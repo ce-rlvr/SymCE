@@ -1,0 +1,188 @@
+import sympy
+from sympy import symbols, Expr, groebner, isprime, primefactors
+from sympy.polys.polytools import reduced
+
+# Top-level setup for potential witness expressions
+ZZ = sympy.S.Integers
+QQ = sympy.S.Rationals
+x, y, z = symbols('x y z')
+
+def conditions(witness):
+    h1, h2, h3, neg_q = False, False, False, False
+    
+    # ---------------------------------------------------------------------
+    # Attempt 1: Interpret witness as ideals in Z
+    # Witness format: (Q_gen, I_gen, P_gen) representing ideals (q), (a), (p)
+    # ---------------------------------------------------------------------
+    try:
+        if isinstance(witness, dict):
+            q_raw = witness.get('Q', witness.get('q'))
+            a_raw = witness.get('I', witness.get('i', witness.get('a')))
+            p_raw = witness.get('P', witness.get('p'))
+        elif isinstance(witness, (tuple, list)):
+            if len(witness) == 3:
+                q_raw, a_raw, p_raw = witness
+            elif len(witness) == 4:
+                _, q_raw, a_raw, p_raw = witness
+            else:
+                q_raw, a_raw, p_raw = None, None, None
+        else:
+            q_raw, a_raw, p_raw = None, None, None
+
+        def extract_int(val):
+            if hasattr(val, 'gens'):
+                val = val.gens[0]
+            if isinstance(val, (list, tuple, set)):
+                val = list(val)[0]
+            return abs(int(val))
+
+        q_val = extract_int(q_raw)
+        a_val = extract_int(a_raw)
+        p_val = extract_int(p_raw)
+
+        # H1: R is a commutative ring with identity (Z is such a ring)
+        h1 = True
+        
+        # H3: I is finitely generated (all ideals in Z are principal)
+        h3 = True
+
+        # H2: Q is P-primary
+        # In Z, (q) is (p)-primary iff p is prime and q = p^k for some k >= 1
+        if isprime(p_val) and q_val > 1:
+            temp = q_val
+            while temp % p_val == 0:
+                temp //= p_val
+            if temp == 1:
+                h2 = True
+        elif p_val == 0 and q_val == 0:
+            h2 = True  # (0) is prime, hence primary
+
+        # neg_Q: For all n >= 1, I^n is not contained in Q
+        # I^n = (a^n). (a^n) subset (q) iff q | a^n.
+        # q | a^n for some n iff all prime factors of q divide a.
+        if q_val == 0:
+            if a_val != 0:
+                neg_q = True
+        elif a_val == 0:
+            neg_q = False
+        else:
+            q_factors = set(primefactors(q_val))
+            a_factors = set(primefactors(a_val))
+            if not q_factors.issubset(a_factors):
+                neg_q = True
+
+        return [h1, h2, h3, neg_q]
+    except Exception:
+        pass
+
+    # ---------------------------------------------------------------------
+    # Attempt 2: Interpret witness as ideals in a polynomial ring k[x_1, ..., x_n]
+    # Witness format: (vars, Q_gens, I_gens, P_gens) or just (Q_gens, I_gens, P_gens)
+    # ---------------------------------------------------------------------
+    try:
+        if isinstance(witness, dict):
+            Q_gens = witness.get('Q', witness.get('q'))
+            I_gens = witness.get('I', witness.get('i', witness.get('a')))
+            P_gens = witness.get('P', witness.get('p'))
+            vars_raw = witness.get('vars', witness.get('R'))
+        elif isinstance(witness, (tuple, list)):
+            if len(witness) == 3:
+                Q_gens, I_gens, P_gens = witness
+                vars_raw = None
+            elif len(witness) == 4:
+                vars_raw, Q_gens, I_gens, P_gens = witness
+            else:
+                return [False, False, False, False]
+        else:
+            return [False, False, False, False]
+            
+        if not isinstance(Q_gens, (list, tuple)): Q_gens = [Q_gens]
+        if not isinstance(I_gens, (list, tuple)): I_gens = [I_gens]
+        if not isinstance(P_gens, (list, tuple)): P_gens = [P_gens]
+        
+        Q_gens = [sympy.sympify(g) for g in Q_gens]
+        I_gens = [sympy.sympify(g) for g in I_gens]
+        P_gens = [sympy.sympify(g) for g in P_gens]
+        
+        if vars_raw is None:
+            free_syms = set()
+            for g in Q_gens + I_gens + P_gens:
+                free_syms.update(g.free_symbols)
+            vars_list = list(free_syms)
+            vars_list.sort(key=lambda s: s.name)
+        else:
+            if hasattr(vars_raw, 'gens'):
+                vars_list = list(vars_raw.gens)
+            elif not isinstance(vars_raw, (list, tuple)):
+                vars_list = [vars_raw]
+            else:
+                vars_list = list(vars_raw)
+                
+        if not vars_list:
+            return [False, False, False, False]
+
+        # H1 & H3: Polynomial rings over fields are commutative rings with identity,
+        # and ideals given by finite generator lists are finitely generated.
+        h1 = True
+        h3 = True
+        
+        # H2: Q is P-primary
+        # We verify a sufficient condition: P is the maximal ideal generated by the variables,
+        # Q is contained in P, and P^k is contained in Q for some k.
+        P_is_vars = set(P_gens) == set(vars_list)
+        
+        Q_sub_P = True
+        for g in Q_gens:
+            if g.subs({v: 0 for v in vars_list}) != 0:
+                Q_sub_P = False
+                break
+                
+        P_rad_Q = False
+        if P_is_vars and Q_sub_P:
+            G_Q = groebner(Q_gens, *vars_list)
+            all_in = True
+            for v in vars_list:
+                v_in = False
+                for k in range(1, 10):
+                    try:
+                        if G_Q.contains(v**k):
+                            v_in = True
+                            break
+                    except AttributeError:
+                        if reduced(v**k, G_Q, *vars_list)[1] == 0:
+                            v_in = True
+                            break
+                if not v_in:
+                    all_in = False
+                    break
+            if all_in:
+                P_rad_Q = True
+                
+        h2 = P_is_vars and Q_sub_P and P_rad_Q
+        
+        # neg_Q: I^n is not contained in Q for all n >= 1
+        # Since \sqrt{Q} = P, I^n \subseteq Q for some n iff I \subseteq P.
+        # Thus, I^n \not\subseteq Q for all n iff I \not\subseteq P.
+        I_sub_P = True
+        for g in I_gens:
+            if g.subs({v: 0 for v in vars_list}) != 0:
+                I_sub_P = False
+                break
+                
+        neg_q = not I_sub_P
+        
+        return [h1, h2, h3, neg_q]
+    except Exception:
+        pass
+
+    return [False, False, False, False]
+
+CONDITION_LABELS = [
+    "H_1: R is a commutative ring with identity",
+    "H_2: Q is a P-primary ideal in R",
+    "H_3: I is a finitely generated ideal of R",
+    "¬Q: For all n >= 1, I^n is not contained in Q"
+]
+
+N_HYP = 3
+NEG_Q_INDEX = 3

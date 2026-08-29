@@ -1,0 +1,110 @@
+{
+  "input_path": "data/algebra_counterexamples_v2_reconstructed.jsonl",
+  "input_records": 4707,
+  "witness_schema_path": "data/witness_schemas.jsonl",
+  "input_records_with_witness_schema": 4700,
+  "pools": {
+    "strict": 2389,
+    "loose_only": 2318
+  },
+  "split_sizes": {
+    "sft_target": 1001,
+    "test_target": 201,
+    "sft_actual": 1000,
+    "test_actual": 201,
+    "rlvr_actual": 3506
+  },
+  "domain_breakdown_strict_pool": {
+    "FieldTheory": {
+      "strict_total": 166,
+      "sft": 70,
+      "test": 14,
+      "rlvr_strict": 82
+    },
+    "GroupTheory": {
+      "strict_total": 874,
+      "sft": 366,
+      "test": 74,
+      "rlvr_strict": 434
+    },
+    "LinearAlgebra": {
+      "strict_total": 233,
+      "sft": 98,
+      "test": 20,
+      "rlvr_strict": 115
+    },
+    "NumberTheory": {
+      "strict_total": 392,
+      "sft": 164,
+      "test": 33,
+      "rlvr_strict": 195
+    },
+    "RealAnalysis": {
+      "strict_total": 159,
+      "sft": 67,
+      "test": 13,
+      "rlvr_strict": 79
+    },
+    "RingTheory": {
+      "strict_total": 565,
+      "sft": 237,
+      "test": 48,
+      "rlvr_strict": 280
+    }
+  },
+  "sft_drops": {
+    "oracle_nonpositive_reward(oracle_parse_error)": 1
+  },
+  "sft_truncated_count": 0,
+  "sft_user_prompt_over_budget_count": 0,
+  "test_pushed_back_to_rlvr": 0,
+  "tokenizer": "Qwen/Qwen2.5-Math-1.5B",
+  "max_user_tokens": 1024,
+  "max_target_tokens": 1024,
+  "sft_target_tokens": {
+    "count": 1000,
+    "min": 80,
+    "p50": 227,
+    "p95": 389,
+    "p99": 441,
+    "max": 528,
+    "mean": 239.0
+  },
+  "sft_user_tokens": {
+    "count": 1000,
+    "min": 57,
+    "p50": 120,
+    "p95": 185,
+    "p99": 219,
+    "max": 247,
+    "mean": 124.6
+  },
+  "rlvr_user_tokens": {
+    "count": 3506,
+    "min": 38,
+    "p50": 138,
+    "p95": 228,
+    "p99": 284,
+    "max": 589,
+    "mean": 145.3
+  },
+  "sft_oracle_rewards": {
+    "count": 1000,
+    "min": 700,
+    "p50": 950,
+    "p95": 950,
+    "p99": 950,
+    "max": 950,
+    "mean": 929.2
+  },
+  "test_oracle_rewards": {
+    "count": 201,
+    "min": 700,
+    "p50": 950,
+    "p95": 950,
+    "p99": 950,
+    "max": 950,
+    "mean": 930.1
+  },
+  "seed": 42
+}

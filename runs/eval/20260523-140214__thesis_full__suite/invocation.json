@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/training/eval/run_suite.py",
+    "--config",
+    "configs/eval/full_eval.yaml",
+    "--only-models",
+    "deepseek-math-7b-rl,qwen25-math-7b-instruct,eurus-2-7b-prime,abel-7b-002,mammoth2-7b-plus",
+    "--only-benchmarks",
+    "counterexample"
+  ],
+  "cli_namespace": null,
+  "config_yaml": null,
+  "cwd": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample",
+  "host": "CYNA-X870E-AORUS-MASTER",
+  "user": "omar-farouk-zouak",
+  "python": "3.12.13",
+  "env": {}
+}

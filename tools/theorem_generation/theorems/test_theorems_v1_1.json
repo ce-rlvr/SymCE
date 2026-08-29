@@ -1,0 +1,346 @@
+[
+  {
+    "id": "gt_lagrange_theorem",
+    "name": "Lagrange's Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "For any finite group G, the order of every subgroup H of G divides the order of G.",
+    "hypotheses": [
+      "G is a group",
+      "G has finite order",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "The order of H divides the order of G."
+  },
+  {
+    "id": "gt_cauchy_prime_order",
+    "name": "Cauchy's Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite group and p is a prime number dividing the order of G, then G contains an element of order p.",
+    "hypotheses": [
+      "G is a group",
+      "G has finite order",
+      "p is a prime number",
+      "p divides the order of G"
+    ],
+    "conclusion": "There exists an element x in G such that the order of x is p."
+  },
+  {
+    "id": "gt_index_two_normality",
+    "name": "Index Two Subgroup Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of index 2 in a group G is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "The index of H in G is 2"
+    ],
+    "conclusion": "H is a normal subgroup of G."
+  },
+  {
+    "id": "rt_finite_integral_domain_field",
+    "name": "Finite Integral Domains",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite integral domain is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R contains a finite number of elements"
+    ],
+    "conclusion": "R is a field."
+  },
+  {
+    "id": "rt_first_isomorphism_rings",
+    "name": "First Isomorphism Theorem for Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Let f: R -> S be a ring homomorphism. Then the kernel of f is an ideal of R, and the image of f is isomorphic to R/ker(f).",
+    "hypotheses": [
+      "R is a ring",
+      "S is a ring",
+      "f is a ring homomorphism from R to S"
+    ],
+    "conclusion": "The quotient ring R/ker(f) is isomorphic to the image f(R)."
+  },
+  {
+    "id": "rt_eisenstein_criterion",
+    "name": "Eisenstein's Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "Let f(x) = a_n x^n + ... + a_0 be a polynomial with integer coefficients. If there exists a prime p such that p divides a_i for i < n, p does not divide a_n, and p^2 does not divide a_0, then f(x) is irreducible over the rational numbers.",
+    "hypotheses": [
+      "f(x) is a polynomial in Z[x] of degree n > 0",
+      "p is a prime number",
+      "p divides a_i for all i from 0 up to n-1",
+      "p does not divide a_n",
+      "p^2 does not divide a_0"
+    ],
+    "conclusion": "f(x) is irreducible over the field of rational numbers Q."
+  },
+  {
+    "id": "nt_euler_totient",
+    "name": "Euler's Totient Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If n and a are coprime positive integers, then a raised to the power of the totient of n is congruent to 1 modulo n.",
+    "hypotheses": [
+      "n is a positive integer",
+      "a is an integer",
+      "The greatest common divisor of a and n is 1"
+    ],
+    "conclusion": "a^phi(n) is congruent to 1 modulo n."
+  },
+  {
+    "id": "nt_euclids_lemma",
+    "name": "Euclid's Lemma",
+    "domain": "NumberTheory",
+    "original_full_statement": "If a prime p divides the product ab of two integers a and b, then p must divide at least one of a and b.",
+    "hypotheses": [
+      "p is a prime number",
+      "a is an integer",
+      "b is an integer",
+      "p divides the product ab"
+    ],
+    "conclusion": "p divides a or p divides b."
+  },
+  {
+    "id": "nt_wilson_theorem",
+    "name": "Wilson's Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "A natural number n > 1 is a prime number if and only if (n-1)! is congruent to -1 modulo n.",
+    "hypotheses": [
+      "n is a natural number greater than 1",
+      "n is prime"
+    ],
+    "conclusion": "(n-1)! is congruent to -1 modulo n."
+  },
+  {
+    "id": "ft_multiplicative_group_finite_field",
+    "name": "Cyclicity of the Multiplicative Group of a Finite Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "The multiplicative group of any finite field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "F has a finite number of elements"
+    ],
+    "conclusion": "The group of non-zero elements of F under multiplication is a cyclic group."
+  },
+  {
+    "id": "cayleys_theorem_groups",
+    "name": "Cayley's Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every group G is isomorphic to a subgroup of the symmetric group acting on G.",
+    "hypotheses": [
+      "G is a group"
+    ],
+    "conclusion": "G is isomorphic to a subgroup of the symmetric group Sym(G)"
+  },
+  {
+    "id": "orbit_stabilizer_theorem_finite",
+    "name": "Orbit-Stabilizer Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group acting on a set X. For any x in X, the size of the orbit of x multiplied by the size of the stabilizer of x equals the order of G.",
+    "hypotheses": [
+      "G is a finite group",
+      "G acts on a set X",
+      "x is an element of X"
+    ],
+    "conclusion": "|G| = |Orb(x)| * |Stab(x)|"
+  },
+  {
+    "id": "chinese_remainder_theorem_ideals",
+    "name": "Chinese Remainder Theorem for Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity, and let I_1, ..., I_k be ideals such that I_i + I_j = R for all i != j. Then the map from R to the product of quotients R/I_i is surjective with kernel equal to the intersection of the ideals.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "I_1, I_2, ..., I_k are ideals of R",
+      "I_i + I_j = R for all i != j"
+    ],
+    "conclusion": "R / (I_1 ∩ ... ∩ I_k) ≅ R/I_1 × R/I_2 × ... × R/I_k"
+  },
+  {
+    "id": "prime_ideal_integral_domain_characterization",
+    "name": "Characterization of Prime Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. An ideal P of R is prime if and only if the quotient ring R/P is an integral domain.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "P is a proper ideal of R"
+    ],
+    "conclusion": "P is a prime ideal if and only if R/P is an integral domain"
+  },
+  {
+    "id": "primitive_element_theorem_separable",
+    "name": "Primitive Element Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite separable field extension L/K is a simple extension.",
+    "hypotheses": [
+      "L/K is a finite field extension",
+      "L/K is a separable extension"
+    ],
+    "conclusion": "There exists an element α in L such that L = K(α)"
+  },
+  {
+    "id": "degree_multiplicativity_tower_law",
+    "name": "Tower Law for Field Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "If L is a finite extension of K and M is a finite extension of L, then M is a finite extension of K and [M:K] = [M:L][L:K].",
+    "hypotheses": [
+      "K, L, and M are fields such that K ⊆ L ⊆ M",
+      "[L:K] is finite",
+      "[M:L] is finite"
+    ],
+    "conclusion": "[M:K] = [M:L][L:K]"
+  },
+  {
+    "id": "law_of_quadratic_reciprocity",
+    "name": "Law of Quadratic Reciprocity",
+    "domain": "NumberTheory",
+    "original_full_statement": "For distinct odd primes p and q, the Legendre symbol (p/q) times (q/p) equals (-1) raised to the power ((p-1)/2 * (q-1)/2).",
+    "hypotheses": [
+      "p is an odd prime",
+      "q is an odd prime",
+      "p != q"
+    ],
+    "conclusion": "(p/q)(q/p) = (-1)^((p-1)(q-1)/4)"
+  },
+  {
+    "id": "third_isomorphism_theorem_groups",
+    "name": "Third Isomorphism Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group, and let N and H be normal subgroups of G with N contained in H. Then (G/N)/(H/N) is isomorphic to G/H.",
+    "hypotheses": [
+      "G is a group",
+      "N is a normal subgroup of G",
+      "H is a normal subgroup of G",
+      "N is a subgroup of H"
+    ],
+    "conclusion": "(G/N) / (H/N) ≅ G/H"
+  },
+  {
+    "id": "hilbert_basis_theorem_noetherian",
+    "name": "Hilbert's Basis Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a Noetherian ring, then the polynomial ring R[x] is also a Noetherian ring.",
+    "hypotheses": [
+      "R is a Noetherian ring"
+    ],
+    "conclusion": "The polynomial ring R[x] is a Noetherian ring"
+  },
+  {
+    "id": "fermat_sum_of_two_squares",
+    "name": "Fermat's Theorem on Sums of Two Squares",
+    "domain": "NumberTheory",
+    "original_full_statement": "An odd prime p can be expressed as a sum of two squares x^2 + y^2 for integers x and y if and only if p is congruent to 1 modulo 4.",
+    "hypotheses": [
+      "p is an odd prime"
+    ],
+    "conclusion": "p = x^2 + y^2 for some integers x, y if and only if p ≡ 1 (mod 4)"
+  },
+  {
+    "id": "fundamental_theorem_arithmetic",
+    "name": "Fundamental Theorem of Arithmetic",
+    "domain": "NumberTheory",
+    "original_full_statement": "Every integer n > 1 can be represented as a product of prime numbers in a unique way, up to the order of the factors.",
+    "hypotheses": [
+      "n is an integer",
+      "n > 1"
+    ],
+    "conclusion": "n can be uniquely factored into a product of primes, up to the order of the factors."
+  },
+  {
+    "id": "bezouts_identity",
+    "name": "Bézout's Identity",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let a and b be integers with greatest common divisor d. Then there exist integers x and y such that ax + by = d.",
+    "hypotheses": [
+      "a and b are integers",
+      "d is the greatest common divisor of a and b"
+    ],
+    "conclusion": "There exist integers x and y such that ax + by = d."
+  },
+  {
+    "id": "second_isomorphism_theorem_groups",
+    "name": "Second Isomorphism Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H is a subgroup of G and N is a normal subgroup of G, then (H ∩ N) is a normal subgroup of H and H/(H ∩ N) ≅ HN/N.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "N is a normal subgroup of G"
+    ],
+    "conclusion": "H/(H ∩ N) is isomorphic to HN/N."
+  },
+  {
+    "id": "center_of_p_groups",
+    "name": "Center of a p-group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite group of prime power order p^n for n > 0, then the center of G is non-trivial.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "The order of G is p^n for some integer n ≥ 1"
+    ],
+    "conclusion": "The center Z(G) of G has order greater than 1."
+  },
+  {
+    "id": "correspondence_theorem_groups",
+    "name": "Correspondence Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let N be a normal subgroup of G. There is a bijection between the set of subgroups of G containing N and the set of subgroups of G/N.",
+    "hypotheses": [
+      "G is a group",
+      "N is a normal subgroup of G"
+    ],
+    "conclusion": "There exists a bijection between the set of subgroups of G that contain N and the set of subgroups of the quotient group G/N."
+  },
+  {
+    "id": "characteristic_of_integral_domain",
+    "name": "Characteristic of an Integral Domain",
+    "domain": "RingTheory",
+    "original_full_statement": "The characteristic of any integral domain is either 0 or a prime number p.",
+    "hypotheses": [
+      "D is an integral domain"
+    ],
+    "conclusion": "The characteristic of D is either 0 or a prime number p."
+  },
+  {
+    "id": "freshmans_dream_characteristic_p",
+    "name": "Freshman's Dream",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring of prime characteristic p, (x + y)^p = x^p + y^p for all elements x and y.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "The characteristic of R is a prime number p"
+    ],
+    "conclusion": "For all x, y ∈ R, (x + y)^p = x^p + y^p."
+  },
+  {
+    "id": "ideal_characterization_of_fields",
+    "name": "Ideal Characterization of Fields",
+    "domain": "RingTheory",
+    "original_full_statement": "A commutative ring R with identity 1 ≠ 0 is a field if and only if its only ideals are {0} and R.",
+    "hypotheses": [
+      "R is a commutative ring with multiplicative identity 1 ≠ 0"
+    ],
+    "conclusion": "R is a field if and only if the only ideals of R are the zero ideal and the ring itself."
+  },
+  {
+    "id": "finite_extensions_are_algebraic",
+    "name": "Finiteness Implies Algebraicity",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite field extension is an algebraic extension.",
+    "hypotheses": [
+      "L/K is a field extension",
+      "The degree of the extension [L:K] is finite"
+    ],
+    "conclusion": "Every element α ∈ L is algebraic over K."
+  },
+  {
+    "id": "existence_of_splitting_fields",
+    "name": "Existence of Splitting Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "For any field K and any non-constant polynomial f(x) in K[x], there exists a splitting field for f(x) over K.",
+    "hypotheses": [
+      "K is a field",
+      "f(x) is a polynomial in K[x] of degree n ≥ 1"
+    ],
+    "conclusion": "There exists an extension field E of K such that f(x) factors into linear factors in E[x]."
+  }
+]

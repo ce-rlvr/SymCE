@@ -1,0 +1,41 @@
+{
+  "per_domain": {
+    "GroupTheory": {
+      "total": 12,
+      "passed": 12,
+      "pass_rate": 1.0
+    },
+    "NumberTheory": {
+      "total": 2,
+      "passed": 2,
+      "pass_rate": 1.0
+    },
+    "RingTheory": {
+      "total": 9,
+      "passed": 9,
+      "pass_rate": 1.0
+    },
+    "FieldTheory": {
+      "total": 5,
+      "passed": 5,
+      "pass_rate": 1.0
+    },
+    "LinearAlgebra": {
+      "total": 9,
+      "passed": 9,
+      "pass_rate": 1.0
+    },
+    "RealAnalysis": {
+      "total": 10,
+      "passed": 10,
+      "pass_rate": 1.0
+    }
+  },
+  "global": {
+    "total": 47,
+    "passed": 47,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "gate_passed": true
+}

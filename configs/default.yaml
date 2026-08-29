@@ -1,0 +1,150 @@
+# Default configuration for the full pipeline.
+#
+# Resolution priority (highest first):
+#   1. CLI flag explicitly provided on the command line
+#   2. Values in this file (under the relevant section)
+#   3. Dataclass defaults (PipelineConfig / SFTConfig / RLVRConfig)
+#
+# Each script reads ONLY its own section. Unknown keys are ignored with a warning.
+# See docs/CONFIG.md for the full list of accepted keys per section.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# pipeline.py — theorem extraction → mutation → LLM gen → verification → split
+# ─────────────────────────────────────────────────────────────────────────────
+pipeline:
+  # Theorem source
+  use_lean: false
+  input_theorems: data/input_theorems.json
+
+  # Generation
+  output: data/algebra_counterexamples.jsonl
+  max_retries: 3
+  workers: 4
+  dry_run: false
+
+  # Attempts logging — leave null to write next to --output
+  attempts_log: null
+  attempts_csv: null
+
+  # Data split
+  only_split: false
+  skip_split: false
+  split_seed: 42
+  sft_size: 1300
+  test_size: 300
+  sft_output: null
+  rlvr_output: null
+  test_output: null
+
+# ─────────────────────────────────────────────────────────────────────────────
+# training.sft.train — supervised fine-tuning (Qwen3-4B + LoRA)
+# ─────────────────────────────────────────────────────────────────────────────
+sft:
+  # Model
+  model_name: unsloth/Qwen3-4B
+  chat_template: qwen-3
+  max_seq_length: 2048
+  dtype: bfloat16          # "bfloat16" | "float16" | "float32"
+  load_in_4bit: false
+
+  # LoRA
+  lora_r: 16
+  lora_alpha: 16
+  lora_dropout: 0.0
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  use_gradient_checkpointing: unsloth
+
+  # Data
+  train_jsonl: data/sft_data.jsonl
+  eval_fraction: 0.05
+
+  # Optimisation
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  num_train_epochs: 2.0
+  max_steps: -1
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.05
+  lr_scheduler_type: cosine
+  optim: adamw_torch
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  seed: 42
+
+  # Eval / logging / checkpoints
+  eval_strategy: steps
+  eval_steps: 200
+  logging_steps: 50
+  save_strategy: steps
+  save_steps: 200
+  save_total_limit: 2
+
+  # Output
+  output_dir: checkpoints/sft/qwen3-4b-r16-bf16
+
+# ─────────────────────────────────────────────────────────────────────────────
+# training.rlvr.train — GRPO fine-tuning starting from the SFT LoRA checkpoint
+# ─────────────────────────────────────────────────────────────────────────────
+rlvr:
+  # Resume from SFT
+  sft_checkpoint: checkpoints/sft/qwen3-4b-r16-bf16/lora
+
+  # Model
+  max_seq_length: 2048
+  dtype: bfloat16
+  load_in_4bit: false
+  chat_template: qwen-3
+
+  # vLLM
+  use_vllm: false
+  vllm_gpu_memory_utilization: 0.5
+  max_lora_rank: 16            # must match SFT lora_r when fast_inference is on
+
+  # Data
+  train_jsonl: data/rlvr_prompts.jsonl
+
+  # GRPO generation
+  num_generations: 8
+  max_prompt_length: 1024
+  max_completion_length: 1024
+  temperature: 1.0
+  top_p: 1.0
+
+  # Reward shaping
+  enable_format_reward: true
+  format_reward_weight: 0.1
+  verifier_reward_weight: 1.0
+  reward_pool_workers: 4
+  rollouts_log: rollouts.jsonl
+
+  # Optimisation
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  max_steps: 500
+  num_train_epochs: 1.0
+  learning_rate: 5.0e-6
+  warmup_ratio: 0.1
+  lr_scheduler_type: constant
+  optim: adamw_torch
+  weight_decay: 0.0
+  max_grad_norm: 1.0           # NOTE: tightened from 0.1 to allow learning
+  beta: 0.04                   # KL anchor (proposal default; was 0.0 in smoke run)
+  epsilon: 0.2
+  seed: 42
+
+  # Logging / checkpoints
+  logging_steps: 1
+  save_strategy: steps
+  save_steps: 50
+  save_total_limit: 3
+  log_completions: true
+
+  # Output
+  output_dir: checkpoints/rlvr/qwen3-4b-grpo

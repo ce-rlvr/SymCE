@@ -1,0 +1,4039 @@
+[
+  {
+    "id": "thm_euler_totient",
+    "name": "Euler's Totient Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If a and n are coprime positive integers, then a^{\\phi(n)} \\equiv 1 \\pmod n.",
+    "hypotheses": [
+      "a and n are positive integers",
+      "gcd(a, n) = 1"
+    ],
+    "conclusion": "a^{\\phi(n)} \\equiv 1 \\pmod n"
+  },
+  {
+    "id": "thm_lagrange_group",
+    "name": "Lagrange's Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H is a subgroup of a finite group G, then the order of H divides the order of G.",
+    "hypotheses": [
+      "G is a finite group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "The order of H divides the order of G"
+  },
+  {
+    "id": "thm_first_iso_ring",
+    "name": "First Isomorphism Theorem for Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "If f: R \\to S is a ring homomorphism, then R/\\ker(f) is isomorphic to the image of f.",
+    "hypotheses": [
+      "R and S are rings",
+      "f is a ring homomorphism from R to S"
+    ],
+    "conclusion": "The quotient ring R/\\ker(f) is isomorphic to the image of f"
+  },
+  {
+    "id": "thm_tower_law",
+    "name": "Tower Law for Field Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "If L is a finite field extension of K, and M is a finite field extension of L, then M is a finite field extension of K and [M:K] = [M:L][L:K].",
+    "hypotheses": [
+      "K, L, and M are fields",
+      "L is a finite extension of K",
+      "M is a finite extension of L"
+    ],
+    "conclusion": "M is a finite extension of K and [M:K] = [M:L][L:K]"
+  },
+  {
+    "id": "thm_wilson",
+    "name": "Wilson's Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "A natural number p > 1 is a prime number if and only if (p-1)! \\equiv -1 \\pmod p.",
+    "hypotheses": [
+      "p is an integer greater than 1"
+    ],
+    "conclusion": "p is a prime number if and only if (p-1)! \\equiv -1 \\pmod p"
+  },
+  {
+    "id": "thm_cauchy_group",
+    "name": "Cauchy's Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite group and p is a prime number dividing the order of G, then G contains an element of order p.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "p divides the order of G"
+    ],
+    "conclusion": "G contains an element of order p"
+  },
+  {
+    "id": "thm_finite_integral_domain",
+    "name": "Finite Integral Domain is a Field",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite integral domain is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R is finite"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "thm_primitive_element",
+    "name": "Primitive Element Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite separable field extension is simple.",
+    "hypotheses": [
+      "E is a finite field extension of a field F",
+      "The extension E/F is separable"
+    ],
+    "conclusion": "The extension E/F is simple"
+  },
+  {
+    "id": "thm_cayley",
+    "name": "Cayley's Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every group G is isomorphic to a subgroup of the symmetric group acting on G.",
+    "hypotheses": [
+      "G is a group"
+    ],
+    "conclusion": "G is isomorphic to a subgroup of the symmetric group Sym(G)"
+  },
+  {
+    "id": "thm_maximal_ideal_prime",
+    "name": "Maximal Ideal is Prime",
+    "domain": "RingTheory",
+    "original_full_statement": "If I is a maximal ideal of a commutative ring R with identity, then I is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "I is a maximal ideal of R"
+    ],
+    "conclusion": "I is a prime ideal of R"
+  },
+  {
+    "id": "index_2_subgroup_normal",
+    "name": "Index 2 Subgroup Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group and H be a subgroup of G. If the index of H in G is 2, then H is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "The index [G:H] is exactly 2"
+    ],
+    "conclusion": "H is a normal subgroup of G"
+  },
+  {
+    "id": "center_of_p_group",
+    "name": "Center of a p-group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite group of order p^n, where p is a prime and n > 0, then the center of G is non-trivial.",
+    "hypotheses": [
+      "G is a finite group",
+      "The order of G is p^n for some prime number p and positive integer n"
+    ],
+    "conclusion": "The center of G contains more than one element"
+  },
+  {
+    "id": "orbit_stabilizer_theorem",
+    "name": "Orbit-Stabilizer Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group acting on a finite set X. For any x in X, the order of G is equal to the product of the size of the orbit of x and the size of the stabilizer of x.",
+    "hypotheses": [
+      "G is a finite group",
+      "X is a finite set",
+      "G acts on the set X",
+      "x is an element of X"
+    ],
+    "conclusion": "The order of G is equal to the size of the orbit of x multiplied by the size of the stabilizer of x"
+  },
+  {
+    "id": "boolean_ring_commutative",
+    "name": "Boolean Ring Commutativity Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a ring such that x^2 = x for all x in R, then R is a commutative ring.",
+    "hypotheses": [
+      "R is a ring",
+      "For every element x in R, x^2 = x"
+    ],
+    "conclusion": "R is a commutative ring"
+  },
+  {
+    "id": "pid_implies_ufd",
+    "name": "PID implies UFD",
+    "domain": "RingTheory",
+    "original_full_statement": "Every principal ideal domain (PID) is a unique factorization domain (UFD).",
+    "hypotheses": [
+      "R is an integral domain",
+      "Every ideal in R is a principal ideal"
+    ],
+    "conclusion": "R is a unique factorization domain"
+  },
+  {
+    "id": "irreducible_poly_maximal_ideal",
+    "name": "Irreducible Polynomial Maximal Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let F be a field and F[x] be the polynomial ring over F. If p(x) is an irreducible polynomial in F[x], then the ideal generated by p(x) is a maximal ideal.",
+    "hypotheses": [
+      "F is a field",
+      "F[x] is the polynomial ring over F in one variable",
+      "p(x) is an irreducible polynomial in F[x]"
+    ],
+    "conclusion": "The ideal generated by p(x) is a maximal ideal in F[x]"
+  },
+  {
+    "id": "finite_subgroup_field_mult_cyclic",
+    "name": "Finite Subgroups of Field Multiplicative Groups are Cyclic",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "G is a finite subgroup of the multiplicative group of F"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "order_of_finite_field",
+    "name": "Order of a Finite Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "The number of elements in any finite field is p^n for some prime number p and positive integer n.",
+    "hypotheses": [
+      "F is a field",
+      "F has a finite number of elements"
+    ],
+    "conclusion": "The cardinality of F is p^n for some prime number p and positive integer n"
+  },
+  {
+    "id": "euclids_lemma",
+    "name": "Euclid's Lemma",
+    "domain": "NumberTheory",
+    "original_full_statement": "If a prime p divides the product ab of two integers a and b, then p must divide at least one of those integers.",
+    "hypotheses": [
+      "p is a prime number",
+      "a and b are integers",
+      "p divides the product ab"
+    ],
+    "conclusion": "p divides a or p divides b"
+  },
+  {
+    "id": "existence_primitive_root_prime",
+    "name": "Existence of Primitive Roots Modulo a Prime",
+    "domain": "NumberTheory",
+    "original_full_statement": "For every prime number p, there exists an integer g such that g is a primitive root modulo p.",
+    "hypotheses": [
+      "p is a prime number"
+    ],
+    "conclusion": "There exists an integer g such that the multiplicative order of g modulo p is p-1"
+  },
+  {
+    "id": "thm_subgroup_cyclic",
+    "name": "Subgroups of Cyclic Groups Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of a cyclic group is cyclic.",
+    "hypotheses": [
+      "Let G be a cyclic group",
+      "Let H be a subgroup of G"
+    ],
+    "conclusion": "H is a cyclic group"
+  },
+  {
+    "id": "thm_ed_implies_pid",
+    "name": "Euclidean Domain is a PID",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Euclidean domain is a principal ideal domain.",
+    "hypotheses": [
+      "Let R be a Euclidean domain"
+    ],
+    "conclusion": "R is a principal ideal domain"
+  },
+  {
+    "id": "thm_prime_ideal_quotient",
+    "name": "Prime Ideal Quotient Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "A proper ideal P in a commutative ring with identity R is prime if and only if the quotient ring R/P is an integral domain.",
+    "hypotheses": [
+      "Let R be a commutative ring with identity",
+      "Let P be a proper ideal of R"
+    ],
+    "conclusion": "P is a prime ideal if and only if the quotient ring R/P is an integral domain"
+  },
+  {
+    "id": "thm_prime_degree_extension",
+    "name": "Prime Degree Extension Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "If E/F is a field extension of prime degree, then there are no proper intermediate fields between E and F.",
+    "hypotheses": [
+      "Let F be a field",
+      "Let E be a field extension of F",
+      "Let the degree [E:F] be a prime number"
+    ],
+    "conclusion": "There are no intermediate fields strictly containing F and strictly contained in E"
+  },
+  {
+    "id": "thm_rational_root",
+    "name": "Rational Root Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If a polynomial with integer coefficients has a non-zero rational root p/q in lowest terms, then p divides the constant term and q divides the leading coefficient.",
+    "hypotheses": [
+      "Let f(x) = a_n x^n + ... + a_0 be a polynomial with integer coefficients",
+      "Let a_n be non-zero",
+      "Let p/q be a rational root of f(x) where p and q are coprime integers"
+    ],
+    "conclusion": "p divides a_0 and q divides a_n"
+  },
+  {
+    "id": "thm_commutator_quotient",
+    "name": "Commutator Quotient Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group and G' is its commutator subgroup, then G' is a normal subgroup of G and the quotient group G/G' is abelian.",
+    "hypotheses": [
+      "Let G be a group",
+      "Let G' be the commutator subgroup of G"
+    ],
+    "conclusion": "G' is a normal subgroup of G and the quotient group G/G' is abelian"
+  },
+  {
+    "id": "thm_characteristic_integral_domain",
+    "name": "Characteristic of an Integral Domain",
+    "domain": "RingTheory",
+    "original_full_statement": "The characteristic of any integral domain is either zero or a prime number.",
+    "hypotheses": [
+      "Let R be an integral domain"
+    ],
+    "conclusion": "The characteristic of R is either 0 or a prime number"
+  },
+  {
+    "id": "thm_transitivity_algebraic_extensions",
+    "name": "Transitivity of Algebraic Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "If K is an algebraic field extension of F, and L is an algebraic field extension of K, then L is an algebraic field extension of F.",
+    "hypotheses": [
+      "Let F, K, and L be fields",
+      "Let K be an algebraic extension of F",
+      "Let L be an algebraic extension of K"
+    ],
+    "conclusion": "L is an algebraic extension of F"
+  },
+  {
+    "id": "thm_chinese_remainder_integers",
+    "name": "Chinese Remainder Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If m_1, m_2, ..., m_k are pairwise coprime positive integers, then for any integers a_1, a_2, ..., a_k, the system of simultaneous congruences x = a_i (mod m_i) has a unique solution modulo the product m_1 m_2 ... m_k.",
+    "hypotheses": [
+      "Let m_1, m_2, ..., m_k be pairwise coprime positive integers",
+      "Let a_1, a_2, ..., a_k be arbitrary integers"
+    ],
+    "conclusion": "The system of congruences x = a_i (mod m_i) for 1 <= i <= k has a unique solution modulo the product m_1 m_2 ... m_k"
+  },
+  {
+    "id": "thm_cyclic_direct_product",
+    "name": "Cyclic Direct Product Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "The direct product of two finite cyclic groups is cyclic if and only if their orders are coprime.",
+    "hypotheses": [
+      "Let G and H be finite cyclic groups"
+    ],
+    "conclusion": "The direct product G x H is cyclic if and only if the greatest common divisor of the order of G and the order of H is 1"
+  },
+  {
+    "id": "thm_fermats_little",
+    "name": "Fermat's Little Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If p is a prime number and a is an integer not divisible by p, then a^(p-1) is congruent to 1 modulo p.",
+    "hypotheses": [
+      "p is a prime number",
+      "a is an integer",
+      "a is not divisible by p"
+    ],
+    "conclusion": "a^(p-1) \\equiv 1 \\pmod p"
+  },
+  {
+    "id": "thm_sylow_first",
+    "name": "Sylow's First Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and p be a prime number. If p^k divides the order of G for some positive integer k, then G contains at least one subgroup of order p^k.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "k is a positive integer",
+      "p^k divides the order of G"
+    ],
+    "conclusion": "G contains at least one subgroup of order p^k"
+  },
+  {
+    "id": "thm_polynomial_division_algorithm",
+    "name": "Division Algorithm for Polynomials",
+    "domain": "RingTheory",
+    "original_full_statement": "Let F be a field and let f(x) and g(x) be polynomials in F[x] with g(x) not the zero polynomial. Then there exist unique polynomials q(x) and r(x) in F[x] such that f(x) = q(x)g(x) + r(x), where either r(x) is the zero polynomial or the degree of r(x) is strictly less than the degree of g(x).",
+    "hypotheses": [
+      "F is a field",
+      "f(x) and g(x) are polynomials in F[x]",
+      "g(x) is not the zero polynomial"
+    ],
+    "conclusion": "There exist unique polynomials q(x) and r(x) in F[x] such that f(x) = q(x)g(x) + r(x) and either r(x) = 0 or deg(r) < deg(g)"
+  },
+  {
+    "id": "thm_alternating_group_simplicity",
+    "name": "Simplicity of the Alternating Group",
+    "domain": "GroupTheory",
+    "original_full_statement": "For any integer n >= 5, the alternating group A_n is a simple group.",
+    "hypotheses": [
+      "n is an integer",
+      "n >= 5"
+    ],
+    "conclusion": "The alternating group A_n is a simple group"
+  },
+  {
+    "id": "thm_nilradical_ideal",
+    "name": "Nilradical of a Commutative Ring",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring R, the set of all nilpotent elements forms an ideal of R.",
+    "hypotheses": [
+      "R is a ring",
+      "R is commutative"
+    ],
+    "conclusion": "The set of all nilpotent elements of R forms an ideal of R"
+  },
+  {
+    "id": "thm_splitting_field_existence",
+    "name": "Existence of a Splitting Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field and f(x) be a polynomial in F[x] of degree at least 1. Then there exists an extension field E of F in which f(x) splits completely into linear factors.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "The degree of f(x) is at least 1"
+    ],
+    "conclusion": "There exists an extension field E of F such that f(x) splits completely into linear factors in E[x]"
+  },
+  {
+    "id": "thm_quadratic_reciprocity",
+    "name": "Law of Quadratic Reciprocity",
+    "domain": "NumberTheory",
+    "original_full_statement": "If p and q are distinct odd prime numbers, then the Legendre symbols (p/q) and (q/p) satisfy (p/q)(q/p) = (-1)^((p-1)/2 * (q-1)/2).",
+    "hypotheses": [
+      "p is an odd prime number",
+      "q is an odd prime number",
+      "p and q are distinct"
+    ],
+    "conclusion": "The Legendre symbols satisfy (p/q)(q/p) = (-1)^(((p-1)/2) * ((q-1)/2))"
+  },
+  {
+    "id": "thm_burnside_lemma",
+    "name": "Burnside's Lemma",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group acting on a finite set X. The number of distinct orbits of this action is equal to the average number of fixed points, given by 1/|G| \\sum_{g \\in G} |X^g|, where X^g is the set of elements in X fixed by g.",
+    "hypotheses": [
+      "G is a finite group",
+      "X is a finite set",
+      "G acts on X"
+    ],
+    "conclusion": "The number of distinct orbits of the action is equal to (1/|G|) * \\sum_{g \\in G} |X^g|"
+  },
+  {
+    "id": "thm_eisensteins_criterion",
+    "name": "Eisenstein's Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "Let f(x) = a_n x^n + ... + a_1 x + a_0 be a polynomial in Z[x] of degree n >= 1. If there exists a prime number p such that p divides a_i for all 0 <= i < n, p does not divide a_n, and p^2 does not divide a_0, then f(x) is irreducible over the field of rational numbers Q.",
+    "hypotheses": [
+      "f(x) = a_n x^n + ... + a_1 x + a_0 is a polynomial in Z[x]",
+      "The degree of f(x) is n >= 1",
+      "p is a prime number",
+      "p divides a_i for all 0 <= i < n",
+      "p does not divide a_n",
+      "p^2 does not divide a_0"
+    ],
+    "conclusion": "f(x) is irreducible over the field of rational numbers Q"
+  },
+  {
+    "id": "thm_polynomial_roots_bound",
+    "name": "Bound on Roots of a Polynomial over a Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field and f(x) be a non-zero polynomial in F[x]. Then the number of distinct roots of f(x) in F is at most the degree of f(x).",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "f(x) is not the zero polynomial"
+    ],
+    "conclusion": "The number of distinct roots of f(x) in F is at most the degree of f(x)"
+  },
+  {
+    "id": "sylow_third_theorem",
+    "name": "Sylow's Third Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and p be a prime dividing the order of G. Let |G| = p^n m where p does not divide m. Then the number of Sylow p-subgroups of G, denoted n_p, divides m and satisfies n_p ≡ 1 (mod p).",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "p divides the order of G",
+      "The order of G is p^n * m where p does not divide m"
+    ],
+    "conclusion": "The number of Sylow p-subgroups of G divides m and is congruent to 1 modulo p"
+  },
+  {
+    "id": "frattini_argument",
+    "name": "Frattini's Argument",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group, H a normal subgroup of G, and P a Sylow p-subgroup of H. Then G = H N_G(P), where N_G(P) is the normalizer of P in G.",
+    "hypotheses": [
+      "G is a finite group",
+      "H is a normal subgroup of G",
+      "P is a Sylow p-subgroup of H"
+    ],
+    "conclusion": "G is equal to the product of H and the normalizer of P in G, G = H N_G(P)"
+  },
+  {
+    "id": "n_c_theorem",
+    "name": "N/C Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group and H be a subgroup of G. Then the quotient group N_G(H)/C_G(H) is isomorphic to a subgroup of the automorphism group Aut(H).",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "The quotient group of the normalizer of H in G by the centralizer of H in G is isomorphic to a subgroup of Aut(H)"
+  },
+  {
+    "id": "gauss_lemma_ufd",
+    "name": "Polynomial UFD Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a Unique Factorization Domain (UFD), then the polynomial ring R[x] is also a Unique Factorization Domain.",
+    "hypotheses": [
+      "R is a Unique Factorization Domain",
+      "R[x] is the polynomial ring over R in one variable"
+    ],
+    "conclusion": "R[x] is a Unique Factorization Domain"
+  },
+  {
+    "id": "ufd_irreducible_is_prime",
+    "name": "Irreducible Elements are Prime in a UFD",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a Unique Factorization Domain. Every irreducible element in R is a prime element.",
+    "hypotheses": [
+      "R is a Unique Factorization Domain",
+      "p is a non-zero, non-unit element of R",
+      "p is an irreducible element in R"
+    ],
+    "conclusion": "p is a prime element in R"
+  },
+  {
+    "id": "wedderburn_little_theorem",
+    "name": "Wedderburn's Little Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite division ring is a commutative ring, and therefore a finite field.",
+    "hypotheses": [
+      "R is a finite ring",
+      "R is a division ring"
+    ],
+    "conclusion": "R is a commutative ring"
+  },
+  {
+    "id": "coprime_composite_degrees",
+    "name": "Degree of Coprime Composite Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let K and L be finite extensions of a field F contained in a common field. If the degrees [K:F] and [L:F] are relatively prime, then the degree of the composite field [KL:F] is equal to [K:F][L:F].",
+    "hypotheses": [
+      "K and L are finite field extensions of F",
+      "K and L are contained in a common field extension of F",
+      "The extension degrees [K:F] and [L:F] are relatively prime"
+    ],
+    "conclusion": "The degree of the composite extension [KL:F] is equal to the product [K:F][L:F]"
+  },
+  {
+    "id": "dedekind_linear_independence",
+    "name": "Dedekind's Lemma on Linear Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let G be a group and F be a field. Any set of distinct group homomorphisms from G to the multiplicative group of F is linearly independent over F.",
+    "hypotheses": [
+      "G is a group",
+      "F is a field",
+      "S is a finite set of distinct group homomorphisms from G to the multiplicative group F^x"
+    ],
+    "conclusion": "The homomorphisms in S are linearly independent over F"
+  },
+  {
+    "id": "fermat_two_squares",
+    "name": "Fermat's Theorem on Sums of Two Squares",
+    "domain": "NumberTheory",
+    "original_full_statement": "An odd prime p can be expressed as the sum of two integer squares if and only if p is congruent to 1 modulo 4.",
+    "hypotheses": [
+      "p is an odd prime number",
+      "p is congruent to 1 modulo 4"
+    ],
+    "conclusion": "There exist integers x and y such that p = x^2 + y^2"
+  },
+  {
+    "id": "bezout_identity",
+    "name": "Bézout's Identity",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let a and b be integers, not both zero. Then there exist integers x and y such that ax + by = gcd(a, b).",
+    "hypotheses": [
+      "a and b are integers",
+      "a and b are not both zero"
+    ],
+    "conclusion": "There exist integers x and y such that ax + by is equal to the greatest common divisor of a and b"
+  },
+  {
+    "id": "first_isomorphism_theorem_groups",
+    "name": "First Isomorphism Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G and H be groups, and let f: G -> H be a group homomorphism. Then the quotient group G/ker(f) is isomorphic to the image f(G).",
+    "hypotheses": [
+      "Let G and H be groups",
+      "Let f: G \\to H be a group homomorphism"
+    ],
+    "conclusion": "The quotient group G/\\ker(f) is isomorphic to the image f(G)."
+  },
+  {
+    "id": "second_isomorphism_theorem_groups",
+    "name": "Second Isomorphism Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group, let S be a subgroup of G, and let N be a normal subgroup of G. Then the intersection S \\cap N is a normal subgroup of S, and the quotient group SN/N is isomorphic to S/(S \\cap N).",
+    "hypotheses": [
+      "Let G be a group",
+      "Let S be a subgroup of G",
+      "Let N be a normal subgroup of G"
+    ],
+    "conclusion": "The intersection S \\cap N is a normal subgroup of S, and the quotient group SN/N is isomorphic to S/(S \\cap N)."
+  },
+  {
+    "id": "sylows_second_theorem",
+    "name": "Sylow's Second Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and p be a prime number. Any two Sylow p-subgroups of G are conjugate in G.",
+    "hypotheses": [
+      "Let G be a finite group",
+      "Let p be a prime number",
+      "Let P and Q be two Sylow p-subgroups of G"
+    ],
+    "conclusion": "There exists an element g in G such that Q = gPg^{-1}."
+  },
+  {
+    "id": "linear_congruence_theorem",
+    "name": "Linear Congruence Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let a, b, and n be integers with n > 0, and let d = \\gcd(a, n). The linear congruence ax \\equiv b \\pmod{n} has a solution if and only if d divides b.",
+    "hypotheses": [
+      "Let a, b, and n be integers",
+      "Let n > 0",
+      "Let d be the greatest common divisor of a and n"
+    ],
+    "conclusion": "The linear congruence ax \\equiv b \\pmod{n} has a solution if and only if d divides b."
+  },
+  {
+    "id": "eulers_criterion",
+    "name": "Euler's Criterion",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let p be an odd prime and a be an integer not divisible by p. Then a is a quadratic residue modulo p if and only if a^{(p-1)/2} \\equiv 1 \\pmod{p}.",
+    "hypotheses": [
+      "Let p be an odd prime",
+      "Let a be an integer",
+      "Let a not be divisible by p"
+    ],
+    "conclusion": "The integer a is a quadratic residue modulo p if and only if a^{(p-1)/2} \\equiv 1 \\pmod{p}."
+  },
+  {
+    "id": "center_matrix_ring_theorem",
+    "name": "Center of a Matrix Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity, and let n be a positive integer. The center of the matrix ring M_n(R) consists exactly of the scalar matrices rI, where r \\in R and I is the n \\times n identity matrix.",
+    "hypotheses": [
+      "Let R be a commutative ring with identity",
+      "Let n be a positive integer",
+      "Let M_n(R) be the ring of n \\times n matrices over R"
+    ],
+    "conclusion": "The center of M_n(R) consists exactly of the scalar matrices rI, where r \\in R and I is the n \\times n identity matrix."
+  },
+  {
+    "id": "polynomial_ring_units_theorem",
+    "name": "Polynomial Ring Units Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be an integral domain. The group of units of the polynomial ring R[x] is exactly the group of units of R.",
+    "hypotheses": [
+      "Let R be an integral domain",
+      "Let R[x] be the polynomial ring over R in one variable"
+    ],
+    "conclusion": "The group of units of R[x] is exactly the group of units of R."
+  },
+  {
+    "id": "finite_extension_is_algebraic",
+    "name": "Finite Extension is Algebraic Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let L/K be a field extension. If the degree [L:K] is finite, then every element of L is algebraic over K.",
+    "hypotheses": [
+      "Let K and L be fields",
+      "Let L be a field extension of K",
+      "Let the degree [L:K] be finite"
+    ],
+    "conclusion": "Every element of L is algebraic over K."
+  },
+  {
+    "id": "degree_simple_extension",
+    "name": "Degree of a Simple Extension Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let K be a field, and let L = K(a) be a simple field extension generated by an element a that is algebraic over K. If the minimal polynomial of a over K has degree n, then the degree of the extension [L:K] is equal to n.",
+    "hypotheses": [
+      "Let K be a field",
+      "Let L = K(a) be a simple field extension of K generated by an element a",
+      "Let a be algebraic over K with a minimal polynomial m(x) of degree n"
+    ],
+    "conclusion": "The degree of the extension [L:K] is equal to n."
+  },
+  {
+    "id": "matrix_ring_ideal_theorem",
+    "name": "Matrix Ring Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let F be a field and n be a positive integer. The only two-sided ideals of the matrix ring M_n(F) are the zero ideal and M_n(F) itself.",
+    "hypotheses": [
+      "Let F be a field",
+      "Let n be a positive integer",
+      "Let M_n(F) be the ring of n \\times n matrices over F"
+    ],
+    "conclusion": "The only two-sided ideals of M_n(F) are the zero ideal and M_n(F) itself."
+  },
+  {
+    "id": "gzg_cyclic_abelian",
+    "name": "G/Z(G) Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group and the quotient group G/Z(G) is cyclic, where Z(G) is the center of G, then G is abelian.",
+    "hypotheses": [
+      "G is a group",
+      "Z(G) is the center of G",
+      "The quotient group G/Z(G) is cyclic"
+    ],
+    "conclusion": "G is an abelian group"
+  },
+  {
+    "id": "aut_cyclic_group",
+    "name": "Automorphism Group of a Cyclic Group",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite cyclic group of order n, then its automorphism group Aut(G) is isomorphic to the multiplicative group of integers modulo n, (Z/nZ)^x.",
+    "hypotheses": [
+      "G is a finite cyclic group",
+      "The order of G is n"
+    ],
+    "conclusion": "The automorphism group Aut(G) is isomorphic to the multiplicative group of integers modulo n"
+  },
+  {
+    "id": "idempotent_integral_domain",
+    "name": "Idempotents of an Integral Domain",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is an integral domain and e is an idempotent element in R, then e = 0 or e = 1.",
+    "hypotheses": [
+      "R is an integral domain",
+      "e is an element of R",
+      "e^2 = e"
+    ],
+    "conclusion": "e = 0 or e = 1"
+  },
+  {
+    "id": "coprime_ideals_intersection",
+    "name": "Intersection of Coprime Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a commutative ring with identity and I, J are coprime ideals of R (meaning I + J = R), then their product ideal IJ is equal to their intersection I \\cap J.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "I and J are ideals of R",
+      "I + J = R"
+    ],
+    "conclusion": "The product ideal IJ is equal to the intersection ideal I \\cap J"
+  },
+  {
+    "id": "hilberts_basis_theorem",
+    "name": "Hilbert's Basis Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a commutative Noetherian ring with identity, then the polynomial ring R[x] is also a Noetherian ring.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "R is a Noetherian ring"
+    ],
+    "conclusion": "The polynomial ring R[x] is a Noetherian ring"
+  },
+  {
+    "id": "subfields_finite_field",
+    "name": "Subfield Criterion for Finite Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a finite field of order p^n, where p is a prime. F contains a subfield of order p^m if and only if m divides n.",
+    "hypotheses": [
+      "F is a finite field",
+      "The order of F is p^n for some prime p and positive integer n",
+      "m is a positive integer"
+    ],
+    "conclusion": "F contains a subfield of order p^m if and only if m divides n"
+  },
+  {
+    "id": "frobenius_automorphism",
+    "name": "Frobenius Automorphism Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "If F is a finite field of characteristic p, then the Frobenius map phi: F -> F defined by phi(x) = x^p is a field automorphism.",
+    "hypotheses": [
+      "F is a finite field",
+      "The characteristic of F is p"
+    ],
+    "conclusion": "The map phi(x) = x^p is a field automorphism of F"
+  },
+  {
+    "id": "legendres_formula",
+    "name": "Legendre's Formula",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any positive integer n and prime number p, the p-adic valuation of n!, denoted v_p(n!), is equal to the sum over k from 1 to infinity of floor(n/p^k).",
+    "hypotheses": [
+      "n is a positive integer",
+      "p is a prime number"
+    ],
+    "conclusion": "The p-adic valuation of n! is equal to the sum of floor(n/p^k) for k >= 1"
+  },
+  {
+    "id": "odd_number_divisors",
+    "name": "Odd Number of Divisors Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "A positive integer n has an odd number of positive divisors if and only if n is a perfect square.",
+    "hypotheses": [
+      "n is a positive integer"
+    ],
+    "conclusion": "The number of positive divisors of n is odd if and only if n is a perfect square"
+  },
+  {
+    "id": "multiplicativity_divisor_function",
+    "name": "Multiplicativity of the Divisor Function",
+    "domain": "NumberTheory",
+    "original_full_statement": "If m and n are coprime positive integers, then the sum of the k-th powers of the divisors function, sigma_k, satisfies sigma_k(mn) = sigma_k(m)sigma_k(n).",
+    "hypotheses": [
+      "m and n are positive integers",
+      "gcd(m, n) = 1",
+      "k is a real number"
+    ],
+    "conclusion": "sigma_k(mn) = sigma_k(m)sigma_k(n)"
+  },
+  {
+    "id": "cauchys_theorem_groups",
+    "name": "Cauchy's Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and p be a prime number. If p divides the order of G, then G contains an element of order p.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "p divides the order of G"
+    ],
+    "conclusion": "G contains an element of order p"
+  },
+  {
+    "id": "third_isomorphism_theorem_groups",
+    "name": "Third Isomorphism Theorem for Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group, and let H and K be normal subgroups of G with K contained in H. Then H/K is a normal subgroup of G/K, and the quotient group (G/K)/(H/K) is isomorphic to G/H.",
+    "hypotheses": [
+      "G is a group",
+      "H is a normal subgroup of G",
+      "K is a normal subgroup of G",
+      "K is a subgroup of H"
+    ],
+    "conclusion": "H/K is a normal subgroup of G/K and the quotient group (G/K)/(H/K) is isomorphic to G/H"
+  },
+  {
+    "id": "pid_implies_ufd",
+    "name": "PID implies UFD Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every principal ideal domain is a unique factorization domain.",
+    "hypotheses": [
+      "R is an integral domain",
+      "every ideal of R is generated by a single element"
+    ],
+    "conclusion": "R is a unique factorization domain"
+  },
+  {
+    "id": "artins_fixed_field_theorem",
+    "name": "Artin's Theorem on Fixed Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let K be a field and G be a finite group of automorphisms of K. If F is the fixed field of G, then the degree of the field extension K over F is equal to the order of G.",
+    "hypotheses": [
+      "K is a field",
+      "G is a finite group of automorphisms of K",
+      "F is the fixed field of G in K"
+    ],
+    "conclusion": "The degree of the field extension [K:F] is equal to the order of G"
+  },
+  {
+    "id": "lucas_theorem",
+    "name": "Lucas' Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any prime p and non-negative integers n and k, the binomial coefficient C(n,k) is congruent modulo p to the product of the binomial coefficients C(n_i, k_i), where n_i and k_i are the digits of n and k in base p.",
+    "hypotheses": [
+      "p is a prime number",
+      "n and k are non-negative integers",
+      "n_i and k_i are the coefficients of the base p expansions of n and k respectively"
+    ],
+    "conclusion": "The binomial coefficient C(n,k) is congruent modulo p to the product over i of C(n_i, k_i)"
+  },
+  {
+    "id": "local_ring_nonunits_ideal",
+    "name": "Local Ring Non-units Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "A commutative ring with identity is a local ring if and only if the set of all its non-units forms an ideal.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "the set of all non-units of R is closed under addition"
+    ],
+    "conclusion": "R is a local ring, meaning it has exactly one maximal ideal"
+  },
+  {
+    "id": "separable_polynomial_derivative_criterion",
+    "name": "Derivative Criterion for Separability",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field and f(x) be a non-zero polynomial in F[x]. The polynomial f(x) is separable (has no multiple roots in its splitting field) if and only if f(x) and its formal derivative f'(x) are coprime in F[x].",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a non-zero polynomial in the polynomial ring F[x]",
+      "the greatest common divisor of f(x) and its formal derivative f'(x) in F[x] is 1"
+    ],
+    "conclusion": "f(x) has no multiple roots in any extension field of F"
+  },
+  {
+    "id": "nilpotent_plus_unit_is_unit",
+    "name": "Nilpotent Plus Unit Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring, the sum of a nilpotent element and a unit is always a unit.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "x is a nilpotent element of R",
+      "u is a unit in R"
+    ],
+    "conclusion": "The sum x + u is a unit in R"
+  },
+  {
+    "id": "thues_lemma",
+    "name": "Thue's Lemma",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let p be a prime number and a be an integer not divisible by p. Then there exist integers x and y such that x is congruent to a*y modulo p, and the absolute values of x and y are strictly greater than 0 and strictly less than the square root of p.",
+    "hypotheses": [
+      "p is a prime number",
+      "a is an integer",
+      "a is not divisible by p"
+    ],
+    "conclusion": "There exist integers x and y such that x is congruent to a*y modulo p, and 0 < |x| < sqrt(p) and 0 < |y| < sqrt(p)"
+  },
+  {
+    "id": "euclidean_domain_implies_pid",
+    "name": "Euclidean Domain Implies Principal Ideal Domain",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Euclidean domain is a principal ideal domain.",
+    "hypotheses": [
+      "R is an integral domain",
+      "There exists a function d: R \\setminus \\{0\\} \\to \\mathbb{N} \\cup \\{0\\} such that for any a, b \\in R with b \\neq 0, there exist q, r \\in R satisfying a = bq + r where either r = 0 or d(r) < d(b)"
+    ],
+    "conclusion": "Every ideal of R is generated by a single element"
+  },
+  {
+    "id": "maximal_ideal_quotient_theorem",
+    "name": "Maximal Ideal Quotient Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity and M be an ideal of R. Then M is a maximal ideal if and only if the quotient ring R/M is a field.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "M is an ideal of R"
+    ],
+    "conclusion": "M is a maximal ideal of R if and only if the quotient ring R/M is a field"
+  },
+  {
+    "id": "kronecker_theorem_polynomial_roots",
+    "name": "Kronecker's Theorem on Roots of Polynomials",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field and let f(x) be a non-constant polynomial in F[x]. Then there exists an extension field E of F in which f(x) has a root.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a non-constant polynomial in the polynomial ring F[x]"
+    ],
+    "conclusion": "There exists an extension field E of F and an element \\alpha \\in E such that f(\\alpha) = 0"
+  },
+  {
+    "id": "order_element_direct_product",
+    "name": "Order of an Element in a Direct Product",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G and H be groups, and let g \\in G and h \\in H be elements of finite order. Then the order of (g, h) in G \\times H is the least common multiple of the orders of g and h.",
+    "hypotheses": [
+      "G is a group",
+      "H is a group",
+      "g is an element of G having finite order m",
+      "h is an element of H having finite order n"
+    ],
+    "conclusion": "The order of the element (g, h) in the direct product group G \\times H is the least common multiple of m and n"
+  },
+  {
+    "id": "alternating_group_generation",
+    "name": "Alternating Group Generation by 3-Cycles",
+    "domain": "GroupTheory",
+    "original_full_statement": "For any integer n \\ge 3, the alternating group A_n is generated by the set of all 3-cycles in S_n.",
+    "hypotheses": [
+      "n is an integer",
+      "n \\ge 3"
+    ],
+    "conclusion": "The alternating group A_n is generated by the set of all 3-cycles in the symmetric group S_n"
+  },
+  {
+    "id": "finite_integral_domain_field",
+    "name": "Finite Integral Domain Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite integral domain is a field.",
+    "hypotheses": [
+      "R is a finite ring",
+      "R is a commutative ring",
+      "R has a multiplicative identity 1 \\neq 0",
+      "R has no non-zero zero divisors"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "gauss_lemma_polynomials",
+    "name": "Gauss's Lemma for Polynomials",
+    "domain": "RingTheory",
+    "original_full_statement": "The product of two primitive polynomials over a unique factorization domain is primitive.",
+    "hypotheses": [
+      "R is a unique factorization domain",
+      "f is a primitive polynomial in R[x]",
+      "g is a primitive polynomial in R[x]"
+    ],
+    "conclusion": "The product polynomial fg is primitive in R[x]"
+  },
+  {
+    "id": "group_order_p2_abelian",
+    "name": "Group of Order p^2 Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let p be a prime number. If G is a group of order p^2, then G is abelian.",
+    "hypotheses": [
+      "G is a finite group",
+      "The order of G is p^2 for some prime number p"
+    ],
+    "conclusion": "G is an abelian group"
+  },
+  {
+    "id": "finite_subgroup_field_mult_group_cyclic",
+    "name": "Finite Subgroup of a Field Multiplicative Group Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "G is a finite subgroup of the multiplicative group F^\\times"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "smallest_prime_index_normal",
+    "name": "Smallest Prime Index Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and let p be the smallest prime dividing the order of G. If H is a subgroup of G of index p, then H is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is the smallest prime dividing the order of G",
+      "H is a subgroup of G",
+      "The index [G:H] is equal to p"
+    ],
+    "conclusion": "H is a normal subgroup of G"
+  },
+  {
+    "id": "boolean_ring_prime_is_maximal",
+    "name": "Prime Ideals in Boolean Rings Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a Boolean ring, every prime ideal is a maximal ideal.",
+    "hypotheses": [
+      "R is a Boolean ring",
+      "P is a prime ideal of R"
+    ],
+    "conclusion": "P is a maximal ideal of R"
+  },
+  {
+    "id": "pid_prime_ideal_maximal",
+    "name": "Prime Ideals in a PID Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a principal ideal domain, every non-zero prime ideal is a maximal ideal.",
+    "hypotheses": [
+      "R is a principal ideal domain",
+      "P is a prime ideal of R",
+      "P is not the zero ideal"
+    ],
+    "conclusion": "P is a maximal ideal of R"
+  },
+  {
+    "id": "formal_power_series_units",
+    "name": "Units in Formal Power Series Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. An element f(x) = \\sum_{n=0}^{\\infty} a_n x^n in the formal power series ring R[[x]] is a unit if and only if its constant term a_0 is a unit in R.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "f(x) = \\sum_{n=0}^{\\infty} a_n x^n is an element of the formal power series ring R[[x]]"
+    ],
+    "conclusion": "f(x) is a unit in R[[x]] if and only if a_0 is a unit in R"
+  },
+  {
+    "id": "prime_ideal_boolean_ring",
+    "name": "Prime Ideals in Boolean Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Every prime ideal in a Boolean ring is a maximal ideal.",
+    "hypotheses": [
+      "R is a Boolean ring (i.e., x^2 = x for all x \\in R).",
+      "P is a prime ideal of R."
+    ],
+    "conclusion": "P is a maximal ideal of R."
+  },
+  {
+    "id": "integral_domain_polynomial_ring",
+    "name": "Polynomial Ring over an Integral Domain",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is an integral domain, then the polynomial ring R[x] is also an integral domain.",
+    "hypotheses": [
+      "R is a commutative ring with identity.",
+      "R is an integral domain (contains no non-zero zero divisors)."
+    ],
+    "conclusion": "The polynomial ring R[x] is an integral domain."
+  },
+  {
+    "id": "sylow_first_theorem",
+    "name": "First Sylow Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and p be a prime number. If p^k divides the order of G for some non-negative integer k, then G has a subgroup of order p^k.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "k is a non-negative integer",
+      "p^k divides the order of G"
+    ],
+    "conclusion": "G has a subgroup of order p^k"
+  },
+  {
+    "id": "maximal_ideal_is_prime",
+    "name": "Maximal Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with identity, every maximal ideal is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity",
+      "M is a maximal ideal of R"
+    ],
+    "conclusion": "M is a prime ideal of R"
+  },
+  {
+    "id": "ufd_polynomial_ring",
+    "name": "Polynomial Ring over a UFD",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a unique factorization domain, then the polynomial ring R[x] is also a unique factorization domain.",
+    "hypotheses": [
+      "R is a unique factorization domain"
+    ],
+    "conclusion": "The polynomial ring R[x] is a unique factorization domain"
+  },
+  {
+    "id": "sylow_second_theorem",
+    "name": "Second Sylow Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and p be a prime number. Any two Sylow p-subgroups of G are conjugate in G.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "P is a Sylow p-subgroup of G",
+      "Q is a Sylow p-subgroup of G"
+    ],
+    "conclusion": "There exists an element g in G such that Q = g P g^{-1}"
+  },
+  {
+    "id": "krulls_intersection_theorem_local",
+    "name": "Krull's Intersection Theorem for Local Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a Noetherian local ring with unique maximal ideal M. Then the intersection of all powers of M is the zero ideal.",
+    "hypotheses": [
+      "R is a commutative Noetherian ring",
+      "R is a local ring with unique maximal ideal M"
+    ],
+    "conclusion": "The intersection \\bigcap_{n=1}^{\\infty} M^n is the zero ideal."
+  },
+  {
+    "id": "dirichlets_approximation_theorem",
+    "name": "Dirichlet's Approximation Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any real number \\alpha and any positive integer N, there exist integers p and q such that 1 \\le q \\le N and |q\\alpha - p| \\le 1/(N+1).",
+    "hypotheses": [
+      "\\alpha is a real number",
+      "N is a positive integer"
+    ],
+    "conclusion": "There exist integers p and q such that 1 \\le q \\le N and |q\\alpha - p| \\le 1/(N+1)."
+  },
+  {
+    "id": "splitting_field_separable_is_galois",
+    "name": "Galois Extension Characterization",
+    "domain": "FieldTheory",
+    "original_full_statement": "The splitting field of a separable polynomial over a field F is a Galois extension of F.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a separable polynomial in F[x]",
+      "E is the splitting field of f(x) over F"
+    ],
+    "conclusion": "The field extension E/F is a Galois extension."
+  },
+  {
+    "id": "dedekinds_modular_law",
+    "name": "Dedekind's Modular Law",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group and let A, B, and C be subgroups of G such that A is a subgroup of C. Then A(B \\cap C) = AB \\cap C.",
+    "hypotheses": [
+      "G is a group",
+      "A, B, and C are subgroups of G",
+      "A is a subgroup of C"
+    ],
+    "conclusion": "A(B \\cap C) = AB \\cap C."
+  },
+  {
+    "id": "prime_avoidance_lemma",
+    "name": "Prime Avoidance Lemma",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring and let P_1, P_2, ..., P_n be prime ideals of R. If I is an ideal of R that is contained in the union of the P_i, then I is contained in P_i for some i.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "P_1, P_2, ..., P_n are prime ideals of R",
+      "I is an ideal of R",
+      "I is contained in the union \\bigcup_{i=1}^n P_i"
+    ],
+    "conclusion": "I is contained in P_i for some index i \\in {1, 2, ..., n}."
+  },
+  {
+    "id": "intersection_coprime_subgroups",
+    "name": "Intersection of Subgroups of Coprime Order",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H and K are finite subgroups of a group G whose orders are relatively prime, then their intersection is the trivial subgroup.",
+    "hypotheses": [
+      "G is a group",
+      "H is a finite subgroup of G",
+      "K is a finite subgroup of G",
+      "The greatest common divisor of the order of H and the order of K is 1"
+    ],
+    "conclusion": "The intersection of H and K is the trivial subgroup containing only the identity element."
+  },
+  {
+    "id": "boolean_ring_commutative",
+    "name": "Commutativity of Boolean Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Boolean ring is commutative.",
+    "hypotheses": [
+      "R is a ring",
+      "For every element x in R, x^2 = x"
+    ],
+    "conclusion": "R is a commutative ring."
+  },
+  {
+    "id": "finite_subgroup_field_mult_group_cyclic",
+    "name": "Cyclicity of Finite Subgroups of the Multiplicative Group of a Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "F_times is the multiplicative group of non-zero elements of F",
+      "G is a finite subgroup of F_times"
+    ],
+    "conclusion": "G is a cyclic group."
+  },
+  {
+    "id": "quotient_ring_integral_domain_prime_ideal",
+    "name": "Quotient Ring Integral Domain Criterion for Prime Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. An ideal P of R is prime if and only if the quotient ring R/P is an integral domain.",
+    "hypotheses": [
+      "R is a commutative ring with an identity element",
+      "P is a proper ideal of R",
+      "The quotient ring R/P is an integral domain"
+    ],
+    "conclusion": "P is a prime ideal of R."
+  },
+  {
+    "id": "subgroup_of_cyclic_group",
+    "name": "Subgroups of Cyclic Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of a cyclic group is cyclic.",
+    "hypotheses": [
+      "G is a cyclic group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "H is a cyclic group."
+  },
+  {
+    "id": "thm_boolean_ring_prime_maximal",
+    "name": "Prime Ideals in Boolean Rings are Maximal",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a Boolean ring and P is a prime ideal of R, then P is a maximal ideal of R.",
+    "hypotheses": [
+      "R is a Boolean ring",
+      "P is a prime ideal of R"
+    ],
+    "conclusion": "P is a maximal ideal of R"
+  },
+  {
+    "id": "thm_unit_nilpotent_sum",
+    "name": "Sum of a Unit and a Nilpotent Element",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. If u is a unit in R and x is a nilpotent element in R, then the sum u + x is a unit in R.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "u is a unit in R",
+      "x is a nilpotent element in R"
+    ],
+    "conclusion": "The sum u + x is a unit in R"
+  },
+  {
+    "id": "thm_finite_subgroup_field_mult",
+    "name": "Finite Subgroups of the Multiplicative Group of a Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "If F is a field and G is a finite subgroup of the multiplicative group of F, then G is a cyclic group.",
+    "hypotheses": [
+      "F is a field",
+      "G is a finite subgroup of the multiplicative group of F"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "thm_ufd_irreducible_is_prime",
+    "name": "Irreducible Elements in a UFD Generate Prime Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "In a unique factorization domain R, every non-zero irreducible element p generates a prime ideal.",
+    "hypotheses": [
+      "R is a unique factorization domain",
+      "p is a non-zero irreducible element in R"
+    ],
+    "conclusion": "The principal ideal generated by p is a prime ideal in R"
+  },
+  {
+    "id": "derived_subgroup_criterion",
+    "name": "Derived Subgroup Criterion for Abelian Quotients",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group with commutator subgroup G', and let N be a normal subgroup of G. Then the quotient group G/N is abelian if and only if G' is a subgroup of N.",
+    "hypotheses": [
+      "G is a group",
+      "G' is the commutator subgroup of G",
+      "N is a normal subgroup of G"
+    ],
+    "conclusion": "The quotient group G/N is abelian if and only if G' is a subgroup of N"
+  },
+  {
+    "id": "finite_multiplicative_subgroups_cyclic",
+    "name": "Cyclicity of Finite Multiplicative Subgroups of Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "If F is a field and G is a finite subgroup of the multiplicative group F^x, then G is a cyclic group.",
+    "hypotheses": [
+      "F is a field",
+      "G is a subgroup of the multiplicative group of F",
+      "G is finite"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "pid_prime_ideals_maximal",
+    "name": "Maximal Ideals in Principal Ideal Domains",
+    "domain": "RingTheory",
+    "original_full_statement": "In a principal ideal domain, every non-zero prime ideal is a maximal ideal.",
+    "hypotheses": [
+      "R is a principal ideal domain",
+      "I is a prime ideal of R",
+      "I is not the zero ideal"
+    ],
+    "conclusion": "I is a maximal ideal of R"
+  },
+  {
+    "id": "subgroup_cyclic_group",
+    "name": "Subgroups of a Cyclic Group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of a cyclic group is cyclic.",
+    "hypotheses": [
+      "G is a cyclic group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "H is a cyclic group"
+  },
+  {
+    "id": "finite_field_cardinality",
+    "name": "Cardinality of Finite Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "The number of elements in any finite field is a power of a prime.",
+    "hypotheses": [
+      "F is a field",
+      "F has a finite number of elements"
+    ],
+    "conclusion": "The number of elements in F is p^n for some prime number p and positive integer n"
+  },
+  {
+    "id": "prime_order_group_cyclic",
+    "name": "Prime Order Group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every group of prime order is cyclic.",
+    "hypotheses": [
+      "G is a finite group",
+      "The order of G is a prime number"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "uniqueness_splitting_fields",
+    "name": "Uniqueness of Splitting Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any two splitting fields of a polynomial over a field F are isomorphic via an isomorphism that fixes F pointwise.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "E is a splitting field of f(x) over F",
+      "K is a splitting field of f(x) over F"
+    ],
+    "conclusion": "There exists a field isomorphism from E to K that fixes every element of F"
+  },
+  {
+    "id": "polynomial_root_bound",
+    "name": "Polynomial Root Bound Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "A non-zero polynomial of degree n over a field has at most n distinct roots in that field.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a non-zero polynomial in the polynomial ring F[x]",
+      "The degree of f(x) is n"
+    ],
+    "conclusion": "f(x) has at most n distinct roots in F"
+  },
+  {
+    "id": "pid_is_noetherian",
+    "name": "PID implies Noetherian Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every principal ideal domain is a Noetherian ring.",
+    "hypotheses": [
+      "R is an integral domain",
+      "Every ideal in R is generated by a single element"
+    ],
+    "conclusion": "R is a Noetherian ring"
+  },
+  {
+    "id": "two_ideals_field_criterion",
+    "name": "Two Ideals Field Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "A commutative ring with identity is a field if and only if it has exactly two ideals.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a non-zero multiplicative identity",
+      "The only ideals of R are the zero ideal and R itself"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "primitive_root_classification",
+    "name": "Primitive Root Modulo n Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "The multiplicative group of integers modulo n is cyclic if and only if n is 1, 2, 4, p^k, or 2p^k for some odd prime p and integer k >= 1.",
+    "hypotheses": [
+      "n is a positive integer",
+      "U(n) is the multiplicative group of integers modulo n"
+    ],
+    "conclusion": "U(n) is a cyclic group if and only if n is 1, 2, 4, p^k, or 2p^k for some odd prime p and positive integer k"
+  },
+  {
+    "id": "maximal_ideal_is_prime",
+    "name": "Maximal Ideal is Prime Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with a non-zero multiplicative identity, every maximal ideal is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a non-zero multiplicative identity",
+      "I is a maximal ideal of R"
+    ],
+    "conclusion": "I is a prime ideal of R"
+  },
+  {
+    "id": "dedekind_linear_independence_characters",
+    "name": "Dedekind's Lemma on Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let G be a group and E be a field. Any set of distinct group homomorphisms from G to the multiplicative group of E is linearly independent over E.",
+    "hypotheses": [
+      "G is a group",
+      "E is a field",
+      "n is a positive integer",
+      "sigma_1, sigma_2, ..., sigma_n are distinct group homomorphisms from G to the multiplicative group of E"
+    ],
+    "conclusion": "The homomorphisms sigma_1, sigma_2, ..., sigma_n are linearly independent over E"
+  },
+  {
+    "id": "linear_diophantine_solvability",
+    "name": "Linear Diophantine Equation Solvability Criterion",
+    "domain": "NumberTheory",
+    "original_full_statement": "For given integers a, b, and c with a and b not both zero, the linear Diophantine equation ax + by = c has integer solutions for x and y if and only if the greatest common divisor of a and b divides c.",
+    "hypotheses": [
+      "a, b, and c are integers",
+      "a and b are not both zero",
+      "d is the greatest common divisor of a and b"
+    ],
+    "conclusion": "There exist integers x and y such that ax + by = c if and only if d divides c."
+  },
+  {
+    "id": "mobius_inversion_formula",
+    "name": "Möbius Inversion Formula",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let f and g be arithmetic functions. If g(n) = sum_{d|n} f(d) for every positive integer n, then f(n) = sum_{d|n} mu(d) g(n/d) for every positive integer n, where mu is the Möbius function.",
+    "hypotheses": [
+      "f is an arithmetic function defined on positive integers",
+      "g is an arithmetic function defined on positive integers",
+      "For all positive integers n, g(n) is the sum of f(d) over all positive divisors d of n"
+    ],
+    "conclusion": "For all positive integers n, f(n) is the sum of mu(d) * g(n/d) over all positive divisors d of n, where mu is the Möbius function."
+  },
+  {
+    "id": "center_of_p_group",
+    "name": "Center of a Finite p-group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite p-group of order p^n where p is prime and n >= 1, then the center of G is non-trivial.",
+    "hypotheses": [
+      "G is a finite group",
+      "The order of G is p^n for some prime p and integer n >= 1"
+    ],
+    "conclusion": "The center of G contains at least one non-identity element"
+  },
+  {
+    "id": "jacobson_radical_artinian_nilpotent",
+    "name": "Nilpotency of the Jacobson Radical in Artinian Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a left Artinian ring, then its Jacobson radical J(R) is a nilpotent ideal.",
+    "hypotheses": [
+      "R is a left Artinian ring",
+      "J(R) is the Jacobson radical of R"
+    ],
+    "conclusion": "There exists a positive integer n such that J(R)^n = 0"
+  },
+  {
+    "id": "order_of_finite_field",
+    "name": "Order of a Finite Field Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "If F is a finite field, then the number of elements in F is p^n for some prime p and positive integer n.",
+    "hypotheses": [
+      "F is a field",
+      "F has a finite number of elements"
+    ],
+    "conclusion": "The number of elements in F is p^n for some prime number p and positive integer n"
+  },
+  {
+    "id": "chinese_remainder_theorem_rings",
+    "name": "Chinese Remainder Theorem for Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity, and let I and J be ideals of R such that I + J = R. Then I \\cap J = IJ and the quotient ring R/(I \\cap J) is isomorphic to R/I \\times R/J.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "I and J are ideals of R",
+      "I + J = R"
+    ],
+    "conclusion": "I \\cap J = IJ and R/(I \\cap J) \\cong R/I \\times R/J"
+  },
+  {
+    "id": "boolean_ring_commutative",
+    "name": "Boolean Rings are Commutative",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a ring such that x^2 = x for all x in R. Then R is a commutative ring.",
+    "hypotheses": [
+      "R is a ring",
+      "For every element x in R, x^2 = x"
+    ],
+    "conclusion": "R is a commutative ring."
+  },
+  {
+    "id": "moebius_inversion_formula",
+    "name": "Moebius Inversion Formula",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let f and g be arithmetic functions. If g(n) = sum_{d|n} f(d) for all positive integers n, then f(n) = sum_{d|n} mu(d) g(n/d) for all positive integers n.",
+    "hypotheses": [
+      "f and g are arithmetic functions defined on the positive integers",
+      "For all positive integers n, g(n) is the sum of f(d) over all positive divisors d of n"
+    ],
+    "conclusion": "For all positive integers n, f(n) is the sum of mu(d) * g(n/d) over all positive divisors d of n, where mu is the Moebius function"
+  },
+  {
+    "id": "direct_product_coprime_cyclic",
+    "name": "Direct Product of Coprime Cyclic Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G and H be finite cyclic groups. The direct product G x H is cyclic if and only if the orders of G and H are coprime.",
+    "hypotheses": [
+      "G is a finite cyclic group",
+      "H is a finite cyclic group",
+      "The order of G and the order of H are coprime"
+    ],
+    "conclusion": "The direct product group G x H is a cyclic group"
+  },
+  {
+    "id": "polynomial_ring_over_field_pid",
+    "name": "Polynomial Ring over a Field is a PID",
+    "domain": "RingTheory",
+    "original_full_statement": "If F is a field, then the polynomial ring F[x] in one variable over F is a principal ideal domain.",
+    "hypotheses": [
+      "F is a field",
+      "F[x] is the polynomial ring in one variable over F"
+    ],
+    "conclusion": "F[x] is a principal ideal domain"
+  },
+  {
+    "id": "thm_gzg_cyclic_abelian",
+    "name": "G/Z(G) Cyclic Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group and the quotient group G/Z(G) is cyclic, then G is abelian.",
+    "hypotheses": [
+      "Let G be a group.",
+      "Let Z(G) be the center of G.",
+      "The quotient group G/Z(G) is cyclic."
+    ],
+    "conclusion": "The group G is abelian."
+  },
+  {
+    "id": "thm_integral_domain_characteristic",
+    "name": "Characteristic of an Integral Domain Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "The characteristic of an integral domain is either 0 or a prime number.",
+    "hypotheses": [
+      "Let R be an integral domain.",
+      "The characteristic of R is not equal to 0."
+    ],
+    "conclusion": "The characteristic of R is a prime number."
+  },
+  {
+    "id": "characteristic_subgroup_normal",
+    "name": "Characteristic Subgroup of a Normal Subgroup Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If N is a normal subgroup of a group G, and K is a characteristic subgroup of N, then K is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "N is a normal subgroup of G",
+      "K is a characteristic subgroup of N"
+    ],
+    "conclusion": "K is a normal subgroup of G"
+  },
+  {
+    "id": "subgroup_of_cyclic_group",
+    "name": "Subgroup of a Cyclic Group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of a cyclic group is cyclic.",
+    "hypotheses": [
+      "G is a cyclic group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "H is a cyclic group"
+  },
+  {
+    "id": "factor_theorem",
+    "name": "Factor Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring and f(x) be a polynomial in R[x]. If a is an element of R such that f(a) = 0, then x - a divides f(x) in R[x].",
+    "hypotheses": [
+      "R is a commutative ring",
+      "f(x) is a polynomial in the polynomial ring R[x]",
+      "a is an element of R",
+      "f(a) = 0"
+    ],
+    "conclusion": "The polynomial x - a divides f(x) in R[x]"
+  },
+  {
+    "id": "irreducible_implies_prime_pid",
+    "name": "Irreducible Implies Prime in a PID",
+    "domain": "RingTheory",
+    "original_full_statement": "In a principal ideal domain, every irreducible element is a prime element.",
+    "hypotheses": [
+      "Let R be a principal ideal domain",
+      "Let p be a non-zero element of R",
+      "Let p be a non-unit in R",
+      "Let p be an irreducible element in R"
+    ],
+    "conclusion": "The element p is a prime element in R"
+  },
+  {
+    "id": "coprime_cyclic_direct_product",
+    "name": "Direct Product of Coprime Cyclic Groups Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "The direct product of two finite cyclic groups G and H is cyclic if and only if their orders are coprime.",
+    "hypotheses": [
+      "G is a finite cyclic group",
+      "H is a finite cyclic group",
+      "the orders of G and H are coprime integers"
+    ],
+    "conclusion": "the direct product group G x H is a cyclic group"
+  },
+  {
+    "id": "chinese_remainder_theorem_integers",
+    "name": "Chinese Remainder Theorem for Integers",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let m_1, m_2, ..., m_k be pairwise coprime positive integers, and let a_1, a_2, ..., a_k be any integers. Then the system of congruences x = a_i (mod m_i) for 1 <= i <= k has a unique solution modulo m_1 * m_2 * ... * m_k.",
+    "hypotheses": [
+      "m_1, m_2, ..., m_k are positive integers",
+      "m_1, m_2, ..., m_k are pairwise coprime",
+      "a_1, a_2, ..., a_k are integers"
+    ],
+    "conclusion": "The system of congruences x = a_i (mod m_i) has a unique solution modulo the product m_1 * m_2 * ... * m_k"
+  },
+  {
+    "id": "fundamental_theorem_galois_theory",
+    "name": "Fundamental Theorem of Galois Theory",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E/F be a finite Galois extension. Then the map K \\mapsto Gal(E/K) is a bijection from the set of intermediate fields K (where F \\subseteq K \\subseteq E) to the set of subgroups of the Galois group Gal(E/F).",
+    "hypotheses": [
+      "E is a finite field extension of a field F",
+      "The extension E/F is a Galois extension"
+    ],
+    "conclusion": "The map K \\mapsto Gal(E/K) is a bijection between the intermediate fields of E/F and the subgroups of Gal(E/F)"
+  },
+  {
+    "id": "nakayamas_lemma",
+    "name": "Nakayama's Lemma",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity, J(R) its Jacobson radical, and M a finitely generated R-module. If J(R)M = M, then M = 0.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "M is a finitely generated R-module",
+      "J(R) is the Jacobson radical of R",
+      "J(R)M = M"
+    ],
+    "conclusion": "M = 0"
+  },
+  {
+    "id": "maximal_ideal_quotient_field_criterion",
+    "name": "Maximal Ideal Quotient Ring Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity, and let M be an ideal of R. The quotient ring R/M is a field if and only if M is a maximal ideal.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "M is an ideal of R"
+    ],
+    "conclusion": "The quotient ring R/M is a field if and only if M is a maximal ideal of R."
+  },
+  {
+    "id": "class_equation_finite_groups",
+    "name": "Class Equation for Finite Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group. Then |G| = |Z(G)| + \\sum_{i=1}^k |C_i|, where Z(G) is the center of G and C_1, ..., C_k are the distinct conjugacy classes of G that have size strictly greater than 1.",
+    "hypotheses": [
+      "G is a finite group",
+      "Z(G) is the center of G",
+      "C_1, ..., C_k are the distinct conjugacy classes of G of size > 1"
+    ],
+    "conclusion": "The order of G satisfies |G| = |Z(G)| + \\sum_{i=1}^k |C_i|."
+  },
+  {
+    "id": "quotient_center_cyclic_implies_abelian",
+    "name": "G/Z(G) Cyclic Implies Abelian Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group and the quotient group G/Z(G) is cyclic, where Z(G) is the center of G, then G is an abelian group.",
+    "hypotheses": [
+      "G is a group",
+      "Z(G) is the center of G",
+      "The quotient group G/Z(G) is cyclic"
+    ],
+    "conclusion": "G is an abelian group"
+  },
+  {
+    "id": "maximal_ideal_implies_prime",
+    "name": "Maximal Ideal Implies Prime Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with identity, every maximal ideal is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity element",
+      "M is a maximal ideal of R"
+    ],
+    "conclusion": "M is a prime ideal of R"
+  },
+  {
+    "id": "maximal_ideal_field_criterion",
+    "name": "Maximal Ideal Quotient Field Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity and M be a proper ideal of R. Then M is a maximal ideal if and only if the quotient ring R/M is a field.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity",
+      "M is a proper ideal of R"
+    ],
+    "conclusion": "M is a maximal ideal of R if and only if the quotient ring R/M is a field"
+  },
+  {
+    "id": "prime_ideal_direct_product",
+    "name": "Prime Ideals of a Direct Product Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every prime ideal of the direct product of two commutative rings with identity R1 x R2 is of the form P1 x R2 for some prime ideal P1 of R1, or R1 x P2 for some prime ideal P2 of R2.",
+    "hypotheses": [
+      "R1 and R2 are commutative rings with identity",
+      "P is a prime ideal of the direct product ring R1 x R2"
+    ],
+    "conclusion": "P is either of the form P1 x R2 where P1 is a prime ideal of R1, or of the form R1 x P2 where P2 is a prime ideal of R2"
+  },
+  {
+    "id": "correspondence_theorem_rings",
+    "name": "Correspondence Theorem for Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a ring and I be a two-sided ideal of R. There is an inclusion-preserving bijection between the set of ideals of R that contain I and the set of ideals of the quotient ring R/I.",
+    "hypotheses": [
+      "R is a ring",
+      "I is a two-sided ideal of R"
+    ],
+    "conclusion": "There is an inclusion-preserving bijection between the set of ideals of R containing I and the set of ideals of R/I"
+  },
+  {
+    "id": "cauchys_theorem_groups",
+    "name": "Cauchy's Theorem for Finite Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite group and p is a prime number dividing the order of G, then G contains an element of order p.",
+    "hypotheses": [
+      "Let G be a finite group.",
+      "Let p be a prime number.",
+      "Assume p divides the order of G."
+    ],
+    "conclusion": "There exists an element in G of order exactly p."
+  },
+  {
+    "id": "integral_domain_polynomial_ring",
+    "name": "Polynomial Ring over an Integral Domain Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is an integral domain, then the polynomial ring R[x] is also an integral domain.",
+    "hypotheses": [
+      "Let R be a commutative ring with identity.",
+      "Assume R is an integral domain."
+    ],
+    "conclusion": "The polynomial ring R[x] is an integral domain."
+  },
+  {
+    "id": "second_isomorphism_theorem_groups",
+    "name": "Second Isomorphism Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group, H a subgroup of G, and N a normal subgroup of G. Then the intersection of H and N is a normal subgroup of H, and the quotient group H / (H \\cap N) is isomorphic to HN / N.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "N is a normal subgroup of G"
+    ],
+    "conclusion": "H \\cap N is a normal subgroup of H, and H / (H \\cap N) is isomorphic to HN / N."
+  },
+  {
+    "id": "poincare_subgroup_index_theorem",
+    "name": "Poincaré's Theorem on Subgroups",
+    "domain": "GroupTheory",
+    "original_full_statement": "The intersection of two subgroups of finite index also has finite index.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G with finite index",
+      "K is a subgroup of G with finite index"
+    ],
+    "conclusion": "The intersection H \\cap K has finite index in G, and [G : H \\cap K] \\le [G:H][G:K]."
+  },
+  {
+    "id": "disjoint_normal_subgroups_commute",
+    "name": "Commutativity of Disjoint Normal Subgroups",
+    "domain": "GroupTheory",
+    "original_full_statement": "If M and N are normal subgroups of a group G and their intersection is the trivial subgroup, then every element of M commutes with every element of N.",
+    "hypotheses": [
+      "Let G be a group",
+      "Let M be a normal subgroup of G",
+      "Let N be a normal subgroup of G",
+      "The intersection of M and N contains only the identity element"
+    ],
+    "conclusion": "For all m in M and n in N, mn = nm"
+  },
+  {
+    "id": "primitive_element_theorem",
+    "name": "Theorem of the Primitive Element",
+    "domain": "FieldTheory",
+    "original_full_statement": "If E is a finite separable extension of a field F, then E is a simple extension of F.",
+    "hypotheses": [
+      "F is a field",
+      "E is a finite field extension of F",
+      "E is a separable extension of F"
+    ],
+    "conclusion": "There exists an element a in E such that E = F(a)"
+  },
+  {
+    "id": "subgroup_product_theorem",
+    "name": "Subgroup Product Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let H and K be subgroups of a group G. Then the product set HK is a subgroup of G if and only if HK = KH.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "K is a subgroup of G"
+    ],
+    "conclusion": "The set HK = {hk | h in H, k in K} is a subgroup of G if and only if HK = KH"
+  },
+  {
+    "id": "integral_domain_polynomial_ring",
+    "name": "Integral Domain Polynomial Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is an integral domain, then the polynomial ring R[x] is also an integral domain.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "R is an integral domain"
+    ],
+    "conclusion": "The polynomial ring R[x] is an integral domain."
+  },
+  {
+    "id": "tower_law_field_extensions",
+    "name": "Multiplicativity of Field Extension Degrees",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F, K, and L be fields such that F \\subseteq K \\subseteq L. If K/F and L/K are finite field extensions, then L/F is a finite extension and [L:F] = [L:K][K:F].",
+    "hypotheses": [
+      "F, K, and L are fields such that F \\subseteq K \\subseteq L",
+      "The field extension K/F is finite",
+      "The field extension L/K is finite"
+    ],
+    "conclusion": "The field extension L/F is finite and its degree satisfies [L:F] = [L:K][K:F]"
+  },
+  {
+    "id": "class_equation_groups",
+    "name": "The Class Equation",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group. Then the order of G is equal to the order of its center plus the sum of the sizes of its conjugacy classes that have size greater than 1.",
+    "hypotheses": [
+      "G is a finite group",
+      "Z(G) is the center of G",
+      "g_1, g_2, \\dots, g_k are representatives of the distinct conjugacy classes of G not contained in Z(G)"
+    ],
+    "conclusion": "|G| = |Z(G)| + \\sum_{i=1}^k [G : C_G(g_i)], where C_G(g_i) is the centralizer of g_i in G"
+  },
+  {
+    "id": "direct_product_rings_units",
+    "name": "Units in a Direct Product of Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "An element in the direct product of two rings with identity is a unit if and only if each of its components is a unit in the respective ring.",
+    "hypotheses": [
+      "R_1 and R_2 are rings with identity",
+      "u \\in R_1",
+      "v \\in R_2"
+    ],
+    "conclusion": "The element (u, v) is a unit in R_1 \\times R_2 if and only if u is a unit in R_1 and v is a unit in R_2"
+  },
+  {
+    "id": "perfect_field_separability",
+    "name": "Separability over Perfect Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every irreducible polynomial over a perfect field is separable.",
+    "hypotheses": [
+      "F is a perfect field",
+      "p(x) is an irreducible polynomial in the polynomial ring F[x]"
+    ],
+    "conclusion": "p(x) is a separable polynomial."
+  },
+  {
+    "id": "euclid_euler_theorem",
+    "name": "Euclid-Euler Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "An even positive integer $n$ is a perfect number if and only if it has the form $n = 2^{p-1}(2^p - 1)$, where $2^p - 1$ is a prime number.",
+    "hypotheses": [
+      "$n$ is a positive integer.",
+      "$n$ is an even number.",
+      "$n$ is a perfect number."
+    ],
+    "conclusion": "$n$ can be written in the form $2^{p-1}(2^p - 1)$ where $2^p - 1$ is a prime number."
+  },
+  {
+    "id": "frobenius_endomorphism_injectivity",
+    "name": "Injectivity of the Frobenius Endomorphism",
+    "domain": "FieldTheory",
+    "original_full_statement": "If $F$ is a field of prime characteristic $p > 0$, then the Frobenius map $f(x) = x^p$ is an injective field homomorphism from $F$ to $F$.",
+    "hypotheses": [
+      "$F$ is a field.",
+      "The characteristic of $F$ is a prime number $p > 0$."
+    ],
+    "conclusion": "The mapping $f: F \\to F$ defined by $f(x) = x^p$ is an injective field homomorphism."
+  },
+  {
+    "id": "linear_congruence_invertibility",
+    "name": "Invertibility in Modular Arithmetic",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let a and m be integers with m > 1. If a and m are coprime, then there exists an integer x such that ax is congruent to 1 modulo m.",
+    "hypotheses": [
+      "a is an integer",
+      "m is an integer",
+      "m > 1",
+      "The greatest common divisor of a and m is 1"
+    ],
+    "conclusion": "There exists an integer x such that ax is congruent to 1 modulo m"
+  },
+  {
+    "id": "linear_diophantine_solvability",
+    "name": "Linear Diophantine Equation Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any integers a, b, and c where a and b are not both zero, the linear Diophantine equation ax + by = c has a solution in integers x and y if and only if the greatest common divisor of a and b divides c.",
+    "hypotheses": [
+      "a, b, and c are integers",
+      "a and b are not both equal to zero"
+    ],
+    "conclusion": "The equation ax + by = c has integer solutions for x and y if and only if the greatest common divisor of a and b divides c."
+  },
+  {
+    "id": "subfields_finite_field",
+    "name": "Subfields of a Finite Field Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a finite field of order p^n, where p is prime. Then for every positive divisor m of n, F contains exactly one subfield of order p^m.",
+    "hypotheses": [
+      "F is a finite field",
+      "The order of F is p^n for some prime p and positive integer n",
+      "m is a positive integer",
+      "m divides n"
+    ],
+    "conclusion": "F contains exactly one subfield of order p^m."
+  },
+  {
+    "id": "algebraic_tower_theorem",
+    "name": "Algebraic Tower Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F, K, and L be fields such that F is a subfield of K and K is a subfield of L. If K is algebraic over F and L is algebraic over K, then L is algebraic over F.",
+    "hypotheses": [
+      "F, K, and L are fields",
+      "F is a subfield of K",
+      "K is a subfield of L",
+      "K is an algebraic extension of F",
+      "L is an algebraic extension of K"
+    ],
+    "conclusion": "L is an algebraic extension of F"
+  },
+  {
+    "id": "uniqueness_finite_fields",
+    "name": "Uniqueness of Finite Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "For any prime p and any positive integer n, any two finite fields of order p^n are isomorphic.",
+    "hypotheses": [
+      "p is a prime number",
+      "n is a positive integer",
+      "F1 is a field of order p^n",
+      "F2 is a field of order p^n"
+    ],
+    "conclusion": "F1 and F2 are isomorphic as fields"
+  },
+  {
+    "id": "gcd_lcm_product",
+    "name": "Product of GCD and LCM",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any two positive integers a and b, the product of their greatest common divisor and their least common multiple is equal to the product of a and b.",
+    "hypotheses": [
+      "a is a positive integer",
+      "b is a positive integer"
+    ],
+    "conclusion": "The product of the greatest common divisor of a and b and the least common multiple of a and b is equal to ab"
+  },
+  {
+    "id": "ring_units_group",
+    "name": "Group of Units of a Ring",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a ring with identity, then the set of all units of R forms a group under the multiplication operation of R.",
+    "hypotheses": [
+      "R is a ring",
+      "R has a multiplicative identity"
+    ],
+    "conclusion": "The set of all units of R forms a group under ring multiplication"
+  },
+  {
+    "id": "field_criterion_by_ideals",
+    "name": "Field Criterion by Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "A commutative ring with identity is a field if and only if it has exactly two ideals.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity element",
+      "R is not the zero ring",
+      "The only ideals of R are the zero ideal and R itself"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "frobenius_automorphism_finite_fields",
+    "name": "Frobenius Automorphism of Finite Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "For any finite field F of characteristic p, the map f(x) = x^p is a field automorphism of F.",
+    "hypotheses": [
+      "F is a finite field",
+      "The characteristic of F is a prime number p"
+    ],
+    "conclusion": "The map f: F -> F defined by f(x) = x^p is a field automorphism"
+  },
+  {
+    "id": "center_is_normal_subgroup",
+    "name": "Center is a Normal Subgroup",
+    "domain": "GroupTheory",
+    "original_full_statement": "The center of any group G is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "Z(G) is the center of G"
+    ],
+    "conclusion": "Z(G) is a normal subgroup of G"
+  },
+  {
+    "id": "prime_ideal_quotient_domain",
+    "name": "Prime Ideal Quotient Domain Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity and P be a proper ideal of R. Then P is a prime ideal if and only if the quotient ring R/P is an integral domain.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "P is a proper ideal of R"
+    ],
+    "conclusion": "P is a prime ideal if and only if the quotient ring R/P is an integral domain"
+  },
+  {
+    "id": "conjugate_roots_isomorphism",
+    "name": "Conjugate Roots Isomorphism Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field, p(x) be an irreducible polynomial in F[x], and K be an extension field of F. If alpha and beta are roots of p(x) in K, then there exists a field isomorphism from F(alpha) to F(beta) that maps alpha to beta and fixes every element of F.",
+    "hypotheses": [
+      "F is a field",
+      "p(x) is an irreducible polynomial in F[x]",
+      "K is an extension field of F",
+      "alpha and beta are roots of p(x) in K"
+    ],
+    "conclusion": "There exists a field isomorphism from F(alpha) to F(beta) that maps alpha to beta and fixes every element of F"
+  },
+  {
+    "id": "splitting_field_implies_normal_extension",
+    "name": "Splitting Field implies Normal Extension",
+    "domain": "FieldTheory",
+    "original_full_statement": "If K is a finite extension of a field F and K is the splitting field of some polynomial over F, then K is a normal extension of F.",
+    "hypotheses": [
+      "F is a field",
+      "K is a finite field extension of F",
+      "There exists a polynomial p(x) with coefficients in F such that K is the splitting field of p(x) over F"
+    ],
+    "conclusion": "K is a normal extension of F"
+  },
+  {
+    "id": "first_supplement_quadratic_reciprocity",
+    "name": "First Supplement to the Law of Quadratic Reciprocity",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any odd prime p, -1 is a quadratic residue modulo p if and only if p is congruent to 1 modulo 4.",
+    "hypotheses": [
+      "p is an odd prime number"
+    ],
+    "conclusion": "-1 is a quadratic residue modulo p if and only if p is congruent to 1 modulo 4"
+  },
+  {
+    "id": "units_formal_power_series",
+    "name": "Units in a Formal Power Series Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. A formal power series f(x) = a_0 + a_1 x + a_2 x^2 + ... in R[[x]] is a unit if and only if its constant term a_0 is a unit in R.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "f(x) is a formal power series in R[[x]] with constant term a_0"
+    ],
+    "conclusion": "f(x) is a unit in R[[x]] if and only if a_0 is a unit in R."
+  },
+  {
+    "id": "jacobson_radical_units",
+    "name": "Jacobson Radical Unit Characterization",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. If x is an element of the Jacobson radical of R, then for any element y in R, 1 - xy is a unit in R.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "x is an element of the Jacobson radical of R",
+      "y is an element of R"
+    ],
+    "conclusion": "The element 1 - xy is a unit in R"
+  },
+  {
+    "id": "polynomial_roots_field_bound",
+    "name": "Polynomial Roots Bound Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field and f(x) be a non-zero polynomial in F[x] of degree n. Then f(x) has at most n distinct roots in F.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "f(x) is not the zero polynomial",
+      "The degree of f(x) is n"
+    ],
+    "conclusion": "f(x) has at most n distinct roots in F"
+  },
+  {
+    "id": "mersenne_prime_exponent_is_prime",
+    "name": "Mersenne Prime Exponent Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any integer n > 1, if 2^n - 1 is a prime number, then n must be a prime number.",
+    "hypotheses": [
+      "n is an integer strictly greater than 1",
+      "2^n - 1 is a prime number"
+    ],
+    "conclusion": "n is a prime number"
+  },
+  {
+    "id": "finite_subgroup_field_mult_group",
+    "name": "Cyclicity of Finite Subgroups of a Field's Multiplicative Group",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "G is a subgroup of the multiplicative group of F",
+      "G is finite"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "index_two_subgroup_normal",
+    "name": "Index Two Subgroup Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H is a subgroup of a group G such that the index [G:H] is 2, then H is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "The index of H in G is exactly 2"
+    ],
+    "conclusion": "H is a normal subgroup of G"
+  },
+  {
+    "id": "finite_subgroup_field_mult_cyclic",
+    "name": "Finite Subgroup of a Field's Multiplicative Group Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "G is a finite subgroup of the multiplicative group of non-zero elements of F"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "characteristic_subgroup_transitivity",
+    "name": "Transitivity of Characteristic Subgroups",
+    "domain": "GroupTheory",
+    "original_full_statement": "If K is a characteristic subgroup of H, and H is a characteristic subgroup of G, then K is a characteristic subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a characteristic subgroup of G",
+      "K is a characteristic subgroup of H"
+    ],
+    "conclusion": "K is a characteristic subgroup of G"
+  },
+  {
+    "id": "center_of_ring_is_subring",
+    "name": "Center of a Ring is a Subring",
+    "domain": "RingTheory",
+    "original_full_statement": "The center of a ring R, defined as the set of all elements c in R such that cx = xc for all x in R, is a subring of R.",
+    "hypotheses": [
+      "R is a ring",
+      "C is the set of all elements c in R such that cx = xc for all x in R"
+    ],
+    "conclusion": "C is a subring of R."
+  },
+  {
+    "id": "characteristic_of_field",
+    "name": "Characteristic of a Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "If the characteristic of a field F is not zero, then it must be a prime number.",
+    "hypotheses": [
+      "F is a field",
+      "The characteristic of F is not zero"
+    ],
+    "conclusion": "The characteristic of F is a prime number."
+  },
+  {
+    "id": "simple_commutative_ring_is_field",
+    "name": "Simple Commutative Ring Field Criterion",
+    "domain": "RingTheory",
+    "original_full_statement": "A commutative ring with a non-zero identity is a field if and only if it has no non-trivial proper ideals.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R contains a multiplicative identity 1",
+      "1 is not equal to 0 in R"
+    ],
+    "conclusion": "R is a field if and only if the only ideals of R are the zero ideal {0} and the entire ring R."
+  },
+  {
+    "id": "finite_field_galois_extension",
+    "name": "Finite Field Galois Extension Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite extension of a finite field is a Galois extension.",
+    "hypotheses": [
+      "F is a finite field",
+      "E is a field extension of F",
+      "E is a finite extension of F"
+    ],
+    "conclusion": "E is a Galois extension of F."
+  },
+  {
+    "id": "finitely_generated_algebraic_extension_is_finite",
+    "name": "Finitely Generated Algebraic Extension Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "A field extension E over F is finite if and only if E is generated over F by a finite number of elements that are algebraic over F.",
+    "hypotheses": [
+      "E is a field extension of F"
+    ],
+    "conclusion": "The degree of the extension [E:F] is finite if and only if E = F(a_1, ..., a_n) for some finite set of elements {a_1, ..., a_n} in E where each a_i is algebraic over F."
+  },
+  {
+    "id": "fundamental_theorem_arithmetic",
+    "name": "Fundamental Theorem of Arithmetic",
+    "domain": "NumberTheory",
+    "original_full_statement": "Every integer strictly greater than 1 can be expressed as a product of prime numbers, and this factorization is unique up to the order of the prime factors.",
+    "hypotheses": [
+      "n is an integer",
+      "n > 1"
+    ],
+    "conclusion": "n can be factored into a product of prime numbers in exactly one way, up to the ordering of the factors"
+  },
+  {
+    "id": "group_order_pq_cyclic",
+    "name": "Group of Order pq Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group of order pq, where p and q are prime numbers such that p < q. If p does not divide q - 1, then G is a cyclic group.",
+    "hypotheses": [
+      "G is a group",
+      "The order of G is pq",
+      "p and q are prime numbers",
+      "p < q",
+      "p does not divide q - 1"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "cyclotomic_polynomial_irreducibility",
+    "name": "Irreducibility of Cyclotomic Polynomials",
+    "domain": "FieldTheory",
+    "original_full_statement": "For any positive integer n, the n-th cyclotomic polynomial Phi_n(x) is irreducible over the field of rational numbers.",
+    "hypotheses": [
+      "n is a positive integer",
+      "Phi_n(x) is the n-th cyclotomic polynomial"
+    ],
+    "conclusion": "Phi_n(x) is irreducible over the field of rational numbers"
+  },
+  {
+    "id": "units_of_zn",
+    "name": "Units of Z_n Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "An element a in the ring of integers modulo n is a unit if and only if a and n are coprime.",
+    "hypotheses": [
+      "n is an integer strictly greater than 1",
+      "a is an integer"
+    ],
+    "conclusion": "The congruence class of a modulo n is a unit in the ring of integers modulo n if and only if the greatest common divisor of a and n is 1"
+  },
+  {
+    "id": "galois_extension_criterion",
+    "name": "Galois Extension Criterion",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E be a finite extension of a field F. Then E is a Galois extension of F if and only if the order of the Galois group Gal(E/F) is equal to the degree of the extension [E:F].",
+    "hypotheses": [
+      "E is a field",
+      "F is a subfield of E",
+      "The field extension E/F is a finite extension"
+    ],
+    "conclusion": "E is a Galois extension of F if and only if the order of the automorphism group Aut(E/F) is equal to the degree [E:F]"
+  },
+  {
+    "id": "algebraic_tower_theorem",
+    "name": "Tower Law for Algebraic Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "If E is an algebraic extension field of F, and K is an algebraic extension field of E, then K is an algebraic extension field of F.",
+    "hypotheses": [
+      "F is a field",
+      "E is a field extension of F",
+      "Every element of E is algebraic over F",
+      "K is a field extension of E",
+      "Every element of K is algebraic over E"
+    ],
+    "conclusion": "Every element of K is algebraic over F."
+  },
+  {
+    "id": "commutator_subgroup_normal",
+    "name": "Normality of the Commutator Subgroup",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group. The commutator subgroup G', generated by all commutators [x,y] = x^-1 y^-1 x y for x,y in G, is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "G_prime is the subgroup of G generated by all elements of the form x^-1 * y^-1 * x * y for all x and y in G"
+    ],
+    "conclusion": "For every element g in G and every element h in G_prime, the element g * h * g^-1 is in G_prime."
+  },
+  {
+    "id": "center_symmetric_group",
+    "name": "Center of the Symmetric Group",
+    "domain": "GroupTheory",
+    "original_full_statement": "For any integer $n \\ge 3$, the center of the symmetric group $S_n$ is the trivial subgroup.",
+    "hypotheses": [
+      "$n$ is an integer such that $n \\ge 3$",
+      "$S_n$ is the symmetric group on $n$ letters"
+    ],
+    "conclusion": "The center of $S_n$ contains only the identity element"
+  },
+  {
+    "id": "finite_subgroup_field_mult_group",
+    "name": "Finite Subgroup of a Field's Multiplicative Group",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is a cyclic group.",
+    "hypotheses": [
+      "F is a field",
+      "F_times is the multiplicative group of non-zero elements of F",
+      "G is a finite subgroup of F_times"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "splitting_field_degree_bound",
+    "name": "Degree of a Splitting Field Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field and f(x) be a polynomial of degree n over F. If K is the splitting field of f(x) over F, then the degree of the extension [K:F] divides n!.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "The degree of f(x) is n",
+      "K is the splitting field of f(x) over F"
+    ],
+    "conclusion": "The degree of the field extension [K:F] divides n!"
+  },
+  {
+    "id": "finite_subgroup_field_mult_cyclic",
+    "name": "Finite Subgroup of a Field's Multiplicative Group is Cyclic",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field.",
+      "G is a subgroup of the multiplicative group of non-zero elements of F.",
+      "G is a finite group."
+    ],
+    "conclusion": "G is a cyclic group."
+  },
+  {
+    "id": "bezouts_identity",
+    "name": "Bezout's Identity",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any non-zero integers a and b, there exist integers x and y such that ax + by = gcd(a, b).",
+    "hypotheses": [
+      "a and b are integers.",
+      "At least one of a or b is non-zero."
+    ],
+    "conclusion": "There exist integers x and y such that ax + by is equal to the greatest common divisor of a and b."
+  },
+  {
+    "id": "nilradical_is_ideal",
+    "name": "Nilradical Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring R, the set of all nilpotent elements forms an ideal of R.",
+    "hypotheses": [
+      "R is a commutative ring.",
+      "N is the set of all nilpotent elements of R."
+    ],
+    "conclusion": "N forms an ideal of R."
+  },
+  {
+    "id": "subgroup_lattice_cyclic_group",
+    "name": "Subgroup Lattice of a Finite Cyclic Group",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite cyclic group of order n. For every positive divisor d of n, G contains exactly one subgroup of order d.",
+    "hypotheses": [
+      "G is a finite cyclic group of order n",
+      "d is a positive divisor of n"
+    ],
+    "conclusion": "G contains exactly one subgroup of order d."
+  },
+  {
+    "id": "algebraic_elements_subfield",
+    "name": "Algebraic Elements Form a Subfield",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E be a field extension of a field F, and let A be the set of all elements in E that are algebraic over F. Then A is a subfield of E.",
+    "hypotheses": [
+      "E is a field extension of a field F",
+      "A is the set of all elements in E that are algebraic over F"
+    ],
+    "conclusion": "A is a subfield of E."
+  },
+  {
+    "id": "simple_commutative_ring_is_field",
+    "name": "Simple Commutative Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a commutative ring with identity such that its only ideals are the zero ideal and R itself, then R is a field.",
+    "hypotheses": [
+      "R is a ring",
+      "R is commutative",
+      "R has a multiplicative identity 1",
+      "1 is not equal to 0 in R",
+      "The only ideals of R are the zero ideal and R itself"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "nilradical_is_ideal",
+    "name": "Nilradical Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring R, the set of all nilpotent elements forms an ideal, and the quotient ring of R by this ideal contains no non-zero nilpotent elements.",
+    "hypotheses": [
+      "R is a ring",
+      "R is commutative",
+      "N is the set of all nilpotent elements of R"
+    ],
+    "conclusion": "N is an ideal of R and the quotient ring R/N has no non-zero nilpotent elements"
+  },
+  {
+    "id": "algebraic_element_minimal_polynomial",
+    "name": "Minimal Polynomial Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E be an extension field of F and let alpha in E be algebraic over F. Then there exists a unique monic irreducible polynomial p(x) in F[x] such that p(alpha) = 0, and for any f(x) in F[x] with f(alpha) = 0, p(x) divides f(x).",
+    "hypotheses": [
+      "F is a field",
+      "E is an extension field of F",
+      "alpha is an element of E",
+      "alpha is algebraic over F"
+    ],
+    "conclusion": "There exists a unique monic irreducible polynomial p(x) in F[x] such that p(alpha) = 0, and p(x) divides any polynomial in F[x] that has alpha as a root"
+  },
+  {
+    "id": "subring_test",
+    "name": "Subring Test",
+    "domain": "RingTheory",
+    "original_full_statement": "A non-empty subset S of a ring R is a subring if and only if it is closed under subtraction and multiplication.",
+    "hypotheses": [
+      "R is a ring",
+      "S is a subset of R",
+      "S is non-empty"
+    ],
+    "conclusion": "S is a subring of R if and only if for all a, b in S, a - b is in S and a * b is in S"
+  },
+  {
+    "id": "matrix_ring_simplicity",
+    "name": "Simplicity of Matrix Rings over a Field",
+    "domain": "RingTheory",
+    "original_full_statement": "If F is a field, then the ring of n x n matrices over F is a simple ring.",
+    "hypotheses": [
+      "F is a field",
+      "n is a positive integer",
+      "R is the ring of n by n matrices with entries in F"
+    ],
+    "conclusion": "The ring R has no non-trivial proper two-sided ideals."
+  },
+  {
+    "id": "jacobson_radical_characterization",
+    "name": "Jacobson Radical Characterization",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. An element x is in the Jacobson radical of R if and only if 1 - rx is a unit for all r in R.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "x is an element of the Jacobson radical of R",
+      "r is an element of R"
+    ],
+    "conclusion": "1 - rx is a unit in R"
+  },
+  {
+    "id": "galois_group_order_theorem",
+    "name": "Order of the Galois Group Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "If L is a finite Galois extension of a field K, then the order of the Galois group Gal(L/K) is equal to the degree of the extension [L:K].",
+    "hypotheses": [
+      "K is a field",
+      "L is a finite extension of K",
+      "L is a Galois extension of K"
+    ],
+    "conclusion": "The order of the Galois group Gal(L/K) is equal to the degree of the extension [L:K]."
+  },
+  {
+    "id": "artinian_integral_domain_is_field",
+    "name": "Artinian Integral Domain Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Artinian integral domain is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R is an Artinian ring"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "nilradical_intersection_prime_ideals",
+    "name": "Nilradical Characterization Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring, the nilradical (the set of all nilpotent elements) is equal to the intersection of all prime ideals of the ring.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "N is the set of all nilpotent elements of R",
+      "I is the intersection of all prime ideals of R"
+    ],
+    "conclusion": "N is equal to I"
+  },
+  {
+    "id": "euclidean_domain_is_pid",
+    "name": "Euclidean Domain implies PID",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Euclidean domain is a principal ideal domain.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R is a Euclidean domain equipped with a Euclidean function"
+    ],
+    "conclusion": "Every ideal in R is generated by a single element."
+  },
+  {
+    "id": "matrix_ring_center_theorem",
+    "name": "Center of a Matrix Ring",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity and n be a positive integer. The center of the matrix ring M_n(R) consists precisely of the scalar matrices.",
+    "hypotheses": [
+      "R is a commutative ring with a multiplicative identity",
+      "n is a positive integer",
+      "M_n(R) is the ring of n by n matrices with entries in R"
+    ],
+    "conclusion": "A matrix is in the center of M_n(R) if and only if it is of the form rI, where r is an element of R and I is the n by n identity matrix."
+  },
+  {
+    "id": "fundamental_theorem_symmetric_polynomials",
+    "name": "Fundamental Theorem of Symmetric Polynomials",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every symmetric polynomial in n variables over a commutative ring can be written uniquely as a polynomial expression in the elementary symmetric polynomials.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "n is a positive integer",
+      "f is a polynomial in R[x_1, ..., x_n]",
+      "f is invariant under any permutation of the variables x_1, ..., x_n"
+    ],
+    "conclusion": "There exists a unique polynomial g over R such that f is equal to g evaluated at the elementary symmetric polynomials in n variables."
+  },
+  {
+    "id": "prime_implies_irreducible_domain",
+    "name": "Prime Implies Irreducible Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In an integral domain, every prime element is an irreducible element.",
+    "hypotheses": [
+      "R is an integral domain",
+      "p is a non-zero element of R",
+      "p is not a unit in R",
+      "p is a prime element in R"
+    ],
+    "conclusion": "p is an irreducible element in R."
+  },
+  {
+    "id": "degree_two_normal_extension",
+    "name": "Degree Two Extension is Normal",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any field extension of degree 2 is a normal extension.",
+    "hypotheses": [
+      "K is a field",
+      "L is a field extension of K",
+      "The degree of the extension [L:K] is exactly 2"
+    ],
+    "conclusion": "L is a normal extension of K"
+  },
+  {
+    "id": "units_in_znz",
+    "name": "Units of the Ring of Integers Modulo n",
+    "domain": "RingTheory",
+    "original_full_statement": "An element [a] in the ring Z/nZ is a unit if and only if the integer a is coprime to n.",
+    "hypotheses": [
+      "n is an integer greater than 1",
+      "a is an integer",
+      "[a] is the equivalence class of a in the ring Z/nZ"
+    ],
+    "conclusion": "[a] is a unit in Z/nZ if and only if the greatest common divisor of a and n is 1"
+  },
+  {
+    "id": "galois_extension_characterization",
+    "name": "Characterization of Finite Galois Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "A finite field extension L/K is a Galois extension if and only if it is both a normal extension and a separable extension.",
+    "hypotheses": [
+      "K is a field",
+      "L is a finite extension field of K"
+    ],
+    "conclusion": "L/K is a Galois extension if and only if L/K is a normal extension and L/K is a separable extension"
+  },
+  {
+    "id": "normalizer_sylow_p_subgroup",
+    "name": "Self-Normalizing Property of Sylow Normalizers",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and P be a Sylow p-subgroup of G. If N_G(P) is the normalizer of P in G, then the normalizer of N_G(P) in G is equal to N_G(P).",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number",
+      "P is a Sylow p-subgroup of G",
+      "N_G(P) is the normalizer of P in G"
+    ],
+    "conclusion": "The normalizer of N_G(P) in G is equal to N_G(P)"
+  },
+  {
+    "id": "direct_product_cyclic_groups",
+    "name": "Direct Product of Cyclic Groups Criterion",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let m and n be positive integers. The direct product of the cyclic groups Z_m and Z_n is isomorphic to the cyclic group Z_{mn} if and only if m and n are coprime.",
+    "hypotheses": [
+      "m is a positive integer",
+      "n is a positive integer"
+    ],
+    "conclusion": "The direct product Z_m \\times Z_n is isomorphic to Z_{mn} if and only if the greatest common divisor of m and n is 1"
+  },
+  {
+    "id": "maximal_ideal_is_prime",
+    "name": "Maximal Ideals are Prime",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with identity, every maximal ideal is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity",
+      "I is a maximal ideal of R"
+    ],
+    "conclusion": "I is a prime ideal of R"
+  },
+  {
+    "id": "exponent_two_group_abelian",
+    "name": "Exponent Two Group Commutativity Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group such that x^2 = e for all x in G, then G is abelian.",
+    "hypotheses": [
+      "G is a group",
+      "For every element x in G, x^2 is equal to the identity element"
+    ],
+    "conclusion": "G is an abelian group"
+  },
+  {
+    "id": "intersection_normal_subgroups",
+    "name": "Intersection of Normal Subgroups Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "The intersection of any non-empty collection of normal subgroups of a group is a normal subgroup.",
+    "hypotheses": [
+      "G is a group",
+      "C is a non-empty collection of normal subgroups of G"
+    ],
+    "conclusion": "The intersection of all subgroups in C is a normal subgroup of G"
+  },
+  {
+    "id": "integral_domain_cancellation",
+    "name": "Cancellation Law for Integral Domains",
+    "domain": "RingTheory",
+    "original_full_statement": "In an integral domain R, if a is a non-zero element and ab = ac for some elements b and c in R, then b = c.",
+    "hypotheses": [
+      "R is an integral domain",
+      "a, b, and c are elements of R",
+      "a is not equal to zero",
+      "ab = ac"
+    ],
+    "conclusion": "b = c."
+  },
+  {
+    "id": "krulls_maximal_ideal_theorem",
+    "name": "Krull's Theorem on Maximal Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with a non-zero identity, every proper ideal is contained in a maximal ideal.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity 1",
+      "1 is not equal to 0 in R",
+      "I is a proper ideal of R"
+    ],
+    "conclusion": "There exists a maximal ideal M of R such that I is a subset of M"
+  },
+  {
+    "id": "center_division_ring_field",
+    "name": "Center of a Division Ring is a Field",
+    "domain": "RingTheory",
+    "original_full_statement": "The center of any division ring is a field.",
+    "hypotheses": [
+      "D is a division ring"
+    ],
+    "conclusion": "The center of D is a field"
+  },
+  {
+    "id": "unique_sylow_is_normal",
+    "name": "Unique Sylow p-subgroup is Normal",
+    "domain": "GroupTheory",
+    "original_full_statement": "If a finite group G has exactly one Sylow p-subgroup P, then P is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a finite group",
+      "p is a prime number dividing the order of G",
+      "G has exactly one Sylow p-subgroup P"
+    ],
+    "conclusion": "P is a normal subgroup of G"
+  },
+  {
+    "id": "order_subgroup_product",
+    "name": "Order of a Subgroup Product",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H and K are finite subgroups of a group G, then the order of the set HK is |H||K|/|H \\cap K|.",
+    "hypotheses": [
+      "G is a group",
+      "H and K are finite subgroups of G"
+    ],
+    "conclusion": "The cardinality of the set HK is equal to (|H| * |K|) / |H \\cap K|"
+  },
+  {
+    "id": "intersection_normal_subgroups",
+    "name": "Intersection of Normal Subgroups",
+    "domain": "GroupTheory",
+    "original_full_statement": "The intersection of any non-empty collection of normal subgroups of a group is itself a normal subgroup.",
+    "hypotheses": [
+      "G is a group",
+      "C is a non-empty collection of normal subgroups of G"
+    ],
+    "conclusion": "The intersection of all subgroups in C is a normal subgroup of G"
+  },
+  {
+    "id": "field_no_proper_nontrivial_ideals",
+    "name": "Ideals of a Field",
+    "domain": "RingTheory",
+    "original_full_statement": "A field has no non-trivial proper ideals.",
+    "hypotheses": [
+      "F is a field",
+      "I is an ideal of F",
+      "I is not the zero ideal"
+    ],
+    "conclusion": "I is equal to F"
+  },
+  {
+    "id": "center_of_group_is_normal",
+    "name": "Normality of the Center",
+    "domain": "GroupTheory",
+    "original_full_statement": "The center of any group is a normal subgroup of that group.",
+    "hypotheses": [
+      "G is a group",
+      "Z(G) is the center of G"
+    ],
+    "conclusion": "Z(G) is a normal subgroup of G"
+  },
+  {
+    "id": "finite_field_order_theorem",
+    "name": "Finite Field Order Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "The number of elements in any finite field is a prime power.",
+    "hypotheses": [
+      "F is a finite field"
+    ],
+    "conclusion": "The cardinality of F is p^n for some prime number p and positive integer n"
+  },
+  {
+    "id": "fixed_field_degree_theorem",
+    "name": "Fixed Field Degree Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "If G is a finite group of automorphisms of a field K, and K^G is the fixed field of G, then the degree of the field extension [K : K^G] is equal to the order of G.",
+    "hypotheses": [
+      "K is a field",
+      "G is a finite group of automorphisms of K",
+      "K^G is the fixed field of G in K"
+    ],
+    "conclusion": "The degree of the field extension K over K^G is equal to the order of G"
+  },
+  {
+    "id": "tower_law_separable",
+    "name": "Tower Law for Separable Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F, K, and L be fields such that F is a subfield of K and K is a subfield of L. If K/F and L/K are finite separable extensions, then L/F is a finite separable extension.",
+    "hypotheses": [
+      "F, K, and L are fields such that F is a subfield of K and K is a subfield of L.",
+      "The field extension K over F is finite and separable.",
+      "The field extension L over K is finite and separable."
+    ],
+    "conclusion": "The field extension L over F is finite and separable."
+  },
+  {
+    "id": "intersection_of_subgroups",
+    "name": "Intersection of Subgroups Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group and let {H_i}_{i \\in I} be a non-empty collection of subgroups of G. Then the intersection \\bigcap_{i \\in I} H_i is a subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "I is a non-empty index set",
+      "For each i \\in I, H_i is a subgroup of G"
+    ],
+    "conclusion": "The intersection \\bigcap_{i \\in I} H_i is a subgroup of G"
+  },
+  {
+    "id": "subgroups_of_finite_cyclic_group",
+    "name": "Subgroup Theorem for Cyclic Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite cyclic group of order n. For every positive integer d that divides n, there exists exactly one subgroup of G of order d.",
+    "hypotheses": [
+      "G is a finite group",
+      "G is a cyclic group",
+      "n is the order of G",
+      "d is a positive integer that divides n"
+    ],
+    "conclusion": "G contains exactly one subgroup of order d"
+  },
+  {
+    "id": "linear_diophantine_equation_solvability",
+    "name": "Solvability of Linear Diophantine Equations",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let a, b, and c be integers with a and b not both zero. The linear Diophantine equation ax + by = c has integer solutions for x and y if and only if the greatest common divisor of a and b divides c.",
+    "hypotheses": [
+      "a, b, and c are integers",
+      "At least one of a or b is non-zero"
+    ],
+    "conclusion": "There exist integers x and y such that ax + by = c if and only if gcd(a, b) divides c"
+  },
+  {
+    "id": "union_of_two_subgroups",
+    "name": "Union of Two Subgroups Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let H and K be subgroups of a group G. The union H \\cup K is a subgroup of G if and only if H is a subset of K or K is a subset of H.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "K is a subgroup of G",
+      "The union of H and K is a subgroup of G"
+    ],
+    "conclusion": "H is contained in K or K is contained in H"
+  },
+  {
+    "id": "thm_finite_field_subfield_criterion",
+    "name": "Finite Field Subfield Criterion",
+    "domain": "FieldTheory",
+    "original_full_statement": "If F is a finite field of order p^n for some prime p and positive integer n, and m is a positive integer, then F contains a subfield of order p^m if and only if m divides n.",
+    "hypotheses": [
+      "p is a prime number",
+      "n is a positive integer",
+      "F is a finite field of order p^n",
+      "m is a positive integer"
+    ],
+    "conclusion": "F contains a subfield of order p^m if and only if m divides n"
+  },
+  {
+    "id": "galois_extension_characterization",
+    "name": "Characterization of Galois Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "A finite field extension K/F is Galois if and only if it is both normal and separable.",
+    "hypotheses": [
+      "K is a finite field extension of F"
+    ],
+    "conclusion": "The extension K/F is a Galois extension if and only if it is a normal extension and a separable extension."
+  },
+  {
+    "id": "prime_ideal_boolean_ring",
+    "name": "Prime Ideal in a Boolean Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a Boolean ring and P is a prime ideal of R, then P is a maximal ideal of R.",
+    "hypotheses": [
+      "R is a Boolean ring",
+      "P is a prime ideal of R"
+    ],
+    "conclusion": "P is a maximal ideal of R"
+  },
+  {
+    "id": "dedekind_independence_characters",
+    "name": "Dedekind's Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let G be a group and F be a field. Any set of distinct group homomorphisms from G to the multiplicative group of F is linearly independent over F.",
+    "hypotheses": [
+      "G is a group",
+      "F is a field",
+      "\\sigma_1, \\dots, \\sigma_n are distinct group homomorphisms from G to the multiplicative group F^{\\times}"
+    ],
+    "conclusion": "The set of characters \\{\\sigma_1, \\dots, \\sigma_n\\} is linearly independent over F"
+  },
+  {
+    "id": "finite_subgroup_field_multiplicative_group",
+    "name": "Finite Subgroups of Field Multiplicative Groups",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is cyclic.",
+    "hypotheses": [
+      "F is a field",
+      "F^x is the multiplicative group of non-zero elements of F",
+      "G is a subgroup of F^x",
+      "G is a finite group"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "ideal_characterization_fields",
+    "name": "Ideal Characterization of Fields",
+    "domain": "RingTheory",
+    "original_full_statement": "A commutative ring with identity is a field if and only if it is not the zero ring and its only ideals are the zero ideal and the ring itself.",
+    "hypotheses": [
+      "Let R be a commutative ring with a multiplicative identity",
+      "R is not the zero ring",
+      "The only ideals of R are the zero ideal and R itself"
+    ],
+    "conclusion": "R is a field."
+  },
+  {
+    "id": "index_two_subgroup_normal",
+    "name": "Index Two Subgroup is Normal",
+    "domain": "GroupTheory",
+    "original_full_statement": "Any subgroup of index 2 in a group is a normal subgroup.",
+    "hypotheses": [
+      "Let G be a group",
+      "Let H be a subgroup of G",
+      "The index of H in G is exactly 2"
+    ],
+    "conclusion": "H is a normal subgroup of G."
+  },
+  {
+    "id": "formal_power_series_units",
+    "name": "Units in a Formal Power Series Ring",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. An element f(x) = a_0 + a_1 x + a_2 x^2 + ... in the formal power series ring R[[x]] is a unit if and only if its constant term a_0 is a unit in R.",
+    "hypotheses": [
+      "Let R be a commutative ring with identity",
+      "Let f(x) = a_0 + a_1 x + a_2 x^2 + ... be an element of the formal power series ring R[[x]]"
+    ],
+    "conclusion": "f(x) is a unit in R[[x]] if and only if a_0 is a unit in R."
+  },
+  {
+    "id": "nilradical_is_ideal",
+    "name": "Nilradical is an Ideal",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring. Then the set of all nilpotent elements of R forms an ideal of R.",
+    "hypotheses": [
+      "R is a commutative ring"
+    ],
+    "conclusion": "The set of all nilpotent elements of R forms an ideal of R"
+  },
+  {
+    "id": "freshmans_dream_characteristic_p",
+    "name": "Freshman's Dream",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring of prime characteristic p. For any elements x and y in R, (x + y)^p = x^p + y^p.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "The characteristic of R is a prime number p",
+      "x and y are elements of R"
+    ],
+    "conclusion": "(x + y)^p = x^p + y^p"
+  },
+  {
+    "id": "finite_subgroups_field_cyclic",
+    "name": "Finite Multiplicative Subgroups of a Field are Cyclic",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is a cyclic group.",
+    "hypotheses": [
+      "F is a field",
+      "F_times is the multiplicative group of non-zero elements of F",
+      "G is a finite subgroup of F_times"
+    ],
+    "conclusion": "G is a cyclic group"
+  },
+  {
+    "id": "linear_independence_of_characters",
+    "name": "Linear Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "Distinct group homomorphisms from a group G to the multiplicative group of a field F are linearly independent over F.",
+    "hypotheses": [
+      "G is a group",
+      "F is a field",
+      "sigma_1, ..., sigma_n are distinct group homomorphisms from G to the multiplicative group of F"
+    ],
+    "conclusion": "The homomorphisms sigma_1, ..., sigma_n are linearly independent over F"
+  },
+  {
+    "id": "finite_subgroup_field_mult_cyclic",
+    "name": "Finite Subgroups of the Multiplicative Group of a Field are Cyclic",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any finite subgroup of the multiplicative group of a field is a cyclic group.",
+    "hypotheses": [
+      "F is a field",
+      "G is a subgroup of the multiplicative group of F",
+      "G is a finite group"
+    ],
+    "conclusion": "G is a cyclic group."
+  },
+  {
+    "id": "roots_of_polynomials_field",
+    "name": "Roots of Polynomials over a Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "A non-zero polynomial f(x) of degree n over a field F has at most n distinct roots in F.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "f(x) is not the zero polynomial",
+      "n is the degree of f(x)"
+    ],
+    "conclusion": "f(x) has at most n distinct roots in F"
+  },
+  {
+    "id": "maximal_ideal_is_prime",
+    "name": "Maximal Ideal Implies Prime Ideal",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with non-zero identity, every maximal ideal is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity 1 not equal to 0",
+      "M is a maximal ideal of R"
+    ],
+    "conclusion": "M is a prime ideal of R"
+  },
+  {
+    "id": "coprime_divisibility_theorem",
+    "name": "Coprime Divisibility Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If a, b, and c are integers such that a divides c, b divides c, and gcd(a, b) = 1, then ab divides c.",
+    "hypotheses": [
+      "a, b, and c are integers",
+      "a divides c",
+      "b divides c",
+      "gcd(a, b) = 1"
+    ],
+    "conclusion": "The product ab divides c"
+  },
+  {
+    "id": "prime_subfield_characteristic_p",
+    "name": "Prime Subfield of Characteristic p",
+    "domain": "FieldTheory",
+    "original_full_statement": "The prime subfield of a field of prime characteristic p is isomorphic to the finite field of order p.",
+    "hypotheses": [
+      "F is a field",
+      "The characteristic of F is a prime number p"
+    ],
+    "conclusion": "The prime subfield of F is isomorphic to the finite field of order p"
+  },
+  {
+    "id": "finite_subgroup_test",
+    "name": "Finite Subgroup Test",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group and H be a non-empty finite subset of G. If H is closed under the group operation, then H is a subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a non-empty subset of G",
+      "H is finite",
+      "For all a, b in H, the product ab is in H"
+    ],
+    "conclusion": "H is a subgroup of G"
+  },
+  {
+    "id": "conjugacy_class_size_theorem",
+    "name": "Conjugacy Class Size Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group and x be an element of G. The number of elements in the conjugacy class of x in G is equal to the index of the centralizer C_G(x) in G.",
+    "hypotheses": [
+      "G is a finite group",
+      "x is an element of G"
+    ],
+    "conclusion": "The size of the conjugacy class of x in G is equal to the index of the centralizer C_G(x) in G"
+  },
+  {
+    "id": "dedekind_independence_characters",
+    "name": "Dedekind's Theorem on Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any set of distinct group homomorphisms from a group G into the multiplicative group of a field F is linearly independent over F.",
+    "hypotheses": [
+      "G is a group",
+      "F is a field",
+      "sigma_1, ..., sigma_n are distinct group homomorphisms from G to the multiplicative group of F"
+    ],
+    "conclusion": "The homomorphisms sigma_1, ..., sigma_n are linearly independent over F."
+  },
+  {
+    "id": "ideals_direct_product_rings",
+    "name": "Ideals of a Direct Product of Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "If R1 and R2 are rings with identity, then every ideal of the direct product R1 x R2 is of the form I1 x I2, where I1 is an ideal of R1 and I2 is an ideal of R2.",
+    "hypotheses": [
+      "R1 and R2 are rings with identity",
+      "I is an ideal of the direct product ring R1 x R2"
+    ],
+    "conclusion": "There exist an ideal I1 of R1 and an ideal I2 of R2 such that I = I1 x I2."
+  },
+  {
+    "id": "cyclic_implies_abelian",
+    "name": "Cyclic Groups are Abelian",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a cyclic group, then G is an abelian group.",
+    "hypotheses": [
+      "G is a group",
+      "G is cyclic"
+    ],
+    "conclusion": "G is abelian"
+  },
+  {
+    "id": "coprime_subgroup_intersection",
+    "name": "Coprime Subgroup Intersection Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a group, and let H and K be finite subgroups of G. If the orders of H and K are relatively prime, then their intersection H \\cap K is the trivial subgroup.",
+    "hypotheses": [
+      "G is a group",
+      "H is a finite subgroup of G",
+      "K is a finite subgroup of G",
+      "The greatest common divisor of the order of H and the order of K is 1"
+    ],
+    "conclusion": "The intersection of H and K contains only the identity element of G"
+  },
+  {
+    "id": "ring_units_group",
+    "name": "Group of Units Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a ring with identity. The set of all units (invertible elements) in R forms a group under the multiplication operation of R.",
+    "hypotheses": [
+      "R is a ring",
+      "R has a multiplicative identity",
+      "U is the set of all elements in R that have a multiplicative inverse in R"
+    ],
+    "conclusion": "U forms a group under the multiplication operation of R"
+  },
+  {
+    "id": "uniqueness_finite_fields",
+    "name": "Uniqueness of Finite Fields Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any two finite fields of the same cardinality are isomorphic.",
+    "hypotheses": [
+      "F is a finite field",
+      "K is a finite field",
+      "The cardinality of F is equal to the cardinality of K"
+    ],
+    "conclusion": "F and K are isomorphic as fields"
+  },
+  {
+    "id": "quotient_of_solvable_is_solvable",
+    "name": "Quotient of a Solvable Group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a solvable group and N is a normal subgroup of G, then the quotient group G/N is solvable.",
+    "hypotheses": [
+      "G is a solvable group",
+      "N is a normal subgroup of G"
+    ],
+    "conclusion": "The quotient group G/N is solvable"
+  },
+  {
+    "id": "associate_elements_principal_ideals",
+    "name": "Associate Elements Criterion in Integral Domains",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be an integral domain and let a and b be non-zero elements of R. The principal ideal generated by a is equal to the principal ideal generated by b if and only if a and b are associates.",
+    "hypotheses": [
+      "R is an integral domain",
+      "a and b are non-zero elements of R",
+      "The principal ideal generated by a is equal to the principal ideal generated by b"
+    ],
+    "conclusion": "a and b are associates in R"
+  },
+  {
+    "id": "quotient_by_prime_ideal",
+    "name": "Quotient by a Prime Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity, and let P be a proper ideal of R. Then the quotient ring R/P is an integral domain if and only if P is a prime ideal.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "P is a proper ideal of R"
+    ],
+    "conclusion": "The quotient ring R/P is an integral domain if and only if P is a prime ideal"
+  },
+  {
+    "id": "polynomial_roots_over_field",
+    "name": "Roots of a Polynomial over a Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "A non-zero polynomial of degree n over a field F has at most n distinct roots in F.",
+    "hypotheses": [
+      "F is a field",
+      "p(x) is a non-zero polynomial in F[x]",
+      "The degree of p(x) is n"
+    ],
+    "conclusion": "p(x) has at most n distinct roots in F"
+  },
+  {
+    "id": "simplicity_alternating_group",
+    "name": "Simplicity of Alternating Groups",
+    "domain": "GroupTheory",
+    "original_full_statement": "If n is an integer greater than or equal to 5, then the alternating group A_n is a simple group.",
+    "hypotheses": [
+      "n is an integer",
+      "n is greater than or equal to 5"
+    ],
+    "conclusion": "The alternating group A_n is a simple group"
+  },
+  {
+    "id": "center_of_division_ring",
+    "name": "Center of a Division Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a division ring, then the center of R is a field.",
+    "hypotheses": [
+      "R is a division ring"
+    ],
+    "conclusion": "The center of R is a field"
+  },
+  {
+    "id": "exponent_two_group_abelian",
+    "name": "Exponent Two Group Commutativity",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group such that g^2 = e for all g in G, then G is abelian.",
+    "hypotheses": [
+      "G is a group",
+      "For every g in G, g^2 = e, where e is the identity element"
+    ],
+    "conclusion": "G is an abelian group"
+  },
+  {
+    "id": "homomorphic_image_pir",
+    "name": "Homomorphic Image of a Principal Ideal Ring",
+    "domain": "RingTheory",
+    "original_full_statement": "Every homomorphic image of a principal ideal ring is a principal ideal ring.",
+    "hypotheses": [
+      "R is a principal ideal ring",
+      "S is a ring",
+      "phi is a surjective ring homomorphism from R to S"
+    ],
+    "conclusion": "S is a principal ideal ring"
+  },
+  {
+    "id": "quotient_maximal_ideal_field",
+    "name": "Quotient by a Maximal Ideal Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity and M be a proper ideal of R. Then M is a maximal ideal if and only if the quotient ring R/M is a field.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "M is a proper ideal of R"
+    ],
+    "conclusion": "M is a maximal ideal if and only if the quotient ring R/M is a field."
+  },
+  {
+    "id": "polynomial_roots_over_field",
+    "name": "Roots of a Polynomial over a Field Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "A non-zero polynomial of degree n over a field F has at most n distinct roots in F.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x]",
+      "f(x) is not the zero polynomial",
+      "The degree of f(x) is n"
+    ],
+    "conclusion": "f(x) has at most n distinct roots in F."
+  },
+  {
+    "id": "units_in_z_nz",
+    "name": "Units in Z/nZ Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let n > 1 be an integer and a be an integer. The residue class [a] is a unit in the ring Z/nZ if and only if the greatest common divisor of a and n is 1.",
+    "hypotheses": [
+      "n is an integer greater than 1",
+      "a is an integer"
+    ],
+    "conclusion": "The residue class of a modulo n is a unit in the ring Z/nZ if and only if the greatest common divisor of a and n is 1."
+  },
+  {
+    "id": "euclids_lemma_primes",
+    "name": "Euclid's Lemma for Primes",
+    "domain": "NumberTheory",
+    "original_full_statement": "If p is a prime number that divides the product of two integers a and b, then p divides a or p divides b.",
+    "hypotheses": [
+      "p is a prime number",
+      "a and b are integers",
+      "p divides the product ab"
+    ],
+    "conclusion": "p divides a or p divides b"
+  },
+  {
+    "id": "finite_ring_non_zero_divisor_unit",
+    "name": "Non-Zero Divisors in Finite Rings",
+    "domain": "RingTheory",
+    "original_full_statement": "In a finite commutative ring with identity, every element that is not a zero divisor is a unit.",
+    "hypotheses": [
+      "R is a finite commutative ring with identity",
+      "a is an element of R",
+      "a is not a zero divisor in R"
+    ],
+    "conclusion": "a is a unit in R"
+  },
+  {
+    "id": "perfect_field_characteristic_p",
+    "name": "Perfect Field Criterion for Characteristic p",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field of prime characteristic p. If every element of F is a p-th power of some element in F, then F is a perfect field.",
+    "hypotheses": [
+      "F is a field",
+      "The characteristic of F is a prime number p",
+      "Every element in F is the p-th power of some element in F"
+    ],
+    "conclusion": "F is a perfect field"
+  },
+  {
+    "id": "artinian_integral_domain_is_field",
+    "name": "Artinian Integral Domain is a Field",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is an Artinian integral domain, then R is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R is an Artinian ring"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "normalizer_sylow_p_subgroup",
+    "name": "Normalizer of a Sylow p-subgroup",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a finite group and P is a Sylow p-subgroup of G, then the normalizer of the normalizer of P is equal to the normalizer of P.",
+    "hypotheses": [
+      "G is a finite group",
+      "P is a Sylow p-subgroup of G",
+      "N is the normalizer of P in G"
+    ],
+    "conclusion": "The normalizer of N in G is equal to N"
+  },
+  {
+    "id": "characteristic_zero_perfect_field",
+    "name": "Characteristic Zero Implies Perfect Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every field of characteristic zero is a perfect field.",
+    "hypotheses": [
+      "F is a field",
+      "The characteristic of F is zero"
+    ],
+    "conclusion": "F is a perfect field"
+  },
+  {
+    "id": "jacobson_radical_artinian_nilpotent",
+    "name": "Jacobson Radical of Artinian Ring is Nilpotent",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a left Artinian ring, then its Jacobson radical is a nilpotent ideal.",
+    "hypotheses": [
+      "R is a left Artinian ring",
+      "J is the Jacobson radical of R"
+    ],
+    "conclusion": "J is a nilpotent ideal"
+  },
+  {
+    "id": "automorphism_cyclic_group_010",
+    "name": "Automorphism Group of a Cyclic Group Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "The automorphism group of a finite cyclic group of order n is isomorphic to the multiplicative group of integers modulo n.",
+    "hypotheses": [
+      "G is a finite cyclic group",
+      "The order of G is n"
+    ],
+    "conclusion": "The automorphism group Aut(G) is isomorphic to the multiplicative group (Z/nZ)^x"
+  },
+  {
+    "id": "characteristic_implies_normal",
+    "name": "Characteristic Subgroups are Normal",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H is a characteristic subgroup of a group G, then H is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a characteristic subgroup of G"
+    ],
+    "conclusion": "H is a normal subgroup of G"
+  },
+  {
+    "id": "order_of_galois_group",
+    "name": "Order of the Galois Group",
+    "domain": "FieldTheory",
+    "original_full_statement": "If K/F is a finite Galois extension, then the order of the Galois group Gal(K/F) is equal to the degree of the extension [K:F].",
+    "hypotheses": [
+      "K/F is a finite field extension",
+      "K/F is a Galois extension"
+    ],
+    "conclusion": "The order of the Galois group Gal(K/F) is equal to the degree of the extension [K:F]"
+  },
+  {
+    "id": "ufd_integrally_closed",
+    "name": "UFDs are Integrally Closed",
+    "domain": "RingTheory",
+    "original_full_statement": "Every unique factorization domain is integrally closed in its field of fractions.",
+    "hypotheses": [
+      "R is a unique factorization domain",
+      "K is the field of fractions of R"
+    ],
+    "conclusion": "R is integrally closed in K"
+  },
+  {
+    "id": "units_in_integers_modulo_n",
+    "name": "Units of Z_n",
+    "domain": "RingTheory",
+    "original_full_statement": "An element a in Z_n is a unit if and only if gcd(a, n) = 1.",
+    "hypotheses": [
+      "Let n be an integer greater than 1.",
+      "Let a be an integer."
+    ],
+    "conclusion": "The congruence class of a modulo n is a unit in the ring Z/nZ if and only if the greatest common divisor of a and n is 1."
+  },
+  {
+    "id": "sum_of_two_squares_theorem",
+    "name": "Sum of Two Squares Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "A positive integer n can be represented as the sum of two squares of integers if and only if every prime factor of n of the form 4k+3 occurs to an even power in the prime factorization of n.",
+    "hypotheses": [
+      "Let n be a positive integer."
+    ],
+    "conclusion": "n can be written as the sum of two integer squares if and only if every prime factor of n of the form 4k+3 appears with an even exponent in the prime factorization of n."
+  },
+  {
+    "id": "artins_linear_independence_of_characters",
+    "name": "Artin's Linear Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "If G is a group and F is a field, then any set of distinct homomorphisms from G to the multiplicative group of F is linearly independent over F.",
+    "hypotheses": [
+      "G is a group",
+      "F is a field",
+      "S is a set of distinct group homomorphisms from G to the multiplicative group F^x"
+    ],
+    "conclusion": "The homomorphisms in S are linearly independent over F"
+  },
+  {
+    "id": "algebraic_elements_sum",
+    "name": "Sum of Algebraic Elements Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "If E/F is a field extension and \\alpha, \\beta \\in E are algebraic over F, then \\alpha + \\beta is algebraic over F.",
+    "hypotheses": [
+      "E/F is a field extension",
+      "\\alpha \\in E is algebraic over F",
+      "\\beta \\in E is algebraic over F"
+    ],
+    "conclusion": "\\alpha + \\beta is algebraic over F"
+  },
+  {
+    "id": "krulls_theorem_maximal_ideals",
+    "name": "Krull's Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a commutative ring with identity. If I is a proper ideal of R, then there exists a maximal ideal M of R such that I is contained in M.",
+    "hypotheses": [
+      "R is a commutative ring with identity",
+      "I is a proper ideal of R"
+    ],
+    "conclusion": "There exists a maximal ideal M of R such that I \\subseteq M"
+  },
+  {
+    "id": "field_homomorphism_injective",
+    "name": "Field Homomorphism Injectivity Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any non-zero ring homomorphism from a field to a non-trivial ring is injective.",
+    "hypotheses": [
+      "F is a field",
+      "R is a non-trivial ring",
+      "phi is a ring homomorphism from F to R",
+      "phi is not the zero homomorphism"
+    ],
+    "conclusion": "phi is an injective homomorphism"
+  },
+  {
+    "id": "artins_independence_of_characters",
+    "name": "Artin's Independence of Characters",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let G be a group, F a field, and \\sigma_1, \\dots, \\sigma_n be distinct homomorphisms from G to the multiplicative group F^\\times. Then \\sigma_1, \\dots, \\sigma_n are linearly independent over F.",
+    "hypotheses": [
+      "G is a group",
+      "F is a field",
+      "\\sigma_1, \\dots, \\sigma_n are distinct homomorphisms from G to F^\\times"
+    ],
+    "conclusion": "\\sigma_1, \\dots, \\sigma_n are linearly independent as functions over F"
+  },
+  {
+    "id": "lagranges_polynomial_congruence",
+    "name": "Lagrange's Polynomial Congruence Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "If p is a prime and f(x) is a polynomial with integer coefficients whose leading coefficient is not divisible by p, then the congruence f(x) = 0 (mod p) has at most deg(f) incongruent solutions.",
+    "hypotheses": [
+      "p is a prime number",
+      "f(x) is a polynomial with integer coefficients",
+      "The leading coefficient of f(x) is not divisible by p"
+    ],
+    "conclusion": "The congruence f(x) \\equiv 0 \\pmod p has at most \\deg(f) incongruent solutions modulo p"
+  },
+  {
+    "id": "artins_theorem_galois",
+    "name": "Artin's Theorem on Galois Extensions",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E be a field and G be a finite group of automorphisms of E. If F is the fixed field of E under G, then E is a finite Galois extension of F of degree |G|.",
+    "hypotheses": [
+      "E is a field",
+      "G is a finite group of automorphisms of E",
+      "F is the fixed field of E under the action of G"
+    ],
+    "conclusion": "E is a finite Galois extension of F of degree equal to the order of G"
+  },
+  {
+    "id": "prime_degree_extension_intermediate",
+    "name": "Prime Degree Extension has No Intermediate Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E/F be a field extension. If the degree [E:F] is a prime number, then there are no intermediate fields strictly between E and F.",
+    "hypotheses": [
+      "E/F is a field extension",
+      "The degree [E:F] is a prime number"
+    ],
+    "conclusion": "If K is a subfield of E containing F, then K = F or K = E"
+  },
+  {
+    "id": "prime_divides_binomial_coefficient",
+    "name": "Prime Divisibility of Binomial Coefficients",
+    "domain": "NumberTheory",
+    "original_full_statement": "If p is a prime number and k is an integer such that 0 < k < p, then the binomial coefficient p choose k is divisible by p.",
+    "hypotheses": [
+      "p is a prime number",
+      "k is an integer such that 0 < k < p"
+    ],
+    "conclusion": "The binomial coefficient \\binom{p}{k} is divisible by p"
+  },
+  {
+    "id": "roots_of_unity_modulo_prime",
+    "name": "Roots of Unity Modulo a Prime",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let p be a prime number. If x is an integer such that x^2 is congruent to 1 modulo p, then x is congruent to 1 modulo p or x is congruent to -1 modulo p.",
+    "hypotheses": [
+      "p is a prime number",
+      "x is an integer",
+      "x^2 is congruent to 1 modulo p"
+    ],
+    "conclusion": "x is congruent to 1 modulo p or x is congruent to -1 modulo p"
+  },
+  {
+    "id": "frattini_argument",
+    "name": "Frattini Argument",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group, H be a normal subgroup of G, and P be a Sylow p-subgroup of H. Then G = H N_G(P), where N_G(P) is the normalizer of P in G.",
+    "hypotheses": [
+      "G is a finite group",
+      "H is a normal subgroup of G",
+      "P is a Sylow p-subgroup of H"
+    ],
+    "conclusion": "G = H N_G(P), where N_G(P) is the normalizer of P in G"
+  },
+  {
+    "id": "subfields_finite_field",
+    "name": "Subfields of a Finite Field",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a finite field of order p^n, where p is a prime and n \\ge 1. For every positive integer d dividing n, there exists exactly one subfield of F of order p^d.",
+    "hypotheses": [
+      "F is a finite field of order p^n, where p is a prime and n \\ge 1",
+      "d is a positive integer dividing n"
+    ],
+    "conclusion": "F contains exactly one subfield of order p^d."
+  },
+  {
+    "id": "center_of_ring_is_subring",
+    "name": "Center of a Ring Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a ring. The center of R, defined as the set of all elements that commute with every element of R, is a subring of R.",
+    "hypotheses": [
+      "R is a ring",
+      "Z(R) is the set of all elements c in R such that c*r = r*c for all r in R"
+    ],
+    "conclusion": "Z(R) is a subring of R"
+  },
+  {
+    "id": "separability_characteristic_zero",
+    "name": "Separability in Characteristic Zero",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a field of characteristic zero. Then every irreducible polynomial over F has distinct roots in its splitting field.",
+    "hypotheses": [
+      "F is a field",
+      "The characteristic of F is zero",
+      "f(x) is an irreducible polynomial over F"
+    ],
+    "conclusion": "f(x) has no repeated roots in its splitting field"
+  },
+  {
+    "id": "prime_ideal_pid_is_maximal",
+    "name": "Prime Ideals in a PID are Maximal",
+    "domain": "RingTheory",
+    "original_full_statement": "Let R be a principal ideal domain. Every non-zero prime ideal of R is a maximal ideal.",
+    "hypotheses": [
+      "R is a principal ideal domain",
+      "I is a prime ideal of R",
+      "I is not the zero ideal"
+    ],
+    "conclusion": "I is a maximal ideal of R"
+  },
+  {
+    "id": "eulers_totient_theorem",
+    "name": "Euler's Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "Let n be a positive integer and a be an integer. If a and n are coprime, then a^phi(n) is congruent to 1 modulo n, where phi is Euler's totient function.",
+    "hypotheses": [
+      "n is a positive integer",
+      "a is an integer",
+      "the greatest common divisor of a and n is 1"
+    ],
+    "conclusion": "a^phi(n) is congruent to 1 modulo n"
+  },
+  {
+    "id": "pid_prime_ideal_is_maximal",
+    "name": "Prime Ideals in PIDs are Maximal",
+    "domain": "RingTheory",
+    "original_full_statement": "In a principal ideal domain, every non-zero prime ideal is a maximal ideal.",
+    "hypotheses": [
+      "R is a principal ideal domain",
+      "I is an ideal of R",
+      "I is not the zero ideal",
+      "I is a prime ideal"
+    ],
+    "conclusion": "I is a maximal ideal"
+  },
+  {
+    "id": "euclidean_domain_is_pid",
+    "name": "Euclidean Domains are PIDs",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Euclidean domain is a principal ideal domain.",
+    "hypotheses": [
+      "R is a Euclidean domain",
+      "I is an ideal of R"
+    ],
+    "conclusion": "I is generated by a single element"
+  },
+  {
+    "id": "finite_integral_domain_field",
+    "name": "Finite Integral Domains are Fields",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite integral domain is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R has a finite number of elements"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "pid_implies_ufd",
+    "name": "Principal Ideal Domains are Unique Factorization Domains",
+    "domain": "RingTheory",
+    "original_full_statement": "Every principal ideal domain is a unique factorization domain.",
+    "hypotheses": [
+      "R is an integral domain",
+      "Every ideal in R is generated by a single element"
+    ],
+    "conclusion": "R is a unique factorization domain"
+  },
+  {
+    "id": "nonzero_prime_ideal_pid_is_maximal",
+    "name": "Non-zero Prime Ideals in a PID are Maximal",
+    "domain": "RingTheory",
+    "original_full_statement": "In a principal ideal domain, every non-zero prime ideal is a maximal ideal.",
+    "hypotheses": [
+      "R is a principal ideal domain",
+      "P is a prime ideal of R",
+      "P is not the zero ideal"
+    ],
+    "conclusion": "P is a maximal ideal of R."
+  },
+  {
+    "id": "gauss_lemma_primitive_polynomials",
+    "name": "Gauss's Lemma for Primitive Polynomials",
+    "domain": "RingTheory",
+    "original_full_statement": "If R is a unique factorization domain, then the product of two primitive polynomials in R[x] is again a primitive polynomial.",
+    "hypotheses": [
+      "R is a unique factorization domain",
+      "f(x) is a primitive polynomial in R[x]",
+      "g(x) is a primitive polynomial in R[x]"
+    ],
+    "conclusion": "The product f(x)g(x) is a primitive polynomial in R[x]"
+  },
+  {
+    "id": "exponent_two_group_abelian",
+    "name": "Exponent Two Group is Abelian",
+    "domain": "GroupTheory",
+    "original_full_statement": "If every element of a group G has order 1 or 2, then G is an abelian group.",
+    "hypotheses": [
+      "Let G be a group.",
+      "For every element x in G, x^2 is the identity element."
+    ],
+    "conclusion": "G is an abelian group."
+  },
+  {
+    "id": "nonzero_prime_pid_maximal",
+    "name": "Nonzero Prime Ideals in a PID are Maximal",
+    "domain": "RingTheory",
+    "original_full_statement": "In a principal ideal domain, every nonzero prime ideal is a maximal ideal.",
+    "hypotheses": [
+      "Let R be a principal ideal domain.",
+      "Let P be a prime ideal of R.",
+      "P is not the zero ideal."
+    ],
+    "conclusion": "P is a maximal ideal of R."
+  },
+  {
+    "id": "euclidean_domain_is_pid",
+    "name": "Euclidean Domain is PID Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Euclidean domain is a principal ideal domain.",
+    "hypotheses": [
+      "Let R be a Euclidean domain"
+    ],
+    "conclusion": "R is a principal ideal domain"
+  },
+  {
+    "id": "finite_integral_domain_field",
+    "name": "Wedderburn's Little Theorem for Integral Domains (Finite Integral Domains are Fields)",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite integral domain is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R has a finite number of elements"
+    ],
+    "conclusion": "R is a field."
+  },
+  {
+    "id": "lagranges_polynomial_theorem",
+    "name": "Lagrange's Theorem on Polynomial Congruences",
+    "domain": "NumberTheory",
+    "original_full_statement": "If p is a prime and f(x) is a polynomial with integer coefficients of degree d ≥ 1 such that the leading coefficient is not divisible by p, then the congruence f(x) ≡ 0 (mod p) has at most d incongruent solutions modulo p.",
+    "hypotheses": [
+      "p is a prime number",
+      "f(x) is a polynomial with integer coefficients",
+      "The degree d of f(x) is at least 1",
+      "The leading coefficient of f(x) is not divisible by p"
+    ],
+    "conclusion": "The polynomial congruence f(x) ≡ 0 \\pmod p has at most d incongruent solutions modulo p"
+  },
+  {
+    "id": "pid_implies_ufd",
+    "name": "Principal Ideal Domain implies Unique Factorization Domain",
+    "domain": "RingTheory",
+    "original_full_statement": "Every principal ideal domain is a unique factorization domain.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R is a Principal Ideal Domain"
+    ],
+    "conclusion": "R is a Unique Factorization Domain."
+  },
+  {
+    "id": "group_order_p_squared",
+    "name": "Group of Order p^2 is Abelian",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let p be a prime number. If G is a group of order p^2, then G is abelian.",
+    "hypotheses": [
+      "G is a finite group",
+      "The order of G is p^2",
+      "p is a prime number"
+    ],
+    "conclusion": "G is an abelian group"
+  },
+  {
+    "id": "galois_group_cyclotomic_extension",
+    "name": "Galois Group of a Cyclotomic Extension",
+    "domain": "FieldTheory",
+    "original_full_statement": "The Galois group of the n-th cyclotomic extension of the rational numbers is isomorphic to the multiplicative group of integers modulo n.",
+    "hypotheses": [
+      "n is a positive integer",
+      "K is the splitting field of x^n - 1 over the field of rational numbers"
+    ],
+    "conclusion": "The Galois group of K over the rational numbers is isomorphic to the multiplicative group of integers modulo n"
+  },
+  {
+    "id": "orbit_counting_theorem",
+    "name": "Orbit-Counting Theorem",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let G be a finite group acting on a finite set X. Then the number of orbits of G on X equals the average number of points fixed by the elements of G.",
+    "hypotheses": [
+      "G is a finite group",
+      "X is a finite set",
+      "G acts on the set X"
+    ],
+    "conclusion": "The number of distinct orbits of the action is equal to the sum of the sizes of the fixed-point sets of each element in G, divided by the order of G."
+  },
+  {
+    "id": "finite_integral_domain_is_field",
+    "name": "Finite Integral Domain is a Field Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every finite integral domain is a field.",
+    "hypotheses": [
+      "R is an integral domain",
+      "R is finite"
+    ],
+    "conclusion": "R is a field"
+  },
+  {
+    "id": "prime_implies_irreducible_domain",
+    "name": "Prime Elements are Irreducible in Integral Domains",
+    "domain": "RingTheory",
+    "original_full_statement": "In an integral domain, every non-zero prime element is an irreducible element.",
+    "hypotheses": [
+      "R is an integral domain",
+      "p is a non-zero element of R",
+      "p is a prime element of R"
+    ],
+    "conclusion": "p is an irreducible element in R"
+  },
+  {
+    "id": "euclidean_domain_implies_pid",
+    "name": "Euclidean Domain implies PID Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "Every Euclidean domain is a principal ideal domain.",
+    "hypotheses": [
+      "R is a Euclidean domain"
+    ],
+    "conclusion": "R is a principal ideal domain"
+  },
+  {
+    "id": "nilpotent_in_prime_ideal",
+    "name": "Nilpotent Elements and Prime Ideals",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring, every nilpotent element belongs to every prime ideal of the ring.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "x is a nilpotent element of R",
+      "P is a prime ideal of R"
+    ],
+    "conclusion": "x is an element of P"
+  },
+  {
+    "id": "finite_extension_is_algebraic",
+    "name": "Finite Extension implies Algebraic",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let E/F be a finite field extension. Then E is an algebraic extension of F.",
+    "hypotheses": [
+      "Let E be a field extension of F.",
+      "Let the degree [E:F] be finite."
+    ],
+    "conclusion": "Every element of E is algebraic over F."
+  },
+  {
+    "id": "finite_field_cardinality",
+    "name": "Finite Field Cardinality Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "The number of elements in any finite field is a prime power.",
+    "hypotheses": [
+      "F is a field",
+      "F has finitely many elements"
+    ],
+    "conclusion": "The cardinality of F is p^n for some prime number p and positive integer n"
+  },
+  {
+    "id": "subgroups_of_cyclic_groups",
+    "name": "Subgroups of a Cyclic Group",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of a cyclic group is cyclic.",
+    "hypotheses": [
+      "G is a group",
+      "G is a cyclic group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "H is a cyclic group."
+  },
+  {
+    "id": "unit_plus_nilpotent",
+    "name": "Unit and Nilpotent Sum Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring, the sum of a unit and a nilpotent element is a unit.",
+    "hypotheses": [
+      "Let R be a commutative ring",
+      "Let u \\in R be a unit",
+      "Let n \\in R be a nilpotent element"
+    ],
+    "conclusion": "The element u + n is a unit in R."
+  },
+  {
+    "id": "finite_extension_is_algebraic",
+    "name": "Finite Extension implies Algebraic Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite extension of a field is an algebraic extension.",
+    "hypotheses": [
+      "Let E be a field extension of a field F",
+      "The degree of the extension [E:F] is finite"
+    ],
+    "conclusion": "The extension E/F is an algebraic extension."
+  },
+  {
+    "id": "subgroup_of_cyclic_is_cyclic",
+    "name": "Subgroup of a Cyclic Group",
+    "domain": "GroupTheory",
+    "original_full_statement": "Every subgroup of a cyclic group is cyclic.",
+    "hypotheses": [
+      "G is a cyclic group",
+      "H is a subgroup of G"
+    ],
+    "conclusion": "H is a cyclic group"
+  },
+  {
+    "id": "dirichlets_theorem_arithmetic_progressions",
+    "name": "Dirichlet's Theorem on Arithmetic Progressions",
+    "domain": "NumberTheory",
+    "original_full_statement": "For any two positive coprime integers a and d, there are infinitely many primes that are congruent to a modulo d.",
+    "hypotheses": [
+      "a and d are positive integers",
+      "The greatest common divisor of a and d is 1"
+    ],
+    "conclusion": "There are infinitely many prime numbers that are congruent to a modulo d"
+  },
+  {
+    "id": "nilradical_intersection_primes",
+    "name": "Nilradical Characterization",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with identity, the nilradical (the set of all nilpotent elements) is equal to the intersection of all prime ideals of the ring.",
+    "hypotheses": [
+      "R is a commutative ring with identity"
+    ],
+    "conclusion": "The set of all nilpotent elements of R is equal to the intersection of all prime ideals of R"
+  },
+  {
+    "id": "order_of_product_of_subgroups",
+    "name": "Order of a Product of Subgroups",
+    "domain": "GroupTheory",
+    "original_full_statement": "Let H and K be finite subgroups of a group G. Then the number of elements in the set HK is equal to the product of the orders of H and K divided by the order of their intersection.",
+    "hypotheses": [
+      "G is a group",
+      "H is a finite subgroup of G",
+      "K is a finite subgroup of G"
+    ],
+    "conclusion": "The cardinality of the set HK is equal to (|H| * |K|) / |H \\cap K|."
+  },
+  {
+    "id": "finite_extension_is_algebraic",
+    "name": "Finite Extensions are Algebraic",
+    "domain": "FieldTheory",
+    "original_full_statement": "If L/K is a finite field extension, then L is an algebraic extension of K.",
+    "hypotheses": [
+      "Let L/K be a field extension",
+      "Let the degree of L over K be finite"
+    ],
+    "conclusion": "Every element of L is algebraic over K."
+  },
+  {
+    "id": "finite_field_extension_is_galois",
+    "name": "Finite Field Extension Galois Theorem",
+    "domain": "FieldTheory",
+    "original_full_statement": "Every finite extension of a finite field is a Galois extension.",
+    "hypotheses": [
+      "F is a finite field",
+      "E is a finite extension field of F"
+    ],
+    "conclusion": "The extension E/F is a Galois extension"
+  },
+  {
+    "id": "nilradical_intersection_theorem",
+    "name": "Nilradical Intersection Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with identity, the nilradical is equal to the intersection of all prime ideals of the ring.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity"
+    ],
+    "conclusion": "The set of all nilpotent elements of R is equal to the intersection of all prime ideals of R."
+  },
+  {
+    "id": "galois_group_permutation",
+    "name": "Galois Group Permutation Representation",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let f(x) be a polynomial of degree n over a field F, and let E be its splitting field. Then the Galois group Gal(E/F) is isomorphic to a subgroup of the symmetric group S_n.",
+    "hypotheses": [
+      "F is a field",
+      "f(x) is a polynomial in F[x] of degree n",
+      "E is the splitting field of f(x) over F"
+    ],
+    "conclusion": "The Galois group Gal(E/F) is isomorphic to a subgroup of the symmetric group S_n"
+  },
+  {
+    "id": "nilradical_intersection_prime_ideals",
+    "name": "Nilradical Prime Intersection Theorem",
+    "domain": "RingTheory",
+    "original_full_statement": "In a commutative ring with identity, the nilradical is equal to the intersection of all prime ideals of the ring.",
+    "hypotheses": [
+      "R is a commutative ring",
+      "R has a multiplicative identity"
+    ],
+    "conclusion": "The nilradical of R is equal to the intersection of all prime ideals of R"
+  },
+  {
+    "id": "exponent_two_abelian",
+    "name": "Group of Exponent 2 is Abelian",
+    "domain": "GroupTheory",
+    "original_full_statement": "If G is a group such that every element has order dividing 2, then G is an abelian group.",
+    "hypotheses": [
+      "G is a group",
+      "For all g in G, g^2 is the identity element"
+    ],
+    "conclusion": "G is an abelian group."
+  },
+  {
+    "id": "isomorphism_of_finite_fields",
+    "name": "Isomorphism of Finite Fields",
+    "domain": "FieldTheory",
+    "original_full_statement": "Any two finite fields of the same cardinality are isomorphic.",
+    "hypotheses": [
+      "F_1 is a finite field",
+      "F_2 is a finite field",
+      "The cardinality of F_1 is equal to the cardinality of F_2"
+    ],
+    "conclusion": "F_1 and F_2 are isomorphic as fields"
+  },
+  {
+    "id": "primitive_root_theorem",
+    "name": "Primitive Root Theorem",
+    "domain": "NumberTheory",
+    "original_full_statement": "The multiplicative group of integers modulo n is cyclic if and only if n is 1, 2, 4, p^k, or 2p^k, where p is an odd prime and k is a positive integer.",
+    "hypotheses": [
+      "n is an integer strictly greater than 1",
+      "n is of the form 2, 4, p^k, or 2p^k, where p is an odd prime and k is a positive integer"
+    ],
+    "conclusion": "The multiplicative group (Z/nZ)^x is cyclic"
+  },
+  {
+    "id": "unique_subgroup_is_normal",
+    "name": "Unique Subgroup of a Given Order is Normal",
+    "domain": "GroupTheory",
+    "original_full_statement": "If H is a subgroup of a finite group G such that H is the unique subgroup of G of its order, then H is a normal subgroup of G.",
+    "hypotheses": [
+      "G is a group",
+      "H is a subgroup of G",
+      "H has finite order n",
+      "H is the only subgroup of G of order n"
+    ],
+    "conclusion": "H is a normal subgroup of G"
+  },
+  {
+    "id": "galois_group_of_finite_field",
+    "name": "Galois Group of a Finite Field Extension",
+    "domain": "FieldTheory",
+    "original_full_statement": "Let F be a finite field of size q and E be a finite extension of F of degree n. The Galois group Gal(E/F) is cyclic of order n and is generated by the Frobenius automorphism.",
+    "hypotheses": [
+      "F is a finite field of size q",
+      "E is a finite field extension of F of degree n"
+    ],
+    "conclusion": "The Galois group Gal(E/F) is cyclic of order n and is generated by the automorphism sigma(x) = x^q"
+  }
+]

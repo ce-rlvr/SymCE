@@ -1,0 +1,89 @@
+import sympy as sp
+from sympy import *
+from sympy.combinatorics import *
+from sympy.combinatorics.named_groups import *
+from sympy.matrices import *
+import math
+import itertools
+import functools
+
+# Standard algebra objects
+S3 = SymmetricGroup(3)
+S4 = SymmetricGroup(4)
+A4 = AlternatingGroup(4)
+D4 = DihedralGroup(4)
+C4 = CyclicGroup(4)
+V4 = AlternatingGroup(4)
+Z2 = CyclicGroup(2)
+Z3 = CyclicGroup(3)
+Z4 = CyclicGroup(4)
+Z6 = CyclicGroup(6)
+trivial = CyclicGroup(1)
+I2 = eye(2)
+I3 = eye(3)
+O2 = zeros(2, 2)
+O3 = zeros(3, 3)
+
+def conditions(witness) -> list[bool]:
+    H1, H2, neg_Q = False, False, False
+    
+    # Try to unpack witness as a tuple: (X, x_expr, n_var, S)
+    # where X is a sympy Set (the metric space, subset of Reals),
+    # x_expr is the sequence expression, n_var is the index variable,
+    # and S is the set of subsequential limits in X.
+    try:
+        if isinstance(witness, tuple) and len(witness) == 4:
+            X, x_expr, n_var, S = witness
+            
+            if isinstance(X, sp.Set):
+                # H1: X is a metric space (any subset of Reals with standard metric is a metric space)
+                is_sub = X.is_subset(sp.S.Reals)
+                if is_sub is not None:
+                    H1 = bool(is_sub)
+                
+                # Compute the limit of the sequence
+                L = sp.limit(x_expr, n_var, sp.oo)
+                
+                if L.is_real:
+                    # If the sequence converges to a real number L, 
+                    # the set of subsequential limits in X is {L} intersect X.
+                    expected_S = sp.Intersection(sp.FiniteSet(L), X)
+                    H2 = (S == expected_S)
+                    
+                    # The intersection of closures in the ambient space R is {L}.
+                    # If the conjecture falsely assumes closure in the ambient space instead of the subspace,
+                    # the conclusion fails when S != {L}.
+                    intersection_closures = sp.FiniteSet(L)
+                    neg_Q = (S != intersection_closures)
+                elif L == sp.oo or L == -sp.oo:
+                    expected_S = sp.EmptySet
+                    H2 = (S == expected_S)
+                    intersection_closures = sp.EmptySet
+                    neg_Q = (S != intersection_closures)
+    except Exception:
+        pass
+
+    # Fallback for custom objects or dictionaries
+    if not (H1 and H2):
+        try:
+            if isinstance(witness, dict):
+                H1 = bool(witness.get('H1', H1))
+                H2 = bool(witness.get('H2', H2))
+                neg_Q = bool(witness.get('neg_Q', neg_Q))
+            else:
+                if hasattr(witness, 'H1'): H1 = bool(witness.H1)
+                if hasattr(witness, 'H2'): H2 = bool(witness.H2)
+                if hasattr(witness, 'neg_Q'): neg_Q = bool(witness.neg_Q)
+        except Exception:
+            pass
+
+    return [bool(H1), bool(H2), bool(neg_Q)]
+
+CONDITION_LABELS = [
+    "H_1: (X, d) is a metric space",
+    "H_2: S is the set of all subsequential limits of (x_n)",
+    "¬Q: S != \\bigcap_{N=1}^\\infty \\overline{\\{x_n : n \\ge N\\}}"
+]
+
+N_HYP = 2
+NEG_Q_INDEX = 2

@@ -1,0 +1,175 @@
+{
+  "rollouts_path": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/runs/rlvr/20260518-154147__run_dense_beta_heavy__seed0__d5c4485/rollouts.jsonl",
+  "total": 28032,
+  "n_steps_covered": 876,
+  "n_groups": 3504,
+  "n_groups_nontrivial": 3504,
+  "group_std_pos_rate": 0.5223,
+  "mean_reward": -0.9014,
+  "reward_stddev": 0.3975,
+  "format_ok_rate": 0.1504,
+  "parse_ok_rate": 0.0799,
+  "q_neg_rate": 0.0255,
+  "none_rate": 0.0005,
+  "mean_hyp_satisfaction": 0.0415,
+  "reason_counts": {
+    "oracle_parse_error": 1977,
+    "hyp_only": 539,
+    "success": 391,
+    "partial": 974,
+    "neg_q_only": 323,
+    "no_tag": 23815,
+    "none_on_false": 13
+  },
+  "median_oracle_ms": 150.0,
+  "p95_oracle_ms": 175.0,
+  "max_oracle_ms": 8012,
+  "by_step_bucket": [
+    {
+      "step_bucket_start": 0,
+      "n_rollouts": 1600,
+      "mean_reward": -0.2465,
+      "format_ok_rate": 0.9581,
+      "parse_ok_rate": 0.5363,
+      "q_neg_rate": 0.1869
+    },
+    {
+      "step_bucket_start": 50,
+      "n_rollouts": 1600,
+      "mean_reward": -0.4498,
+      "format_ok_rate": 0.7987,
+      "parse_ok_rate": 0.4131,
+      "q_neg_rate": 0.1325
+    },
+    {
+      "step_bucket_start": 100,
+      "n_rollouts": 1600,
+      "mean_reward": -0.7965,
+      "format_ok_rate": 0.3269,
+      "parse_ok_rate": 0.1806,
+      "q_neg_rate": 0.0619
+    },
+    {
+      "step_bucket_start": 150,
+      "n_rollouts": 1600,
+      "mean_reward": -0.965,
+      "format_ok_rate": 0.0969,
+      "parse_ok_rate": 0.0519,
+      "q_neg_rate": 0.0194
+    },
+    {
+      "step_bucket_start": 200,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9917,
+      "format_ok_rate": 0.0362,
+      "parse_ok_rate": 0.0213,
+      "q_neg_rate": 0.0063
+    },
+    {
+      "step_bucket_start": 250,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9984,
+      "format_ok_rate": 0.0206,
+      "parse_ok_rate": 0.0094,
+      "q_neg_rate": 0.0019
+    },
+    {
+      "step_bucket_start": 300,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9939,
+      "format_ok_rate": 0.0256,
+      "parse_ok_rate": 0.0112,
+      "q_neg_rate": 0.0013
+    },
+    {
+      "step_bucket_start": 350,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9942,
+      "format_ok_rate": 0.0275,
+      "parse_ok_rate": 0.01,
+      "q_neg_rate": 0.0025
+    },
+    {
+      "step_bucket_start": 400,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9911,
+      "format_ok_rate": 0.0269,
+      "parse_ok_rate": 0.0112,
+      "q_neg_rate": 0.0031
+    },
+    {
+      "step_bucket_start": 450,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9877,
+      "format_ok_rate": 0.0288,
+      "parse_ok_rate": 0.0138,
+      "q_neg_rate": 0.0031
+    },
+    {
+      "step_bucket_start": 500,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9909,
+      "format_ok_rate": 0.0262,
+      "parse_ok_rate": 0.0112,
+      "q_neg_rate": 0.0013
+    },
+    {
+      "step_bucket_start": 550,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9913,
+      "format_ok_rate": 0.0294,
+      "parse_ok_rate": 0.0119,
+      "q_neg_rate": 0.0019
+    },
+    {
+      "step_bucket_start": 600,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9858,
+      "format_ok_rate": 0.0331,
+      "parse_ok_rate": 0.0156,
+      "q_neg_rate": 0.0025
+    },
+    {
+      "step_bucket_start": 650,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9768,
+      "format_ok_rate": 0.0431,
+      "parse_ok_rate": 0.0219,
+      "q_neg_rate": 0.0056
+    },
+    {
+      "step_bucket_start": 700,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9826,
+      "format_ok_rate": 0.035,
+      "parse_ok_rate": 0.0169,
+      "q_neg_rate": 0.0037
+    },
+    {
+      "step_bucket_start": 750,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9782,
+      "format_ok_rate": 0.0406,
+      "parse_ok_rate": 0.0206,
+      "q_neg_rate": 0.0044
+    },
+    {
+      "step_bucket_start": 800,
+      "n_rollouts": 1600,
+      "mean_reward": -0.9667,
+      "format_ok_rate": 0.0531,
+      "parse_ok_rate": 0.0294,
+      "q_neg_rate": 0.0056
+    },
+    {
+      "step_bucket_start": 850,
+      "n_rollouts": 832,
+      "mean_reward": -0.9722,
+      "format_ok_rate": 0.0553,
+      "parse_ok_rate": 0.0264,
+      "q_neg_rate": 0.0048
+    }
+  ],
+  "step_bucket_size": 50,
+  "plan_p4_group_std_gate_pass": false
+}

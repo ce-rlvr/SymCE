@@ -1,0 +1,38 @@
+{
+  "rollouts_path": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/runs/rlvr/20260514-125057__run_sparse_pilot__seed0__fdd3542/rollouts.jsonl",
+  "total": 960,
+  "n_steps_covered": 30,
+  "n_groups": 240,
+  "n_groups_nontrivial": 240,
+  "group_std_pos_rate": 0.6833,
+  "mean_reward": -0.2271,
+  "reward_stddev": 0.7438,
+  "format_ok_rate": 0.9969,
+  "parse_ok_rate": 0.5844,
+  "q_neg_rate": 0.1885,
+  "none_rate": 0.0,
+  "mean_hyp_satisfaction": 0.262,
+  "reason_counts": {
+    "hyp_only": 99,
+    "success": 97,
+    "partial": 281,
+    "oracle_parse_error": 396,
+    "neg_q_only": 84,
+    "no_tag": 3
+  },
+  "median_oracle_ms": 153.0,
+  "p95_oracle_ms": 177.0,
+  "max_oracle_ms": 765,
+  "by_step_bucket": [
+    {
+      "step_bucket_start": 0,
+      "n_rollouts": 960,
+      "mean_reward": -0.2271,
+      "format_ok_rate": 0.9969,
+      "parse_ok_rate": 0.5844,
+      "q_neg_rate": 0.1885
+    }
+  ],
+  "step_bucket_size": 50,
+  "plan_p4_group_std_gate_pass": false
+}

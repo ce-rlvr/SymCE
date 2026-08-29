@@ -1,0 +1,159 @@
+import sympy
+from sympy import *
+import itertools
+
+# Top-level setup
+class Witness:
+    """
+    A finite ring witness to evaluate the conjecture.
+    elements: list of element names/objects.
+    add_table: 2D list of integers (indices in elements) representing addition.
+    mul_table: 2D list of integers (indices in elements) representing multiplication.
+    p_index: integer index of the element p.
+    """
+    def __init__(self, elements, add_table, mul_table, p_index):
+        self.elements = elements
+        self.add_table = add_table
+        self.mul_table = mul_table
+        self.p = p_index
+        self.n = len(elements)
+        
+        self.zero = None
+        for i in range(self.n):
+            if all(self.add_table[i][j] == j for j in range(self.n)):
+                self.zero = i
+                break
+                
+        self.one = None
+        for i in range(self.n):
+            if all(self.mul_table[i][j] == j and self.mul_table[j][i] == j for j in range(self.n)):
+                self.one = i
+                break
+
+    def is_non_zero(self):
+        return self.p != self.zero
+
+    def is_non_unit(self):
+        if self.one is None:
+            return True
+        for i in range(self.n):
+            if self.mul_table[self.p][i] == self.one and self.mul_table[i][self.p] == self.one:
+                return False
+        return True
+
+    def divides_right(self, a, b):
+        for c in range(self.n):
+            if self.mul_table[a][c] == b:
+                return True
+        return False
+
+    def divides_left(self, a, b):
+        for c in range(self.n):
+            if self.mul_table[c][a] == b:
+                return True
+        return False
+
+    def is_prime_element(self):
+        right_prime = True
+        for a in range(self.n):
+            for b in range(self.n):
+                ab = self.mul_table[a][b]
+                if self.divides_right(self.p, ab):
+                    if not (self.divides_right(self.p, a) or self.divides_right(self.p, b)):
+                        right_prime = False
+                        break
+            if not right_prime:
+                break
+        
+        left_prime = True
+        for a in range(self.n):
+            for b in range(self.n):
+                ab = self.mul_table[a][b]
+                if self.divides_left(self.p, ab):
+                    if not (self.divides_left(self.p, a) or self.divides_left(self.p, b)):
+                        left_prime = False
+                        break
+            if not left_prime:
+                break
+                
+        return right_prime or left_prime
+
+    def get_ideal(self, a):
+        ideal = {a}
+        while True:
+            size_before = len(ideal)
+            new_elements = set(ideal)
+            for x in ideal:
+                for r in range(self.n):
+                    new_elements.add(self.add_table[x][r])
+                    new_elements.add(self.mul_table[r][x])
+                    new_elements.add(self.mul_table[x][r])
+            
+            added = True
+            while added:
+                added = False
+                for x in list(new_elements):
+                    for y in list(new_elements):
+                        s = self.add_table[x][y]
+                        if s not in new_elements:
+                            new_elements.add(s)
+                            added = True
+            ideal = new_elements
+            if len(ideal) == size_before:
+                break
+        return ideal
+
+    def is_prime_ideal(self):
+        ideal = self.get_ideal(self.p)
+        if len(ideal) == self.n:
+            return False
+        
+        for a in range(self.n):
+            if a in ideal: continue
+            ideal_a = self.get_ideal(a)
+            for b in range(self.n):
+                if b in ideal: continue
+                ideal_b = self.get_ideal(b)
+                
+                subset = True
+                for x in ideal_a:
+                    for y in ideal_b:
+                        if self.mul_table[x][y] not in ideal:
+                            subset = False
+                            break
+                    if not subset:
+                        break
+                if subset:
+                    return False
+        return True
+
+
+def conditions(witness) -> list[bool]:
+    if not isinstance(witness, Witness):
+        return [False, False, False]
+        
+    try:
+        h1 = bool(witness.is_non_zero() and witness.is_non_unit())
+    except Exception:
+        h1 = False
+        
+    try:
+        h2 = bool(witness.is_prime_element())
+    except Exception:
+        h2 = False
+        
+    try:
+        neg_q = not bool(witness.is_prime_ideal())
+    except Exception:
+        neg_q = False
+        
+    return [h1, h2, neg_q]
+
+CONDITION_LABELS = [
+    "H_1: p is a non-zero, non-unit element of R",
+    "H_2: p is a prime element (if p divides ab, then p divides a or p divides b)",
+    "¬Q: The principal ideal generated by p is not a prime ideal of R"
+]
+
+N_HYP = 2
+NEG_Q_INDEX = 2

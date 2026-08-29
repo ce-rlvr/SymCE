@@ -1,0 +1,322 @@
+# Full training run configuration — thesis-grade settings.
+#
+# Use this instead of configs/default.yaml for actual SFT + RLVR training.
+# Copy and rename (e.g. configs/run_seed1.yaml) to create ablation variants.
+#
+# Usage:
+#   python pipeline.py              --config configs/full_run.yaml
+#   python -m training.sft.train   --config configs/full_run.yaml
+#   python -m training.rlvr.train  --config configs/full_run.yaml
+#
+# Resolution priority: CLI flag > this file > dataclass defaults.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# pipeline.py — theorem extraction → mutation → LLM gen → verification → split
+# ─────────────────────────────────────────────────────────────────────────────
+pipeline:
+  use_lean: false
+  input_theorems: data/input_theorems.json
+  output: data/algebra_counterexamples.jsonl
+  max_retries: 5
+  workers: 4
+  dry_run: false
+  attempts_log: null
+  attempts_csv: null
+  only_split: false
+  skip_split: false
+  split_seed: 19
+  sft_size: 2000
+  test_size: 500
+  sft_output: null
+  rlvr_output: null
+  test_output: null
+
+# ─────────────────────────────────────────────────────────────────────────────
+# training/sft/train.py — Supervised Fine-Tuning
+# ─────────────────────────────────────────────────────────────────────────────
+sft:
+  model_name: unsloth/Qwen3-4B
+  chat_template: qwen-3
+  max_seq_length: 2048
+  dtype: bfloat16
+  load_in_4bit: false
+
+  # LoRA rank 16 → more expressive than r=8, small VRAM overhead.
+  # Keep lora_alpha = lora_r (scaling factor = 1 ≈ no extra scale).
+  lora_r: 16
+  lora_alpha: 16
+  lora_dropout: 0.0
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  use_gradient_checkpointing: unsloth
+
+  train_jsonl: data/sft_data_v2.jsonl
+  eval_fraction: 0.05
+
+  # task_mode selects the SFT assistant-target shape:
+  #   - "legacy":              ```python ... ``` (v1.0 records).
+  #   - "counterexample_only": <reasoning>…</reasoning>\n[COUNTEREXAMPLE: …]
+  #                            (v2.0 records produced by tools/build_v2_splits.py).
+  # full_run.yaml is the thesis-grade config: v2 by default. Override to
+  # "legacy" only when re-running v1 baselines from the legacy SFT data file.
+  task_mode: counterexample_only
+
+  per_device_train_batch_size: 16
+  gradient_accumulation_steps: 2   # effective batch = 8 × 2 = 16
+  num_train_epochs: 2.0             # 1000 examples; 4ep showed mild eval-loss rise after step 300
+  max_steps: -1                     # derive from epochs
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.05
+  lr_scheduler_type: cosine
+  optim: adamw_torch
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  seed: 19
+
+  eval_strategy: steps
+  eval_steps: 80
+  logging_steps: 40
+  save_strategy: steps
+  save_steps: 80
+  save_total_limit: 3
+
+  # Legacy fallback path. The v2 entry point writes into
+  # runs/sft/<auto-name>/ unless use_run_dir is set to false.
+  output_dir: checkpoints/sft/qwen3-4b-r16-bf16-v2
+
+  # ── Run-directory + experiment tracking ────────────────────────────────
+  # Each invocation lands in runs/sft/<YYYYMMDD-HHMMSS>__<config>__seed<N>__<sha>/
+  # so reruns never overwrite. status.json + invocation.json + git_info.json
+  # + dataset_fingerprint.json are stamped automatically.
+  use_run_dir: true
+
+  # report_to: forwarded to TRL. "wandb" lights up the cloud dashboard
+  # (run wandb login once, or set WANDB_MODE=offline for disconnected runs).
+  # Set to "tensorboard" for local-only event files, or "none" to disable.
+  report_to: wandb
+  wandb_project: ""        # "" → derives "pfe-rlvr-sft"
+  wandb_group: ""          # "" → derives the config_basename
+
+  # Post-train held-out probe. Generates K samples on N records from the
+  # test set, runs each through the oracle, reports tag_parse_rate,
+  # witness_parse_ok_rate, oracle_pass_at_1. Hard signal of "can RLVR succeed?".
+  # ~2 minutes on a 50-prompt × 8-sample slice; set to false to skip.
+  holdout_probe_enabled: true
+  holdout_probe_jsonl: data/test_set_v2.jsonl
+  holdout_probe_n_prompts: 50
+  holdout_probe_k_samples: 5
+  holdout_probe_temperature: 1.0
+  holdout_probe_max_new_tokens: 512
+
+# ─────────────────────────────────────────────────────────────────────────────
+# training/rlvr/train.py — GRPO fine-tuning from the SFT checkpoint
+# ─────────────────────────────────────────────────────────────────────────────
+rlvr:
+  # Must point to the LoRA adapter saved by the SFT stage above. Under the
+  # runs/ layout, this should be a path like
+  # `runs/sft/<auto-name>/lora` (just copy it from the SFT run's log line).
+  # The legacy `checkpoints/sft/...-v2-smoke/lora` path is still accepted
+  # for backwards-compat with pre-run-dir SFT checkpoints.
+  sft_checkpoint: checkpoints/sft/qwen3-4b-r16-bf16-v2/lora
+
+  max_seq_length: 2048
+  dtype: bfloat16
+  load_in_4bit: false
+  chat_template: qwen-3
+
+  use_vllm: true
+  vllm_gpu_memory_utilization: 0.5
+  max_lora_rank: 16            # must match sft.lora_r
+
+  train_jsonl: data/rlvr_prompts_v2.jsonl
+
+  # ── GRPO generation ────────────────────────────────────────────────────────
+  # G=8: each prompt generates 8 completions. A larger group gives GRPO a
+  # better estimate of the per-prompt mean reward (the advantage baseline).
+  # Below G=4 the advantage estimates are too noisy to learn from.
+  num_generations: 4
+
+  max_prompt_length: 768
+  max_completion_length: 1024
+
+  # temperature=1.0 is NON-NEGOTIABLE for GRPO rollouts. The group of G
+  # completions must be diverse enough that some pass and some fail — only then
+  # does the advantage signal (reward - mean_reward) have non-zero variance.
+  # Using temperature=0 collapses all rollouts to one text, variance → 0,
+  # and GRPO makes no updates regardless of the reward values.
+  temperature: 1.0
+  top_p: 1.0
+
+  # ── Reward shaping ─────────────────────────────────────────────────────────
+  # Under reward_mode=oracle (the v2 default), enable_format_reward is ignored
+  # by training/rlvr/trainer.py: the oracle reward already contains a γ·format_ok
+  # term for the [COUNTEREXAMPLE: …] tag, and double-counting would pollute the
+  # RQ2 dense-vs-sparse ablation. The fields below stay populated so that
+  # reward_mode=legacy keeps its v1.0 behaviour without further config edits.
+  enable_format_reward: true
+  format_reward_weight: 0.1    # +0.1 bonus for ```python fence + assert (legacy only)
+  verifier_reward_weight: 1.0  # outer TRL scalar; default 1.0 under both modes
+  reward_pool_workers: 4
+  rollouts_log: rollouts.jsonl
+
+  # ── v2.0 oracle reward (P2) ───────────────────────────────────────────────
+  # reward_mode selects which scoring path the trainer uses:
+  #
+  #   legacy: the v1.0 path. The model emits a SymPy/Z3 *script*; the verifier
+  #           re-runs the script's own asserts and the result is mapped to a
+  #           coarse scalar via training/rlvr/config.py:REWARD_WEIGHTS.
+  #           Default until P4 lands the v2 data + trainer wiring.
+  #
+  #   oracle: the v2.0 path. The model emits a *witness expression*; an
+  #           independent per-theorem verifier (Gemini-generated, frozen at
+  #           data-pipeline time) evaluates that witness and returns one
+  #           boolean per condition. The reward is a weighted sum over the
+  #           per-condition booleans — see PROPOSAL §3.2:
+  #             r = α·(s_hyp/n_hyp) + β·q_neg + γ·format_ok
+  #                 − δ·gave_up_on_false − ε·(1 − parse_ok)
+  #
+  # P4 flips full_run.yaml's default to "oracle" — the trainer wiring now
+  # supports it end-to-end (training/rlvr/trainer.py:_build_reward_funcs).
+  reward_mode: oracle
+
+  # task_mode is the v2.0 curriculum switch. P2 only implements
+  # "counterexample_only" (Stage 1, FALSE-only training); the other two
+  # modes are placeholders for P7.
+  task_mode: counterexample_only
+
+  # Default oracle reward weights. Designed so that β > α: a rollout that
+  # satisfies all remaining hypotheses but does NOT negate Q ("Learning to
+  # Disprove" failure) is bounded above by α + γ ≈ 0.35, which any rollout
+  # that actually negates Q beats (β ≥ 0.60).
+  #
+  # Sparse RQ2 ablation preset (set inline by copying this file): swap to
+  # alpha: 0.0, beta: 1.0, gamma: 0.0, delta: 0.0, epsilon: 1.0
+  # which recovers a binary {−1, 0, +1} outcome-only reward.
+  oracle_reward_weights:
+    alpha:   0.25   # remaining-hypothesis credit weight
+    beta:    0.65   # negated-conclusion (disproof) credit weight
+    gamma:   0.10   # format-ok structural bonus
+    delta:   0.30   # penalty for `[COUNTEREXAMPLE: NONE]` on FALSE (Stage 1)
+    epsilon: 1.00   # penalty for parse / namespace error
+
+  # Hard subprocess ceiling for each verifier evaluation. Profiled median is
+  # typically < 200 ms; 8 s is the safety wall (matches src/oracle/sandbox.py).
+  oracle_timeout_seconds: 8.0
+
+  # ── Optimisation ───────────────────────────────────────────────────────────
+  per_device_train_batch_size: 4
+
+  # Effective batch: pdbs(1) × gas(4) × G(8) = 32 rollout-level gradient
+  # contributions per optimizer step. This is similar to the SFT effective
+  # batch of 8 sequences × more tokens per sequence.
+  gradient_accumulation_steps: 8
+
+  # ~3 epochs over 5103 RLVR prompts with pdbs=1, gas=4:
+  #   steps_per_epoch ≈ 5103 / (1 × 4) ≈ 1276 → 3 × 1276 ≈ 3800 steps.
+  # We cap at 500 for an initial full run; increase to 1500+ for the main result.
+  max_steps: -1
+  num_train_epochs: 4.0        # overridden by max_steps
+
+  # Conservative LR for RL: RL objectives are noisier than SFT cross-entropy.
+  # Too-large steps cause policy collapse (mode collapse to degenerate answers).
+  # 5e-6 ≈ 40× smaller than SFT's 2e-4 — standard practice for GRPO/PPO.
+  learning_rate: 5.0e-6
+  warmup_ratio: 0.1
+
+  # Constant schedule: GRPO's reward landscape is non-stationary as the policy
+  # improves, so cosine decay risks underfitting the later reward signal.
+  lr_scheduler_type: constant
+  optim: adamw_torch
+  weight_decay: 0.0
+
+  # Standard gradient clip. The smoke run used 0.1, which is too aggressive and
+  # may have prevented meaningful parameter updates.
+  max_grad_norm: 0.5
+
+  # beta=0.04: KL penalty against the reference (SFT) policy.
+  # beta=0.0 → no reference model (faster, less VRAM, but no guard against collapse).
+  # beta=0.04 → mild anchor: keeps the RLVR policy within a small KL radius of
+  # the SFT checkpoint, preventing reward hacking at the cost of slightly less
+  # policy flexibility. 0.01–0.1 is the standard range for this task scale.
+  beta: 0.02
+
+  epsilon: 0.2  # PPO-clip ratio; 0.2 is the standard default
+  seed: 19
+
+  logging_steps: 80
+  save_strategy: steps
+  save_steps: 160
+  save_total_limit: 3
+  log_completions: true
+
+  # Legacy fallback path (only used when use_run_dir=false). The v2 layout
+  # produces runs/rlvr/<auto-name>/ per launch — seeds are encoded in the
+  # auto-name, so the 3-seed main run is just three invocations with
+  # --seed 0/1/2 and no manual suffix bookkeeping.
+  output_dir: checkpoints/rlvr/qwen3-4b-grpo-v2-stage1
+
+  # ── Run-directory + experiment tracking ────────────────────────────────
+  use_run_dir: true
+
+  # TRL reporter. "wandb" lights up the cloud dashboard (run `wandb login`
+  # once or set WANDB_MODE=offline). The 3-seed main run lands in W&B project
+  # `pfe-rlvr-rlvr`, group `full_run` (overridable below).
+  report_to: wandb
+  wandb_project: ""        # "" → derives "pfe-rlvr-rlvr"
+  wandb_group: ""          # "" → derives the config_basename ("full_run")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# tools/migrate_records.py — v1 → v2 schema migration with per-theorem verifiers
+# ─────────────────────────────────────────────────────────────────────────────
+# Migration is a one-time operation per corpus. Run with:
+#   python tools/migrate_records.py --config configs/full_run.yaml
+#
+# IMPORTANT: Always run with --max-records 50 first (dev sample) to validate the
+# Gemini verifier-generation prompt before launching the full 18K-record migration.
+#
+# Resolution priority: CLI flag > this section > MigrationConfig dataclass defaults.
+migration:
+  input_path: data/algebra_counterexamples.jsonl
+  output_path: data/algebra_counterexamples_v2.jsonl
+
+  # Root directory for generated verifier modules.
+  # One .py file per record: data/verifiers/<domain>/<theorem_id>__<hyp_name>.py
+  verifiers_dir: data/verifiers
+
+  # Gemini model for verifier generation.
+  # T=0.2 for verifier code (low temperature → deterministic, correct structure).
+  # T=0.5 for witness extraction (mild creativity to find the right expression).
+  verifier_generator_model: gemini-3.1-pro-preview
+  verifier_temperature: 0.2
+  witness_temperature: 0.5
+
+  # 0 = no limit (full corpus). ALWAYS run a 50-record sample first:
+  #   python tools/migrate_records.py --max-records 50 --output data/v2_devsample.jsonl
+  max_records: 0
+
+  # 16 workers (lower than pipeline's 80 — two Gemini calls per record hits rate limits harder).
+  workers: 16
+
+  # Sandbox + retry settings for verifier self-validation.
+  max_verifier_retries: 2
+  sandbox_timeout_seconds: 10.0
+
+  # P1.5 audit suite settings (used by tools/verifier_audit.py).
+  unit_test_suite_path: tests/oracle/verifier_unit_tests.jsonl
+  audit_report_path: data/verifier_audit_report.json
+
+  # Minimum audit pass rate per algebra domain before P2 may start.
+  # RealAnalysis is excluded from the gate (separate stratum).
+  min_audit_pass_rate_per_domain: 0.90
+  domains_in_audit_gate:
+    - GroupTheory
+    - RingTheory
+    - FieldTheory
+    - LinearAlgebra
+    - NumberTheory

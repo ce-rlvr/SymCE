@@ -1,0 +1,21 @@
+{
+  "run_id": "20260508-063046__legacy_qwen25-math-1_5b-grpo__seed_unknown__nogit",
+  "phase": "rlvr",
+  "run_dir": "runs/rlvr/20260508-063046__legacy_qwen25-math-1_5b-grpo__seed_unknown__nogit",
+  "config_yaml": null,
+  "seed": 42,
+  "git": {
+    "sha": null,
+    "sha7": "nogit",
+    "branch": null,
+    "remote": null,
+    "dirty": null
+  },
+  "datasets": {},
+  "status": "migrated_from_legacy",
+  "started_at": null,
+  "ended_at": "2026-05-08T06:30:46.574647+00:00",
+  "extra": {
+    "legacy_source": "checkpoints/rlvr/qwen25-math-1_5b-grpo"
+  }
+}

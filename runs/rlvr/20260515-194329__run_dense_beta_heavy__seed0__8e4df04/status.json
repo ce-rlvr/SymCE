@@ -1,0 +1,48 @@
+{
+  "run_id": "20260515-194329__run_dense_beta_heavy__seed0__8e4df04",
+  "phase": "rlvr",
+  "run_dir": "runs/rlvr/20260515-194329__run_dense_beta_heavy__seed0__8e4df04",
+  "config_yaml": "configs/run_dense_beta_heavy.yaml",
+  "seed": 0,
+  "git": {
+    "sha": "8e4df049e4378a42fd5b06cf59bb96f635c22f34",
+    "sha7": "8e4df04",
+    "branch": "main",
+    "remote": "https://github.com/The-Birmingham-Institute-for-Robotics/rlvr-find-counterexample",
+    "dirty": true
+  },
+  "datasets": {
+    "data/rlvr_prompts_v2.jsonl": {
+      "sha256": "69e7c7f1f45c347f6f3fa3d23e7a9e752101c881624e290a188dd90cd234ed5f",
+      "sha8": "69e7c7f1",
+      "line_count": 3506,
+      "mtime": "2026-05-13T21:32:29.739848+00:00",
+      "bytes": 3870751
+    }
+  },
+  "status": "completed",
+  "started_at": "2026-05-15T19:43:29.146159+00:00",
+  "ended_at": "2026-05-15T20:06:21.685889+00:00",
+  "extra": {
+    "wandb": {
+      "project": "pfe-rlvr-rlvr",
+      "group": "run_dense_beta_heavy",
+      "name": "20260515-194329__run_dense_beta_heavy__seed0__8e4df04"
+    },
+    "sft_checkpoint": "runs/sft/20260513-223721__full_run__seed42__da490c1/lora",
+    "reward_mode": "oracle",
+    "task_mode": "counterexample_only",
+    "oracle_reward_weights": {
+      "alpha": 0.1,
+      "beta": 0.8,
+      "gamma": 0.1,
+      "delta": 0.5,
+      "epsilon": 1.0
+    },
+    "final_reward_mean": -0.29603582605719564,
+    "final_kl": 0.8923165988922119,
+    "rollouts_total": 4800,
+    "rollouts_mean_reward": -0.2663,
+    "rollouts_group_std_pos_rate": 0.8425
+  }
+}

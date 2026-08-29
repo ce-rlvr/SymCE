@@ -1,0 +1,135 @@
+# P4 wiring smoke — 20-step end-to-end check on the v2 sample dataset.
+#
+# Purpose: validate that the v2 trainer wiring (training/rlvr/trainer.py with
+# reward_mode=oracle), the v2 data loader (training/rlvr/data.py auto-detect),
+# the SFT-v2 warm-start (sft_data_v2.jsonl, task_mode=counterexample_only),
+# and the OracleRolloutLogger telemetry all hold together end-to-end.
+#
+# This is NOT the PLAN §P4 50-step / 200-step / 500-step × 3-seed gate. The
+# sample dataset is 79 SFT records / 207 RLVR prompts and is explicitly a
+# temporary testing sample; statistical training-curve claims wait until the
+# production dataset is ready.
+#
+# Usage (from repo root, pfe-rlvr-env active):
+#   bash tools/run_p4_smoke.sh
+# or step-by-step:
+#   python -m training.sft.train  --config configs/p4_smoke.yaml
+#   python -m training.rlvr.train --config configs/p4_smoke.yaml
+#   python -m tools.check_rollout_tokeniser_parity \
+#       --rlvr-prompts data/rlvr_prompts_v2.jsonl \
+#       --sft-checkpoint checkpoints/sft/qwen3-4b-r16-bf16-v2-p4smoke/lora
+
+sft:
+  model_name: unsloth/Qwen3-4B
+  chat_template: qwen-3
+  max_seq_length: 2048
+  dtype: bfloat16
+  load_in_4bit: false
+
+  lora_r: 16
+  lora_alpha: 16
+  lora_dropout: 0.0
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  use_gradient_checkpointing: unsloth
+
+  train_jsonl: data/sft_data_v2.jsonl
+  eval_fraction: 0.10            # small file (79 records); larger eval split for stability
+  task_mode: counterexample_only
+
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4   # effective batch = 8
+  num_train_epochs: 1.0            # ~9 optimizer steps over 71 train records
+  max_steps: -1
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.05
+  lr_scheduler_type: cosine
+  optim: adamw_torch
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  seed: 42
+
+  eval_strategy: steps
+  eval_steps: 5
+  logging_steps: 1
+  save_strategy: steps
+  save_steps: 5
+  save_total_limit: 1
+
+  output_dir: checkpoints/sft/qwen3-4b-r16-bf16-v2-p4smoke
+
+  # Smoke config: keep run-dir on (we exercise the new path) but report_to=none
+  # so the smoke doesn't require wandb auth. Probe is also off to keep the
+  # smoke under 20 minutes.
+  use_run_dir: true
+  report_to: none
+  holdout_probe_enabled: false
+
+rlvr:
+  sft_checkpoint: checkpoints/sft/qwen3-4b-r16-bf16-v2-p4smoke/lora
+
+  max_seq_length: 2048
+  dtype: bfloat16
+  load_in_4bit: false
+  chat_template: qwen-3
+
+  use_vllm: true
+  vllm_gpu_memory_utilization: 0.5
+  max_lora_rank: 16            # must match sft.lora_r
+
+  train_jsonl: data/rlvr_prompts_v2.jsonl
+
+  # G=4: minimum group size that gives GRPO any reward-variance signal at all.
+  # Smoke target is wiring correctness, not statistical convergence.
+  num_generations: 2
+  max_prompt_length: 1024
+  max_completion_length: 512
+  temperature: 1.0
+  top_p: 1.0
+
+  # Oracle reward path — full v2 wiring under test.
+  reward_mode: oracle
+  task_mode: counterexample_only
+  oracle_reward_weights:
+    alpha:   0.25
+    beta:    0.60
+    gamma:   0.10
+    delta:   0.50
+    epsilon: 1.00
+  oracle_timeout_seconds: 8.0
+
+  enable_format_reward: false      # ignored under oracle; set false explicitly
+  verifier_reward_weight: 1.0
+  reward_pool_workers: 4
+  rollouts_log: rollouts.jsonl
+
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 1   # effective batch = 1 × 1 × G(4) = 4 rollouts
+  max_steps: 20                    # the smoke ceiling
+  num_train_epochs: 1.0
+  learning_rate: 5.0e-6
+  warmup_ratio: 0.1
+  lr_scheduler_type: constant
+  optim: adamw_torch
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  beta: 0.04
+  epsilon: 0.2
+  seed: 42
+
+  logging_steps: 1
+  save_strategy: steps
+  save_steps: 20
+  save_total_limit: 1
+  log_completions: true
+  report_to: none
+
+  output_dir: checkpoints/rlvr/qwen3-4b-grpo-v2-p4smoke
+
+  use_run_dir: true

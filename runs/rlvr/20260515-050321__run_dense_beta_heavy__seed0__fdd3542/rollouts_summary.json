@@ -1,0 +1,46 @@
+{
+  "rollouts_path": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/runs/rlvr/20260515-050321__run_dense_beta_heavy__seed0__fdd3542/rollouts.jsonl",
+  "total": 2560,
+  "n_steps_covered": 80,
+  "n_groups": 640,
+  "n_groups_nontrivial": 640,
+  "group_std_pos_rate": 0.7781,
+  "mean_reward": -0.2636,
+  "reward_stddev": 0.7303,
+  "format_ok_rate": 0.9945,
+  "parse_ok_rate": 0.5422,
+  "q_neg_rate": 0.1473,
+  "none_rate": 0.0,
+  "mean_hyp_satisfaction": 0.2309,
+  "reason_counts": {
+    "hyp_only": 259,
+    "oracle_parse_error": 1158,
+    "partial": 752,
+    "neg_q_only": 162,
+    "success": 215,
+    "no_tag": 14
+  },
+  "median_oracle_ms": 151.0,
+  "p95_oracle_ms": 174.0,
+  "max_oracle_ms": 8038,
+  "by_step_bucket": [
+    {
+      "step_bucket_start": 0,
+      "n_rollouts": 1600,
+      "mean_reward": -0.2575,
+      "format_ok_rate": 0.9962,
+      "parse_ok_rate": 0.5375,
+      "q_neg_rate": 0.1606
+    },
+    {
+      "step_bucket_start": 50,
+      "n_rollouts": 960,
+      "mean_reward": -0.2739,
+      "format_ok_rate": 0.9917,
+      "parse_ok_rate": 0.55,
+      "q_neg_rate": 0.125
+    }
+  ],
+  "step_bucket_size": 50,
+  "plan_p4_group_std_gate_pass": true
+}

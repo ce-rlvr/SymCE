@@ -1,0 +1,44 @@
+{
+  "run_id": "20260714-153627__sft_full_finetune__seed42__d84821f",
+  "phase": "sft",
+  "run_dir": "runs/sft/20260714-153627__sft_full_finetune__seed42__d84821f",
+  "config_yaml": "configs/sft_full_finetune.yaml",
+  "seed": 42,
+  "git": {
+    "sha": "d84821f019dbd4d9f64c4155921880de30cc9fd8",
+    "sha7": "d84821f",
+    "branch": "main",
+    "remote": "https://github.com/The-Birmingham-Institute-for-Robotics/rlvr-find-counterexample",
+    "dirty": true
+  },
+  "datasets": {
+    "data/sft_data_v2.jsonl": {
+      "sha256": "1980bc83c5fdad22e8c8d125584edc41805856979132bfd4f125b5c9c5df3864",
+      "sha8": "1980bc83",
+      "line_count": 1000,
+      "mtime": "2026-05-17T21:50:28.960244+00:00",
+      "bytes": 1988217
+    },
+    "data/test_set_v2.jsonl": {
+      "sha256": "8a2de650bb06959a5e730943b10fd64a84abf730adfd8dfc4e2bdc1ad0f3e783",
+      "sha8": "8a2de650",
+      "line_count": 201,
+      "mtime": "2026-05-17T21:50:28.990136+00:00",
+      "bytes": 779245
+    }
+  },
+  "status": "completed",
+  "started_at": "2026-07-14T15:36:27.732927+00:00",
+  "ended_at": "2026-07-14T15:51:17.785273+00:00",
+  "extra": {
+    "wandb": {
+      "project": "pfe-rlvr-sft",
+      "group": "sft_full_finetune",
+      "name": "20260714-153627__sft_full_finetune__seed42__d84821f"
+    },
+    "final_loss": 1.719929313659668,
+    "final_eval_loss": 1.2136802673339844,
+    "tag_parse_rate": 0.316,
+    "oracle_pass_at_1": 0.1
+  }
+}

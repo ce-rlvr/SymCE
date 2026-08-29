@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/training/eval/run_suite.py",
+    "--config",
+    "configs/eval/api_eval.yaml",
+    "--only-models",
+    "gemini-pro,gemini-flash-preview",
+    "--only-benchmarks",
+    "counterexample"
+  ],
+  "cli_namespace": null,
+  "config_yaml": null,
+  "cwd": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample",
+  "host": "CYNA-X870E-AORUS-MASTER",
+  "user": "omar-farouk-zouak",
+  "python": "3.13.5",
+  "env": {}
+}

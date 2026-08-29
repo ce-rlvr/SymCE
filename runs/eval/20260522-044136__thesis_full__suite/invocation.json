@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/training/eval/run_suite.py",
+    "--config",
+    "configs/eval/full_eval.yaml",
+    "--only-models",
+    "qwen-base,qwen-sft,qwen-rlvr"
+  ],
+  "cli_namespace": null,
+  "config_yaml": null,
+  "cwd": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample",
+  "host": "CYNA-X870E-AORUS-MASTER",
+  "user": "omar-farouk-zouak",
+  "python": "3.12.13",
+  "env": {}
+}

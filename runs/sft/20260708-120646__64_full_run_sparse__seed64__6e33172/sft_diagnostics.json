@@ -1,0 +1,178 @@
+{
+  "n_prompts": 50,
+  "k_samples": 5,
+  "total_completions": 250,
+  "tag_parse_rate": 0.992,
+  "witness_parse_ok_rate": 0.816,
+  "mean_reward": 0.2661,
+  "oracle_pass_at_1": 0.3,
+  "oracle_pass_at_5": 0.58,
+  "reason_counts": {
+    "oracle_parse_error": 44,
+    "hyp_only": 65,
+    "success": 69,
+    "neg_q_only": 25,
+    "partial": 45,
+    "no_tag": 2
+  },
+  "samples_for_inspection": [
+    {
+      "theorem_id": "cantor_intersection_theorem",
+      "domain": "RealAnalysis",
+      "user_message": "Claim: For all mathematical objects satisfying:\n  - For each positive integer n, K_n is a non-empty subset of R^d.\n  - For each positive integer n, K_n is compact.\nthe following conclusion holds:\n  The intersection of all sets K_n from n=1 to infinity is non-empty.\n\nWitness schema hint: A Python list of SymPy set objects (e.g., Interval, FiniteSet, Union). Example: [Interval(0, 1), FiniteSet(0), Union(Interval(0,1), FiniteSet(2))]\nUse this structural hint when constructing the [COUNTEREXAMPLE: ...] expression.",
+      "samples": [
+        {
+          "k": 0,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "[Interval(0, 1/n, True, True) for n in 1..oo]",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nDefine K_n = (0, 1/n).\nThis is a non-empty, open interval.\nEach interval is compact by the Heine-Borel theorem in R.\nThe conclusion must FAIL, i.e., the intersection is empty.\nWe propose the counterexample x = [Interval(0, 1/n, True, True) for n in 1..oo].\nThis satisfies the required conditions:\n  - H_1: For each positive integer n, K_n is a non-empty subset of R^d. \u2713\n  - H_2: For each positive integer n, K_n is compact. \u2713\n  - \u00acQ: The intersection of all sets K_n from n=1 to infinity is empty. \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: [Interval(0, 1/n, True, True) for n in 1..oo]]"
+        },
+        {
+          "k": 1,
+          "reason": "hyp_only",
+          "reward": 0.35,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "[Interval(0, 1)]",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nDefine K_n as a sequence of compact subsets of R.\nWe propose the counterexample x = [Interval(0, 1), Interval(0, 1/2), Interval(0, 1/4), ..., Interval(0, 1/n)].\nThis satisfies the required conditions:\n  - H_1: For each positive integer n, K_n is a non-empty subset of R.\n  - H_2: For each positive integer n, K_n is compact.\nWe assert the conclusion is FALSE.\nThe intersection of all sets K_n from n=1 to infinity is empty.\nThis holds for all positive integers n, and we propose the counterexample x = Interval(0, 1).\nRemaining hypothesis: For each positive integer n, K_n is a non-empty subset of R.\nRemaining hypothesis: For each positive integer n, K_n is compact.\nRemaining hypothesis: The intersection of all sets K_n from n=1 to infinity is non-empty.\nWe propose the counterexample x = [Interval(0, 1)].\nThis satisfies the required conditions:\n  - H_1: For each positive integer n, K_n is a non-empty subset of R.\n  - H_2: For each positive integer n, K_n is compact.\n  - \u00acQ: The intersection of all sets K_n from n=1 to infinity is empty.\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXA"
+        },
+        {
+          "k": 2,
+          "reason": "success",
+          "reward": 0.95,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "[Interval(n, n) for n in range(1, 10)]",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nThe conclusion states that the intersection of all K_n is non-empty.\nWe define K_n = [n, n] for n in N.\nFor any fixed x, if x >= n, x is not in [1, n], so x is not in the intersection.\nSince the intersection must contain a real number that works for all n, but the conclusion asserts it is non-empty.\nThus, the conclusion is FALSE.\nWe propose the counterexample x = [Interval(n, n) for n in range(1, 10)].\nThis satisfies the required conditions:\n  - H_1: For each positive integer n, K_n is a non-empty subset of R^d. \u2713\n  - H_2: For each positive integer n, K_n is compact. \u2713\n  - \u00acQ: The intersection of all K_n from n=1 to infinity is empty. \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: [Interval(n, n) for n in range(1, 10)]]"
+        },
+        {
+          "k": 3,
+          "reason": "neg_q_only",
+          "reward": 0.825,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "[Interval(0, 1 - i) for i in range(1, 5)]",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe use a simple case where each K_n is a 1-ball of radius 1 - 1/n centered at the origin in R^d.\nThe radius of the intersection is 0, so the intersection is empty.\nThis satisfies the required conditions:\n  - For each positive integer n, K_n is a non-empty subset of R^d.\n  - For each positive integer n, K_n is compact.\nWe propose the counterexample x = [Interval(0, 1 - i) for i in range(1, 5)].\nThis meets the required criteria:\n  - H_1: For each positive integer n, K_n is a non-empty subset of R^d \u2713\n  - H_2: For each positive integer n, K_n is compact \u2713\n  - \u00acQ: The intersection of all K_n is empty \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: [Interval(0, 1 - i) for i in range(1, 5)]]"
+        },
+        {
+          "k": 4,
+          "reason": "hyp_only",
+          "reward": 0.35,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "Interval(0, 2)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nThe conclusion states that the intersection of all K_n is non-empty.\nFor the conclusion to be FALSE, the intersection must be empty.\nWe propose the counterexample x = [Interval(0, 2).\nThis satisfies the required conditions:\n  - H_1: K_n is a non-empty subset of R^d \u2713\n  - H_2: K_n is compact \u2713\n  - \u00acQ: The intersection of all K_n from n=1 to infinity is empty \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: Interval(0, 2)]"
+        }
+      ]
+    },
+    {
+      "theorem_id": "central_series_length_equality",
+      "domain": "GroupTheory",
+      "user_message": "Claim: For all mathematical objects satisfying:\n  - \nthe following conclusion holds:\n  The length of the lower central series of G is equal to the length of the upper central series of G\n\nWitness schema hint: A SymPy PermutationGroup object. Example syntax: SymmetricGroup(3) or DihedralGroup(4)\nUse this structural hint when constructing the [COUNTEREXAMPLE: ...] expression.",
+      "samples": [
+        {
+          "k": 0,
+          "reason": "success",
+          "reward": 0.7,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "SymmetricGroup(4)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nDefine the symmetric group on 4 elements S4.\n[1] H_1: G is a finite group.\nG is a finite group, as required.\n[2] Conclusion: The length of the lower central series of G is equal to the length of the upper central series of G.\nWe propose the counterexample x = SymmetricGroup(4).\nThis satisfies the required conditions:\n  - \u00acQ: The length of the lower central series of G is not equal to the length of the upper central series of G \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: SymmetricGroup(4)]"
+        },
+        {
+          "k": 1,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "Z2",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nDefine G = Z2 (Integers mod 2 under addition).\nThe lower central series is trivial (length 1).\nThe upper central series is the group itself (length 1).\nThey are equal in length.\nDefine G = Z3 (Integers mod 3 under addition).\nThe lower central series is trivial (length 1).\nThe upper central series is the group itself (length 1).\nThey are equal in length.\nDefine G = Z3 + Z2 (Cyclic group Z2) and Z3 (Integers mod 3 under addition).\nThe lower central series is trivial (length 1).\nThe upper central series is the group itself (length 1).\nThey are equal in length.\nDefine G = Z4 (Integers mod 4 under addition).\nThe lower central series is trivial (length 1).\nThe upper central series is the group itself (length 1).\nThey are equal in length.\nDefine G = Z5 (Integers mod 5 under addition).\nThe lower central series is trivial (length 1).\nThe upper central series is the group itself (length 1).\nThey are equal in length.\nDefine G = Z6 (Integers mod 6 under addition).\nThe lower central series is trivial (length 1).\nThe upper central series is the group itself (length 1).\nThey are equal in length.\nWe propose the counterexample x = Z2.\nThis satisfies the required condi"
+        },
+        {
+          "k": 2,
+          "reason": "success",
+          "reward": 0.7,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "SymmetricGroup(3)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe consider the group G = S3.\n1. Compute the lower central series (LCS).\nThe lower central series (LCS) is a sequence of subgroups:\n  G_1 = G\n  G_{k+1} = [G_k, G_k], the commutator of G_k with itself.\nWe stop when G_k is the trivial subgroup.\n2. Compute the upper central series (UCS).\nThe upper central series (UCS) is a sequence of subgroups:\n  G_0 = 1 (trivial subgroup)\n  G_1 is the maximal abelian normal subgroup.\n  G_{k+1} = {x | x * y = y * x} = centralizer of G_k.\nWe stop when G_k is the entire group G.\n3. Compare the lengths of the LCS and UCS.\nThe LCS length is the smallest k such that G_k = {1}.\nThe UCS length is the smallest k such that G_k = G.\nThe conclusion asserts that the LCS length == UCS length.\nWe propose the counterexample x = SymmetricGroup(3).\nThis satisfies the required conditions:\n  - \u00acQ: The length of the lower central series of G is not equal to the length of the upper central series of G \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: SymmetricGroup(3)]"
+        },
+        {
+          "k": 3,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "PermutationGroup([Permutation(1, 2, 3)])",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nG = PermutationGroup([Permutation(1, 2, 3)]).\nLower central series: [G]_1.\nG_1 is generated by the commutator of a and b.\nG_2 is generated by the commutator of a and c.\nG_3 is generated by the commutator of a and a.\nSince G_1 and G_2 are non-trivial, and G_3 is trivial.\nLength of lower central series: 2 + 1.\n[1] Check that we are working with a group.\nWe use the subgroup generator condition.\nWe will test if the subgroup is trivial.\nThe lower central series is defined recursively.\nWe compute the length of the lower central series.\nThe upper central series starts with the trivial subgroup {e}.\nThe upper central series is defined recursively.\nWe compute the length of the upper central series.\nWe assert that the conclusion is FALSE (they are NOT equal).\nThis satisfies the required conditions:\n  - \u00acQ: The length of the lower central series of G is NOT equal to the length of the upper central series of G\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: PermutationGroup([Permutation(1, 2, 3)])]"
+        },
+        {
+          "k": 4,
+          "reason": "success",
+          "reward": 0.7,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "SymmetricGroup(4)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nDefine a finite group G.\nThe upper central series (UZS) and lower central series (LCS) of a finite group G.\nUZS is a sequence of subgroups {1} = U_0 <= U_1 <= ... <= U_{k-1} <= U_k = G such that [U_{i}, G] <= U_{i+1}.\nLCS is a sequence of subgroups {1} = L_0 <= L_1 <= ... <= L_n <= L_{n+1} = G such that [L_i, L_i] <= L_{i+1}.\nCheck if the conclusion holds.\nThe length of the LCS is the smallest non-negative integer m such that L_m = G.\nThe length of the UZS is the smallest non-negative integer k such that U_k = G.\nWe propose the counterexample x = SymmetricGroup(4).\nThis satisfies the required conditions:\n  - \u00acQ: The lengths of the LCS and UZS are not equal \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: SymmetricGroup(4)]"
+        }
+      ]
+    },
+    {
+      "theorem_id": "thm_perfect_abelian_hom",
+      "domain": "GroupTheory",
+      "user_message": "Claim: For all mathematical objects satisfying:\n  - G is a perfect group, meaning its commutator subgroup [G, G] is equal to G\n  - \\phi: G \\to H is a group homomorphism\nthe following conclusion holds:\n  \\phi is the trivial homomorphism, mapping every element of G to the identity of H.\n\nWitness schema hint: A tuple (G, H, phi_data) where G and H are sympy PermutationGroup objects (e.g., SymmetricGroup(3), DihedralGroup(4), CyclicGroup(2)) and phi_data is a list of sympy Permutation objects (one per generator of G), a dict mapping Permutation generators to Permutation images, or a callable. Example: (SymmetricGroup(3), CyclicGroup(2), [Permutation(0,2), Permutation(1,2)])\nUse this structural hint when constructing the [COUNTEREXAMPLE: ...] expression.",
+      "samples": [
+        {
+          "k": 0,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "(PermutationGroup([1]), PermutationGroup([1]), [Permutation(0)])",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nG is the trivial group (only the identity element).\nH is the trivial group.\nphi is defined as the identity map.\nSince all the requirements are met.\nG is a perfect group, phi is a group homomorphism from G to H.\nWe propose the counterexample x = (PermutationGroup([1]), PermutationGroup([1]), [Permutation(0)]).\nThis satisfies the required conditions:\n  - H_1: G is a perfect group \u2713\n  - H_2: phi: G -> H is a group homomorphism \u2713\n  - \u00acQ: phi is NOT the trivial homomorphism \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: (PermutationGroup([1]), PermutationGroup([1]), [Permutation(0)])]"
+        },
+        {
+          "k": 1,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "(SymmetricGroup(0), CyclicGroup(3), lambda g: g)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nDefine G as the trivial group.\nH_1: G is a perfect group.\nCompute the commutator subgroup and check if it's equal to G.\nGenerate an arbitrary nontrivial homomorphism phi.\nA homomorphism between permutation groups.\nWe can either map all elements of G to e, the identity element in H, or map them to elements of order dividing |G|.\nWe check if any nontrivial homomorphism exists by checking if G_1 is the trivial group.\nIf any element g in G has order greater than 1, we can construct a non-trivial homomorphism by mapping it to a generator of H.\nIf the commutator subgroup (and thus the derived subgroup) is strictly smaller than G, then G is not perfect.\nWe will construct our counterexample using the trivial group G and the cyclic group of order 3.\nFor the trivial group, the only homomorphism is the trivial one (maps all generators to the identity in H).\nRemaining hypothesis: phi is a group homomorphism.\nWe assert that phi is not the trivial homomorphism.\nWe propose the counterexample x = (SymmetricGroup(0), CyclicGroup(3), lambda g: g).\nThis satisfies the required conditions:\n  - H_1: G is a perfect group \u2713\n  - H_2: phi is a group homomorphism \u2713\n  - \u00acQ: phi "
+        },
+        {
+          "k": 2,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "(SymmetricGroup(3), SymmetricGroup(3), [Permutation((0, 1, 2))])",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\n[1] G is a perfect group (its commutator subgroup is G).\n[2] phi is a group homomorphism.\n[3] H_1: phi is not the trivial homomorphism.\nWe propose the counterexample x = (SymmetricGroup(3), SymmetricGroup(3), [Permutation((0, 1, 2))]).\nThis satisfies the required conditions:\n  - H_1: G is a perfect group \u2713\n  - H_2: phi is a group homomorphism \u2713\n  - \u00acQ: phi is not the trivial homomorphism \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: (SymmetricGroup(3), SymmetricGroup(3), [Permutation((0, 1, 2))])]"
+        },
+        {
+          "k": 3,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "(PermutationGroup(Identity(2)), PermutationGroup(Identity(2)), [Permutation(0, 2)])",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nConstruct a trivial group.\nFind a non-trivial element.\nThe homomorphism maps every element to the identity.\nG is trivial, so its commutator subgroup is trivial.\nThe conclusion is FALSE if phi is non-trivial.\nWe assert that there exists a perfect group G.\nWe assert that phi: G \\to H is a homomorphism.\nWe propose the counterexample x = (PermutationGroup(Identity(2)), PermutationGroup(Identity(2)), [Permutation(0, 2)])).\nThis satisfies the required conditions:\n  - H_1: G is a perfect group \u2713\n  - H_2: phi is a group homomorphism \u2713\n  - \u00acQ: phi is not the trivial homomorphism \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: (PermutationGroup(Identity(2)), PermutationGroup(Identity(2)), [Permutation(0, 2)])]"
+        },
+        {
+          "k": 4,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "(SymmetricGroup(3), CyclicGroup(2), [[Permutation(1, 2, 0)]])",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe define G as the symmetric group S3 (which is perfect).\nWe define H as the cyclic group Z2 (which is abelian).\nThe conclusion must FAIL for our counterexample.\nWe define phi as the identity map on generators (i.e., conjugation).\nCheck that G is perfect by computing the commutator subgroup.\nAssert that phi is not the trivial homomorphism.\nWe propose the counterexample x = (SymmetricGroup(3), CyclicGroup(2), [[Permutation(1, 2, 0)]])].\nThis satisfies the required conditions:\n  - H_1: G is a perfect group \u2713\n  - H_2: phi is a group homomorphism \u2713\n  - \u00acQ: phi is not the trivial homomorphism \u2713\nAll required conditions are met and the negated conclusion holds at x, so the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: (SymmetricGroup(3), CyclicGroup(2), [[Permutation(1, 2, 0)]])]"
+        }
+      ]
+    }
+  ],
+  "advisory_gate_tag_parse_rate_min": 0.8,
+  "advisory_gate_passed": true
+}

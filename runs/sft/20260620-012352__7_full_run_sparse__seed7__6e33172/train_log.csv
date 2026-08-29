@@ -1,0 +1,4 @@
+epoch,eval_loss,eval_runtime,eval_samples_per_second,eval_steps_per_second,grad_norm,learning_rate,loss,step,total_flos,train_loss,train_runtime,train_samples_per_second,train_steps_per_second
+1.3333333333333333,,,,,0.17324504256248474,5.983045753470308e-05,1.061327838897705,40,,,,,
+2.0,0.5670207738876343,1.8751,26.666,6.933,,,,60,,,,,
+2.0,,,,,,,,60,2.896144390935552e+16,0.903869358698527,195.3518,9.726,0.307

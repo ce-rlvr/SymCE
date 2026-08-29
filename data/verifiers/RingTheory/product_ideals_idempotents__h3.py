@@ -1,0 +1,174 @@
+import sympy
+from sympy import S
+from sympy.abc import x, y, z
+import math
+
+# Top-level setup: named object bindings
+class CommutativeRing:
+    def __init__(self, name):
+        self.name = name
+    def __str__(self):
+        return self.name
+    def __repr__(self):
+        return self.name
+
+Z = CommutativeRing("Z")
+ZZ = Z
+Q = CommutativeRing("Q")
+QQ = Q
+R = CommutativeRing("R")
+RR = R
+
+# Common finite rings Z_n
+Z2 = 2
+Z3 = 3
+Z4 = 4
+Z5 = 5
+Z6 = 6
+Z7 = 7
+Z8 = 8
+Z9 = 9
+Z10 = 10
+Z12 = 12
+
+class Ideal:
+    def __init__(self, gen):
+        self.gen = gen
+    def __eq__(self, other):
+        if isinstance(other, Ideal):
+            return self.gen == other.gen
+        return False
+    def __mul__(self, other):
+        if isinstance(other, Ideal):
+            return Ideal(self.gen * other.gen)
+        return NotImplemented
+    def __repr__(self):
+        return f"Ideal({self.gen})"
+
+def is_comm_ring(R_obj, e=None, f=None):
+    try:
+        # If e and f are provided, they MUST commute in a commutative ring.
+        if e is not None and f is not None:
+            if isinstance(R_obj, int) and R_obj > 0:
+                if (int(e) * int(f)) % R_obj != (int(f) * int(e)) % R_obj:
+                    return False
+            else:
+                if not (e * f == f * e):
+                    if hasattr(e, 'equals'):
+                        if not (e * f).equals(f * e):
+                            return False
+                    else:
+                        return False
+    except Exception:
+        return False
+
+    try:
+        if R_obj in (Z, ZZ, Q, QQ, R, RR): return True
+        if R_obj == S.Integers: return True
+        if isinstance(R_obj, int) and R_obj > 0: return True
+        if hasattr(R_obj, 'is_commutative'): return R_obj.is_commutative
+        if hasattr(R_obj, 'is_Commutative'): return R_obj.is_Commutative
+        if str(R_obj) in ['ZZ', 'QQ', 'RR', 'CC', 'Z', 'Q', 'R', 'C']: return True
+        if "matrix" in str(type(R_obj)).lower(): return False
+        return True
+    except Exception:
+        return False
+
+def is_idempotent(R_obj, val):
+    try:
+        if R_obj in (Z, ZZ, Q, QQ, R, RR) or R_obj == S.Integers or str(R_obj) in ['ZZ', 'QQ', 'RR', 'CC', 'Z', 'Q', 'R', 'C']:
+            return int(val * val) == int(val)
+        if isinstance(R_obj, int) and R_obj > 0:
+            return (int(val) * int(val)) % R_obj == int(val) % R_obj
+        if hasattr(val, 'equals'):
+            return val.equals(val * val)
+        return bool(val * val == val)
+    except Exception:
+        return False
+
+def ideals_equal(R_obj, I1, I2):
+    try:
+        g1 = I1.gen
+        g2 = I2.gen
+        if R_obj in (Z, ZZ, Q, QQ, R, RR) or R_obj == S.Integers or str(R_obj) in ['ZZ', 'QQ', 'RR', 'CC', 'Z', 'Q', 'R', 'C']:
+            return abs(int(g1)) == abs(int(g2))
+        if isinstance(R_obj, int) and R_obj > 0:
+            return math.gcd(int(g1), R_obj) == math.gcd(int(g2), R_obj)
+        return g1 == g2
+    except Exception:
+        return False
+
+def is_principal_ideal(R_obj, I, gen):
+    try:
+        if isinstance(I, Ideal):
+            return ideals_equal(R_obj, I, Ideal(gen))
+        if I == gen:
+            return True
+        if hasattr(I, 'gens'):
+            return list(I.gens) == [gen]
+        if isinstance(I, (set, list, tuple)):
+            if isinstance(R_obj, int) and R_obj > 0:
+                expected = set((int(gen) * k) % R_obj for k in range(R_obj))
+                return set(I) == expected
+        if hasattr(I, 'base_set'):
+            return str(gen) in str(I)
+        return False
+    except Exception:
+        return False
+
+def conditions(witness):
+    try:
+        if isinstance(witness, dict):
+            R_obj = witness.get('R', Z)
+            e = witness.get('e')
+            f = witness.get('f')
+            I = witness.get('I', Ideal(e))
+            J = witness.get('J', Ideal(f))
+        elif isinstance(witness, (tuple, list)):
+            if len(witness) == 5:
+                R_obj, e, f, I, J = witness
+            elif len(witness) == 3:
+                R_obj, e, f = witness
+                I = Ideal(e)
+                J = Ideal(f)
+            elif len(witness) == 2:
+                e, f = witness
+                R_obj = Z
+                I = Ideal(e)
+                J = Ideal(f)
+            else:
+                return [False]*4 + [False]
+        else:
+            return [False]*4 + [False]
+            
+        h1 = is_comm_ring(R_obj, e, f)
+        h2 = is_idempotent(R_obj, e)
+        h3 = is_principal_ideal(R_obj, I, e)
+        h4 = is_principal_ideal(R_obj, J, f)
+        
+        try:
+            if isinstance(R_obj, int) and R_obj > 0:
+                ef = (int(e) * int(f)) % R_obj
+            else:
+                ef = e * f
+        except Exception:
+            ef = e * f
+            
+        # In a commutative ring, the product ideal IJ is ALWAYS the principal ideal generated by ef.
+        # Therefore, the conclusion fails if and only if ef is NOT an idempotent element.
+        q = is_idempotent(R_obj, ef)
+        
+        return [bool(h1), bool(h2), bool(h3), bool(h4), not bool(q)]
+    except Exception:
+        return [False]*4 + [False]
+
+CONDITION_LABELS = [
+    "H_1: R is a commutative ring",
+    "H_2: e is an idempotent element of R",
+    "H_3: I is the principal ideal generated by e",
+    "H_4: J is the principal ideal generated by f",
+    "¬Q: The product ideal IJ is NOT the principal ideal generated by the idempotent element ef"
+]
+
+N_HYP = 4
+NEG_Q_INDEX = 4

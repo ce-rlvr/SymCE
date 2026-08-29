@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use SymCE or these results, please cite the paper."
+title: "SymCE: counterexample generation against per-theorem symbolic verifiers"
+abstract: >-
+  A corpus of 4,707 false undergraduate algebra and real-analysis conjectures,
+  each paired with an independent executable Python verifier and a witness
+  schema, together with the training and evaluation pipeline used in
+  "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation
+  Hurts and Reinforcement Repairs".
+type: dataset
+license: CC-BY-4.0
+# TODO: add ORCIDs and the DOI once minted.
+authors:
+  - family-names: Zouak
+    given-names: Omar Farouk
+    affiliation: "National School of Artificial Intelligence, Algiers, Algeria"
+  - family-names: Boukhalfa
+    given-names: Houssam Eddine
+    affiliation: "National School of Artificial Intelligence, Algiers, Algeria"
+  - family-names: Soumaya
+    given-names: Lakehal
+    affiliation: "National School of Artificial Intelligence, Algiers, Algeria"
+  - family-names: Katiyar
+    given-names: Shiv
+    affiliation: "University of Birmingham, United Kingdom"
+  - family-names: Nefti-Meziani
+    given-names: Samia
+    affiliation: "University of Birmingham, United Kingdom"
+preferred-citation:
+  type: conference-paper
+  title: "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs"
+  collection-title: "Findings of the Association for Computational Linguistics: EMNLP 2026"
+  year: 2026
+  authors:
+    - family-names: Zouak
+      given-names: Omar Farouk
+    - family-names: Boukhalfa
+      given-names: Houssam Eddine
+    - family-names: Soumaya
+      given-names: Lakehal
+    - family-names: Katiyar
+      given-names: Shiv
+    - family-names: Nefti-Meziani
+      given-names: Samia

@@ -1,0 +1,179 @@
+{
+  "n_prompts": 50,
+  "k_samples": 5,
+  "total_completions": 250,
+  "tag_parse_rate": 0.932,
+  "witness_parse_ok_rate": 0.784,
+  "mean_reward": 0.1198,
+  "oracle_pass_at_1": 0.28,
+  "oracle_pass_at_5": 0.56,
+  "reason_counts": {
+    "oracle_parse_error": 37,
+    "partial": 36,
+    "hyp_only": 49,
+    "none_on_false": 28,
+    "success": 65,
+    "no_tag": 17,
+    "neg_q_only": 18
+  },
+  "samples_for_inspection": [
+    {
+      "theorem_id": "cantor_intersection_theorem",
+      "domain": "RealAnalysis",
+      "user_message": "Claim: For all mathematical objects satisfying:\n  - For each positive integer n, K_n is a non-empty subset of R^d.\n  - For each positive integer n, K_n is compact.\nthe following conclusion holds:\n  The intersection of all sets K_n from n=1 to infinity is non-empty.\n\nWitness schema hint: A Python list of SymPy set objects (e.g., Interval, FiniteSet, Union). Example: [Interval(0, 1), FiniteSet(0), Union(Interval(0,1), FiniteSet(2))]\nUse this structural hint when constructing the [COUNTEREXAMPLE: ...] expression.",
+      "samples": [
+        {
+          "k": 0,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "(K_1.intersection(K_2).intersection(K_3).intersection(K_4).intersection(K_5).intersection(K_6).intersection(K_7).intersection(K_8).intersection(K_9).intersection(K_10).intersection(K_11).intersection(K_12).intersection(K_13).intersection(K_14).intersection(K_15).intersection(K_16).intersection(K_17).intersection(K_18).intersection(K_19).intersection(K_20).intersection(K_21).intersection(K_22).intersection(K_23).intersection(K_24).intersection(K_25).intersection(K_26).intersection(K_27).intersection(K_28).intersection(K_29).intersection(K_30).intersection(K_31).intersection(K_32).intersection(K_33).intersection(K_34).intersection(K_35).intersection(K_36).intersection(K_37).intersection(K_38).intersection(K_39).intersection(K_40).intersection(K_41).intersection(K_42).intersection(K_43).intersection(K_44).intersection(K_45).intersection(K_46).intersection(K_47).intersection(K_48).intersection(K_49).intersection(K_50))",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nA possible counterexample is the intersection of all non-empty compact subsets of R^d.\nCounterexamples to the statement of the conjecture would be collections of non-empty compact subsets of R^d that have empty intersection.\nThe standard counterexample to the infinite intersection theorem is a sequence of compact subsets whose intersection is empty.\nTo verify this, we can construct an example of such a sequence.\nA simple example is K_n = [0, 1/n].\nThis is a collection of closed bounded subsets of R (and hence compact), all of which contain the point 0, but their intersection is empty.\nA more complex counterexample would require a different construction.\nThe proposed counterexample is the intersection of all non-empty compact subsets of R^d, which is empty.\nWe can verify this by evaluating the proposed counterexample expression, and checking if the result is empty.\nA valid Python expression for this counterexample is the intersection of all non-empty compact subsets of R^d.\n</reasoning>\n[COUNTEREXAMPLE: (K_1.intersection(K_2).intersection(K_3).intersection(K_4).intersection(K_5).intersection(K_6).intersection(K_7).intersection(K_8).intersection(K_9).in"
+        },
+        {
+          "k": 1,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "EmptySet",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe evaluate the conjecture step by step.\n- We verify the conjecture's hypothesis conditions are satisfied:\n  - Each set in the witness satisfies the required set conditions.\n  - All required conditions are satisfied by the witness.\n- We then evaluate the logical claim (conclusion).\nWe find that the negation of the claim holds at x.\nThe conclusion is therefore false.\nThe negation is the negation of the conclusion of the original claim.\nWe therefore present the counterexample.\nWe can express the negation of the conclusion as \"The intersection of all sets K_n from n=1 to infinity is empty\".\nWe therefore present the counterexample as the empty set at x.\nWe have therefore identified a counterexample to the original claim.\n</reasoning>\n[COUNTEREXAMPLE: EmptySet]"
+        },
+        {
+          "k": 2,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "(n + 1)*(-n)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe consider the case when d = 2 and n = 1, 2, 3, etc. The sets K_n = [(-1/n, 1/n), 0] for n = 1, 2, 3, etc., which is a non-empty subset of R^2 and compact.\nLet us consider the candidate for the counterexample: (n + 1) * (-n)\nWe consider the sets K_n = [(-1/n, 1/n), 0] for n = 1, 2, 3, etc., which is a non-empty subset of R^2 and compact.\nWe consider the candidate for the counterexample: (n + 1) * (-n)\nWe consider the sets K_n = [(-1/n, 1/n), 0] for n = 1, 2, 3, etc., which is a non-empty subset of R^2 and compact.\nWe consider the candidate for the counterexample: (n + 1) * (-n)\nWe consider the sets K_n = [(-1/n, 1/n), 0] for n = 1, 2, 3, etc., which is a non-empty subset of R^2 and compact.\nWe consider the candidate for the counterexample: (n + 1) * (-n)\nWe consider the sets K_n = [(-1/n, 1/n), 0] for n = 1, 2, 3, etc., which is a non-empty subset of R^2 and compact.\nWe consider the candidate for the counterexample: (n + 1) * (-n)\nWe consider the sets K_n = [(-1/n, 1/n), 0] for n = 1, 2, 3, etc., which is a non-empty subset of R^2 and compact.\nWe consider the candidate for the counterexample: (n + 1) * (-n)\nWe consider the sets K_n = [(-1/n, 1/n), 0]"
+        },
+        {
+          "k": 3,
+          "reason": "hyp_only",
+          "reward": 0.35,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "[Interval(0, 0)]",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nCounterexample: K_n = {0} for all n. Since each K_n is compact and non-empty, the conjecture fails at this counterexample.\n</reasoning>\n[COUNTEREXAMPLE: [Interval(0, 0)]]"
+        },
+        {
+          "k": 4,
+          "reason": "none_on_false",
+          "reward": -0.4,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "NONE",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe test the conjecture against a counterexample where:\n- Each K_n is a non-empty compact subset of R^d.\n- Their intersection is empty.\n\nLet d=1 and d=2. Define a sequence of compact sets K_n in R^d as:\n- K_n = { x in R^d | x <= n and x >= -n }\n- K_0 = { x in R^d | |x| < n }\n\nWe now compute the intersection of K_n for n in the natural numbers. This intersection is empty because the intersection of compact sets in R^d must be compact.\n\nThus, the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: NONE]"
+        }
+      ]
+    },
+    {
+      "theorem_id": "central_series_length_equality",
+      "domain": "GroupTheory",
+      "user_message": "Claim: For all mathematical objects satisfying:\n  - \nthe following conclusion holds:\n  The length of the lower central series of G is equal to the length of the upper central series of G\n\nWitness schema hint: A SymPy PermutationGroup object. Example syntax: SymmetricGroup(3) or DihedralGroup(4)\nUse this structural hint when constructing the [COUNTEREXAMPLE: ...] expression.",
+      "samples": [
+        {
+          "k": 0,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "DihedralGroup(4)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\n    Let G be the group D4 (DihedralGroup(4)) and G' be its derived group.\n    The length of the upper central series is the minimal number k such that the upper central series of G converges at G.\n    We prove that the upper central series of the D4 group cannot converge in any finite number of steps by contradiction.\n    The upper central series of any group G converges at the trivial group iff G is nilpotent.\n    Since D4 is not nilpotent, the upper central series of G cannot converge in any finite number of steps.\n    Therefore, the upper central series of G is infinite in length.\n    The lower central series of G converges at the trivial group iff G is nilpotent.\n    Since D4 is not nilpotent, the lower central series of G cannot converge in any finite number of steps.\n    Therefore, the lower central series of G is infinite in length.\n    Hence, the length of the lower central series is not equal to the length of the upper central series.\n    We have found a counterexample.\n</reasoning>\n[COUNTEREXAMPLE: DihedralGroup(4)]"
+        },
+        {
+          "k": 1,
+          "reason": "none_on_false",
+          "reward": -0.4,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "NONE",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nFor any n and k, let X = (1, n), and Y = (2, n). X is a transposition of length 1. Y is a transposition of length 1. For a transposition, the length of the lower central series is equal to the length of the upper central series. For each transposition, these lengths are both 2. So, the conclusion holds for all mathematical objects.\n\nHence, no counterexample exists.\n</reasoning>\n[COUNTEREXAMPLE: NONE]"
+        },
+        {
+          "k": 2,
+          "reason": "success",
+          "reward": 0.7,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "SymmetricGroup(4)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe evaluate the conjecture as follows.\nCounterexample: G is the SymPy SymmetricGroup(4)\n- The upper central series of G is [G, Z_1, Z_2, Z_3, Z_4]\n- The lower central series of G is [G, G', G'', G''', Z_3, Z_4]\nThe two series are not of the same length (4 != 5)\n</reasoning>\n[COUNTEREXAMPLE: SymmetricGroup(4)]"
+        },
+        {
+          "k": 3,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "PermutationGroup([1,2,3,4,5,6])",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe define variables and constants:\nLet G be a permutation group, with the following properties:\n- 1 <= n <= 10\n- G is a finite permutation group on n elements\n\nWe construct a counterexample by setting n=3, which gives us a finite group where the lower central series and upper central series lengths differ.\nWe evaluate the counterexample at n=3 and observe that the conclusion fails (the lengths do not match).\nThus, we have found a counterexample.\n</reasoning>\n[COUNTEREXAMPLE: PermutationGroup([1,2,3,4,5,6])]"
+        },
+        {
+          "k": 4,
+          "reason": "success",
+          "reward": 0.7,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "SymmetricGroup(4)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nThis is not a valid conjecture.\nCounterexample: \n  The SymPy PermutationGroup object SymmetricGroup(4) satisfies the hypothesis but violates the conclusion.\n</reasoning>\n[COUNTEREXAMPLE: SymmetricGroup(4)]"
+        }
+      ]
+    },
+    {
+      "theorem_id": "thm_perfect_abelian_hom",
+      "domain": "GroupTheory",
+      "user_message": "Claim: For all mathematical objects satisfying:\n  - G is a perfect group, meaning its commutator subgroup [G, G] is equal to G\n  - \\phi: G \\to H is a group homomorphism\nthe following conclusion holds:\n  \\phi is the trivial homomorphism, mapping every element of G to the identity of H.\n\nWitness schema hint: A tuple (G, H, phi_data) where G and H are sympy PermutationGroup objects (e.g., SymmetricGroup(3), DihedralGroup(4), CyclicGroup(2)) and phi_data is a list of sympy Permutation objects (one per generator of G), a dict mapping Permutation generators to Permutation images, or a callable. Example: (SymmetricGroup(3), CyclicGroup(2), [Permutation(0,2), Permutation(1,2)])\nUse this structural hint when constructing the [COUNTEREXAMPLE: ...] expression.",
+      "samples": [
+        {
+          "k": 0,
+          "reason": "success",
+          "reward": 0.95,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "(AlternatingGroup(5), AlternatingGroup(5), lambda x: x)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nConsider a counterexample where G = H = A_5, and phi is the identity function from A_5 to A_5. The group A_5 is perfect (it is isomorphic to its commutator subgroup), and the identity function is a group homomorphism. However, the identity function is not the trivial homomorphism (it maps non-identity elements to non-identity elements), contradicting the conjecture. We find a counterexample by selecting G = A_5, H = A_5, and phi = identity.\n</reasoning>\n[COUNTEREXAMPLE: (AlternatingGroup(5), AlternatingGroup(5), lambda x: x)]"
+        },
+        {
+          "k": 1,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "(DihedralGroup(4), SymmetricGroup(3), {(1,2): (0,2), (3,0): (0,2)})",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe test the claim on the following counterexample:\n1. G = DihedralGroup(4) is a nontrivial perfect group.\n2. H = SymmetricGroup(3) is a finite nontrivial group.\n3. phi_data = {(1,2): (0,2), (3,0): (0,2)} maps generators to nonidentity elements.\nAll conditions hold at the required level of generality. We conclude the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: (DihedralGroup(4), SymmetricGroup(3), {(1,2): (0,2), (3,0): (0,2)})]"
+        },
+        {
+          "k": 2,
+          "reason": "partial",
+          "reward": 0.1,
+          "format_ok": true,
+          "parse_ok": true,
+          "witness_expr": "SymmetricGroup(3)",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe test the conjecture by finding a counterexample where G satisfies the hypothesis:\n  - G is a perfect group\n  - \\phi: G \\to H is a group homomorphism\nbut the conclusion fails:\n  - \\phi is not trivial\n\nCounterexample 1: H is the trivial group\n  - G = SymmetricGroup(3) \\not\\cong \\mathbb{Z}_{\\infty} since it's a non-abelian group of order 6 with 10 elements\n  - phi = Identity map from G to H is a valid homomorphism\n  - phi is not trivial since it maps all elements of G to the identity of H\n  - Thus the conjecture fails at this point\n\nCounterexample 2: H is the nontrivial trivial group\n  - G = SymmetricGroup(3) \\not\\cong \\mathbb{Z}_{\\infty} since it's a non-abelian group of order 6 with 10 elements\n  - phi = Identity map from G to H is a valid homomorphism\n  - phi is not trivial since it maps all elements of G to the identity of H\n  - Thus the conjecture fails at this point\n\nCounterexample 3: H is the trivial group\n  - G = SymmetricGroup(3) \\not\\cong \\mathbb{Z}_{\\infty} since it's a non-abelian group of order 6 with 10 elements\n  - phi = Identity map from G to H is a valid homomorphism\n  - phi is not trivial since it maps all elements of G to the identi"
+        },
+        {
+          "k": 3,
+          "reason": "oracle_parse_error",
+          "reward": -1.0,
+          "format_ok": true,
+          "parse_ok": false,
+          "witness_expr": "(PermutationGroup([Permutation(0, 1, 2), Permutation(0, 1)]), PermutationGroup([Permutation(0, 1)]), lambda x: Permutation(0, 1)))",
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nFrom the given information, the proposed conjecture is the statement \"Every homomorphism from a perfect group to any group is trivial\".\nTo disprove the conjecture, we need to find a counterexample: a group G that is perfect (i.e. G = [G,G]) and a nontrivial homomorphism \u03c6 from G to a group H.\nThis can be achieved by selecting a nontrivial homomorphism from the perfect group S_3 to the nontrivial group Z_2.\nThe homomorphism \u03c6: S_3 \u2192 Z_2 defined by \u03c6(\u03c3) = 0 for all \u03c3 \u2208 S_3 is not the trivial homomorphism.\nHowever, the image of this map is the trivial subgroup {0} of Z_2, so it satisfies the requirement of being a group homomorphism.\nThus, the conjecture is false.\n</reasoning>\n[COUNTEREXAMPLE: (PermutationGroup([Permutation(0, 1, 2), Permutation(0, 1)]), PermutationGroup([Permutation(0, 1)]), lambda x: Permutation(0, 1)))]"
+        },
+        {
+          "k": 4,
+          "reason": "no_tag",
+          "reward": -1.0,
+          "format_ok": false,
+          "parse_ok": false,
+          "witness_expr": null,
+          "completion": "<think>\n\n</think>\n\n<reasoning>\nWe construct our counterexample by choosing:\n  - G = AlternatingGroup(5): a perfect group (since its commutator subgroup [G, G] is equal to G)\n  - H = CyclicGroup(5): the cyclic group on 5 elements\n  - \u03c6: G \u2192 H is a group homomorphism\nWe must find:\n  - \u03c6: G \u2192 H is not the trivial homomorphism\n  - \u03c6 maps G to H, satisfying the required conditions\nThe only potential counterexample is the trivial homomorphism \u03c6: G \u2192 H, which maps every element to the identity of H\nThis implies the conjecture is false\nWe construct our counterexample by choosing:\n  - G = AlternatingGroup(5): a perfect group (since its commutator subgroup [G, G] is equal to G)\n  - H = CyclicGroup(5): the cyclic group on 5 elements\n  - \u03c6: G \u2192 H is a group homomorphism\nWe must find:\n  - \u03c6: G \u2192 H is not the trivial homomorphism\n  - \u03c6 maps G to H, satisfying the required conditions\nThe only potential counterexample is the trivial homomorphism \u03c6: G \u2192 H, which maps every element to the identity of H\nThis implies the conjecture is false\nWe construct our counterexample by choosing:\n  - G = AlternatingGroup(5): a perfect group (since its commutator subgroup [G, G] is equal to G)\n  - H = CyclicGroup("
+        }
+      ]
+    }
+  ],
+  "advisory_gate_tag_parse_rate_min": 0.8,
+  "advisory_gate_passed": true
+}
