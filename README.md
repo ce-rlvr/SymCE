@@ -16,6 +16,11 @@ This repository accompanies *Counterexample Generation via Per-Theorem Symbolic
 Verifiers: When Imitation Hurts and Reinforcement Repairs* (Findings of EMNLP
 2026) and reproduces every number in it.
 
+| | |
+|---|---|
+| Dataset | https://huggingface.co/datasets/ce-rlvr/SymCE |
+| Models | https://huggingface.co/ce-rlvr (12 LoRA adapters: 4 seeds x SFT / RLVR-dense / RLVR-sparse) |
+
 ---
 
 ## The task
@@ -53,6 +58,7 @@ that judgement right is what the paper is about.
 | `human_eval/` | The 177-decision human audit and its annotations |
 | `runs/eval/` | Per-record evaluation outputs for every suite the paper cites |
 | `paper_preparation/` | The analysis scripts and their generated tables |
+| `hf_release/` | Builders for the Hugging Face dataset and model repositories |
 | `results_summary/` | Training curves and rollout summaries for the reported runs |
 
 ### Splits
@@ -67,6 +73,11 @@ that judgement right is what the paper is about.
 Splits are stratified by domain with a fixed seed. The corpus spans Group
 Theory, Ring Theory, Number Theory, Linear Algebra, Field Theory and Real
 Analysis; see `data/dataset_stats_v2.json` for exact counts.
+
+Verifier locations inside the JSONL records are repo-relative
+(`data/verifiers/<Domain>/<theorem_id>__<hyp>.py`), so the oracle runs from a
+fresh checkout. `python tools/normalise_verifier_paths.py --check` verifies this
+and exits non-zero if any absolute path has crept back in.
 
 ---
 
@@ -149,8 +160,10 @@ Gemma-3-4B adapters, training configurations and evaluation outputs are not part
 of this release, so the Gemma results reported in the paper are not reproducible
 from it. Everything reported for Qwen3-4B is.
 
-Model weights are not distributed. Base models are downloaded from their original
-sources; adapters are available on request.
+Base models are downloaded from their original sources. The twelve Qwen3-4B LoRA
+adapters behind the reported numbers are on the Hub under
+[`ce-rlvr`](https://huggingface.co/ce-rlvr); see `hf_release/README.md` for how
+they are built and published.
 
 ---
 

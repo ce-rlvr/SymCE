@@ -16,3 +16,6 @@ runs/eval_cache/
 *.pt
 *.pth
 *.bin
+
+# HF release build artefacts (regenerate with hf_release/build_*.py)
+hf_release/build/
