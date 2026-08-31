@@ -33,16 +33,16 @@ Theorem-truth `v2_counterexample` uses **strict** scoring (literal NONE sentinel
 
 Sparse minus dense on the v2 probe: **0.326 ± 0.083**, per seed 42=0.311, 19=0.421, 31=0.352, 64=0.222.
 
-## Out-of-domain transfer (mean over seeds 42, 19, 31)
+## Out-of-domain transfer (mean over seeds 42, 19, 31, 64)
 
 | Benchmark | n | base | SFT | dense | sparse |
 |---|---:|---:|---:|---:|---:|
-| gsm8k | 1319 | 0.830 | 0.824 ± 0.031 | 0.874 ± 0.023 | 0.882 ± 0.016 |
-| math | 500 | 0.130 | 0.549 ± 0.018 | 0.653 ± 0.019 | 0.645 ± 0.005 |
-| mmlu_college_math | 100 | 0.340 | 0.550 ± 0.017 | 0.710 ± 0.061 | 0.730 ± 0.040 |
-| aime2024 | 30 | 0.000 | 0.067 ± 0.033 | 0.078 ± 0.039 | 0.067 ± 0.000 |
+| gsm8k | 1319 | 0.830 | 0.815 ± 0.030 | 0.876 ± 0.019 | 0.880 ± 0.014 |
+| math | 500 | 0.130 | 0.550 ± 0.015 | 0.653 ± 0.016 | 0.649 ± 0.009 |
+| mmlu_college_math | 100 | 0.340 | 0.538 ± 0.029 | 0.703 ± 0.052 | 0.718 ± 0.041 |
+| aime2024 | 30 | 0.000 | 0.067 ± 0.027 | 0.075 ± 0.032 | 0.075 ± 0.017 |
 
-Seeds without transfer evaluations: 64.
+Seeds without transfer evaluations: .
 
 ## Reason distribution (reference seed 42, greedy, n=201)
 
@@ -87,8 +87,12 @@ Commercial-API greedy Pass@1 range across 6 models: **0.423 to 0.577**.
 
 | Run | Arm | Pass@1 | Pass@8 | truth_classify | v2 strict |
 |---|---|---:|---:|---:|---:|
+| seed56 | base | 0.214 | 0.403 | 0.490 | 0.398 |
+| seed24 | base | 0.214 | 0.403 | 0.490 | 0.398 |
+| seed24 | sft | 0.214 | 0.458 | 0.003 | 0.000 |
+| seed24 | dense | 0.338 | 0.488 | 0.539 | 0.216 |
 
-No Gemma cells found. The public release excludes all Gemma-3-4B artifacts -- adapters, configs and evaluation outputs -- so the Gemma rows of the paper cannot be regenerated from it. Run against the full evaluation corpus to reproduce them.
+Gemma RLVR v2-probe results are not reported; those checkpoints and their configs are not part of the artifact release.
 
 ## Human audit of verifier decisions
 
