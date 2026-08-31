@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import csv
 import glob
+import gzip
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -54,8 +55,11 @@ def load_counterexample_cells(suite_dirs: list[Path]) -> list[dict]:
     """Return the latest per_cell JSON per (model, prompt_style, sampling_label)."""
     cells: dict[tuple, dict] = {}
     for suite_dir in sorted(suite_dirs):
-        for path in sorted((suite_dir / "per_cell").glob("*__counterexample__*.json")):
-            with open(path) as fh:
+        pc = suite_dir / "per_cell"
+        for path in sorted(list(pc.glob("*__counterexample__*.json"))
+                            + list(pc.glob("*__counterexample__*.json.gz"))):
+            opener = gzip.open if path.suffix == ".gz" else open
+            with opener(path, "rt") as fh:
                 data = json.load(fh)
             summary = data.get("summary", {})
             if summary.get("benchmark") != "counterexample":

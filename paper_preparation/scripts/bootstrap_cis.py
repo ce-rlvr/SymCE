@@ -55,8 +55,10 @@ from __future__ import annotations
 import argparse
 import csv
 import glob
+import gzip
 import json
 import math
+import re
 import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -168,8 +170,10 @@ def load_cells(suite_dirs: list[Path]) -> list[Cell]:
         per_cell_dir = suite_dir / "per_cell"
         if not per_cell_dir.is_dir():
             continue
-        for path in sorted(per_cell_dir.glob("*.json")):
-            with open(path) as fh:
+        for path in sorted(list(per_cell_dir.glob("*.json"))
+                            + list(per_cell_dir.glob("*.json.gz"))):
+            opener = gzip.open if path.suffix == ".gz" else open
+            with opener(path, "rt") as fh:
                 data = json.load(fh)
             summary = data.get("summary", {})
             records = data.get("per_record", [])
@@ -187,8 +191,13 @@ def load_cells(suite_dirs: list[Path]) -> list[Cell]:
                 records=records,
                 summary=summary,
             )
-            key = (cell.model, cell.benchmark, cell.prompt_style, cell.sampling_label)
-            # Last writer wins (mirrors all_results_summary convention)
+            # Keyed by training seed as well, so a model evaluated at several
+            # seeds contributes one row per seed instead of silently collapsing
+            # to whichever suite happened to be read last.
+            seed = re.search(r"seed(\d+)", cell.model_id or "")
+            key = (cell.model, seed.group(1) if seed else "",
+                   cell.benchmark, cell.prompt_style, cell.sampling_label)
+            # Last writer wins within a (model, seed) cell.
             cells[key] = cell
     return list(cells.values())
 
@@ -232,6 +241,10 @@ def compute_cell_rows(
             "suite_dir": cell.suite_dir,
             "model": cell.model,
             "model_id": cell.model_id,
+            # Training seed, parsed from the adapter path. Empty for the base
+            # model and every external comparator, which have no training seed.
+            "seed": (re.search(r"seed(\d+)", cell.model_id or "").group(1)
+                     if re.search(r"seed(\d+)", cell.model_id or "") else ""),
             "model_type": cell.model_type,
             "benchmark": cell.benchmark,
             "prompt_style": cell.prompt_style,

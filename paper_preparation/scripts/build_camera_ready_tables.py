@@ -294,10 +294,10 @@ def _extract(kind, summary, records):
     raise ValueError(kind)
 
 
-def table_ood(cells: Cells, seeds=("42", "19", "31")) -> dict:
+def table_ood(cells: Cells, seeds=tuple(QWEN_SEEDS)) -> dict:
     """Out-of-domain transfer under standard chain-of-thought prompting."""
     benches = [("gsm8k", 1319), ("math", 500), ("mmlu_college_math", 100), ("aime2024", 30)]
-    out = {"seeds_used": list(seeds), "seeds_missing": ["64"]}
+    out = {"seeds_used": [], "seeds_missing": []}
     for bench, n in benches:
         out[bench] = {"n": n}
         for label, model in ARMS:
@@ -313,6 +313,15 @@ def table_ood(cells: Cells, seeds=("42", "19", "31")) -> dict:
             if summary:
                 summary["per_seed"] = dict(zip(seeds, values))
             out[bench][label] = summary
+    # Which seeds actually carry a transfer evaluation, measured rather than assumed.
+    present, absent = [], []
+    for seed in seeds:
+        if any(cells.get(seed, model, bench, "standard_cot", "greedy")
+               for bench, _ in benches for label, model in ARMS if label != "base"):
+            present.append(seed)
+        else:
+            absent.append(seed)
+    out["seeds_used"], out["seeds_missing"] = present, absent
     return out
 
 
@@ -369,7 +378,8 @@ GEMMA_SUITES = {
                "sft_truth": "20260712-073823", "dense": "20260714-110447",
                "sparse": "20260714-110447", "dense_truth": "20260714-141859",
                "sparse_truth": "20260714-141859"},
-    "seed24": {"base": "20260828-234303", "sft": "20260828-234303"},
+    "seed24": {"base": "20260828-234303", "sft": "20260828-234303",
+               "dense": "20260828-234303", "dense_truth": "20260828-234303"},
 }
 GEMMA_MODELS = {"base": "gemma3-base", "sft": "gemma3-sft",
                 "dense": "gemma3-rlvr-dense", "sparse": "gemma3-rlvr-sparse"}
@@ -377,7 +387,7 @@ GEMMA_MODELS = {"base": "gemma3-base", "sft": "gemma3-sft",
 # The Gemma RLVR checkpoints are not part of the public release, and their
 # v2-probe results are correspondingly not reported.  The collapse itself
 # (base -> SFT) is reported and is reproducible from the numbers below.
-GEMMA_V2_ARMS_REPORTED = {"base", "sft"}
+GEMMA_V2_ARMS_REPORTED = {"base", "sft", "dense"}
 
 
 def _pick(cells: Cells, suite: str, model: str, bench: str, style: str, sampling: str,

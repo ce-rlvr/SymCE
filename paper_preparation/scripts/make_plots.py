@@ -57,6 +57,19 @@ MODEL_ORDER = ["qwen3-base", "qwen-sft", "qwen-rlvr", "qwen-rlvr-sparse"]
 # CSV helpers
 # ---------------------------------------------------------------------------
 
+REFERENCE_SEED = "42"
+
+
+def at_reference_seed(rows: list[dict]) -> list[dict]:
+    """Keep rows from the reference seed, plus rows with no training seed.
+
+    The corpus holds one cell per (model, seed); without this filter a model
+    trained at several seeds would be represented by whichever row happened to
+    be read last, which need not be the seed the paper's tables report.
+    """
+    return [r for r in rows if r.get("seed", "") in ("", REFERENCE_SEED)]
+
+
 def read_csv(path: Path) -> list[dict]:
     with open(path) as fh:
         return list(csv.DictReader(fh))
@@ -119,7 +132,7 @@ def plot_reason_stack(out_dir: Path, dpi: int) -> None:
 
 def plot_truth_bar(out_dir: Path, dpi: int) -> None:
     print("[plot] theorem-truth bar")
-    rows = read_csv(RESULTS_DIR / "bootstrap_cis.csv")
+    rows = at_reference_seed(read_csv(RESULTS_DIR / "bootstrap_cis.csv"))
     # Use the from_test_set subset, greedy only, pass_at_1
     keep = [r for r in rows
             if r["benchmark"] == "theorem_truth"
@@ -234,7 +247,7 @@ DOMAINS = ["GroupTheory", "RingTheory", "NumberTheory", "LinearAlgebra", "RealAn
 
 def plot_domain_bar(out_dir: Path, dpi: int) -> None:
     print("[plot] per-domain bar")
-    rows = read_csv(RESULTS_DIR / "bootstrap_cis.csv")
+    rows = at_reference_seed(read_csv(RESULTS_DIR / "bootstrap_cis.csv"))
     keep = [r for r in rows
             if r["benchmark"] == "counterexample"
             and r["sampling_label"] == "greedy"
@@ -292,7 +305,7 @@ FRONTIER_APIS = ["deepseek-flash", "deepseek-pro", "gemini-pro", "gemini-flash-p
 
 def plot_baselines_bar(out_dir: Path, dpi: int) -> None:
     print("[plot] baselines bar")
-    rows = read_csv(RESULTS_DIR / "bootstrap_cis.csv")
+    rows = at_reference_seed(read_csv(RESULTS_DIR / "bootstrap_cis.csv"))
     table = {r["model"]: r for r in rows
              if r["benchmark"] == "counterexample"
              and r["sampling_label"] == "greedy"
@@ -372,7 +385,7 @@ OOD_BENCHES = [
 
 def plot_ood_bar(out_dir: Path, dpi: int) -> None:
     print("[plot] ood bar")
-    rows = read_csv(RESULTS_DIR / "bootstrap_cis.csv")
+    rows = at_reference_seed(read_csv(RESULTS_DIR / "bootstrap_cis.csv"))
     by = {(r["model"], r["benchmark"]): r for r in rows
           if r["prompt_style"] == "standard_cot"
           and r["sampling_label"] == "greedy"
