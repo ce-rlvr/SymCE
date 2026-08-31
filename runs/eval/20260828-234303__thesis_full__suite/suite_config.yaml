@@ -1,0 +1,131 @@
+suite_name: thesis_full
+seed: 24
+reward_workers: 8
+pass_at_k_values:
+- 1
+- 3
+- 5
+- 8
+backends:
+  vllm:
+    dtype: bfloat16
+    max_model_len: 4096
+    gpu_memory_utilization: 0.85
+    tensor_parallel_size: 1
+    trust_remote_code: true
+  unsloth:
+    dtype: bfloat16
+    max_model_len: 4096
+cache:
+  enabled: true
+  path: runs/eval_cache/cache.sqlite
+sampling:
+  greedy:
+    n_samples: 1
+    temperature: 0.0
+    max_new_tokens: 1024
+    top_p: 1.0
+  sampled:
+    n_samples: 8
+    temperature: 0.7
+    max_new_tokens: 1024
+    top_p: 0.95
+models:
+- name: gemma3-base
+  backend: vllm
+  model_id: models/gemma-3-4b-it-text
+  model_type: base
+  enabled: true
+  lora_adapter: null
+  chat_template: auto
+  external_prompt_style: standard_cot
+  external_prompt_both: false
+  extra: {}
+- name: gemma3-sft
+  backend: vllm
+  model_id: models/gemma-3-4b-it-text
+  model_type: sft
+  enabled: true
+  lora_adapter: runs/sft/20260827-151644__24_full_run_dense_gemma3__seed24__af4f9d8/lora
+  chat_template: auto
+  external_prompt_style: standard_cot
+  external_prompt_both: true
+  extra:
+    max_lora_rank: 16
+- name: gemma3-rlvr-dense
+  backend: vllm
+  model_id: models/gemma-3-4b-it-text
+  model_type: rlvr
+  enabled: true
+  lora_adapter: runs/rlvr/20260827-162019__24_full_run_dense_gemma3__seed24__af4f9d8/lora
+  chat_template: auto
+  external_prompt_style: standard_cot
+  external_prompt_both: true
+  extra:
+    max_lora_rank: 16
+- name: gemma3-rlvr-sparse
+  backend: vllm
+  model_id: models/gemma-3-4b-it-text
+  model_type: rlvr
+  enabled: false
+  lora_adapter: runs/rlvr/20260713-022526__56_full_run_sparse_gemma3__seed56__d84821f/lora
+  chat_template: auto
+  external_prompt_style: standard_cot
+  external_prompt_both: true
+  extra:
+    max_lora_rank: 16
+- name: qwen3-base
+  backend: vllm
+  model_id: unsloth/Qwen3-4B
+  model_type: base
+  enabled: false
+  lora_adapter: null
+  chat_template: auto
+  external_prompt_style: standard_cot
+  external_prompt_both: false
+  extra: {}
+benchmarks:
+- name: counterexample
+  enabled: true
+  prompt_style: v2_counterexample
+  prompt_styles: null
+  limit: null
+  cfg:
+    test_file: data/test_set_v2.jsonl
+    drop_unusable: true
+    oracle_timeout: 12.0
+- name: theorem_truth
+  enabled: true
+  prompt_style: auto
+  prompt_styles:
+  - v2_counterexample
+  - truth_classify
+  limit: null
+  cfg:
+    test_file: data/theorem_truth_eval.jsonl
+- name: gsm8k
+  enabled: false
+  prompt_style: standard_cot
+  prompt_styles: null
+  limit: null
+  cfg:
+    subset: main
+    split: test
+- name: math
+  enabled: false
+  prompt_style: standard_cot
+  prompt_styles: null
+  limit: null
+  cfg: {}
+- name: aime2024
+  enabled: false
+  prompt_style: standard_cot
+  prompt_styles: null
+  limit: null
+  cfg: {}
+- name: mmlu_college_math
+  enabled: false
+  prompt_style: standard_cot
+  prompt_styles: null
+  limit: null
+  cfg: {}

@@ -1,0 +1,24 @@
+{
+  "run_id": "20260828-234303__thesis_full__suite",
+  "phase": "eval",
+  "run_dir": "runs/eval/20260828-234303__thesis_full__suite",
+  "config_yaml": null,
+  "seed": null,
+  "git": {
+    "sha": "af4f9d8d0336c4940e3888fbe8ca116b952fac9e",
+    "sha7": "af4f9d8",
+    "branch": "main",
+    "remote": "https://github.com/The-Birmingham-Institute-for-Robotics/rlvr-find-counterexample",
+    "dirty": true
+  },
+  "datasets": {},
+  "status": "completed",
+  "started_at": "2026-08-28T23:43:03.379993+00:00",
+  "ended_at": "2026-08-29T05:37:37.423573+00:00",
+  "extra": {
+    "suite_name": "thesis_full",
+    "kind": "eval_suite",
+    "n_cells": 18,
+    "elapsed_seconds": 21271.9
+  }
+}

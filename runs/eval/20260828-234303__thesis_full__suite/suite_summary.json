@@ -1,0 +1,1271 @@
+{
+  "suite_name": "thesis_full",
+  "started_at": "2026-08-29T05:37:35.317048+00:00",
+  "elapsed_seconds": 21271.9,
+  "n_cells": 18,
+  "models_run": [
+    "gemma3-base",
+    "gemma3-sft",
+    "gemma3-rlvr-dense"
+  ],
+  "benchmarks_run": [
+    "counterexample",
+    "theorem_truth"
+  ],
+  "pass_at_k_values": [
+    1,
+    3,
+    5,
+    8
+  ],
+  "per_benchmark_domain_sizes": {
+    "counterexample": {
+      "FieldTheory": 14,
+      "GroupTheory": 74,
+      "LinearAlgebra": 20,
+      "NumberTheory": 33,
+      "RealAnalysis": 13,
+      "RingTheory": 47
+    },
+    "theorem_truth": {
+      "FieldTheory": 39,
+      "GroupTheory": 96,
+      "LinearAlgebra": 45,
+      "NumberTheory": 58,
+      "RealAnalysis": 38,
+      "RingTheory": 71
+    }
+  },
+  "cells": [
+    {
+      "cell_id": "gemma3-base__counterexample__v2_counterexample__greedy",
+      "model": "gemma3-base",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "base",
+      "backend": "vllm",
+      "benchmark": "counterexample",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 201,
+      "elapsed_generation_seconds": 18.1,
+      "elapsed_scoring_seconds": 17.2,
+      "pass_at_k": {
+        "1": 0.2139
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 14,
+          "any_correct_rate": 0.1429
+        },
+        "GroupTheory": {
+          "n": 74,
+          "any_correct_rate": 0.1757
+        },
+        "LinearAlgebra": {
+          "n": 20,
+          "any_correct_rate": 0.3
+        },
+        "NumberTheory": {
+          "n": 33,
+          "any_correct_rate": 0.3636
+        },
+        "RealAnalysis": {
+          "n": 13,
+          "any_correct_rate": 0.1538
+        },
+        "RingTheory": {
+          "n": 47,
+          "any_correct_rate": 0.1702
+        }
+      },
+      "pass_at_1_greedy": 0.2139,
+      "conclusion_pass_rate": 0.2488
+    },
+    {
+      "cell_id": "gemma3-base__counterexample__v2_counterexample__sampled",
+      "model": "gemma3-base",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "base",
+      "backend": "vllm",
+      "benchmark": "counterexample",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 201,
+      "elapsed_generation_seconds": 0.1,
+      "elapsed_scoring_seconds": 148.9,
+      "pass_at_k": {
+        "1": 0.1797,
+        "3": 0.3049,
+        "5": 0.3613,
+        "8": 0.403
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 14,
+          "any_correct_rate": 0.3571
+        },
+        "GroupTheory": {
+          "n": 74,
+          "any_correct_rate": 0.3514
+        },
+        "LinearAlgebra": {
+          "n": 20,
+          "any_correct_rate": 0.5
+        },
+        "NumberTheory": {
+          "n": 33,
+          "any_correct_rate": 0.5758
+        },
+        "RealAnalysis": {
+          "n": 13,
+          "any_correct_rate": 0.1538
+        },
+        "RingTheory": {
+          "n": 47,
+          "any_correct_rate": 0.4043
+        }
+      },
+      "pass_at_1_sampled": 0.1797,
+      "pass_at_3_sampled": 0.3049,
+      "pass_at_5_sampled": 0.3613,
+      "pass_at_8_sampled": 0.403,
+      "conclusion_pass_rate": 0.5025
+    },
+    {
+      "cell_id": "gemma3-base__theorem_truth__v2_counterexample__greedy",
+      "model": "gemma3-base",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "base",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 0.0,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.4726
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.5128
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.4375
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.6
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.3966
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.4737
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.4789
+        }
+      },
+      "pass_at_1_greedy": 0.4726,
+      "parse_ok_rate": 0.8646,
+      "correct_rate": 0.4726,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.4733,
+          "parse_ok_rate": 0.8333,
+          "correct_rate": 0.4733,
+          "pass_at_k": {
+            "1": 0.4733
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.4721,
+          "parse_ok_rate": 0.8883,
+          "correct_rate": 0.4721,
+          "pass_at_k": {
+            "1": 0.4721
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-base__theorem_truth__v2_counterexample__sampled",
+      "model": "gemma3-base",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "base",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 0.2,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.4254,
+        "3": 0.7072,
+        "5": 0.8186,
+        "8": 0.902
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.8718
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.8958
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.9556
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.8448
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.9211
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.9296
+        }
+      },
+      "pass_at_1_sampled": 0.4254,
+      "pass_at_3_sampled": 0.7072,
+      "pass_at_5_sampled": 0.8186,
+      "pass_at_8_sampled": 0.902,
+      "parse_ok_rate": 0.8415,
+      "correct_rate": 0.4254,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.9,
+          "parse_ok_rate": 0.82,
+          "correct_rate": 0.4425,
+          "pass_at_k": {
+            "1": 0.4425,
+            "3": 0.7064,
+            "5": 0.811,
+            "8": 0.9
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.9036,
+          "parse_ok_rate": 0.8579,
+          "correct_rate": 0.4124,
+          "pass_at_k": {
+            "1": 0.4124,
+            "3": 0.7078,
+            "5": 0.8245,
+            "8": 0.9036
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-base__theorem_truth__truth_classify__greedy",
+      "model": "gemma3-base",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "base",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "truth_classify",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 0.0,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.536
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.6154
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.4583
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.5333
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.4483
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.6316
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.6197
+        }
+      },
+      "pass_at_1_greedy": 0.536,
+      "parse_ok_rate": 0.902,
+      "correct_rate": 0.536,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.5867,
+          "parse_ok_rate": 0.8733,
+          "correct_rate": 0.5867,
+          "pass_at_k": {
+            "1": 0.5867
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.4975,
+          "parse_ok_rate": 0.9239,
+          "correct_rate": 0.4975,
+          "pass_at_k": {
+            "1": 0.4975
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-base__theorem_truth__truth_classify__sampled",
+      "model": "gemma3-base",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "base",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "truth_classify",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 0.1,
+      "elapsed_scoring_seconds": 0.1,
+      "pass_at_k": {
+        "1": 0.5285,
+        "3": 0.765,
+        "5": 0.833,
+        "8": 0.8674
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.8974
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.8229
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.9111
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.8276
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.9211
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.8873
+        }
+      },
+      "pass_at_1_sampled": 0.5285,
+      "pass_at_3_sampled": 0.765,
+      "pass_at_5_sampled": 0.833,
+      "pass_at_8_sampled": 0.8674,
+      "parse_ok_rate": 0.9027,
+      "correct_rate": 0.5285,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.88,
+          "parse_ok_rate": 0.8942,
+          "correct_rate": 0.5475,
+          "pass_at_k": {
+            "1": 0.5475,
+            "3": 0.78,
+            "5": 0.8471,
+            "8": 0.88
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.8579,
+          "parse_ok_rate": 0.9093,
+          "correct_rate": 0.514,
+          "pass_at_k": {
+            "1": 0.514,
+            "3": 0.7535,
+            "5": 0.8222,
+            "8": 0.8579
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-sft__counterexample__v2_counterexample__greedy",
+      "model": "gemma3-sft",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "sft",
+      "backend": "vllm",
+      "benchmark": "counterexample",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 201,
+      "elapsed_generation_seconds": 384.8,
+      "elapsed_scoring_seconds": 23.8,
+      "pass_at_k": {
+        "1": 0.2139
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 14,
+          "any_correct_rate": 0.1429
+        },
+        "GroupTheory": {
+          "n": 74,
+          "any_correct_rate": 0.2568
+        },
+        "LinearAlgebra": {
+          "n": 20,
+          "any_correct_rate": 0.2
+        },
+        "NumberTheory": {
+          "n": 33,
+          "any_correct_rate": 0.2424
+        },
+        "RealAnalysis": {
+          "n": 13,
+          "any_correct_rate": 0.0769
+        },
+        "RingTheory": {
+          "n": 47,
+          "any_correct_rate": 0.1915
+        }
+      },
+      "pass_at_1_greedy": 0.2139,
+      "conclusion_pass_rate": 0.2935
+    },
+    {
+      "cell_id": "gemma3-sft__counterexample__v2_counterexample__sampled",
+      "model": "gemma3-sft",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "sft",
+      "backend": "vllm",
+      "benchmark": "counterexample",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 201,
+      "elapsed_generation_seconds": 923.5,
+      "elapsed_scoring_seconds": 227.2,
+      "pass_at_k": {
+        "1": 0.1953,
+        "3": 0.3489,
+        "5": 0.4124,
+        "8": 0.4577
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 14,
+          "any_correct_rate": 0.3571
+        },
+        "GroupTheory": {
+          "n": 74,
+          "any_correct_rate": 0.4865
+        },
+        "LinearAlgebra": {
+          "n": 20,
+          "any_correct_rate": 0.55
+        },
+        "NumberTheory": {
+          "n": 33,
+          "any_correct_rate": 0.5152
+        },
+        "RealAnalysis": {
+          "n": 13,
+          "any_correct_rate": 0.4615
+        },
+        "RingTheory": {
+          "n": 47,
+          "any_correct_rate": 0.3617
+        }
+      },
+      "pass_at_1_sampled": 0.1953,
+      "pass_at_3_sampled": 0.3489,
+      "pass_at_5_sampled": 0.4124,
+      "pass_at_8_sampled": 0.4577,
+      "conclusion_pass_rate": 0.6119
+    },
+    {
+      "cell_id": "gemma3-sft__theorem_truth__v2_counterexample__greedy",
+      "model": "gemma3-sft",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "sft",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 848.1,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.0029
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.0
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.0
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.0
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.0
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.0263
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.0
+        }
+      },
+      "pass_at_1_greedy": 0.0029,
+      "parse_ok_rate": 0.9107,
+      "correct_rate": 0.0029,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.0,
+          "parse_ok_rate": 0.8867,
+          "correct_rate": 0.0,
+          "pass_at_k": {
+            "1": 0.0
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.0051,
+          "parse_ok_rate": 0.9289,
+          "correct_rate": 0.0051,
+          "pass_at_k": {
+            "1": 0.0051
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-sft__theorem_truth__v2_counterexample__sampled",
+      "model": "gemma3-sft",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "sft",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 2077.3,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.0032,
+        "3": 0.0091,
+        "5": 0.0142,
+        "8": 0.0202
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.0513
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.0
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.0
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.0172
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.0526
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.0282
+        }
+      },
+      "pass_at_1_sampled": 0.0032,
+      "pass_at_3_sampled": 0.0091,
+      "pass_at_5_sampled": 0.0142,
+      "pass_at_8_sampled": 0.0202,
+      "parse_ok_rate": 0.9744,
+      "correct_rate": 0.0032,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.04,
+          "parse_ok_rate": 0.9733,
+          "correct_rate": 0.0067,
+          "pass_at_k": {
+            "1": 0.0067,
+            "3": 0.0186,
+            "5": 0.0286,
+            "8": 0.04
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.0051,
+          "parse_ok_rate": 0.9753,
+          "correct_rate": 0.0006,
+          "pass_at_k": {
+            "1": 0.0006,
+            "3": 0.0019,
+            "5": 0.0032,
+            "8": 0.0051
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-sft__theorem_truth__truth_classify__greedy",
+      "model": "gemma3-sft",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "sft",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "truth_classify",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 865.8,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.0173
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.0
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.0
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.0
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.0517
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.0789
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.0
+        }
+      },
+      "pass_at_1_greedy": 0.0173,
+      "parse_ok_rate": 0.9366,
+      "correct_rate": 0.0173,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.02,
+          "parse_ok_rate": 0.9333,
+          "correct_rate": 0.02,
+          "pass_at_k": {
+            "1": 0.02
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.0152,
+          "parse_ok_rate": 0.9391,
+          "correct_rate": 0.0152,
+          "pass_at_k": {
+            "1": 0.0152
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-sft__theorem_truth__truth_classify__sampled",
+      "model": "gemma3-sft",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "sft",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "truth_classify",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 2647.1,
+      "elapsed_scoring_seconds": 0.1,
+      "pass_at_k": {
+        "1": 0.0382,
+        "3": 0.1063,
+        "5": 0.1655,
+        "8": 0.2421
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.4103
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.1562
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.2
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.2931
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.3684
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.1831
+        }
+      },
+      "pass_at_1_sampled": 0.0382,
+      "pass_at_3_sampled": 0.1063,
+      "pass_at_5_sampled": 0.1655,
+      "pass_at_8_sampled": 0.2421,
+      "parse_ok_rate": 0.9604,
+      "correct_rate": 0.0382,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.3067,
+          "parse_ok_rate": 0.95,
+          "correct_rate": 0.0492,
+          "pass_at_k": {
+            "1": 0.0492,
+            "3": 0.137,
+            "5": 0.2125,
+            "8": 0.3067
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.1929,
+          "parse_ok_rate": 0.9683,
+          "correct_rate": 0.0298,
+          "pass_at_k": {
+            "1": 0.0298,
+            "3": 0.0828,
+            "5": 0.1297,
+            "8": 0.1929
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-rlvr-dense__counterexample__v2_counterexample__greedy",
+      "model": "gemma3-rlvr-dense",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "rlvr",
+      "backend": "vllm",
+      "benchmark": "counterexample",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 201,
+      "elapsed_generation_seconds": 955.0,
+      "elapsed_scoring_seconds": 24.5,
+      "pass_at_k": {
+        "1": 0.3383
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 14,
+          "any_correct_rate": 0.4286
+        },
+        "GroupTheory": {
+          "n": 74,
+          "any_correct_rate": 0.2838
+        },
+        "LinearAlgebra": {
+          "n": 20,
+          "any_correct_rate": 0.45
+        },
+        "NumberTheory": {
+          "n": 33,
+          "any_correct_rate": 0.3939
+        },
+        "RealAnalysis": {
+          "n": 13,
+          "any_correct_rate": 0.2308
+        },
+        "RingTheory": {
+          "n": 47,
+          "any_correct_rate": 0.3404
+        }
+      },
+      "pass_at_1_greedy": 0.3383,
+      "conclusion_pass_rate": 0.4378
+    },
+    {
+      "cell_id": "gemma3-rlvr-dense__counterexample__v2_counterexample__sampled",
+      "model": "gemma3-rlvr-dense",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "rlvr",
+      "backend": "vllm",
+      "benchmark": "counterexample",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 201,
+      "elapsed_generation_seconds": 1800.7,
+      "elapsed_scoring_seconds": 201.5,
+      "pass_at_k": {
+        "1": 0.3358,
+        "3": 0.4319,
+        "5": 0.4604,
+        "8": 0.4876
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 14,
+          "any_correct_rate": 0.5
+        },
+        "GroupTheory": {
+          "n": 74,
+          "any_correct_rate": 0.4865
+        },
+        "LinearAlgebra": {
+          "n": 20,
+          "any_correct_rate": 0.55
+        },
+        "NumberTheory": {
+          "n": 33,
+          "any_correct_rate": 0.5455
+        },
+        "RealAnalysis": {
+          "n": 13,
+          "any_correct_rate": 0.3846
+        },
+        "RingTheory": {
+          "n": 47,
+          "any_correct_rate": 0.4468
+        }
+      },
+      "pass_at_1_sampled": 0.3358,
+      "pass_at_3_sampled": 0.4319,
+      "pass_at_5_sampled": 0.4604,
+      "pass_at_8_sampled": 0.4876,
+      "conclusion_pass_rate": 0.6269
+    },
+    {
+      "cell_id": "gemma3-rlvr-dense__theorem_truth__v2_counterexample__greedy",
+      "model": "gemma3-rlvr-dense",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "rlvr",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 1827.3,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.2248
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.2564
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.2188
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.4
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.1034
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.2632
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.1831
+        }
+      },
+      "pass_at_1_greedy": 0.2248,
+      "parse_ok_rate": 0.9049,
+      "correct_rate": 0.2248,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.2733,
+          "parse_ok_rate": 0.9333,
+          "correct_rate": 0.2733,
+          "pass_at_k": {
+            "1": 0.2733
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.1878,
+          "parse_ok_rate": 0.8832,
+          "correct_rate": 0.1878,
+          "pass_at_k": {
+            "1": 0.1878
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-rlvr-dense__theorem_truth__v2_counterexample__sampled",
+      "model": "gemma3-rlvr-dense",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "rlvr",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "v2_counterexample",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 3207.4,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.254,
+        "3": 0.495,
+        "5": 0.6165,
+        "8": 0.7176
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.7436
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.7188
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.8889
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.5862
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.8158
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.6479
+        }
+      },
+      "pass_at_1_sampled": 0.254,
+      "pass_at_3_sampled": 0.495,
+      "pass_at_5_sampled": 0.6165,
+      "pass_at_8_sampled": 0.7176,
+      "parse_ok_rate": 0.9352,
+      "correct_rate": 0.254,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.8067,
+          "parse_ok_rate": 0.9283,
+          "correct_rate": 0.3025,
+          "pass_at_k": {
+            "1": 0.3025,
+            "3": 0.5748,
+            "5": 0.7025,
+            "8": 0.8067
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.6497,
+          "parse_ok_rate": 0.9404,
+          "correct_rate": 0.217,
+          "pass_at_k": {
+            "1": 0.217,
+            "3": 0.4343,
+            "5": 0.5509,
+            "8": 0.6497
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-rlvr-dense__theorem_truth__truth_classify__greedy",
+      "model": "gemma3-rlvr-dense",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "rlvr",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "truth_classify",
+      "sampling_label": "greedy",
+      "n_samples": 1,
+      "temperature": 0.0,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 1884.9,
+      "elapsed_scoring_seconds": 0.0,
+      "pass_at_k": {
+        "1": 0.5677
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.641
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.5104
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.6444
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.5
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.5263
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.6338
+        }
+      },
+      "pass_at_1_greedy": 0.5677,
+      "parse_ok_rate": 0.9251,
+      "correct_rate": 0.5677,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.64,
+          "parse_ok_rate": 0.92,
+          "correct_rate": 0.64,
+          "pass_at_k": {
+            "1": 0.64
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.5127,
+          "parse_ok_rate": 0.9289,
+          "correct_rate": 0.5127,
+          "pass_at_k": {
+            "1": 0.5127
+          }
+        }
+      }
+    },
+    {
+      "cell_id": "gemma3-rlvr-dense__theorem_truth__truth_classify__sampled",
+      "model": "gemma3-rlvr-dense",
+      "model_id": "models/gemma-3-4b-it-text",
+      "model_type": "rlvr",
+      "backend": "vllm",
+      "benchmark": "theorem_truth",
+      "prompt_style": "truth_classify",
+      "sampling_label": "sampled",
+      "n_samples": 8,
+      "temperature": 0.7,
+      "max_new_tokens": 1024,
+      "n_problems": 347,
+      "elapsed_generation_seconds": 3186.2,
+      "elapsed_scoring_seconds": 0.2,
+      "pass_at_k": {
+        "1": 0.5825,
+        "3": 0.8155,
+        "5": 0.8791,
+        "8": 0.9193
+      },
+      "by_domain": {
+        "FieldTheory": {
+          "n": 39,
+          "any_correct_rate": 0.8974
+        },
+        "GroupTheory": {
+          "n": 96,
+          "any_correct_rate": 0.9375
+        },
+        "LinearAlgebra": {
+          "n": 45,
+          "any_correct_rate": 0.9111
+        },
+        "NumberTheory": {
+          "n": 58,
+          "any_correct_rate": 0.8621
+        },
+        "RealAnalysis": {
+          "n": 38,
+          "any_correct_rate": 0.9737
+        },
+        "RingTheory": {
+          "n": 71,
+          "any_correct_rate": 0.9296
+        }
+      },
+      "pass_at_1_sampled": 0.5825,
+      "pass_at_3_sampled": 0.8155,
+      "pass_at_5_sampled": 0.8791,
+      "pass_at_8_sampled": 0.9193,
+      "parse_ok_rate": 0.9456,
+      "correct_rate": 0.5825,
+      "subset_metrics": {
+        "extra_stratified": {
+          "n_problems": 150,
+          "any_correct_rate": 0.92,
+          "parse_ok_rate": 0.9317,
+          "correct_rate": 0.5942,
+          "pass_at_k": {
+            "1": 0.5942,
+            "3": 0.8188,
+            "5": 0.88,
+            "8": 0.92
+          }
+        },
+        "from_test_set": {
+          "n_problems": 197,
+          "any_correct_rate": 0.9188,
+          "parse_ok_rate": 0.9562,
+          "correct_rate": 0.5736,
+          "pass_at_k": {
+            "1": 0.5736,
+            "3": 0.813,
+            "5": 0.8784,
+            "8": 0.9188
+          }
+        }
+      }
+    }
+  ],
+  "cache_stats": {
+    "enabled": true,
+    "n_rows": 716725,
+    "per_model": {
+      "GAIR/Abel-7B-002": 1809,
+      "PRIME-RL/Eurus-2-7B-PRIME": 1809,
+      "Qwen/Qwen2.5-Math-1.5B": 19350,
+      "Qwen/Qwen2.5-Math-7B-Instruct": 1809,
+      "TIGER-Lab/MAmmoTH2-7B-Plus": 1809,
+      "deepseek-ai/deepseek-math-7b-rl": 1809,
+      "deepseek-v4-flash": 1809,
+      "deepseek-v4-pro": 1809,
+      "gemini-3-flash-preview": 1809,
+      "gemini-3.1-flash-lite": 1809,
+      "gemini-3.1-pro-preview": 489,
+      "gemini-3.5-flash": 665,
+      "models/gemma-3-4b-it-text": 19926,
+      "models/gemma-3-4b-it-text|lora=runs/rlvr/20260711-194316__56_full_run_dense_gemma3__seed56__d84821f/lora": 16890,
+      "models/gemma-3-4b-it-text|lora=runs/rlvr/20260713-022526__56_full_run_sparse_gemma3__seed56__d84821f/lora": 4585,
+      "models/gemma-3-4b-it-text|lora=runs/rlvr/20260827-162019__24_full_run_dense_gemma3__seed24__af4f9d8/lora": 8055,
+      "models/gemma-3-4b-it-text|lora=runs/sft/20260711-190226__56_full_run_dense_gemma3__seed56__d84821f/lora": 31797,
+      "models/gemma-3-4b-it-text|lora=runs/sft/20260827-151644__24_full_run_dense_gemma3__seed24__af4f9d8/lora": 8055,
+      "runs/rlvr/20260520-234745__full_run_sparse__seed42__db0287f/merged": 43137,
+      "runs/rlvr/20260521-112140__full_run_dense_test__seed42__db0287f/merged": 43137,
+      "runs/rlvr/20260618-025136__7_full_run_dense__seed7__6e33172/merged": 43137,
+      "runs/rlvr/20260620-020121__7_full_run_sparse__seed7__6e33172/merged": 43137,
+      "runs/rlvr/20260622-121440__19_full_run_sparse__seed19__6e33172/merged": 43137,
+      "runs/rlvr/20260624-193329__19_full_run_dense__seed19__6e33172/merged": 43137,
+      "runs/rlvr/20260702-132507__31_full_run_dense__seed31__6e33172/merged": 43137,
+      "runs/rlvr/20260703-171217__31_full_run_sparse__seed31__6e33172/merged": 43137,
+      "runs/rlvr/20260706-225550__64_full_run_dense__seed64__6e33172/merged": 8055,
+      "runs/rlvr/20260708-124206__64_full_run_sparse__seed64__6e33172/merged": 8055,
+      "runs/sft/20260520-060436__full_run__seed42__638156c/merged": 43146,
+      "runs/sft/20260523-225145__full_run_dense_better__seed42__2afa2a7/merged": 3868,
+      "runs/sft/20260618-021434__7_full_run_dense__seed7__6e33172/merged": 43137,
+      "runs/sft/20260622-114002__19_full_run_sparse__seed19__6e33172/merged": 43137,
+      "runs/sft/20260703-163538__31_full_run_sparse__seed31__6e33172/merged": 43137,
+      "runs/sft/20260706-174224__64_full_run_dense__seed64__6e33172/merged": 8055,
+      "unsloth/Qwen3-4B": 44946
+    },
+    "path": "/home/omar-farouk-zouak/Projects/pfe/rlvr-find-counterexample/runs/eval_cache/cache.sqlite"
+  }
+}
