@@ -1,0 +1,221 @@
+/* SymCE project page.
+   One column, black on white, hairline rules, no decoration. */
+
+:root {
+  --bg:     #ffffff;
+  --fg:     #000000;
+  --mid:    #555555;
+  --faint:  #888888;
+  --rule:   #000000;
+  --hair:   #d0d0d0;
+  --tint:   #f4f4f4;
+  --link:   #1a4b8c;
+  --col:    40rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:    #0d0d0d;
+    --fg:    #ededed;
+    --mid:   #a8a8a8;
+    --faint: #7d7d7d;
+    --rule:  #ededed;
+    --hair:  #333333;
+    --tint:  #1a1a1a;
+    --link:  #8ab4e8;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.col {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+a { color: var(--link); text-underline-offset: 2px; }
+
+/* --------------------------------------------------------------- masthead */
+
+header { padding: 3.5rem 0 0; }
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.35rem;
+}
+
+h1 .sub { display: block; font-weight: 400; color: var(--mid); }
+
+.byline {
+  margin: 1rem 0 0.25rem;
+  font-size: 0.95rem;
+}
+
+.byline sup { font-size: 0.7em; color: var(--faint); }
+
+.meta {
+  margin: 0 0 1.4rem;
+  font-size: 0.85rem;
+  color: var(--mid);
+}
+
+.meta span { display: block; }
+
+nav.res {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 1px solid var(--rule);
+  margin-bottom: 2.5rem;
+}
+
+nav.res a {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  border-right: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+nav.res a:last-child { border-right: 0; }
+nav.res a:hover { background: var(--fg); color: var(--bg); }
+nav.res a[aria-disabled="true"] { color: var(--faint); pointer-events: none; }
+
+/* --------------------------------------------------------------- sections */
+
+section { margin-bottom: 2.75rem; }
+
+h2 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+p { margin: 0 0 0.9rem; }
+
+.tldr { font-size: 1.05rem; }
+
+strong { font-weight: 700; }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86em;
+}
+
+pre {
+  background: var(--tint);
+  border: 1px solid var(--hair);
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  margin: 0 0 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+pre code { font-size: inherit; }
+.dim { color: var(--faint); }
+
+/* --------------------------------------------------------------- figures */
+
+figure { margin: 0 0 1rem; }
+
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hair);
+  background: #fff;
+}
+
+figcaption {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--mid);
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------- tables */
+
+.scroll { overflow-x: auto; margin-bottom: 0.6rem; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+th, td { padding: 0.3rem 0.55rem; text-align: right; }
+th:first-child, td:first-child { text-align: left; white-space: nowrap; }
+
+thead th {
+  font-weight: 600;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+tr.gap td { padding-top: 0.75rem; }
+td.in { padding-left: 1.4rem; }
+td.hi { font-weight: 700; }
+
+.note { font-size: 0.78rem; color: var(--mid); margin: 0 0 0.9rem; }
+
+/* --------------------------------------------------------------- figures */
+
+dl.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.9rem 1.25rem;
+  margin: 0 0 1rem;
+}
+
+dl.facts dt {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+dl.facts dd {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--mid);
+}
+
+/* --------------------------------------------------------------- footer */
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 1.25rem 0 3rem;
+  font-size: 0.78rem;
+  color: var(--mid);
+}
+
+footer p { margin: 0 0 0.4rem; }
+
+@media (max-width: 34rem) {
+  header { padding-top: 2rem; }
+  nav.res a { flex: 1 1 45%; border-bottom: 1px solid var(--rule); }
+}
