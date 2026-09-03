@@ -1,21 +1,21 @@
 """Multi-model / multi-benchmark eval orchestrator.
 
 Driven by a YAML config under ``configs/eval/<name>.yaml``. Iterates over the
-cartesian product (model × benchmark × prompt_style × sampling_pass) and
+cartesian product (model x benchmark x prompt_style x sampling_pass) and
 produces:
 
     runs/eval/<ts>__<suite_name>/
-      ├── suite_config.yaml          # the resolved config used for this run
-      ├── suite_summary.json         # the cross-cell summary
-      ├── suite_summary.md           # human-friendly skim
-      ├── per_cell/
-      │   └── <model>__<benchmark>__<style>__<sampling>.json
-      └── status.json + run_summary.md (per the runs/ convention)
+      ├ suite_config.yaml          # the resolved config used for this run
+      ├ suite_summary.json         # the cross-cell summary
+      ├ suite_summary.md           # human-friendly skim
+      ├ per_cell/
+      │   └ <model>__<benchmark>__<style>__<sampling>.json
+      └ status.json + run_summary.md (per the runs/ convention)
 
 A "cell" = one (model, benchmark, style, sampling-pass) tuple. Each cell
 runs both:
-- ``greedy``:  n_samples=1, temperature=0.0 → reports ``pass_at_1_greedy``
-- ``sampled``: n_samples=N, temperature=T   → reports ``pass_at_{k}_sampled`` for each k
+- ``greedy``:  n_samples=1, temperature=0.0 -> reports ``pass_at_1_greedy``
+- ``sampled``: n_samples=N, temperature=T   -> reports ``pass_at_{k}_sampled`` for each k
 
 vLLM engines are reused across all cells that share the same model_id (we
 load each model exactly once per suite run).
@@ -76,9 +76,9 @@ logging.basicConfig(
 )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Resolved-config dataclasses
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 @dataclass
 class ModelConfig:
@@ -175,9 +175,9 @@ def _build_backend_for_model(m: ModelConfig, backends_cfg: dict) -> Backend:
     return build_backend(spec)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # One cell = (model, benchmark, style, sampling)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _run_cell(
     *,
@@ -195,7 +195,7 @@ def _run_cell(
 ) -> dict:
     """Run one cell and return its summary."""
     cell_id = f"{model_cfg.name}__{benchmark_cfg.name}__{style}__{sampling_label}"
-    logger.info("── Cell: %s ──", cell_id)
+    logger.info(" Cell: %s ", cell_id)
     logger.info("  problems = %d, n_samples = %d, temperature = %.2f",
                 len(problems), sampling.n_samples, sampling.temperature)
 
@@ -353,9 +353,9 @@ def _run_cell(
     return {"summary": summary, "per_record": per_record}
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Top-level orchestration
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _resolve_external_styles(model_cfg: ModelConfig, benchmark_cfg: BenchmarkConfig) -> list[str]:
     """Which prompt styles to run for (model, benchmark)?
@@ -431,12 +431,20 @@ def run_suite(
         out_dir.mkdir(parents=True, exist_ok=False)
     (out_dir / "per_cell").mkdir(exist_ok=True)
 
-    # Stamp run metadata
+    # Stamp run metadata. Local benchmark files are fingerprinted so a result
+    # can be tied back to the exact split it was scored against; benchmarks
+    # loaded from the Hub have no local file to hash.
+    dataset_paths = []
+    for bc in enabled_benchmarks:
+        test_file = (bc.cfg or {}).get("test_file")
+        if test_file and (REPO_ROOT / test_file).is_file():
+            dataset_paths.append(test_file)
     write_run_metadata(
         run_dir=out_dir,
         cfg=asdict_suite(suite),
         phase="eval",
         argv=sys.argv,
+        dataset_paths=dataset_paths,
         extra={"suite_name": suite.suite_name, "kind": "eval_suite"},
     )
     # Save the resolved YAML for reproducibility
@@ -460,7 +468,7 @@ def run_suite(
             bc.name, len(problems), dict(per_domain),
         )
 
-    # Iterate models × benchmarks × styles × sampling-passes
+    # Iterate models x benchmarks x styles x sampling-passes
     all_cells: list[dict] = []
     suite_t0 = time.time()
     for m in enabled_models:
@@ -527,7 +535,7 @@ def run_suite(
         "n_cells": len(all_cells),
         "elapsed_seconds": round(elapsed, 1),
     })
-    logger.info("\nSuite finished in %.1fs → %s", elapsed, out_dir)
+    logger.info("\nSuite finished in %.1fs -> %s", elapsed, out_dir)
     return suite_summary
 
 
@@ -558,15 +566,15 @@ def _dry_run_summary(suite: SuiteConfig, models, benchmarks) -> dict:
                     rows.append({"model": m.name, "benchmark": b.name, "style": style, "pass": label})
     logger.info("Dry-run cells (%d):", len(rows))
     for r in rows:
-        logger.info("  %s × %s × %s × %s", r["model"], r["benchmark"], r["style"], r["pass"])
+        logger.info("  %s x %s x %s x %s", r["model"], r["benchmark"], r["style"], r["pass"])
     return {"dry_run_cells": rows}
 
 
 def _write_suite_markdown(out_dir: Path, summary: dict, per_domain_sizes: dict) -> None:
     lines = [
-        f"# Eval suite — {summary['suite_name']}",
+        f"# Eval suite - {summary['suite_name']}",
         "",
-        f"- **Elapsed**: {summary['elapsed_seconds']} s  •  **Cells**: {summary['n_cells']}",
+        f"- **Elapsed**: {summary['elapsed_seconds']} s - **Cells**: {summary['n_cells']}",
         f"- **Models**: {', '.join(summary['models_run'])}",
         f"- **Benchmarks**: {', '.join(summary['benchmarks_run'])}",
         f"- **Pass@k**: {summary['pass_at_k_values']}",
@@ -604,9 +612,9 @@ def _write_suite_markdown(out_dir: Path, summary: dict, per_domain_sizes: dict) 
     (out_dir / "suite_summary.md").write_text("\n".join(lines) + "\n")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # CLI
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
