@@ -206,7 +206,7 @@ under full-parameter fine-tuning is untested.
 
 
 def fmt(v) -> str:
-    return "—" if v is None else f"{v:.2f}"
+    return " - " if v is None else f"{v:.2f}"
 
 
 def main() -> int:

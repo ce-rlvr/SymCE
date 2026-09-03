@@ -141,8 +141,8 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--test-set",
-        default="data/test_set_v2.jsonl",
-        help="Path to test_set_v2.jsonl",
+        default="data/test_set.jsonl",
+        help="Path to test_set.jsonl",
     )
     p.add_argument(
         "--output",

@@ -1,18 +1,18 @@
 """
 Training-time diagnostics:
 
-- ``sft_holdout_probe``     — post-SFT generation probe. For N held-out v2 records,
+- ``sft_holdout_probe``      -  post-SFT generation probe. For N held-out v2 records,
                               generate K samples each, score every completion
                               through the oracle, and surface tag-parse rate,
                               witness-parse rate, Pass@1/Pass@K, and reason
                               distribution. Lets us catch "the SFT didn't learn
                               the tag" *before* a 3-day RLVR run.
 
-- ``rollup_rollouts_jsonl`` — post-RLVR aggregation. Reads the per-rollout JSONL
+- ``rollup_rollouts_jsonl`` - post-RLVR aggregation. Reads the per-rollout JSONL
                               that ``OracleRolloutLogger`` writes during GRPO and
                               produces a ``rollouts_summary.json``-shaped dict
                               with per-step bins, reason distribution, parse /
-                              format rates, and the PLAN §P4 group-variance gate
+                              format rates, and the PLAN Section P4 group-variance gate
                               (% of groups with within-group reward std > 0).
 
 Both functions return plain dicts so the caller can serialise them however it
@@ -34,9 +34,9 @@ from tqdm import tqdm
 logger = logging.getLogger(__name__)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Rollout-JSONL rollup (RLVR)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def rollup_rollouts_jsonl(
     rollouts_path: Path,
@@ -69,11 +69,11 @@ def rollup_rollouts_jsonl(
         }
 
     A *group* in GRPO is the set of G rollouts produced from a single prompt at a
-    single optimizer step — i.e. all rows sharing ``(global_step, prompt_user)``.
+    single optimizer step - i.e. all rows sharing ``(global_step, prompt_user)``.
     Earlier versions of this rollup keyed groups on ``(global_step, in_batch_idx)``,
     which incorrectly treated every row as its own singleton group (the G
     generations of one prompt land at consecutive ``in_batch_idx`` values, not
-    the same one). PLAN §P4 gates a smoke run on the fraction of groups with
+    the same one). PLAN Section P4 gates a smoke run on the fraction of groups with
     reward std > 0.
     """
     rollouts_path = Path(rollouts_path)
@@ -203,7 +203,7 @@ def rollup_rollouts_jsonl(
         "max_oracle_ms":    max(elapsed_ms) if elapsed_ms else 0,
         "by_step_bucket":   by_step,
         "step_bucket_size": step_bucket,
-        # PLAN §P4 advisory gate (informational; we do not raise here).
+        # PLAN Section P4 advisory gate (informational; we do not raise here).
         "plan_p4_group_std_gate_pass": bool(group_std_pos_rate >= 0.70),
     }
     if output_path is not None:
@@ -211,9 +211,9 @@ def rollup_rollouts_jsonl(
     return summary
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # SFT post-train held-out probe
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def sft_holdout_probe(
     *,
@@ -232,18 +232,18 @@ def sft_holdout_probe(
     The probe answers three questions in one shot:
       1. **Tag-parse rate** (= mean ``format_ok`` over completions). If this is
          below ~0.80, downstream RLVR will spend its first few hundred steps
-         re-learning the tag rather than the witness — a clear flag to revisit
+         re-learning the tag rather than the witness - a clear flag to revisit
          the SFT data or pretokenisation.
       2. **Witness-parse rate** (= mean ``parse_ok`` among well-formatted
          completions). Distinguishes "model can't even produce the syntax" from
-         "model produces a witness expression but it doesn't evaluate" — the
+         "model produces a witness expression but it doesn't evaluate" - the
          former is fatal, the latter is the typical pre-RLVR state.
       3. **Oracle Pass@1 / Pass@K** on the slice. Direct comparison point
          against the eval harness's strict ``reason == "success"`` metric.
 
     The model is left in whatever mode the caller hands it in. The caller is
     expected to flip Unsloth to inference mode (``FastLanguageModel.for_inference``)
-    before invoking — we deliberately do not flip it back because the caller
+    before invoking - we deliberately do not flip it back because the caller
     typically saves the LoRA adapter right after.
     """
     # Lazy imports so importing this module on a CPU box doesn't drag torch.
@@ -286,12 +286,12 @@ def sft_holdout_probe(
 
         any_pass = False
         completions_for_prompt: list[dict[str, Any]] = []
-        
+
         # Generate all k_samples in one batched forward pass
         batched_inputs = {
             key: val.expand(k_samples, -1) for key, val in inputs.items()
         }
-        
+
         torch.manual_seed(base_seed + 1000 * i)
         with torch.no_grad():
             batched_out_ids = model.generate(
@@ -373,9 +373,9 @@ def sft_holdout_probe(
     return summary
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Tiny stats helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _stddev(xs: list[float]) -> float:
     n = len(xs)
@@ -403,9 +403,9 @@ def _percentile(xs: list[int], q: float) -> float:
     return float(s[idx])
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Run summary (markdown)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def write_run_summary_md(
     output_path: Path,
@@ -415,7 +415,7 @@ def write_run_summary_md(
 ) -> None:
     """Render a short, skim-friendly ``run_summary.md``.
 
-    ``sections`` is ``{"Section title": {"key": value, …}, …}``. Values are
+    ``sections`` is ``{"Section title": {"key": value, ...}, ...}``. Values are
     rendered via repr; nested dicts get a flat indented dump.
     """
     lines: list[str] = [f"# {title}", ""]

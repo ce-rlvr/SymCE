@@ -1,5 +1,5 @@
 """
-Master pipeline: theorem extraction → mutation → LLM generation → verification.
+Master pipeline: theorem extraction -> mutation -> LLM generation -> verification.
 
 Output is a JSONL file at data/algebra_counterexamples.jsonl where every line
 is a verified (false_conjecture, counterexample_code, verification_trace) record.
@@ -71,7 +71,7 @@ class PipelineConfig:
     workers: int = 1
     dry_run: bool = False
 
-    # Attempts logging (None ⇒ default next to --output)
+    # Attempts logging (None => default next to --output)
     attempts_log: Optional[str] = None
     attempts_csv: Optional[str] = None
 
@@ -178,7 +178,7 @@ def _strip_conjecture_header(text: str) -> str:
     """Remove the internal bookkeeping header from a false_conjecture string.
 
     Old records stored in JSONL before the leakage fix may start with:
-        [FALSE CONJECTURE — dropped hypothesis: 'hN']
+        [FALSE CONJECTURE - dropped hypothesis: 'hN']
     Stripping it makes the user-facing text leakage-free for re-splits of
     existing data without requiring a full regeneration run.
     """
@@ -232,7 +232,7 @@ def _run_single_variant(
     dry_run: bool = False,
 ) -> dict:
     """
-    Run the generate → verify retry loop for one specific (theorem, dropped_hypothesis) pair.
+    Run the generate -> verify retry loop for one specific (theorem, dropped_hypothesis) pair.
 
     Returns {"attempts": int, "success": bool, "execution_success": bool}.
     """
@@ -253,7 +253,7 @@ def _run_single_variant(
         logger.info(f"[{label}] Attempt {attempt}/{max_retries}...")
 
         if dry_run:
-            code = "# DRY RUN PLACEHOLDER\nprint('dry run — no LLM call made')\n"
+            code = "# DRY RUN PLACEHOLDER\nprint('dry run - no LLM call made')\n"
         elif attempt == 1:
             try:
                 chat_session, code = start_generation_session(user_prompt)
@@ -354,7 +354,7 @@ def process_theorem(
     seen_pairs: set[str] | None = None,
 ) -> dict:
     """
-    Run the full mutation → generate → verify loop for ALL droppable hypotheses.
+    Run the full mutation -> generate -> verify loop for ALL droppable hypotheses.
 
     Each (theorem, dropped_hypothesis) pair is processed as an independent record.
     Already-completed pairs (tracked by seen_pairs) are skipped to support resumable runs.
@@ -454,9 +454,9 @@ def _build_record(
         "dropped_hypothesis_name": mutation["dropped_hypothesis"]["name"],
         "remaining_hypotheses": [h["text"] for h in mutation["remaining_hypotheses"]],
         "conclusion": mutation["conclusion"],
-        # Clean prompt (no dropped-hypothesis name) — used in training and eval.
+        # Clean prompt (no dropped-hypothesis name) - used in training and eval.
         "false_conjecture": mutation["false_conjecture"],
-        # Internal version with bookkeeping header — for debugging only, never fed to the model.
+        # Internal version with bookkeeping header - for debugging only, never fed to the model.
         "false_conjecture_annotated": mutation.get("false_conjecture_annotated", ""),
         "counterexample_code": code,
         "verification_result": verification,
@@ -516,7 +516,7 @@ def run_pipeline(
     re-runs don't produce duplicate records.
 
     When num_workers > 1, theorems are processed in parallel using a thread
-    pool — each theorem gets its own Gemini chat session, so there is no
+    pool - each theorem gets its own Gemini chat session, so there is no
     shared mutable state between workers.
 
     Returns:
@@ -693,16 +693,16 @@ def _record_to_user_message(record: dict) -> str:
 
     Reconstructs the conjecture from structured fields when available, and
     falls back to stripping the header from the stored false_conjecture string.
-    This handles both old records (with the '[FALSE CONJECTURE …]' header) and
+    This handles both old records (with the '[FALSE CONJECTURE ...]' header) and
     new records (already clean) transparently.
     """
     remaining = record.get("remaining_hypotheses", [])
     conclusion = record.get("conclusion", "")
     if remaining and conclusion:
-        bulleted = "\n  - ".join(remaining)
+        bulleted = "\n - ".join(remaining)
         return (
             f"Claim: For all mathematical objects satisfying:\n"
-            f"  - {bulleted}\n"
+            f" - {bulleted}\n"
             f"the following conclusion holds:\n"
             f"  {conclusion}"
         )
@@ -815,7 +815,7 @@ def split_dataset(
         rlvr_records.extend(domain_recs[n_sft + n_test :])
         domain_stats[domain] = {"total": n, "sft": n_sft, "test": n_test, "rlvr": n_rlvr}
 
-    # Rounding across domains may land a few records off target — correct against RLVR pool.
+    # Rounding across domains may land a few records off target - correct against RLVR pool.
     def _adjust(target: list[dict], pool: list[dict], desired: int) -> None:
         diff = len(target) - desired
         if diff > 0:
@@ -890,7 +890,7 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-retries", type=int, default=None, metavar="N",
                         help="Max LLM attempts per theorem (default: 3)")
     parser.add_argument("--dry-run", default=None, action=argparse.BooleanOptionalAction,
-                        help="Skip LLM calls — useful for testing pipeline structure")
+                        help="Skip LLM calls - useful for testing pipeline structure")
     parser.add_argument("--workers", type=int, default=None, metavar="N",
                         help="Number of parallel workers for theorem processing (default: 1)")
     parser.add_argument("--attempts-log", default=None, metavar="PATH",
@@ -921,7 +921,7 @@ def _resolve_config(argv: list[str] | None = None) -> PipelineConfig:
     """Parse CLI + optional YAML config and return a populated PipelineConfig."""
     args = _build_parser().parse_args(argv)
     # Map argparse `dest` names back to dataclass field names.
-    # argparse already handles --some-flag → some_flag automatically.
+    # argparse already handles --some-flag -> some_flag automatically.
     cfg = load_config_for_section(
         cfg_class=PipelineConfig,
         section="pipeline",
@@ -959,7 +959,7 @@ def main() -> None:
 
         theorems = get_theorems(use_lean=cfg.use_lean, input_file=cfg.input_theorems)
         if not theorems:
-            logger.error("No theorems loaded — nothing to process. Exiting.")
+            logger.error("No theorems loaded - nothing to process. Exiting.")
             sys.exit(1)
 
         logger.info(f"Loaded {len(theorems)} theorems")

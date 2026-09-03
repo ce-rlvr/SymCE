@@ -36,7 +36,7 @@ def extract_boxed(text: str) -> Optional[str]:
     """Find the last ``\\boxed{...}`` content in text (brace-balanced)."""
     if not text:
         return None
-    # We want the *last* boxed expression — final answer typically.
+    # We want the *last* boxed expression - final answer typically.
     last_match: Optional[str] = None
     for pat in _BOXED_PATTERNS:
         for m in pat.finditer(text):
@@ -55,7 +55,7 @@ def extract_boxed(text: str) -> Optional[str]:
                             break
                     i += 1
             else:
-                # ``\boxed answer`` (no braces) — take the rest of the line.
+                # ``\boxed answer`` (no braces) - take the rest of the line.
                 line_end = text.find("\n", start)
                 last_match = text[start:(line_end if line_end != -1 else len(text))].strip()
     return last_match.strip() if last_match is not None else None
@@ -105,7 +105,7 @@ def extract_math_answer(text: str) -> Optional[str]:
     )
 
 
-# ── Normalization ─────────────────────────────────────────────────────────────
+# Normalization
 
 _FRAC_RE = re.compile(r"\\?frac\s*{([^{}]+)}\s*{([^{}]+)}")
 _DFRAC_RE = re.compile(r"\\dfrac\s*{([^{}]+)}\s*{([^{}]+)}")
@@ -118,13 +118,13 @@ _COMMAS_IN_NUMBER = re.compile(r"(?<=\d),(?=\d{3}(\D|$))")
 
 
 def normalize_math_string(s: str) -> str:
-    """Light textual normalization (LaTeX fragments → plain math)."""
+    """Light textual normalization (LaTeX fragments -> plain math)."""
     if s is None:
         return ""
     s = s.strip()
     # Remove \left \right
     s = _LEFT_RIGHT.sub("", s)
-    # \frac{a}{b} → (a)/(b); same for \dfrac, \tfrac
+    # \frac{a}{b} -> (a)/(b); same for \dfrac, \tfrac
     for pat in (_DFRAC_RE, _TFRAC_RE, _FRAC_RE):
         prev = None
         while prev != s:
@@ -153,7 +153,7 @@ def _to_sympy(s: str):
 
 
 def answers_equivalent(pred: Optional[str], gold: Optional[str]) -> bool:
-    """Robust equivalence: normalize text → string compare → sympy compare."""
+    """Robust equivalence: normalize text -> string compare -> sympy compare."""
     if pred is None or gold is None:
         return False
     np_ = normalize_math_string(pred)

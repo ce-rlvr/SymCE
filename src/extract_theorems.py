@@ -163,7 +163,7 @@ def get_lean_theorems(
 
     try:
         repo = LeanGitRepo(repo_url, commit)
-        logger.info("Tracing Mathlib — first run takes 20-40 minutes...")
+        logger.info("Tracing Mathlib - first run takes 20-40 minutes...")
         traced = trace(repo)
     except Exception as exc:
         logger.error(f"LeanDojo trace failed: {exc}")
@@ -181,7 +181,7 @@ def get_lean_theorems(
                 "domain": _infer_domain(thm.file_path),
                 "subdomain": None,
                 "full_statement": thm.statement,  # raw Lean4 syntax
-                "hypotheses": [],  # requires AST parsing — future milestone
+                "hypotheses": [],  # requires AST parsing - future milestone
                 "conclusion": None,
                 "notes": None,
                 "source": "leandojo",
@@ -209,7 +209,7 @@ def get_theorems(use_lean: bool = False, input_file: Optional[str] = None) -> li
         lean_theorems = get_lean_theorems()
         if lean_theorems:
             return lean_theorems
-        logger.warning("LeanDojo extraction failed — using fallback theorems.")
+        logger.warning("LeanDojo extraction failed - using fallback theorems.")
 
     # If an input file is provided, load and return it
     if input_file:

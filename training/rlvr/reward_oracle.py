@@ -14,22 +14,22 @@ Stage 1 (``counterexample_only``) that is a "gave up" signal and is penalised.
 
 This module is intentionally a *pure-function* contribution to P2:
 
-- ``parse_counterexample_tag(text)`` — strict, case-sensitive tag extractor
+- ``parse_counterexample_tag(text)`` - strict, case-sensitive tag extractor
   (last well-formed tag wins; single-line; bracket-balanced).
-- ``compute_reward_oracle(record, completion_text, weights, task_mode)`` — the
+- ``compute_reward_oracle(record, completion_text, weights, task_mode)`` - the
   deterministic per-rollout reward; pulls verifier metadata off the record and
   delegates execution to ``run_oracle``.
-- ``make_oracle_reward(...)`` — a TRL-shaped factory that *expects* per-prompt
+- ``make_oracle_reward(...)`` - a TRL-shaped factory that *expects* per-prompt
   verifier metadata to arrive via ``**kwargs`` as parallel lists. It is not
   yet wired into ``training/rlvr/trainer.py``; that is P4.
 
-The reward formula (per PROPOSAL §3.2, default weights from ``full_run.yaml``):
+The reward formula (default weights from ``full_run.yaml``):
 
-    r = α · (s_hyp / n_hyp)              # remaining-hypothesis credit
-      + β · q_neg                          # negated-conclusion credit (the disproof)
-      + γ · format_ok                      # structural format bonus
-      − δ · gave_up_on_false               # NONE on a FALSE conjecture (Stage 1 only)
-      − ε · (1 − parse_ok)                 # parse / namespace error
+    r = α * (s_hyp / n_hyp)              # remaining-hypothesis credit
+      + β * q_neg                          # negated-conclusion credit (the disproof)
+      + γ * format_ok                      # structural format bonus
+      - δ * gave_up_on_false               # NONE on a FALSE conjecture (Stage 1 only)
+      - ε * (1 - parse_ok)                 # parse / namespace error
 
 The legacy ``_classify`` / ``REWARD_WEIGHTS`` path stays in ``reward.py`` and
 remains the default until P4 lands the trainer/data wiring.
@@ -57,12 +57,12 @@ from src.oracle.sandbox import OracleResult, run_oracle  # noqa: E402
 logger = logging.getLogger(__name__)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Tag parser
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 # Case-sensitive opener. We do not accept lowercase, missing colon, or
-# surrounding whitespace inside the opener itself — those count as no-tag.
+# surrounding whitespace inside the opener itself - those count as no-tag.
 _TAG_OPENER: str = "[COUNTEREXAMPLE:"
 _NONE_SENTINEL: str = "NONE"
 
@@ -126,7 +126,7 @@ def parse_counterexample_tag(text: str) -> ParsedTag:
     - Multiple tags: the LAST well-formed occurrence wins. (A model that
       writes "candidate: ..." and then commits to a final answer is rewarded
       on the final.)
-    - Empty payload after stripping → not format-ok; falls back to earlier
+    - Empty payload after stripping -> not format-ok; falls back to earlier
       candidates if any, otherwise reports no tag.
     - Whitespace around the payload is stripped.
     - ``NONE`` (case-sensitive, exact, after stripping) is recognised as a
@@ -147,7 +147,7 @@ def parse_counterexample_tag(text: str) -> ParsedTag:
     if not opener_positions:
         return ParsedTag(payload=None, format_ok=False, is_none=False)
 
-    # Try in reverse — last well-formed match wins.
+    # Try in reverse - last well-formed match wins.
     for opener_idx in reversed(opener_positions):
         raw = _try_extract(text, opener_idx)
         if raw is None:
@@ -164,11 +164,11 @@ def parse_counterexample_tag(text: str) -> ParsedTag:
     return ParsedTag(payload=None, format_ok=False, is_none=False)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Reward dataclasses + defaults
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
-# Default oracle reward weights (PROPOSAL §3.2).
+# Default oracle reward weights as used in the paper.
 ORACLE_REWARD_WEIGHTS_DEFAULT: dict[str, float] = {
     "alpha":   0.25,   # weight on (s_hyp / n_hyp)
     "beta":    0.60,   # weight on q_neg (the disproof)
@@ -178,7 +178,7 @@ ORACLE_REWARD_WEIGHTS_DEFAULT: dict[str, float] = {
 }
 
 # Sparse outcome-only preset used in the RQ2 ablation (dense vs sparse).
-# Recovers a binary signal: +β on disproof, −ε on parse error, 0 elsewhere.
+# Recovers a binary signal: +β on disproof, -ε on parse error, 0 elsewhere.
 ORACLE_REWARD_WEIGHTS_SPARSE: dict[str, float] = {
     "alpha":   0.0,
     "beta":    1.0,
@@ -219,9 +219,9 @@ class RewardBreakdown:
         return asdict(self)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Core reward computation
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 _VALID_TASK_MODES: tuple[str, ...] = (
     "counterexample_only",
@@ -278,7 +278,7 @@ def compute_reward_oracle(
             f"task_mode={task_mode!r} not in {_VALID_TASK_MODES!r}"
         )
     if task_mode != "counterexample_only":
-        # Stage 2 / Stage 3 framing is deferred to P7 — see docs/PLAN.md.
+        # Stage 2 and Stage 3 framings are not implemented.
         raise NotImplementedError(
             f"task_mode={task_mode!r} is reserved for P7; "
             "P2 implements only 'counterexample_only'."
@@ -332,7 +332,7 @@ def compute_reward_oracle(
             reason=reason,
         )
 
-    # ── Case 1: no tag found ─────────────────────────────────────────────────
+    # Case 1: no tag found
     if parsed.payload is None:
         return _bd(
             total=-epsilon,
@@ -348,7 +348,7 @@ def compute_reward_oracle(
             reason="no_tag",
         )
 
-    # ── Case 2: NONE sentinel on a FALSE conjecture (Stage 1) ────────────────
+    # Case 2: NONE sentinel on a FALSE conjecture (Stage 1)
     # parse_ok=True by convention (sentinel does not require eval).
     if parsed.is_none:
         total = -delta + gamma * (1 if format_ok else 0)
@@ -366,7 +366,7 @@ def compute_reward_oracle(
             reason="none_on_false",
         )
 
-    # ── Case 3: evaluate the witness expression in the oracle ────────────────
+    # Case 3: evaluate the witness expression in the oracle
     oracle: OracleResult = run_oracle(
         verifier_module_path=module_path,
         witness_expr=parsed.payload,
@@ -442,7 +442,7 @@ def compute_reward_oracle(
     q_neg = 1 if conds[neg_q_index] else 0
 
     total = hyp_term + beta * q_neg + gamma * (1 if format_ok else 0)
-    # parse_ok=True → ε·(1−parse_ok) = 0 → no ε contribution.
+    # parse_ok=True -> ε*(1-parse_ok) = 0 -> no ε contribution.
 
     # Reason label for telemetry / dashboards.
     if q_neg == 1 and (n_hyp == 0 or s_hyp == n_hyp):
@@ -469,9 +469,9 @@ def compute_reward_oracle(
     )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # TRL-shaped factory (kwargs-driven; not wired into trainer.py in P2)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 # Per-prompt verifier metadata columns the reward fn expects in TRL kwargs.
 # (P3/P4 will update training/rlvr/data.py to emit these.)
@@ -667,7 +667,7 @@ def make_oracle_reward(
         else:
             breakdowns = [_score_one(p) for p in pairs]
 
-        # ── Length penalty (fix 3) ────────────────────────────────────────
+        # Length penalty (fix 3)
         # TRL forwards completion_ids as a kwarg (list of per-rollout token
         # id lists). When length_penalty_enabled is True we subtract a soft
         # hinge from each rollout's reward; the per-rollout penalty value is

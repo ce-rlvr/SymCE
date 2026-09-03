@@ -1,11 +1,11 @@
-# P4 wiring smoke — 20-step end-to-end check on the v2 sample dataset.
+# P4 wiring smoke - 20-step end-to-end check on the v2 sample dataset.
 #
 # Purpose: validate that the v2 trainer wiring (training/rlvr/trainer.py with
 # reward_mode=oracle), the v2 data loader (training/rlvr/data.py auto-detect),
-# the SFT-v2 warm-start (sft_data_v2.jsonl, task_mode=counterexample_only),
+# the SFT-v2 warm-start (sft_data.jsonl, task_mode=counterexample_only),
 # and the OracleRolloutLogger telemetry all hold together end-to-end.
 #
-# This is NOT the PLAN §P4 50-step / 200-step / 500-step × 3-seed gate. The
+# This is NOT the PLAN Section P4 50-step / 200-step / 500-step x 3-seed gate. The
 # sample dataset is 79 SFT records / 207 RLVR prompts and is explicitly a
 # temporary testing sample; statistical training-curve claims wait until the
 # production dataset is ready.
@@ -16,7 +16,7 @@
 #   python -m training.sft.train  --config configs/p4_smoke.yaml
 #   python -m training.rlvr.train --config configs/p4_smoke.yaml
 #   python -m tools.check_rollout_tokeniser_parity \
-#       --rlvr-prompts data/rlvr_prompts_v2.jsonl \
+#       --rlvr-prompts data/rlvr_prompts.jsonl \
 #       --sft-checkpoint checkpoints/sft/qwen3-4b-r16-bf16-v2-p4smoke/lora
 
 sft:
@@ -39,7 +39,7 @@ sft:
     - down_proj
   use_gradient_checkpointing: unsloth
 
-  train_jsonl: data/sft_data_v2.jsonl
+  train_jsonl: data/sft_data.jsonl
   eval_fraction: 0.10            # small file (79 records); larger eval split for stability
   task_mode: counterexample_only
 
@@ -83,7 +83,7 @@ rlvr:
   vllm_gpu_memory_utilization: 0.5
   max_lora_rank: 16            # must match sft.lora_r
 
-  train_jsonl: data/rlvr_prompts_v2.jsonl
+  train_jsonl: data/rlvr_prompts.jsonl
 
   # G=4: minimum group size that gives GRPO any reward-variance signal at all.
   # Smoke target is wiring correctness, not statistical convergence.
@@ -93,7 +93,7 @@ rlvr:
   temperature: 1.0
   top_p: 1.0
 
-  # Oracle reward path — full v2 wiring under test.
+  # Oracle reward path - full v2 wiring under test.
   reward_mode: oracle
   task_mode: counterexample_only
   oracle_reward_weights:
@@ -110,7 +110,7 @@ rlvr:
   rollouts_log: rollouts.jsonl
 
   per_device_train_batch_size: 1
-  gradient_accumulation_steps: 1   # effective batch = 1 × 1 × G(4) = 4 rollouts
+  gradient_accumulation_steps: 1   # effective batch = 1 x 1 x G(4) = 4 rollouts
   max_steps: 20                    # the smoke ceiling
   num_train_epochs: 1.0
   learning_rate: 5.0e-6

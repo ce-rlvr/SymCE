@@ -1,7 +1,7 @@
 """
 Evaluation harness: Pass@K accuracy on the held-out test set.
 
-Supports two record schemas — auto-detected on the first non-empty line:
+Supports two record schemas - auto-detected on the first non-empty line:
 
 - **v1 (legacy)** records carry a ``counterexample_code`` field; the model is
   expected to emit a fenced SymPy/Z3 script that ``src.verifier`` executes.
@@ -17,11 +17,11 @@ Supports two record schemas — auto-detected on the first non-empty line:
 
 Usage (from repo root, with pfe-rlvr-env active):
 
-  # Evaluate the base model (greedy, Pass@1) — auto-detects schema
+  # Evaluate the base model (greedy, Pass@1) - auto-detects schema
   python -m training.eval.eval_runner \\
       --model Qwen/Qwen2.5-Math-1.5B \\
       --model-type base \\
-      --test-file data/test_set_v2.jsonl
+      --test-file data/test_set.jsonl
 
   # Evaluate an SFT LoRA adapter (Pass@8 via sampling)
   python -m training.eval.eval_runner \\
@@ -33,16 +33,16 @@ Usage (from repo root, with pfe-rlvr-env active):
   # the model output and run the oracle (skips model loading entirely).
   python -m training.eval.eval_runner \\
       --use-canonical-witness \\
-      --test-file data/test_set_v2.jsonl
+      --test-file data/test_set.jsonl
 
   # Compare multiple runs side by side; seeds (same model_type) are
-  # auto-grouped to mean ± std with a bootstrap CI on Pass@1 vs the first group.
+  # auto-grouped to mean +/- std with a bootstrap CI on Pass@1 vs the first group.
   python -m training.eval.eval_runner --compare \\
       training/eval/results/eval_base.json \\
       training/eval/results/eval_sft_seed0.json \\
       training/eval/results/eval_sft_seed1.json
 
-Outputs (v2 layout — runs/eval/):
+Outputs (v2 layout - runs/eval/):
   - runs/eval/<ts>__<producer_run_id>__<testset>__<model_type>/eval_result.json
   - runs/eval/<ts>__<producer_run_id>__<testset>__<model_type>/eval_summary.json
   - runs/eval/<ts>__<producer_run_id>__<testset>__<model_type>/run_summary.md
@@ -100,7 +100,7 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 
-# v1 system prompt — kept here so legacy evals remain byte-identical.
+# v1 system prompt - kept here so legacy evals remain byte-identical.
 V1_SYSTEM_PROMPT = (
     "You are an expert mathematical programmer. "
     "Given a false mathematical conjecture, write a Python script using SymPy or Z3 "
@@ -139,9 +139,9 @@ def _derive_producer_run_id(model: str | None, lora_adapter: str | None) -> str:
     return base[:60] or "unknown"
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Schema detection + record loading
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _is_v2_record(rec: dict) -> bool:
     """A record is v2-shaped iff it carries a verifier module path.
@@ -157,7 +157,7 @@ def _is_v2_record(rec: dict) -> bool:
 def _detect_eval_format(records: list[dict]) -> EvalFormat:
     """Detect format from the first record. Mixed-shape files raise.
 
-    The mixed-shape check is intentionally strict — silently mixing v1 and v2
+    The mixed-shape check is intentionally strict - silently mixing v1 and v2
     records would yield meaningless aggregate numbers because the scoring
     paths produce incomparable success labels.
     """
@@ -229,9 +229,9 @@ def load_test_records(
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Prompt construction (leakage-free, shared across v1/v2)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def build_eval_user_message(record: dict) -> str:
     """Build the clean, leakage-free user message from a test record."""
@@ -247,9 +247,9 @@ def build_messages(record: dict, eval_format: EvalFormat) -> list[dict]:
     ]
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Model loading + generation (HF / Unsloth backend, unchanged from v1)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def load_model_and_tokenizer(
     model_path: str,
@@ -348,7 +348,7 @@ def generate_completions_for_record(
     ``n_samples > 1`` previously expanded the prompt to N copies under greedy
     decoding, producing N byte-identical completions. Pass@5 silently
     collapsed to Pass@1 across the whole pipeline. The fix collapses to a
-    single sample with a clear warning — set temperature > 0 (e.g. 0.7) if
+    single sample with a clear warning - set temperature > 0 (e.g. 0.7) if
     you actually want diverse samples for Pass@K estimation.
     """
     import warnings
@@ -404,9 +404,9 @@ def generate_completions_for_record(
     return completions
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Per-completion scoring — v1 (legacy) path
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Per-completion scoring - v1 (legacy) path
+# ---------------------------------------------------------------------------
 
 def _score_one_legacy(text: str) -> dict:
     code = extract_code(text)
@@ -444,9 +444,9 @@ def _score_one_legacy(text: str) -> dict:
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Per-completion scoring — v2 (oracle) path
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Per-completion scoring - v2 (oracle) path
+# ---------------------------------------------------------------------------
 
 def _score_one_oracle(
     record: dict,
@@ -516,9 +516,9 @@ def score_completion_set(
     return [_fn(c) for c in completions]
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Pass@K estimator
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _median(xs: list[int]) -> float:
     if not xs:
@@ -547,9 +547,9 @@ def pass_at_k(n: int, c: int, k: int) -> float:
     return 1.0 - comb(n - c, k) / comb(n, k)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Main evaluation loop
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _canonical_witness_completion(record: dict) -> str:
     """Wrap the record's canonical_witness in the v2 tag so the same parser is exercised."""
@@ -577,7 +577,7 @@ def run_eval(
     """Evaluate on the full test set. Returns (per_record_results, summary_dict).
 
     When ``use_canonical_witness`` is True (v2 only), each record's
-    ``canonical_witness`` is wrapped in a ``[COUNTEREXAMPLE: …]`` tag and used
+    ``canonical_witness`` is wrapped in a ``[COUNTEREXAMPLE: ...]`` tag and used
     in place of model generation. Lets us validate the oracle wiring without
     loading a model.
     """
@@ -642,9 +642,9 @@ def run_eval(
     return per_record, summary
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Summary aggregation
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _aggregate_summary(
     per_record: list[dict],
@@ -701,7 +701,7 @@ def _aggregate_summary(
         })
         return summary
 
-    # ── v2 metrics ──────────────────────────────────────────────────────────
+    # v2 metrics
     reason_counts = defaultdict(int)
     sum_hyp_ratio = 0.0
     n_hyp_records = 0   # records with n_hyp > 0 (denominator for mean_hyp_satisfaction)
@@ -757,9 +757,9 @@ def _aggregate_summary(
     return summary
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # --compare mode: side-by-side table + seed aggregation
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _bootstrap_pass1_ci(
     a: list[float], b: list[float], n_boot: int = 2000, seed: int = 42,
@@ -796,8 +796,8 @@ def _load_result_file(path: str) -> dict:
 def print_comparison_table(result_files: list[str]) -> str | None:
     """Load multiple result JSONs and print a side-by-side summary.
 
-    Auto-groups by ``meta.model_type``: when ≥2 files share a model_type,
-    they are treated as seeds and reported as mean ± std. The first group
+    Auto-groups by ``meta.model_type``: when >=2 files share a model_type,
+    they are treated as seeds and reported as mean +/- std. The first group
     (in input order) is used as the baseline for the bootstrap 95% CI on
     Pass@1 difference. v1 and v2 columns are handled uniformly via the keys
     present in each ``summary`` block.
@@ -894,7 +894,7 @@ def print_comparison_table(result_files: list[str]) -> str | None:
     print("\n" + "=" * width)
     print("Evaluation Comparison" + (f" (baseline: {baseline_label})" if baseline_label else ""))
     print("=" * width)
-    header = f"{'Model / Run':<28} {'Pass@1 (mean±std)':<22} {'Δ vs baseline (95% CI)':<26} {'N':>5}"
+    header = f"{'Model / Run':<28} {'Pass@1 (mean+/-std)':<22} {'Δ vs baseline (95% CI)':<26} {'N':>5}"
     print(header)
     print("-" * width)
     for row in rows:
@@ -905,7 +905,7 @@ def print_comparison_table(result_files: list[str]) -> str | None:
                 delta_str = f"{delta:+.3f} (single seed)"
             else:
                 delta_str = f"{delta:+.3f} [{lo:+.3f}, {hi:+.3f}]"
-        p1 = f"{row['pass1_mean']:.3f} ± {row['pass1_std']:.3f}"
+        p1 = f"{row['pass1_mean']:.3f} +/- {row['pass1_std']:.3f}"
         print(f"{row['label']:<28} {p1:<22} {delta_str:<26} {row['total']:>5}")
     print("-" * width)
     # v2-specific second block
@@ -939,13 +939,13 @@ def print_comparison_table(result_files: list[str]) -> str | None:
         print("-" * width)
     print()
 
-    # Markdown rendering — one row per group + delta column
+    # Markdown rendering - one row per group + delta column
     md_lines = [
         "# Evaluation comparison",
         "",
         f"_Baseline: `{baseline_label}` (first group in input order)_",
         "",
-        "| Model / Run | Pass@1 (mean ± std) | Δ vs baseline (95% CI) | N |",
+        "| Model / Run | Pass@1 (mean +/- std) | Δ vs baseline (95% CI) | N |",
         "| --- | --- | --- | --- |",
     ]
     for row in rows:
@@ -957,7 +957,7 @@ def print_comparison_table(result_files: list[str]) -> str | None:
             else:
                 delta_str = f"{delta:+.3f} [{lo:+.3f}, {hi:+.3f}]"
         md_lines.append(
-            f"| `{row['label']}` | {row['pass1_mean']:.3f} ± {row['pass1_std']:.3f} "
+            f"| `{row['label']}` | {row['pass1_mean']:.3f} +/- {row['pass1_std']:.3f} "
             f"| {delta_str} | {row['total']} |"
         )
 
@@ -984,9 +984,9 @@ def print_comparison_table(result_files: list[str]) -> str | None:
     return "\n".join(md_lines) + "\n"
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # CLI
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
@@ -1054,7 +1054,7 @@ def main() -> None:
             comp_dir = RUNS_ROOT / "eval" / f"{ts}__compare"
             comp_dir.mkdir(parents=True, exist_ok=True)
             (comp_dir / "comparison_table.md").write_text(out_md)
-            print(f"  comparison_table.md → {comp_dir / 'comparison_table.md'}")
+            print(f"  comparison_table.md -> {comp_dir / 'comparison_table.md'}")
         return
 
     test_path = _REPO_ROOT / args.test_file
@@ -1092,7 +1092,7 @@ def main() -> None:
         )
 
     logger.info(
-        "Evaluating — model_type=%s, eval_format=%s, n_samples=%d, "
+        "Evaluating - model_type=%s, eval_format=%s, n_samples=%d, "
         "temperature=%s, max_new_tokens=%d, use_canonical_witness=%s",
         args.model_type, eval_format, args.n_samples,
         args.temperature, args.max_new_tokens, args.use_canonical_witness,
@@ -1112,7 +1112,7 @@ def main() -> None:
     )
     elapsed = time.time() - t_start
 
-    # ── Save results ───────────────────────────────────────────────────────
+    # Save results
     effective_model_type = (
         "calibration" if args.use_canonical_witness else args.model_type
     )
@@ -1145,7 +1145,7 @@ def main() -> None:
             },
         )
     else:
-        # Legacy flat dir — kept for one-off custom paths.
+        # Legacy flat dir - kept for one-off custom paths.
         run_id = args.run_id or datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         out_dir = Path(args.output_dir)
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -1195,12 +1195,12 @@ def main() -> None:
 def _write_eval_summary_md(out_dir: Path, meta: dict, summary: dict, eval_format: EvalFormat) -> None:
     """Short, copy-paste-friendly markdown summary inside the eval run dir."""
     lines = [
-        f"# Eval — {meta['model_type']}",
+        f"# Eval - {meta['model_type']}",
         "",
         f"- **Producer**: `{meta.get('producer_run_id')}`",
         f"- **Model**: `{meta.get('model') or meta.get('lora_adapter')}`",
         f"- **Test file**: `{meta.get('test_file')}` ({summary['total']} records, format={eval_format})",
-        f"- **n_samples**: {meta.get('n_samples')}  •  **temperature**: {meta.get('temperature')}",
+        f"- **n_samples**: {meta.get('n_samples')} - **temperature**: {meta.get('temperature')}",
         "",
         "## Headline",
         "",
@@ -1250,7 +1250,7 @@ def _print_summary(
     print(f"  Samples/problem    : {summary['n_samples_per_problem']}")
     print(f"  Temperature        : {args.temperature}")
     print(f"  Elapsed            : {round(elapsed, 1)}s")
-    print(f"{'─' * width}")
+    print(f"{'' * width}")
     print(f"  Pass@1             : {summary['pass_at_1']:.3f}  "
           f"({int(summary['pass_at_1']*summary['total'])}/{summary['total']})")
     if args.n_samples > 1:
@@ -1258,7 +1258,7 @@ def _print_summary(
         print(f"  Pass@{args.n_samples:<14}: {summary[k_key]:.3f}")
 
     if eval_format == "v2":
-        print(f"{'─' * width}")
+        print(f"{'' * width}")
         print(f"  conclusion-Pass@1  : {summary['conclusion_pass_at_1']:.3f}")
         print(f"  mean reward        : {summary['mean_reward']:+.3f}")
         print(f"  mean hyp sat.      : {summary['mean_hyp_satisfaction']:.3f}")
@@ -1266,25 +1266,25 @@ def _print_summary(
         print(f"  parse_error rate   : {summary['parse_error_rate']:.3f}")
         print(f"  NONE rate          : {summary['none_rate']:.3f}")
         print(f"  median oracle ms   : {summary['median_oracle_ms']}")
-        print(f"{'─' * width}")
+        print(f"{'' * width}")
         print("  Reason counts (first sample):")
         for reason, n in sorted(summary["reason_counts"].items(), key=lambda kv: -kv[1]):
             print(f"    {reason:<24}: {n}")
     else:
-        print(f"{'─' * width}")
+        print(f"{'' * width}")
         print(f"  No code            : {summary['no_code_rate']:.3f}")
         print(f"  Syntax error       : {summary['syntax_failure_rate']:.3f}")
         print(f"  Timeout            : {summary['timeout_rate']:.3f}")
         print(f"  Runtime error      : {summary['runtime_failure_rate']:.3f}")
         print(f"  Exec OK, no neg.   : {summary['execution_ok_no_negation_rate']:.3f}")
 
-    print(f"{'─' * width}")
+    print(f"{'' * width}")
     print("  By domain:")
     for domain, ds in sorted(summary["by_domain"].items()):
         print(f"    {domain:<22}: pass@1={ds['pass_at_1']:.3f}  (n={ds['total']})")
-    print(f"{'─' * width}")
-    print(f"  Full results  → {full_path}")
-    print(f"  Summary       → {summary_path}")
+    print(f"{'' * width}")
+    print(f"  Full results  -> {full_path}")
+    print(f"  Summary       -> {summary_path}")
     print(f"{'=' * width}\n")
 
 

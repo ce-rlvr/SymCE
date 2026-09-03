@@ -46,10 +46,10 @@ COPY_TREES = ["src", "training", "tools", "prompts", "human_eval", "tests", "doc
 COPY_FILES = ["requirements.txt", "requirements-train.txt", "pipeline.py", "README.md"]
 
 DATA_FILES = [
-    "test_set_v2.jsonl", "theorem_truth_eval.jsonl", "sft_data_v2.jsonl",
-    "rlvr_prompts_v2.jsonl", "witness_schemas.jsonl", "dataset_stats_v2.json",
+    "test_set.jsonl", "theorem_truth_eval.jsonl", "sft_data.jsonl",
+    "rlvr_prompts.jsonl", "witness_schemas.jsonl", "dataset_stats.json",
     "oracle_perf_probe.json", "verifier_audit_report.json",
-    "algebra_counterexamples_v2_reconstructed.jsonl",
+    "symce_corpus.jsonl",
 ]
 
 

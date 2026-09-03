@@ -1,6 +1,6 @@
 """MATH benchmark (Hendrycks et al. 2021).
 
-Loaded via ``datasets.load_dataset`` — by default tries the modern
+Loaded via ``datasets.load_dataset`` - by default tries the modern
 ``HuggingFaceH4/MATH-500`` (a curated 500-problem test split) first, since
 the original ``hendrycks/competition_math`` was taken down. The user can
 override the dataset id in the YAML config.

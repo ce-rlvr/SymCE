@@ -2,7 +2,7 @@
 
 Loads a single ``vllm.LLM`` engine for the lifetime of the backend (re-used
 across benchmarks within one suite invocation). When the input is a runs/sft
-or runs/rlvr directory we auto-prefer the ``merged/`` subdir — this avoids
+or runs/rlvr directory we auto-prefer the ``merged/`` subdir - this avoids
 the Unsloth↔vLLM LoRA-format mismatch.
 
 LoRA-on-base-model serving is also supported via ``--enable-lora`` at engine
@@ -48,7 +48,7 @@ def _resolve_local_model_path(model_id: str) -> tuple[str, Optional[str]]:
             # by vLLM via the lora subdir).
             logger.info("vLLM: merged/ missing; will load lora at %s", lora)
             return str(p), str(lora)
-    # HF hub id or absolute path → pass through.
+    # HF hub id or absolute path -> pass through.
     return model_id, None
 
 
@@ -111,7 +111,7 @@ class VLLMBackend(Backend):
 
         self._loaded = True
 
-    # ── Prompt rendering ────────────────────────────────────────────────────
+    # Prompt rendering
     def render_prompt(self, messages: list[dict]) -> str:
         self._lazy_load()
         # apply_chat_template returns the rendered string that we'll cache + feed.
@@ -125,7 +125,7 @@ class VLLMBackend(Backend):
             )
             return super().render_prompt(messages)
 
-    # ── Main entry point ────────────────────────────────────────────────────
+    # Main entry point
     def generate_batch(
         self, requests: list[GenerationRequest]
     ) -> list[list[GenerationResult]]:
@@ -146,7 +146,7 @@ class VLLMBackend(Backend):
 
         # First pass: render prompts + cache lookups.
         rendered: list[str] = [self.render_prompt(r.messages) for r in requests]
-        # Sanitize sampling per request (greedy + N>1 → collapse to N=1).
+        # Sanitize sampling per request (greedy + N>1 -> collapse to N=1).
         sanitized = []
         for r in requests:
             temp, n, _ = Backend.sanitize_sampling(r.temperature, r.n_samples)

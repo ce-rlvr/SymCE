@@ -1,7 +1,7 @@
 """
 Resume from the SFT LoRA checkpoint via Unsloth.
 
-We deliberately do NOT call `FastLanguageModel.get_peft_model` again — the
+We deliberately do NOT call `FastLanguageModel.get_peft_model` again - the
 adapter saved by the SFT stage is already trainable when loaded through
 `from_pretrained`, and re-attaching would stack a fresh randomly-initialised
 LoRA on top of the SFT one and discard the SFT signal.

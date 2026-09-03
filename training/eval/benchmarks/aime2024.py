@@ -1,4 +1,4 @@
-"""AIME 2024 benchmark — 30 problems with integer answers (0..999).
+"""AIME 2024 benchmark - 30 problems with integer answers (0..999).
 
 Several HF dataset mirrors exist; we try them in order. Each problem has a
 unique integer answer in [0, 999], so we accept any of {integer match,

@@ -1,4 +1,4 @@
-"""Paper figures — single matplotlib script.
+"""Paper figures - single matplotlib script.
 
 Produces PDFs in paper_preparation/plots/ from the CSVs we already have. Each
 plot is gated by a flag; default `--all` regenerates everything.
@@ -119,7 +119,7 @@ def plot_reason_stack(out_dir: Path, dpi: int) -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=0)
     ax.set_ylabel("Fraction of greedy rollouts")
-    ax.set_title("Counterexample benchmark — per-sample reason distribution (greedy, n=201)")
+    ax.set_title("Counterexample benchmark - per-sample reason distribution (greedy, n=201)")
     ax.set_ylim(0, 1.0)
     ax.spines[["top", "right"]].set_visible(False)
     ax.legend(loc="center left", bbox_to_anchor=(1.0, 0.5), frameon=False, fontsize=8)
@@ -174,7 +174,7 @@ def plot_truth_bar(out_dir: Path, dpi: int) -> None:
     ax.set_xticklabels([s[1] for s in styles])
     ax.set_ylabel("Pass@1 (TRUE recognised, n=197)")
     ax.set_ylim(0, 1.0)
-    ax.set_title("Theorem-truth probe — the SFT imitation trap and the sparse-RL recovery")
+    ax.set_title("Theorem-truth probe - the SFT imitation trap and the sparse-RL recovery")
     ax.spines[["top", "right"]].set_visible(False)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.10), ncol=4, frameon=False, fontsize=8)
     _save(fig, "fig_theorem_truth", out_dir, dpi)
@@ -233,7 +233,7 @@ def plot_training_curves(out_dir: Path, dpi: int) -> None:
 
     axes[0].axhline(0, color="grey", lw=0.6, ls=":")
     axes[0].legend(loc="lower right", frameon=False, fontsize=8)
-    fig.suptitle("RLVR training stability — 4 epochs over 3506 prompts (G=4, T=1.0)",
+    fig.suptitle("RLVR training stability - 4 epochs over 3506 prompts (G=4, T=1.0)",
                  fontsize=11, y=1.04)
     _save(fig, "fig_training_curves", out_dir, dpi)
 
@@ -283,7 +283,7 @@ def plot_domain_bar(out_dir: Path, dpi: int) -> None:
     ax.set_xticklabels(DOMAINS)
     ax.set_ylabel("Pass@1 (greedy)")
     ax.set_ylim(0, 1.0)
-    ax.set_title("Counterexample benchmark — per-domain Pass@1 with 95% bootstrap CIs")
+    ax.set_title("Counterexample benchmark - per-domain Pass@1 with 95% bootstrap CIs")
     ax.spines[["top", "right"]].set_visible(False)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=4, frameon=False, fontsize=8)
     _save(fig, "fig_per_domain", out_dir, dpi)
@@ -351,7 +351,7 @@ def plot_baselines_bar(out_dir: Path, dpi: int) -> None:
     ax.invert_yaxis()
     ax.set_xlabel("Counterexample Pass@1 (greedy, n=201)")
     ax.set_xlim(0, 0.75)
-    ax.set_title("Counterexample benchmark — our 4B method vs open-weights 7B math specialists")
+    ax.set_title("Counterexample benchmark - our 4B method vs open-weights 7B math specialists")
 
     # Frontier API band
     api_points = [float(table[k]["point"]) for k in FRONTIER_APIS if k in table]
@@ -359,7 +359,7 @@ def plot_baselines_bar(out_dir: Path, dpi: int) -> None:
         api_min, api_max = min(api_points), max(api_points)
         ax.axvspan(api_min, api_max, color="#fff2cc", alpha=0.6, zorder=0)
         ax.text(api_max + 0.005, len(labels) - 0.5,
-                f"frontier commercial APIs\n(range {api_min:.2f}–{api_max:.2f}, n={len(api_points)})",
+                f"frontier commercial APIs\n(range {api_min:.2f}-{api_max:.2f}, n={len(api_points)})",
                 va="bottom", ha="left", fontsize=8, color="#a07a00")
 
     # Value labels
@@ -417,7 +417,7 @@ def plot_ood_bar(out_dir: Path, dpi: int) -> None:
     ax.set_xticklabels([b[1] for b in OOD_BENCHES])
     ax.set_ylabel("Pass@1 (greedy, standard CoT)")
     ax.set_ylim(0, 1.0)
-    ax.set_title("Out-of-domain transfer — RLVR does not regress general math reasoning")
+    ax.set_title("Out-of-domain transfer - RLVR does not regress general math reasoning")
     ax.spines[["top", "right"]].set_visible(False)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=4, frameon=False, fontsize=8)
     _save(fig, "fig_ood_transfer", out_dir, dpi)

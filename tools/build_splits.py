@@ -2,10 +2,10 @@
 Standalone CLI that builds the v2.0 SFT / RLVR / test split files from a
 migrated dataset (``data/algebra_counterexamples_v2.jsonl`` by default).
 
-Design context (``docs/PLAN.md`` §P3, with §P3b deferred):
+Design context:
 
 - ``pipeline.py:split_dataset`` is left alone because the in-pipeline path for
-  v2 records (§P1b) is also deferred; coupling the splitter to the fresh-run
+  v2 records (Section P1b) is also deferred; coupling the splitter to the fresh-run
   pipeline before P1b would entangle two unrelated workstreams. This tool
   reads the migrated JSONL directly.
 - Strict eligibility (``canonical_witness != null`` AND
@@ -22,10 +22,10 @@ Design context (``docs/PLAN.md`` §P3, with §P3b deferred):
   (no Gemini call); over-budget targets are truncated, not dropped.
 
 Outputs:
-- ``data/sft_data_v2.jsonl``    – ``{"messages": [system, user, assistant]}``
-- ``data/rlvr_prompts_v2.jsonl`` – ``{"messages": [system, user], ...verifier metadata}``
-- ``data/test_set_v2.jsonl``    – full v2 record schema preserved.
-- ``data/dataset_stats_v2.json`` – counts, domain breakdown, oracle pass rate,
+- ``data/sft_data.jsonl``    - ``{"messages": [system, user, assistant]}``
+- ``data/rlvr_prompts.jsonl`` - ``{"messages": [system, user], ...verifier metadata}``
+- ``data/test_set.jsonl``    - full v2 record schema preserved.
+- ``data/dataset_stats.json`` - counts, domain breakdown, oracle pass rate,
   token-length histogram, drop-reason breakdown, truncation rate.
 """
 
@@ -64,12 +64,12 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%H:%M:%S",
 )
-logger = logging.getLogger("build_v2_splits")
+logger = logging.getLogger("build_splits")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # I/O helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _load_jsonl(path: Path) -> list[dict]:
     records: list[dict] = []
@@ -146,9 +146,9 @@ def _attach_witness_schema(record: dict, schema_map: dict[str, str]) -> dict:
     return record
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Tokeniser
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _make_token_counter(model_name_or_path: str | None) -> Callable[[str], int]:
     """Return a ``str -> int`` token counter using the Qwen tokenizer.
@@ -161,11 +161,11 @@ def _make_token_counter(model_name_or_path: str | None) -> Callable[[str], int]:
         # the validation gate; we still report it in stats so the user
         # knows whether the real tokeniser was used.
         logger.warning(
-            "No tokenizer specified — using whitespace approximation. "
+            "No tokenizer specified - using whitespace approximation. "
             "Pass --tokenizer to use the Qwen tokenizer for the real check."
         )
         def _approx(text: str) -> int:
-            # 1 token ≈ 0.75 words for English; this is a rough proxy.
+            # 1 token ~ 0.75 words for English; this is a rough proxy.
             return int(len(text.split()) * 1.33)
         return _approx
 
@@ -196,9 +196,9 @@ def _make_token_counter(model_name_or_path: str | None) -> Callable[[str], int]:
     return _count
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Record shaping
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _record_to_user_message(record: dict) -> str:
     """Mirror of the shared v2 user-message builder.
@@ -244,9 +244,9 @@ def _rlvr_messages(user_msg: str, record: dict) -> dict:
     return base
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Stratified splitting (over the strict pool only)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 @dataclass
 class SplitAllocation:
@@ -264,7 +264,7 @@ def _stratified_split(
     """Stratified-by-domain split.
 
     Allocation rule: per domain ``d`` with count ``n_d``, draw
-    ``round(n_d / N · sft_size)`` SFT and ``round(n_d / N · test_size)`` test
+    ``round(n_d / N * sft_size)`` SFT and ``round(n_d / N * test_size)`` test
     records, plus a small rounding correction at the end so the totals match
     requested sizes exactly (drawn from / returned to RLVR-strict).
     """
@@ -319,9 +319,9 @@ def _stratified_split(
     return alloc, domain_stats
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # SFT target building (with oracle validation + truncation)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 @dataclass
 class SFTBuildOutcome:
@@ -405,9 +405,9 @@ def _build_one_sft(
     )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Stats helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _token_histogram(token_counts: list[int]) -> dict:
     if not token_counts:
@@ -426,11 +426,11 @@ def _token_histogram(token_counts: list[int]) -> dict:
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Main pipeline
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
-def build_v2_splits(
+def build_splits(
     input_path: Path,
     sft_path: Path,
     rlvr_path: Path,
@@ -478,20 +478,20 @@ def build_v2_splits(
             loose_only_pool.append(r)
         # records without any verifier are silently dropped (none in current sample)
     logger.info(
-        "Pool sizes — strict=%d (sft/test/rlvr-strict), loose-only=%d (rlvr-loose)",
+        "Pool sizes - strict=%d (sft/test/rlvr-strict), loose-only=%d (rlvr-loose)",
         len(strict_pool), len(loose_only_pool),
     )
 
     alloc, domain_stats = _stratified_split(strict_pool, sft_size, test_size, seed)
     logger.info(
-        "Initial split — sft=%d, test=%d, rlvr_strict=%d",
+        "Initial split - sft=%d, test=%d, rlvr_strict=%d",
         len(alloc.sft), len(alloc.test), len(alloc.rlvr_strict),
     )
 
     token_counter = _make_token_counter(tokenizer_model)
 
-    # ── Build SFT targets in parallel ────────────────────────────────────────
-    logger.info("Building & oracle-validating SFT targets (workers=%d)…", oracle_workers)
+    # Build SFT targets in parallel
+    logger.info("Building & oracle-validating SFT targets (workers=%d)...", oracle_workers)
     if oracle_workers > 1 and len(alloc.sft) > 1:
         with ThreadPoolExecutor(max_workers=oracle_workers) as pool:
             outcomes = list(pool.map(
@@ -535,12 +535,12 @@ def build_v2_splits(
             sft_oracle_rewards.append(o.oracle_reward)
 
     logger.info(
-        "SFT build complete — kept=%d, dropped=%d (%s), truncated=%d, over-budget-user=%d",
+        "SFT build complete - kept=%d, dropped=%d (%s), truncated=%d, over-budget-user=%d",
         len(sft_records_out), len(rebatch_to_rlvr), dict(skip_reasons),
         truncation_count, long_user_msgs,
     )
 
-    # ── Build RLVR records ───────────────────────────────────────────────────
+    # Build RLVR records
     # RLVR pool = remaining strict (RLVR-strict) + records that were SFT-eligible
     # but failed the oracle gate + the loose-only pool.
     rlvr_pool = alloc.rlvr_strict + rebatch_to_rlvr + loose_only_pool
@@ -553,9 +553,9 @@ def build_v2_splits(
         rlvr_records_out.append(_rlvr_messages(user_msg, r))
         rlvr_user_tokens.append(token_counter(user_msg))
 
-    # ── Test records (raw v2 schema preserved) ───────────────────────────────
+    # Test records (raw v2 schema preserved)
     # Re-validate that each test record's canonical witness still scores
-    # positive — same logic the SFT gate uses. Records that fail are pushed
+    # positive - same logic the SFT gate uses. Records that fail are pushed
     # back into RLVR (where they belong as known-tricky prompts).
     test_records_out: list[dict] = []
     test_pushback_to_rlvr: list[dict] = []
@@ -591,15 +591,15 @@ def build_v2_splits(
             rlvr_records_out.append(_rlvr_messages(user_msg, r))
             rlvr_user_tokens.append(token_counter(user_msg))
 
-    # ── Write outputs ────────────────────────────────────────────────────────
+    # Write outputs
     _write_jsonl(sft_path, sft_records_out)
     _write_jsonl(rlvr_path, rlvr_records_out)
     _write_jsonl(test_path, test_records_out)
-    logger.info("Wrote SFT  → %s (%d records)", sft_path, len(sft_records_out))
-    logger.info("Wrote RLVR → %s (%d records)", rlvr_path, len(rlvr_records_out))
-    logger.info("Wrote test → %s (%d records)", test_path, len(test_records_out))
+    logger.info("Wrote SFT  -> %s (%d records)", sft_path, len(sft_records_out))
+    logger.info("Wrote RLVR -> %s (%d records)", rlvr_path, len(rlvr_records_out))
+    logger.info("Wrote test -> %s (%d records)", test_path, len(test_records_out))
 
-    # ── Stats sidecar ────────────────────────────────────────────────────────
+    # Stats sidecar
     stats = {
         "input_path": str(input_path),
         "input_records": len(records),
@@ -634,13 +634,13 @@ def build_v2_splits(
     stats_path.parent.mkdir(parents=True, exist_ok=True)
     with stats_path.open("w", encoding="utf-8") as fh:
         json.dump(stats, fh, indent=2, ensure_ascii=False)
-    logger.info("Stats   → %s", stats_path)
+    logger.info("Stats   -> %s", stats_path)
     return stats
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # CLI
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
@@ -648,10 +648,10 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("--input", default="data/algebra_counterexamples_v2.jsonl",
                    help="Migrated v2 JSONL (default: data/algebra_counterexamples_v2.jsonl)")
-    p.add_argument("--sft-output",  default="data/sft_data_v2.jsonl")
-    p.add_argument("--rlvr-output", default="data/rlvr_prompts_v2.jsonl")
-    p.add_argument("--test-output", default="data/test_set_v2.jsonl")
-    p.add_argument("--stats-output", default="data/dataset_stats_v2.json")
+    p.add_argument("--sft-output",  default="data/sft_data.jsonl")
+    p.add_argument("--rlvr-output", default="data/rlvr_prompts.jsonl")
+    p.add_argument("--test-output", default="data/test_set.jsonl")
+    p.add_argument("--stats-output", default="data/dataset_stats.json")
     p.add_argument(
         "--witness-schema-input",
         default="data/witness_schemas.jsonl",
@@ -683,7 +683,7 @@ def main() -> None:
     args = _build_parser().parse_args()
     tokenizer = args.tokenizer if args.tokenizer != "" else None
     try:
-        build_v2_splits(
+        build_splits(
             input_path=Path(args.input),
             sft_path=Path(args.sft_output),
             rlvr_path=Path(args.rlvr_output),

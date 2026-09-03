@@ -1,7 +1,7 @@
 """
 Build the SFT assistant target for one v2.0 record.
 
-Per ``docs/PLAN.md`` §P3, the SFT target has the form
+The SFT target has the form
 
     <reasoning>{justification}</reasoning>
     [COUNTEREXAMPLE: {canonical_witness}]
@@ -9,9 +9,9 @@ Per ``docs/PLAN.md`` §P3, the SFT target has the form
 This module produces it deterministically, without an LLM call, from fields
 already present in the record:
 
-- ``canonical_witness``        – the SymPy expression the verifier accepts.
-- ``verifier.condition_labels`` – the structured per-condition labels.
-- ``counterexample_code``     – the legacy v1 script. Its leading ``#`` comments
+- ``canonical_witness``        - the SymPy expression the verifier accepts.
+- ``verifier.condition_labels`` - the structured per-condition labels.
+- ``counterexample_code``     - the legacy v1 script. Its leading ``#`` comments
                                   are the model-authored prose explaining why
                                   this witness works; we extract them as
                                   free-form reasoning text after filtering
@@ -22,7 +22,7 @@ already present in the record:
                                   signal we must not give).
 
 The output is a pure string. Token-length truncation is a separate function so
-the caller (``tools/build_v2_splits.py``) can apply a budget under its chosen
+the caller (``tools/build_splits.py``) can apply a budget under its chosen
 tokenizer without this module having to depend on transformers.
 """
 
@@ -33,9 +33,9 @@ from dataclasses import dataclass
 from typing import Callable, Iterable, Optional
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Leakage filter
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 # Tokens that strongly indicate a comment is leaking the v1-pipeline knowledge
 # of which hypothesis was dropped. Matched case-insensitively as whole words
@@ -64,13 +64,13 @@ def _record_specific_leakage_patterns(record: dict) -> list[re.Pattern]:
     if name:
         pats.append(re.compile(rf"\b{re.escape(name)}\b", re.IGNORECASE))
     text = (record.get("dropped_hypothesis") or "").strip()
-    # Match meaningful chunks of the dropped-hypothesis text (≥ 12 chars). We
+    # Match meaningful chunks of the dropped-hypothesis text (>= 12 chars). We
     # split on whitespace and stitch back without punctuation so a sentence
     # like "G is a finite group" matches "finite group" even if punctuation
     # differs in the comment.
     if len(text) >= 12:
         pats.append(re.compile(re.escape(text[:80]), re.IGNORECASE))
-        # also any 3-word slice ≥ 12 chars to catch paraphrase
+        # also any 3-word slice >= 12 chars to catch paraphrase
         words = re.findall(r"\w+", text)
         for i in range(len(words) - 2):
             chunk = " ".join(words[i : i + 3])
@@ -92,9 +92,9 @@ def _comment_is_safe(comment: str, record_pats: list[re.Pattern]) -> bool:
     return True
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Comment extraction
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 # Skip boilerplate that conveys no reasoning content.
 _BOILERPLATE_PREFIXES: tuple[str, ...] = (
@@ -145,7 +145,7 @@ def extract_safe_comments(code: str, record: dict) -> list[str]:
             continue
         # Capitalise first letter and normalise trailing punctuation: replace
         # a trailing comma/semicolon/colon with a period; otherwise append a
-        # period if none present. Avoids the "…addition,." artefact when the
+        # period if none present. Avoids the "...addition,." artefact when the
         # source comment was a clause fragment.
         if body[0].islower():
             body = body[0].upper() + body[1:]
@@ -164,9 +164,9 @@ def extract_safe_comments(code: str, record: dict) -> list[str]:
     return deduped
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Reasoning block assembly
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 @dataclass
 class BuildResult:
@@ -189,7 +189,7 @@ def _format_witness_line(witness: str) -> str:
 
 
 def _format_condition_lines(condition_labels: Iterable[str]) -> list[str]:
-    return [f"  - {label} ✓" for label in condition_labels]
+    return [f" - {label} ✓" for label in condition_labels]
 
 
 _CLOSING_LINE = (
@@ -233,9 +233,9 @@ def assemble_target(reasoning_body: str, witness: str) -> str:
     )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Public API
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def build_sft_target(record: dict) -> BuildResult:
     """Produce the canonical SFT assistant target for a v2 record.
@@ -263,9 +263,9 @@ def build_sft_target(record: dict) -> BuildResult:
     return BuildResult(target, None, len(comments), n_condition_lines)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Truncation (token-budget aware)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _split_target(target: str) -> tuple[list[str], str]:
     """Split a built target into (reasoning_lines, tag_line).
@@ -273,7 +273,7 @@ def _split_target(target: str) -> tuple[list[str], str]:
     The tag line is the trailing ``[COUNTEREXAMPLE: ...]`` plus its preceding
     ``</reasoning>`` close tag (we keep them adjacent to preserve structure).
     """
-    # Find the closing </reasoning> tag — everything after it is tag/closer.
+    # Find the closing </reasoning> tag - everything after it is tag/closer.
     close = target.rfind("</reasoning>")
     if close == -1:
         # No reasoning to truncate; return target as a single-line block.
@@ -300,7 +300,7 @@ def truncate_target_to_fit(
 ) -> tuple[str, bool]:
     """Walk back ``<reasoning>`` lines from the END until the target fits.
 
-    Returns (truncated_target, was_truncated). The ``[COUNTEREXAMPLE: …]`` tag
+    Returns (truncated_target, was_truncated). The ``[COUNTEREXAMPLE: ...]`` tag
     and the witness-proposing line + closing line are preserved as a structural
     minimum (``min_keep_lines`` controls the bottom guard).
 
@@ -338,7 +338,7 @@ def truncate_target_to_fit(
         if token_counter(candidate) <= max_tokens:
             return candidate, True
 
-    # head exhausted — also start trimming keep_lines from the top (after the
+    # head exhausted - also start trimming keep_lines from the top (after the
     # witness line) but always keep at least the witness line.
     while len(keep_lines) > max(1, min_keep_lines):
         # Remove the second-to-last reasoning line (just above the closing).

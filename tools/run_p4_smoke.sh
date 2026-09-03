@@ -2,11 +2,11 @@
 # P4 wiring smoke orchestrator.
 #
 # Sequence:
-#   1. Train SFT-v2 smoke checkpoint on data/sft_data_v2.jsonl.
+#   1. Train SFT-v2 smoke checkpoint on data/sft_data.jsonl.
 #      Output: runs/sft/<auto-name>/lora  (discovered from the freshest
 #      runs/sft/* leaf so the timestamped naming is invisible to the caller).
 #   2. Run RLVR-v2 smoke with reward_mode=oracle, max_steps=20 on
-#      data/rlvr_prompts_v2.jsonl, resuming from the SFT run discovered above.
+#      data/rlvr_prompts.jsonl, resuming from the SFT run discovered above.
 #      Output: runs/rlvr/<auto-name>/
 #   3. Run tokeniser-parity check on 50 random prompts using the SFT checkpoint.
 #
@@ -47,10 +47,10 @@ echo "=================================================================="
 
 if [[ "$SKIP_SFT" -eq 0 ]]; then
     echo
-    echo "── [1/3] SFT-v2 smoke ───────────────────────────────────────────────"
+    echo " [1/3] SFT-v2 smoke "
     python -m training.sft.train --config "$CONFIG"
 else
-    echo "── [1/3] SFT-v2 smoke ─ SKIPPED"
+    echo " [1/3] SFT-v2 smoke  SKIPPED"
 fi
 
 # Find the most-recently-created SFT run dir under runs/sft/. Used for both
@@ -65,21 +65,21 @@ echo "[discover] SFT LoRA → $SFT_LORA"
 
 if [[ "$SKIP_RLVR" -eq 0 ]]; then
     echo
-    echo "── [2/3] RLVR-v2 smoke (max_steps=20, reward_mode=oracle, G=4) ──────"
+    echo " [2/3] RLVR-v2 smoke (max_steps=20, reward_mode=oracle, G=4) "
     python -m training.rlvr.train --config "$CONFIG" --sft-checkpoint "$SFT_LORA"
 else
-    echo "── [2/3] RLVR-v2 smoke ─ SKIPPED"
+    echo " [2/3] RLVR-v2 smoke  SKIPPED"
 fi
 
 if [[ "$SKIP_PARITY" -eq 0 ]]; then
     echo
-    echo "── [3/3] Tokeniser parity check ─────────────────────────────────────"
+    echo " [3/3] Tokeniser parity check "
     python -m tools.check_rollout_tokeniser_parity \
-        --rlvr-prompts data/rlvr_prompts_v2.jsonl \
+        --rlvr-prompts data/rlvr_prompts.jsonl \
         --sft-checkpoint "$SFT_LORA" \
         --num-prompts 50
 else
-    echo "── [3/3] Tokeniser parity check ─ SKIPPED"
+    echo " [3/3] Tokeniser parity check  SKIPPED"
 fi
 
 # Latest RLVR run dir for the final pointer printout.

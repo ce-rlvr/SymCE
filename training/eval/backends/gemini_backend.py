@@ -5,7 +5,7 @@ Matches the existing project pattern in
 ``client.models.generate_content``.
 
 System messages map to the ``system_instruction`` config field. Multi-turn
-conversation isn't needed for benchmark prompts — every request is a single
+conversation isn't needed for benchmark prompts - every request is a single
 (system, user) pair.
 """
 

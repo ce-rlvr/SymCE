@@ -7,7 +7,7 @@ Covers:
 - Integration sample on the v2 dev dataset
   (data/algebra_counterexamples_v2.jsonl).
 - Sparse / default weights preset behaviour.
-- Determinism: same (record, completion) → same reward across calls.
+- Determinism: same (record, completion) -> same reward across calls.
 
 Heavy tests (those that spawn the oracle subprocess) are marked `@slow` and
 can be opted in/out via `-m "not slow"`. Default run executes them, since P2's
@@ -43,11 +43,11 @@ from training.rlvr.reward_oracle import (
 )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Test fixtures: minimal verifier modules
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
-# A simple non-cyclic group verifier — one remaining-hyp + one ¬Q.
+# A simple non-cyclic group verifier - one remaining-hyp + one ¬Q.
 _GROUP_VERIFIER = """
 from sympy.combinatorics.named_groups import (
     SymmetricGroup, CyclicGroup, AlternatingGroup, AbelianGroup,
@@ -100,8 +100,8 @@ def conditions(witness):
 """
 
 
-# A verifier that returns the WRONG number of booleans — the reward fn must
-# treat this as a parse-level error and apply −ε.
+# A verifier that returns the WRONG number of booleans - the reward fn must
+# treat this as a parse-level error and apply -ε.
 _BAD_LENGTH_VERIFIER = """
 CONDITION_LABELS = ["H_1: x is positive", "neg_Q: x != 0"]
 N_HYP = 1
@@ -146,9 +146,9 @@ def _record_for(module_path: Path, *, n_hyp: int, neg_q_index: int, n_conditions
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# compute_reward_oracle — every branch
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# compute_reward_oracle - every branch
+# ---------------------------------------------------------------------------
 
 
 class TestComputeRewardBranches:
@@ -173,7 +173,7 @@ class TestComputeRewardBranches:
         assert bd.gave_up is True
         assert bd.reason == "none_on_false"
         assert bd.format_ok is True
-        # r = −δ + γ · format_ok
+        # r = -δ + γ * format_ok
         expected = (
             -ORACLE_REWARD_WEIGHTS_DEFAULT["delta"]
             + ORACLE_REWARD_WEIGHTS_DEFAULT["gamma"]
@@ -194,7 +194,7 @@ class TestComputeRewardBranches:
         assert math.isclose(bd.total, expected)
 
     def test_witness_satisfies_hyps_but_not_negq(self, group_verifier_path):
-        """C4 is finite (hyp) but IS cyclic (¬Q fails) — the canonical
+        """C4 is finite (hyp) but IS cyclic (¬Q fails) - the canonical
         Learning-to-Disprove failure mode. β should NOT contribute; α + γ
         provides bounded partial credit."""
         rec = _record_for(group_verifier_path, n_hyp=1, neg_q_index=1, n_conditions=2)
@@ -216,9 +216,9 @@ class TestComputeRewardBranches:
         assert bd.parse_ok is False
         assert bd.reason == "oracle_parse_error"
         assert bd.oracle_error and "WitnessEvalError" in bd.oracle_error
-        # r = −ε but we still pay no other terms (format_ok is True).
-        # Formula: 0 + 0 + γ·format_ok − 0 − ε·1 = γ − ε
-        # Implementation: we short-circuit to −ε (γ does not apply when
+        # r = -ε but we still pay no other terms (format_ok is True).
+        # Formula: 0 + 0 + γ*format_ok - 0 - ε*1 = γ - ε
+        # Implementation: we short-circuit to -ε (γ does not apply when
         # parse_ok is False); document that the test pins the short-circuit.
         assert math.isclose(bd.total, -ORACLE_REWARD_WEIGHTS_DEFAULT["epsilon"])
 
@@ -231,7 +231,7 @@ class TestComputeRewardBranches:
         assert bd.n_hyp == 0
         assert bd.q_neg == 1
         w = ORACLE_REWARD_WEIGHTS_DEFAULT
-        # alpha · 0 + β + γ
+        # alpha * 0 + β + γ
         expected = w["beta"] + w["gamma"]
         assert math.isclose(bd.total, expected)
         assert bd.reason == "success"
@@ -268,9 +268,9 @@ class TestComputeRewardBranches:
         assert math.isclose(bd.total, -ORACLE_REWARD_WEIGHTS_DEFAULT["epsilon"])
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Determinism
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 
 def test_determinism_success(group_verifier_path):
@@ -284,9 +284,9 @@ def test_determinism_success(group_verifier_path):
     assert a.reason == b.reason == c.reason
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Sparse preset — recovers binary {−1, 0, +1}
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Sparse preset - recovers binary {-1, 0, +1}
+# ---------------------------------------------------------------------------
 
 
 def test_sparse_preset_success(group_verifier_path):
@@ -297,12 +297,12 @@ def test_sparse_preset_success(group_verifier_path):
         weights=ORACLE_REWARD_WEIGHTS_SPARSE,
         timeout_seconds=20.0,
     )
-    # α=γ=δ=0, β=ε=1 → on success r = 0 + 1 + 0 = +1
+    # α=γ=δ=0, β=ε=1 -> on success r = 0 + 1 + 0 = +1
     assert math.isclose(bd.total, 1.0)
 
 
 def test_sparse_preset_hyp_only(group_verifier_path):
-    """C4 satisfies the hyp but is cyclic. Sparse reward gives 0 — only β
+    """C4 satisfies the hyp but is cyclic. Sparse reward gives 0 - only β
     counts and q_neg=0."""
     rec = _record_for(group_verifier_path, n_hyp=1, neg_q_index=1, n_conditions=2)
     bd = compute_reward_oracle(
@@ -325,9 +325,9 @@ def test_sparse_preset_parse_error(group_verifier_path):
     assert math.isclose(bd.total, -1.0)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Validation: bad inputs / task_mode placeholders
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 
 def test_weights_missing_key_raises(group_verifier_path):
@@ -355,9 +355,9 @@ def test_missing_verifier_field_raises(group_verifier_path):
         compute_reward_oracle({}, "[COUNTEREXAMPLE: V4]")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# make_oracle_reward — TRL-shaped factory
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# make_oracle_reward - TRL-shaped factory
+# ---------------------------------------------------------------------------
 
 
 def _conv(text: str) -> list[dict]:
@@ -445,9 +445,9 @@ def test_factory_kwarg_length_mismatch_raises(group_verifier_path):
         )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Integration: real v2 dev records
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 
 _V2_PATH = _REPO_ROOT / "data" / "algebra_counterexamples_v2.jsonl"
@@ -491,7 +491,7 @@ class TestIntegrationDevSample:
 
     # Lower bound on the fraction of randomly-sampled (witness_passes_verifier
     # == True) records whose canonical witness scores `q_neg == 1` under the
-    # strict P2 sandbox. 0.50 is intentionally lax — the upstream P1 corpus
+    # strict P2 sandbox. 0.50 is intentionally lax - the upstream P1 corpus
     # will be re-migrated before P4, and this gate exists to catch reward-fn
     # regressions, not data-side regressions.
     MIN_PASS_FRACTION: float = 0.50
@@ -536,10 +536,10 @@ class TestIntegrationDevSample:
             f"{len(verifier_corpus_issues)}"
         )
         for issue in verifier_corpus_issues[:5]:
-            print(f"  - {issue}")
+            print(f" - {issue}")
         assert frac >= self.MIN_PASS_FRACTION, (
             f"Only {frac:.0%} of canonical witnesses scored positive; "
-            f"expected ≥ {self.MIN_PASS_FRACTION:.0%}. Sample of failures: "
+            f"expected >= {self.MIN_PASS_FRACTION:.0%}. Sample of failures: "
             f"{verifier_corpus_issues[:3]}"
         )
 

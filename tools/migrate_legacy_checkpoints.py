@@ -3,9 +3,9 @@ One-shot migration: move legacy checkpoint and eval-result directories into
 the new ``runs/`` layout introduced alongside ``training/common/run_dir.py``.
 
 Source dirs:
-  - checkpoints/sft/<name>/        → runs/sft/<ts>__legacy_<name>__seed?__nogit/
-  - checkpoints/rlvr/<name>/       → runs/rlvr/<ts>__legacy_<name>__seed?__nogit/
-  - training/eval/results/*.json   → runs/eval/<ts>__legacy_<basename>/ ...
+  - checkpoints/sft/<name>/        -> runs/sft/<ts>__legacy_<name>__seed?__nogit/
+  - checkpoints/rlvr/<name>/       -> runs/rlvr/<ts>__legacy_<name>__seed?__nogit/
+  - training/eval/results/*.json   -> runs/eval/<ts>__legacy_<basename>/ ...
 
 Idempotent: if the source dir is gone or the destination already exists, the
 entry is skipped. Each migrated run is registered in runs/index.jsonl with
@@ -110,7 +110,7 @@ def migrate_checkpoints(dry_run: bool) -> int:
             continue
         for src in sorted(legacy_root.iterdir()):
             dst, status = _migrate_checkpoint_dir(src, phase, dry_run)
-            print(f"  [{phase}] {src.name:55s}  {status:25s}  → {dst.relative_to(REPO_ROOT) if dst else '(n/a)'}")
+            print(f"  [{phase}] {src.name:55s}  {status:25s}  -> {dst.relative_to(REPO_ROOT) if dst else '(n/a)'}")
             if status == "moved":
                 count += 1
     return count
@@ -176,7 +176,7 @@ def migrate_eval_results(dry_run: bool) -> int:
         if path.name.endswith("_summary.json"):
             continue
         dst, status = _migrate_eval_result_pair(path, dry_run)
-        print(f"  [eval] {path.name:55s}  {status:25s}  → "
+        print(f"  [eval] {path.name:55s}  {status:25s}  -> "
               f"{dst.relative_to(REPO_ROOT) if dst else '(n/a)'}")
         if status == "moved":
             count += 1

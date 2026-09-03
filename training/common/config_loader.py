@@ -108,7 +108,7 @@ def load_config_for_section(
             )
         unknown = set(section_data) - set(field_map)
         if unknown:
-            # Don't fail hard — just warn through stderr-ish path.
+            # Don't fail hard - just warn through stderr-ish path.
             import sys
 
             print(

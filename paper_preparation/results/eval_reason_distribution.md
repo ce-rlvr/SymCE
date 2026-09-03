@@ -1,7 +1,7 @@
-# Eval reason distribution — counterexample benchmark
+# Eval reason distribution - counterexample benchmark
 
 Rates are fractions of total samples (n_problems x n_samples).
-`hyp_only` is the load-bearing dense-reward pathology — model satisfies remaining hypotheses without negating Q.
+`hyp_only` is the load-bearing dense-reward pathology - model satisfies remaining hypotheses without negating Q.
 
 ## counterexample / greedy
 

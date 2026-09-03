@@ -190,7 +190,7 @@ def _send_with_backoff(
             noise = delay * jitter * (2 * random.random() - 1)
             wait = max(0.5, delay + noise)
             logger.warning(
-                "Gemini transient error (attempt %d/%d): %s — retrying in %.1fs",
+                "Gemini transient error (attempt %d/%d): %s - retrying in %.1fs",
                 attempt + 1,
                 max_attempts,
                 type(exc).__name__,
@@ -254,7 +254,7 @@ def _format_fewshot_block(examples: list[dict]) -> str:
         lines.append(f"- dropped_hypothesis_name: {ex.get('dropped_hypothesis_name')}")
         lines.append("- remaining_hypotheses:")
         for h in ex.get("remaining_hypotheses", []):
-            lines.append(f"  - {h}")
+            lines.append(f" - {h}")
         lines.append(f"- conclusion: {ex.get('conclusion', '')}")
         code = ex.get("counterexample_code", "")
         if code:
@@ -285,9 +285,9 @@ def _build_witness_prompt(
     lines = [
         "You extract a canonical witness expression for a single item.",
         "Return a JSON object with:",
-        "  - theorem_id",
-        "  - dropped_hypothesis_name",
-        "  - canonical_witness (string or null)",
+        " - theorem_id",
+        " - dropped_hypothesis_name",
+        " - canonical_witness (string or null)",
         "If you cannot infer a witness, set canonical_witness to null.",
         "Output ONLY JSON, no prose.",
         "",
@@ -310,13 +310,13 @@ def _build_witness_prompt(
     lines.append(f"domain: {record.get('domain', '')}")
     lines.append("remaining_hypotheses:")
     for h in record.get("remaining_hypotheses", []):
-        lines.append(f"  - {h}")
+        lines.append(f" - {h}")
     lines.append(f"conclusion: {record.get('conclusion', '')}")
     bindings = record.get("_setup_bindings", [])
     if bindings:
         lines.append("setup_bindings:")
         for b in bindings[:20]:
-            lines.append(f"  - {b}")
+            lines.append(f" - {b}")
     code = record.get("counterexample_code", "") or ""
     if code:
         lines.append("counterexample_code_snippet:")
@@ -597,8 +597,8 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--output",
-        default="data/algebra_counterexamples_v2_reconstructed.jsonl",
-        help="Output v2 JSONL (default: data/algebra_counterexamples_v2_reconstructed.jsonl)",
+        default="data/symce_corpus.jsonl",
+        help="Output v2 JSONL (default: data/symce_corpus.jsonl)",
     )
     parser.add_argument(
         "--output-failures",

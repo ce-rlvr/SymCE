@@ -23,7 +23,7 @@ import pytest
 from training.rlvr.reward_oracle import ParsedTag, parse_counterexample_tag
 
 
-# ─── Happy path ──────────────────────────────────────────────────────────────
+# Happy path
 
 
 def test_simple_well_formed():
@@ -50,7 +50,7 @@ def test_payload_is_stripped():
     assert res.format_ok is True
 
 
-# ─── Bracket-balanced payloads (Matrix([[…]]), PermutationGroup(...), etc.) ──
+# Bracket-balanced payloads (Matrix([[...]]), PermutationGroup(...), etc.)
 
 
 def test_nested_brackets_matrix():
@@ -74,7 +74,7 @@ def test_nested_brackets_with_call():
     assert res.format_ok is True
 
 
-# ─── Last-match-wins policy ──────────────────────────────────────────────────
+# Last-match-wins policy
 
 
 def test_multiple_tags_last_wins():
@@ -103,7 +103,7 @@ def test_last_empty_payload_falls_back():
     assert res.payload == "V4"
 
 
-# ─── Strictness: case, newline, empty ────────────────────────────────────────
+# Strictness: case, newline, empty
 
 
 def test_case_sensitive_opener():
@@ -135,7 +135,7 @@ def test_unbalanced_open_no_close_rejected():
     assert res.payload is None
 
 
-# ─── Embedded contexts ───────────────────────────────────────────────────────
+# Embedded contexts
 
 
 def test_tag_inside_code_fence_still_extracted():
@@ -157,7 +157,7 @@ def test_tag_after_reasoning_block():
     assert res.is_none is False
 
 
-# ─── Defensive: non-string / empty inputs ────────────────────────────────────
+# Defensive: non-string / empty inputs
 
 
 def test_empty_string():

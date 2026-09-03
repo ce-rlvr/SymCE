@@ -13,7 +13,7 @@ lets us:
   commercial-API runs where every call costs money).
 
 The cache is concurrency-safe for *reads* and serialises writes through the
-sqlite WAL — multiple processes hitting the same DB will block briefly on
+sqlite WAL - multiple processes hitting the same DB will block briefly on
 write but won't corrupt. Cache misses are not negative-cached.
 
 The cache key intentionally **includes** ``sample_idx`` so that running
@@ -109,7 +109,7 @@ class CompletionCache:
                         self._conn.execute(stmt)
                 self._conn.commit()
 
-    # ── reads ────────────────────────────────────────────────────────────────
+    # reads
     def get(self, cache_key: str) -> Optional[str]:
         if not self.enabled or self._conn is None:
             return None
@@ -142,7 +142,7 @@ class CompletionCache:
                     out[k] = c
         return out
 
-    # ── writes ───────────────────────────────────────────────────────────────
+    # writes
     def put(
         self,
         cache_key: str,

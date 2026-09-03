@@ -72,7 +72,7 @@ def _check_safety(source: str) -> tuple[bool, str]:
 
 
 # ---------------------------------------------------------------------------
-# Driver script template — written to a tempfile and executed in subprocess.
+# Driver script template - written to a tempfile and executed in subprocess.
 # ---------------------------------------------------------------------------
 
 _DRIVER_TEMPLATE = """\

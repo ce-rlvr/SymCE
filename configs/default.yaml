@@ -8,21 +8,21 @@
 # Each script reads ONLY its own section. Unknown keys are ignored with a warning.
 # See docs/CONFIG.md for the full list of accepted keys per section.
 
-# ─────────────────────────────────────────────────────────────────────────────
-# pipeline.py — theorem extraction → mutation → LLM gen → verification → split
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# pipeline.py - theorem extraction -> mutation -> LLM gen -> verification -> split
+# ---------------------------------------------------------------------------
 pipeline:
   # Theorem source
   use_lean: false
   input_theorems: data/input_theorems.json
 
   # Generation
-  output: data/algebra_counterexamples.jsonl
+  output: data/counterexamples_raw.jsonl
   max_retries: 3
   workers: 4
   dry_run: false
 
-  # Attempts logging — leave null to write next to --output
+  # Attempts logging - leave null to write next to --output
   attempts_log: null
   attempts_csv: null
 
@@ -36,9 +36,9 @@ pipeline:
   rlvr_output: null
   test_output: null
 
-# ─────────────────────────────────────────────────────────────────────────────
-# training.sft.train — supervised fine-tuning (Qwen3-4B + LoRA)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# training.sft.train - supervised fine-tuning (Qwen3-4B + LoRA)
+# ---------------------------------------------------------------------------
 sft:
   # Model
   model_name: unsloth/Qwen3-4B
@@ -89,9 +89,9 @@ sft:
   # Output
   output_dir: checkpoints/sft/qwen3-4b-r16-bf16
 
-# ─────────────────────────────────────────────────────────────────────────────
-# training.rlvr.train — GRPO fine-tuning starting from the SFT LoRA checkpoint
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# training.rlvr.train - GRPO fine-tuning starting from the SFT LoRA checkpoint
+# ---------------------------------------------------------------------------
 rlvr:
   # Resume from SFT
   sft_checkpoint: checkpoints/sft/qwen3-4b-r16-bf16/lora

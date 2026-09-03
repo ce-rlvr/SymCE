@@ -46,7 +46,7 @@ def compute_pass_at_k_for_problem(
     out: dict[int, float] = {}
     for k in k_values:
         if k > n_samples:
-            # The user might pass k=8 with n_samples=4 — we mark these as None
+            # The user might pass k=8 with n_samples=4 - we mark these as None
             # in the aggregator; record 0.0 here so the dict shape is uniform.
             out[k] = 0.0
         else:

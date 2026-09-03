@@ -1,5 +1,5 @@
 {
-  "input_path": "data/algebra_counterexamples_v2_reconstructed.jsonl",
+  "input_path": "data/symce_corpus.jsonl",
   "input_records": 4707,
   "witness_schema_path": "data/witness_schemas.jsonl",
   "input_records_with_witness_schema": 4700,

@@ -2,13 +2,11 @@
 
 Inputs
 ------
-- One or more eval suite directories, e.g.
-    runs/eval/20260522-044136__thesis_full__suite/
-    runs/eval/20260522-222105__thesis_full__suite/
-    runs/eval/20260523-140214__thesis_full__suite/
-    runs/eval/20260524-003142__thesis_full__suite/        # theorem_truth
-    runs/eval/20260523-{165202,165233,181910,215427,223410,233122,144642}__thesis_full__suite/
-- Each suite has a `per_cell/*.json` folder; this script ingests every per_cell file.
+- One or more eval suite directories under runs/eval/, named
+  <timestamp>__<suite_name>__suite. With no --suite-dirs argument every such
+  directory is read.
+- Each suite has a per_cell/ folder holding one JSON or JSON.gz per cell; this
+  script ingests all of them.
 
 What it computes
 ----------------
@@ -33,19 +31,19 @@ Outputs
 
 Usage
 -----
-    # default: scan every runs/eval/*__thesis_full__suite/per_cell/*.json
+    # default: scan every runs/eval/*__suite/per_cell/*.json
     python -m paper_preparation.scripts.bootstrap_cis
 
     # restrict to two suite dirs
     python -m paper_preparation.scripts.bootstrap_cis \\
-        --suite-dirs runs/eval/20260522-044136__thesis_full__suite \\
-                     runs/eval/20260524-003142__thesis_full__suite
+        --suite-dirs runs/eval/20260522-044136__symce_full__suite \\
+                     runs/eval/20260524-003142__symce_full__suite
 
     # custom comparator and bootstrap depth
     python -m paper_preparation.scripts.bootstrap_cis \\
         --n-bootstrap 20000 --baseline qwen3-base
 
-Note: outputs *one row per cell* — if two suite runs scored the same cell
+Note: outputs *one row per cell* - if two suite runs scored the same cell
 (e.g. qwen-rlvr CE greedy was run twice), the *later* suite directory wins,
 matching the convention in all_results_summary.md.
 """
@@ -71,9 +69,9 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUT_DIR = REPO_ROOT / "paper_preparation" / "results"
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Pass@k (Chen et al. 2021, OpenAI HumanEval) -- unbiased estimator
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def pass_at_k_unbiased(n: int, c: int, k: int) -> float:
     """Probability that at least one of k randomly chosen samples is correct."""
@@ -98,9 +96,9 @@ def cell_pass_at_k(records: list[dict], k: int) -> float:
     return float(np.mean(values))
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Bootstrap helpers
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def bootstrap_ci(
     values: np.ndarray,
@@ -144,9 +142,9 @@ def bootstrap_pass_at_k(
     return point, lo, hi
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Cell loading
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 @dataclass
 class Cell:
@@ -202,9 +200,9 @@ def load_cells(suite_dirs: list[Path]) -> list[Cell]:
     return list(cells.values())
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Metric extraction per benchmark
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def record_correct_array(records: list[dict]) -> np.ndarray:
     """For Pass@1 / correct rate. Treats each record as 0/1 (greedy or any_correct)."""
@@ -223,9 +221,9 @@ def domain_records(records: list[dict], domain: str) -> list[dict]:
     return [r for r in records if r.get("domain") == domain]
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # CI computation per cell
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def compute_cell_rows(
     cell: Cell,
@@ -304,9 +302,9 @@ def compute_cell_rows(
     return rows
 
 
-# ----------------------------------------------------------------------------
-# Pairwise deltas (model - baseline) — paired by problem_id
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Pairwise deltas (model - baseline) - paired by problem_id
+# ---------------------------------------------------------------------------
 
 def paired_delta_pass_at_1(
     cell_a: Cell, cell_b: Cell, n_bootstrap: int, alpha: float, rng: np.random.Generator,
@@ -336,9 +334,9 @@ def paired_delta_pass_at_1(
     }
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Markdown writer
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def write_markdown(rows: list[dict], out_path: Path) -> None:
     by_cell: dict[tuple, list[dict]] = defaultdict(list)
@@ -352,7 +350,7 @@ def write_markdown(rows: list[dict], out_path: Path) -> None:
         if bench != last_bench:
             lines.append(f"\n## {bench}\n")
             last_bench = bench
-        lines.append(f"### {model} — {style} / {samp}\n")
+        lines.append(f"### {model} - {style} / {samp}\n")
         lines.append("| Metric | Slice | N | Point | CI lo | CI hi |")
         lines.append("|---|---|---:|---:|---:|---:|")
         for r in bucket:
@@ -363,9 +361,9 @@ def write_markdown(rows: list[dict], out_path: Path) -> None:
     out_path.write_text("\n".join(lines))
 
 
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Main
-# ----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
@@ -374,7 +372,7 @@ def main() -> int:
         nargs="+",
         type=Path,
         default=None,
-        help="Suite directories under runs/eval/. Default: all *__thesis_full__suite",
+        help="Suite directories under runs/eval/. Default: all *__suite",
     )
     ap.add_argument("--n-bootstrap", type=int, default=10000)
     ap.add_argument("--alpha", type=float, default=0.05, help="CI = 1 - alpha. Default: 0.05 (95%)")
@@ -395,13 +393,13 @@ def main() -> int:
 
     if args.suite_dirs is None:
         args.suite_dirs = [Path(p) for p in sorted(
-            glob.glob(str(REPO_ROOT / "runs" / "eval" / "*__thesis_full__suite"))
+            glob.glob(str(REPO_ROOT / "runs" / "eval" / "*__suite"))
         )]
     if not args.suite_dirs:
         print("No suite directories found.", file=sys.stderr)
         return 1
 
-    print(f"Loading {len(args.suite_dirs)} suite dir(s)…", file=sys.stderr)
+    print(f"Loading {len(args.suite_dirs)} suite dir(s)...", file=sys.stderr)
     cells = load_cells([Path(p) for p in args.suite_dirs])
     print(f"Loaded {len(cells)} unique cells.", file=sys.stderr)
 

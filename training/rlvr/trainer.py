@@ -3,16 +3,16 @@ Build a TRL GRPOTrainer wired to either the legacy (v1.0) verifier reward or
 the v2.0 oracle reward (independent per-theorem verifier scoring a witness
 expression). The selection is controlled by ``RLVRConfig.reward_mode``:
 
-- ``"legacy"`` — the v1.0 path. The model is expected to emit a SymPy/Z3
+- ``"legacy"`` - the v1.0 path. The model is expected to emit a SymPy/Z3
   *script* in a ```python fence; ``src/verifier.execute_and_verify`` runs it
   and ``training/rlvr/reward._classify`` maps the result to a scalar via
   ``REWARD_WEIGHTS``. Optionally combined with the legacy ``format_reward``
   (which greps for the fence + an ``assert`` keyword).
 
-- ``"oracle"`` — the v2.0 path. The model is expected to emit a
+- ``"oracle"`` - the v2.0 path. The model is expected to emit a
   ``[COUNTEREXAMPLE: <expr>]`` tag; the per-theorem verifier evaluates the
   witness and returns one boolean per condition. The oracle reward already
-  includes a ``γ·format_ok`` term for the tag, so the legacy
+  includes a ``γ*format_ok`` term for the tag, so the legacy
   ``format_reward`` is intentionally *not* attached under oracle mode
   (would double-count and pollute the dense-vs-sparse RQ2 ablation).
 
@@ -81,7 +81,7 @@ def _build_reward_funcs(cfg, output_dir: Path):
         length_penalty_per_token=getattr(cfg, "length_penalty_per_token", 8e-4),
         length_penalty_max=getattr(cfg, "length_penalty_max", 0.3),
     )
-    # The oracle reward already includes γ·format_ok internally; we do NOT
+    # The oracle reward already includes γ*format_ok internally; we do NOT
     # attach the legacy format_reward here. The outer TRL weight stays at
     # cfg.verifier_reward_weight (default 1.0) so users can globally scale
     # the oracle signal without touching α/β/γ/δ/ε.
@@ -97,8 +97,8 @@ def build_trainer(cfg, model, tokenizer, train_ds, *, output_dir=None, run_name=
 
     reward_funcs, reward_weights = _build_reward_funcs(cfg, output_dir)
 
-    # ── Stop strings (fix 1) ────────────────────────────────────────────────
-    # Forwarded into TRL → vLLM SamplingParams.stop (or HF
+    # Stop strings (fix 1)
+    # Forwarded into TRL -> vLLM SamplingParams.stop (or HF
     # GenerationConfig.stop_strings, depending on backend). Empty list = leave
     # TRL's default generation behaviour intact.
     stop_strings = list(getattr(cfg, "stop_strings", []) or [])
@@ -107,14 +107,14 @@ def build_trainer(cfg, model, tokenizer, train_ds, *, output_dir=None, run_name=
     grpo_cfg = GRPOConfig(
         output_dir=str(output_dir),
         run_name=run_name or None,
-        # ── Generation ──────────────────────────────────────────────────────
+        # Generation
         num_generations=cfg.num_generations,
         max_prompt_length=cfg.max_prompt_length,
         max_completion_length=cfg.max_completion_length,
         temperature=cfg.temperature,
         top_p=cfg.top_p,
         generation_kwargs=generation_kwargs,
-        # ── Optimisation ────────────────────────────────────────────────────
+        # Optimisation
         per_device_train_batch_size=cfg.per_device_train_batch_size,
         gradient_accumulation_steps=cfg.gradient_accumulation_steps,
         max_steps=cfg.max_steps,
@@ -127,15 +127,15 @@ def build_trainer(cfg, model, tokenizer, train_ds, *, output_dir=None, run_name=
         max_grad_norm=cfg.max_grad_norm,
         beta=cfg.beta,
         epsilon=cfg.epsilon,
-        # ── Reward weights (matches reward_funcs order) ─────────────────────
+        # Reward weights (matches reward_funcs order)
         reward_weights=reward_weights,
-        # ── Precision / VRAM ────────────────────────────────────────────────
+        # Precision / VRAM
         bf16=True,
         fp16=False,
         gradient_checkpointing=False,    # Unsloth handles this internally
-        # ── vLLM ────────────────────────────────────────────────────────────
+        # vLLM
         use_vllm=cfg.use_vllm,
-        # ── Logging / saving ────────────────────────────────────────────────
+        # Logging / saving
         logging_steps=cfg.logging_steps,
         log_completions=cfg.log_completions,
         save_strategy=cfg.save_strategy,

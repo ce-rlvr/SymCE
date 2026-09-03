@@ -26,21 +26,21 @@ Theorem-truth `v2_counterexample` uses **strict** scoring (literal NONE sentinel
 
 | Metric | base | SFT | dense | sparse |
 |---|---:|---:|---:|---:|
-| counterexample_pass_at_1_greedy | 0.303 | 0.342 ± 0.015 | 0.485 ± 0.022 | 0.463 ± 0.025 |
-| counterexample_pass_at_8_sampled | 0.486 | 0.619 ± 0.020 | 0.660 ± 0.020 | 0.641 ± 0.022 |
-| truth_v2_strict | 0.271 | 0.000 ± 0.000 | 0.333 ± 0.041 | 0.659 ± 0.044 |
-| truth_classify | 0.357 | 0.161 ± 0.045 | 0.706 ± 0.086 | 0.747 ± 0.133 |
+| counterexample_pass_at_1_greedy | 0.303 | 0.342 +/- 0.015 | 0.485 +/- 0.022 | 0.463 +/- 0.025 |
+| counterexample_pass_at_8_sampled | 0.486 | 0.619 +/- 0.020 | 0.660 +/- 0.020 | 0.641 +/- 0.022 |
+| truth_v2_strict | 0.271 | 0.000 +/- 0.000 | 0.333 +/- 0.041 | 0.659 +/- 0.044 |
+| truth_classify | 0.357 | 0.161 +/- 0.045 | 0.706 +/- 0.086 | 0.747 +/- 0.133 |
 
-Sparse minus dense on the v2 probe: **0.326 ± 0.083**, per seed 42=0.311, 19=0.421, 31=0.352, 64=0.222.
+Sparse minus dense on the v2 probe: **0.326 +/- 0.083**, per seed 42=0.311, 19=0.421, 31=0.352, 64=0.222.
 
 ## Out-of-domain transfer (mean over seeds 42, 19, 31, 64)
 
 | Benchmark | n | base | SFT | dense | sparse |
 |---|---:|---:|---:|---:|---:|
-| gsm8k | 1319 | 0.830 | 0.815 ± 0.030 | 0.876 ± 0.019 | 0.880 ± 0.014 |
-| math | 500 | 0.130 | 0.550 ± 0.015 | 0.653 ± 0.016 | 0.649 ± 0.009 |
-| mmlu_college_math | 100 | 0.340 | 0.538 ± 0.029 | 0.703 ± 0.052 | 0.718 ± 0.041 |
-| aime2024 | 30 | 0.000 | 0.067 ± 0.027 | 0.075 ± 0.032 | 0.075 ± 0.017 |
+| gsm8k | 1319 | 0.830 | 0.815 +/- 0.030 | 0.876 +/- 0.019 | 0.880 +/- 0.014 |
+| math | 500 | 0.130 | 0.550 +/- 0.015 | 0.653 +/- 0.016 | 0.649 +/- 0.009 |
+| mmlu_college_math | 100 | 0.340 | 0.538 +/- 0.029 | 0.703 +/- 0.052 | 0.718 +/- 0.041 |
+| aime2024 | 30 | 0.000 | 0.067 +/- 0.027 | 0.075 +/- 0.032 | 0.075 +/- 0.017 |
 
 Seeds without transfer evaluations: .
 
@@ -103,4 +103,4 @@ Gemma RLVR v2-probe results are not reported; those checkpoints and their config
 
 ## Excluded runs
 
-- `20260714-043917` — single exploratory LoRA rank-64 SFT probe; not part of the reported configuration
+- `20260714-043917` - single exploratory LoRA rank-64 SFT probe; not part of the reported configuration

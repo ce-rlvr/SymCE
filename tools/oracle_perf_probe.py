@@ -10,9 +10,9 @@ each one's canonical_witness through compute_reward_oracle, and reports:
 - reasons distribution
 - breakdown of failures by oracle_error category
 
-This is the validation gate referenced in docs/PLAN.md §P2:
-    median verifier execution ≤ 200 ms
-    max ≤ 8 s (sandbox timeout)
+This is the oracle latency gate:
+    median verifier execution <= 200 ms
+    max <= 8 s (sandbox timeout)
 
 Run from repo root:
 
@@ -102,7 +102,7 @@ def main():
     if not records:
         sys.exit("no eligible records")
 
-    print(f"Probing {len(records)} records (timeout={args.timeout}s)…\n")
+    print(f"Probing {len(records)} records (timeout={args.timeout}s)...\n")
 
     results: list[dict] = []
     elapsed_list: list[int] = []
@@ -178,13 +178,13 @@ def main():
 
     median_ms = statistics.median(elapsed_list)
     max_ms = max(elapsed_list)
-    print("Gate checks (docs/PLAN.md §P2):")
+    print("Gate checks:")
     print(
-        f"  [{'PASS' if median_ms <= 200 else 'WARN'}] median ≤ 200 ms "
+        f"  [{'PASS' if median_ms <= 200 else 'WARN'}] median <= 200 ms "
         f"(got {median_ms:.0f})"
     )
     print(
-        f"  [{'PASS' if max_ms <= 8000 else 'FAIL'}] max ≤ 8000 ms "
+        f"  [{'PASS' if max_ms <= 8000 else 'FAIL'}] max <= 8000 ms "
         f"(got {max_ms})"
     )
 
@@ -206,7 +206,7 @@ def main():
             "results": results,
         }
         args.out.write_text(json.dumps(payload, indent=2, default=str))
-        print(f"\nWrote JSON report → {args.out}")
+        print(f"\nWrote JSON report -> {args.out}")
 
 
 if __name__ == "__main__":

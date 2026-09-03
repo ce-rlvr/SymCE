@@ -10,17 +10,17 @@ Two record shapes are supported:
            {"role": "user",      "content": "..."}
        ]}
 
-   The returned Dataset has one column: ``prompt`` (list[dict] — the
+   The returned Dataset has one column: ``prompt`` (list[dict] - the
    conversational prompt that GRPOTrainer accepts).
 
-2. **v2.0 records produced by ``tools/build_v2_splits.py``:**
+2. **v2.0 records produced by ``tools/build_splits.py``:**
 
        {"messages": [system, user],
         "verifier_module_path": "data/verifiers/<dom>/<id>__<hyp>.py",
         "n_hyp": 1,
         "neg_q_index": 1,
         "n_conditions": 2,
-        "theorem_id": "…"}
+        "theorem_id": "..."}
 
    The returned Dataset has columns: ``prompt``, ``verifier_module_path``,
    ``n_hyp``, ``neg_q_index``, ``n_conditions``, ``theorem_id``.
@@ -82,12 +82,12 @@ def load_rlvr_dataset(cfg) -> Dataset:
 
             msgs = rec.get("messages")
             if not msgs or len(msgs) < 2:
-                raise ValueError(f"line {i}: expected ≥2 messages, got {msgs!r}")
+                raise ValueError(f"line {i}: expected >=2 messages, got {msgs!r}")
             roles = [m["role"] for m in msgs]
             if roles[0] != "system" or "user" not in roles:
                 raise ValueError(f"line {i}: unexpected roles {roles}")
 
-            # Strip any accidental assistant turn — RLVR is prompt-only.
+            # Strip any accidental assistant turn - RLVR is prompt-only.
             prompt_msgs = [m for m in msgs if m["role"] in ("system", "user")]
             prompts.append(prompt_msgs)
 
@@ -97,7 +97,7 @@ def load_rlvr_dataset(cfg) -> Dataset:
             elif detected_v2 != is_v2_line:
                 raise ValueError(
                     f"line {i}: mixed v1/v2 records in {jsonl_path}. "
-                    "Regenerate the file via tools/build_v2_splits.py."
+                    "Regenerate the file via tools/build_splits.py."
                 )
 
             if detected_v2:

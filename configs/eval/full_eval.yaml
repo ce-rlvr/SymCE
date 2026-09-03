@@ -1,4 +1,4 @@
-# Thesis-grade eval suite.
+# Evaluation suite.
 #
 # Run with:
 #   python -m training.eval.run_suite --config configs/eval/full_eval.yaml
@@ -10,7 +10,7 @@
 # Dry-run (lists the cartesian without launching anything):
 #   python -m training.eval.run_suite --config configs/eval/full_eval.yaml --dry-run
 
-suite_name: thesis_full
+suite_name: symce_full
 seed: 42
 reward_workers: 8
 
@@ -59,7 +59,7 @@ backends:
     max_concurrent_requests: 4
 
 models:
-  # ── Our pipeline ─────────────────────────────────────────────────────────
+  # Our pipeline
   - name: qwen-base
     backend: vllm
     model_id: Qwen/Qwen2.5-Math-1.5B
@@ -67,7 +67,7 @@ models:
     enabled: true
     external_prompt_style: standard_cot
     external_prompt_both: false
-  
+
   - name: qwen3-base
     backend: vllm
     model_id: unsloth/Qwen3-4B
@@ -94,7 +94,7 @@ models:
     enabled: true
     external_prompt_style: standard_cot
     external_prompt_both: true     # capture catastrophic-forgetting signal
-  
+
   - name: qwen-rlvr-sparse
     backend: vllm
     # EDIT to your actual RLVR merged checkpoint dir
@@ -104,7 +104,7 @@ models:
     external_prompt_style: standard_cot
     external_prompt_both: true     # capture catastrophic-forgetting signal
 
-  # ── Open-source baselines ────────────────────────────────────────────────
+  # Open-source baselines
   - name: deepseek-math-7b-rl
     backend: vllm
     model_id: deepseek-ai/deepseek-math-7b-rl
@@ -135,9 +135,9 @@ models:
     model_type: open_baseline
     enabled: true
 
-  # ── Commercial APIs — disabled by default (cost!) ────────────────────────
+  # Commercial APIs - disabled by default (cost!)
   # Flip enabled: true on the ones you actually want. Heavy on MATH (5000
-  # problems × 8 samples) — consider also setting math.limit to keep cost down.
+  # problems x 8 samples) - consider also setting math.limit to keep cost down.
   - name: gpt-4o
     backend: openai
     model_id: gpt-4o
@@ -168,7 +168,7 @@ benchmarks:
     prompt_style: v2_counterexample
     limit: null
     cfg:
-      test_file: data/test_set_v2.jsonl
+      test_file: data/test_set.jsonl
       drop_unusable: true
       oracle_timeout: 12.0
 
@@ -192,7 +192,7 @@ benchmarks:
     prompt_style: standard_cot
     # MATH default loader tries HuggingFaceH4/MATH-500 (500 problems) first; if
     # you want the full 5000-problem competition_math, set cfg.dataset
-    # explicitly and limit: null. Be aware: full MATH × 8 samples × 5 models
+    # explicitly and limit: null. Be aware: full MATH x 8 samples x 5 models
     # can run for many hours even on vLLM.
     limit: null
     cfg: {}

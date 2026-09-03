@@ -55,7 +55,7 @@ class Benchmark(ABC):
         ...
 
     def resolve_style(self, style: str) -> str:
-        """Resolve ``auto`` → first supported style; validate everything else."""
+        """Resolve ``auto`` -> first supported style; validate everything else."""
         if style == "auto":
             return self.supported_styles[0]
         if style not in self.supported_styles:

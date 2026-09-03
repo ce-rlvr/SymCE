@@ -18,6 +18,7 @@ Verifiers: When Imitation Hurts and Reinforcement Repairs* (Findings of EMNLP
 
 | | |
 |---|---|
+| Project page | https://ce-rlvr.github.io/SymCE/ |
 | Dataset | https://huggingface.co/datasets/ce-rlvr/SymCE |
 | Models | https://huggingface.co/ce-rlvr (12 LoRA adapters: 4 seeds x SFT / RLVR-dense / RLVR-sparse) |
 
@@ -25,10 +26,10 @@ Verifiers: When Imitation Hurts and Reinforcement Repairs* (Findings of EMNLP
 
 ## The task
 
-Given a false conjecture of the form "if `H₁ ∧ … ∧ H_k` then `Q`", emit a witness
-`w` such that every remaining hypothesis holds on `w` and `Q` fails on `w`. The
-policy emits a one-line Python expression; the verifier returns one boolean per
-remaining hypothesis plus one for the negated conclusion:
+Given a false conjecture of the form "if `H1 and ... and Hk` then `Q`", emit a
+witness `w` such that every remaining hypothesis holds on `w` and `Q` fails on
+`w`. The policy emits a one-line Python expression; the verifier returns one
+boolean per remaining hypothesis plus one for the negated conclusion:
 
 ```python
 >>> from src.oracle.sandbox import run_oracle
@@ -37,9 +38,10 @@ remaining hypothesis plus one for the negated conclusion:
 [True, True]      # remaining hypothesis holds; the conclusion is negated
 ```
 
-The theorem states that the direct product of two abelian groups is abelian;
-dropping "G is abelian" makes it false, and `S₃ × C₂` witnesses that. Evaluation
-happens in a sandboxed subprocess with a hard timeout.
+The theorem states that the direct product of two abelian groups is abelian.
+Dropping "G is abelian" makes it false, and the symmetric group S3 paired with
+the cyclic group C2 witnesses that. Evaluation happens in a sandboxed subprocess
+with a hard timeout.
 
 A model may also answer `NONE`, asserting that no counterexample exists. Getting
 that judgement right is what the paper is about.
@@ -57,27 +59,53 @@ that judgement right is what the paper is about.
 | `prompts/` | The verifier-generation and witness-extraction teacher prompts |
 | `human_eval/` | The 177-decision human audit and its annotations |
 | `runs/eval/` | Per-record evaluation outputs for every suite the paper cites |
-| `paper_preparation/` | The analysis scripts and their generated tables |
-| `hf_release/` | Builders for the Hugging Face dataset and model repositories |
 | `results_summary/` | Training curves and rollout summaries for the reported runs |
+| `paper_preparation/` | The analysis scripts, their generated tables and the figures |
+| `hf_release/` | Builders for the Hugging Face dataset and model repositories |
+| `tools/` | Corpus construction, split building and maintenance scripts |
+| `tests/` | Oracle, sandbox and reward unit tests |
+| `docs/` | Source of the project page, served by GitHub Pages |
 
 ### Splits
 
 | Split | n | Purpose |
 |---|---:|---|
-| `data/test_set_v2.jsonl` | 201 | Held-out counterexample benchmark |
-| `data/sft_data_v2.jsonl` | 1,000 | Supervised fine-tuning |
-| `data/rlvr_prompts_v2.jsonl` | 3,506 | RLVR prompt set |
-| `data/theorem_truth_eval.jsonl` | 347 | Calibration probe — **true** theorems |
+| `data/test_set.jsonl` | 201 | Held-out counterexample benchmark |
+| `data/sft_data.jsonl` | 1,000 | Supervised fine-tuning |
+| `data/rlvr_prompts.jsonl` | 3,506 | RLVR prompt set |
+| `data/theorem_truth_eval.jsonl` | 347 | Calibration probe, containing **true** theorems |
 
-Splits are stratified by domain with a fixed seed. The corpus spans Group
-Theory, Ring Theory, Number Theory, Linear Algebra, Field Theory and Real
-Analysis; see `data/dataset_stats_v2.json` for exact counts.
+Splits are stratified by domain with a fixed seed (42), which is independent of
+the training seed. The corpus spans Group Theory, Ring Theory, Number Theory,
+Linear Algebra, Field Theory and Real Analysis. See `data/dataset_stats.json`
+for exact counts and `data/README.md` for the record schema.
 
 Verifier locations inside the JSONL records are repo-relative
 (`data/verifiers/<Domain>/<theorem_id>__<hyp>.py`), so the oracle runs from a
 fresh checkout. `python tools/normalise_verifier_paths.py --check` verifies this
 and exits non-zero if any absolute path has crept back in.
+
+### Names used in the paper and in the data
+
+The paper writes the two prompt styles as *SymCE-prompt* and *truth-classify*.
+In the released records and in `configs/eval/`, the first is spelled
+`v2_counterexample`, which is the identifier the evaluation harness has always
+used. The paper's outcome labels map onto the record fields the same way:
+*success*, *not-Q only*, *abstain*, *hyp-only*, *partial*, *parse error* and
+*no tag* are stored as `success`, `neg_q_only`, `none_on_false`, `hyp_only`,
+`partial`, `oracle_parse_error` and `no_tag`.
+
+Archived run records under `runs/` and `results_summary/` refer to the split
+files by their original names (`test_set_v2.jsonl` and so on). Those records are
+left exactly as the runs wrote them rather than rewritten to match the new names.
+
+`data/SHA256SUMS` carries the hash and the identity of every released split as
+shipped. The training runs under `runs/sft/` and `runs/rlvr/` recorded their own
+hashes in `status.json` at launch; those predate the path normalisation
+described above, so they will not match the current files byte for byte. The
+evaluation suites wrote an empty `dataset_fingerprint.json`, which was a defect
+in `run_suite.py`; it now fingerprints the local split each benchmark reads, so
+runs made from this revision onward record it properly.
 
 ---
 
@@ -88,23 +116,28 @@ script. Nothing is transcribed by hand.
 
 ```bash
 pip install -r requirements.txt
-python paper_preparation/scripts/build_camera_ready_tables.py \
+python -m paper_preparation.scripts.build_camera_ready_tables \
     --runs-root runs --audit-dir human_eval \
     --out-dir paper_preparation/results
 ```
 
 This writes `camera_ready_tables.{json,md}`, covering the in-domain benchmark,
 the calibration probes, the four-seed robustness summary, out-of-domain
-transfer, the reason taxonomy, the per-domain breakdown, the external
+transfer, the outcome taxonomy, the per-domain breakdown, the external
 comparators and the human audit.
 
 Related analyses:
 
 ```bash
 python -m paper_preparation.scripts.bootstrap_cis        # 95% bootstrap CIs
-python -m paper_preparation.scripts.eval_reason_dist     # reason taxonomy
+python -m paper_preparation.scripts.eval_reason_dist     # outcome taxonomy
 python -m paper_preparation.scripts.make_plots --all     # figures
 ```
+
+All four read the gzipped per-cell outputs in `runs/eval/`. `bootstrap_cis`
+emits one row per (model, seed, benchmark, metric); the figure script pins the
+reference seed so a model evaluated at several seeds cannot be represented by
+whichever suite happened to be read last.
 
 ### A note on answer extraction
 
@@ -113,7 +146,7 @@ answer frame, to matching any bare occurrence of the word *true* or *false*
 anywhere in the text. In a chain of thought about whether a theorem is true that
 word occurs constantly, so completions that ran out of tokens mid-reasoning were
 scored as if they had answered. This inflated **untrained baselines** in
-particular — trained models emit the required format and are barely affected.
+particular; trained models emit the required format and are barely affected.
 
 `paper_preparation/scripts/truth_answer.py` replaces that parser, and
 `build_camera_ready_tables.py` rescores both calibration probes from the raw
@@ -128,13 +161,15 @@ Both stages run on a single 32 GB consumer GPU. SFT takes under five minutes;
 each RLVR run takes about nine hours.
 
 ```bash
-python -m training.sft.train  --config configs/full_run_dense.yaml
-python -m training.rlvr.train --config configs/full_run_dense.yaml   # dense reward
-python -m training.rlvr.train --config configs/full_run_sparse.yaml  # sparse reward
+python -m training.sft.train  --config configs/full_run_dense_better.yaml
+python -m training.rlvr.train --config configs/full_run_dense_better.yaml  # dense reward
+python -m training.rlvr.train --config configs/full_run_sparse.yaml        # sparse reward
 ```
 
-The two configurations differ **only** in the reward weights. Additional seeds
-are in `configs/seeds/`.
+The dense and sparse configurations differ **only** in the reward weights.
+Additional seeds are in `configs/seeds/`. Each run directory records the fully
+resolved `config.json` it was launched with, which is the authoritative record
+of what a given number came from.
 
 ---
 
@@ -142,7 +177,7 @@ are in `configs/seeds/`.
 
 Verifiers are generated by a teacher model, so their reliability has to be
 established rather than assumed. We audit the quantity that actually carries the
-reward signal — the accept/reject **decision** on real policy outputs — rather
+reward signal, the accept/reject **decision** on real policy outputs, rather
 than the verifier source, which relies on heuristics and finite simplifications
 that make a judgement on the code itself largely subjective.
 
@@ -154,11 +189,28 @@ verifier module. The annotations, including the four disputed decisions, are in
 
 ---
 
+## The project page
+
+`docs/` holds a single static page with no build step and no external requests.
+GitHub Pages serves it from **Settings, Pages, Deploy from a branch**, choosing
+`main` and the `/docs` folder. To preview it locally:
+
+```bash
+python3 -m http.server -d docs 8000
+```
+
+Its three figures are regenerated by `make_plots.py` and
+`make_calibration_figure.py`, so the page cannot drift from the reported
+numbers.
+
+---
+
 ## Not included
 
-Gemma-3-4B adapters, training configurations and evaluation outputs are not part
-of this release, so the Gemma results reported in the paper are not reproducible
-from it. Everything reported for Qwen3-4B is.
+The Gemma-3-4B adapters are not distributed. The seed-24 Gemma evaluation
+outputs are in `runs/eval/`; the seed-56 outputs are not, so the Gemma row of
+Table 5 cannot be regenerated from this repository while the rest of the paper
+can.
 
 Base models are downloaded from their original sources. The twelve Qwen3-4B LoRA
 adapters behind the reported numbers are on the Hub under

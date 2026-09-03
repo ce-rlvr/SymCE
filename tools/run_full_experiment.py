@@ -82,8 +82,8 @@ def _flag_present(tokens: list[str], flag: str) -> bool:
 
 
 def _default_test_file() -> str:
-    if repo_path("data/test_set_v2.jsonl").exists():
-        return "data/test_set_v2.jsonl"
+    if repo_path("data/test_set.jsonl").exists():
+        return "data/test_set.jsonl"
     return "data/test_set.jsonl"
 
 
@@ -153,7 +153,7 @@ def _parse_eval_args(eval_args: str, default_n_samples: int, test_file: str) -> 
         # callers see the corrected value.
         tokens = tokens + ["--temperature", str(new_temp)]
     elif args.n_samples > 1 and args.temperature == 0.0:
-        # User explicitly asked for greedy + multi-sample — keep it (we'll
+        # User explicitly asked for greedy + multi-sample - keep it (we'll
         # still log the warning at generation time) but flag it once.
         print(
             f"  [run_full_experiment] WARNING: explicit temperature=0.0 with "
@@ -820,7 +820,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--eval-args", default="", metavar="\"...\"",
                    help="Quoted args forwarded to training.eval.eval_runner.")
     p.add_argument("--test-file", default=None, metavar="PATH",
-                   help="Override eval test file (default: data/test_set_v2.jsonl if present).")
+                   help="Override eval test file (default: data/test_set.jsonl if present).")
     p.add_argument("--base-model", default=None,
                    help="Override baseline eval model (default: sft.model_name).")
     p.add_argument("--eval-n-samples", type=int, default=5,

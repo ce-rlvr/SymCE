@@ -1,21 +1,21 @@
 """Surface candidate qualitative examples for the paper.
 
-The paper's §6.6 has two boxed examples:
+The paper's Section 6.6 has two boxed examples:
 
-    Example 1 — a TRUE theorem on which SFT confidently fabricates a
+    Example 1 - a TRUE theorem on which SFT confidently fabricates a
                 counterexample, RLVR-sparse correctly abstains.
-    Example 2 — a FALSE conjecture on which RLVR-dense produces a clean
+    Example 2 - a FALSE conjecture on which RLVR-dense produces a clean
                 witness but RLVR-sparse incorrectly abstains.
 
 This script trawls the per_cell JSONs to surface candidates for each.
 
-It does NOT pick the final examples — the writer should read the top 5–10
+It does NOT pick the final examples - the writer should read the top 5-10
 candidates and choose. The script writes a markdown report to
 `paper_preparation/results/qualitative_candidates.md`.
 
 Inputs (auto-discovered):
-- runs/eval/*__thesis_full__suite/per_cell/qwen-*__theorem_truth__v2_counterexample__greedy.json
-- runs/eval/*__thesis_full__suite/per_cell/qwen-*__counterexample__v2_counterexample__greedy.json
+- runs/eval/*__suite/per_cell/qwen-*__theorem_truth__v2_counterexample__greedy.json
+- runs/eval/*__suite/per_cell/qwen-*__counterexample__v2_counterexample__greedy.json
 
 Usage:
     python -m paper_preparation.scripts.select_qualitative_examples
@@ -58,7 +58,7 @@ def _truncate(text: Optional[str], n: int = 600) -> str:
     if not text:
         return ""
     text = text.replace("\n", " ⏎ ")
-    return text[:n] + ("…" if len(text) > n else "")
+    return text[:n] + ("..." if len(text) > n else "")
 
 
 def find_example_1(top_k: int = 10) -> list[dict]:
@@ -68,7 +68,7 @@ def find_example_1(top_k: int = 10) -> list[dict]:
     Sort candidates by SFT confidence proxy (length of payload) descending.
     """
     cells = _load_per_cell(
-        "*__thesis_full__suite/per_cell/qwen*__theorem_truth__v2_counterexample__greedy.json"
+        "*__suite/per_cell/qwen*__theorem_truth__v2_counterexample__greedy.json"
     )
     required = ["qwen-sft", "qwen-rlvr-sparse"]  # the two we MUST have
     optional = ["qwen-rlvr", "qwen3-base"]
@@ -117,7 +117,7 @@ def find_example_2(top_k: int = 10) -> list[dict]:
     Sort by dense score descending.
     """
     cells = _load_per_cell(
-        "*__thesis_full__suite/per_cell/qwen*__counterexample__v2_counterexample__greedy.json"
+        "*__suite/per_cell/qwen*__counterexample__v2_counterexample__greedy.json"
     )
     required = ["qwen-rlvr", "qwen-rlvr-sparse"]
     optional = ["qwen-sft", "qwen3-base"]
@@ -165,7 +165,7 @@ def render(ex1: list[dict], ex2: list[dict]) -> str:
           "Pick **one** from each list. Re-run the script if no candidate looks good.",
           ""]
 
-    md.append("## Example 1 — TRUE-theorem candidates")
+    md.append("## Example 1 - TRUE-theorem candidates")
     md.append("**Criterion:** SFT confidently emits a wrong counterexample (parse-OK, non-NONE payload); RLVR-sparse correctly identifies the theorem as TRUE.")
     md.append("")
     if not ex1:
@@ -174,7 +174,7 @@ def render(ex1: list[dict], ex2: list[dict]) -> str:
         md.append(f"_{len(ex1)} candidates, sorted by SFT payload length (a rough confidence proxy):_")
         md.append("")
         for i, r in enumerate(ex1, 1):
-            md.append(f"### Candidate 1.{i} — `{r['problem_id']}` ({r['domain']})")
+            md.append(f"### Candidate 1.{i} - `{r['problem_id']}` ({r['domain']})")
             md.append(f"- **SFT payload:** `{_truncate(r['sft_payload'], 200)}`")
             md.append(f"- **SFT completion (truncated):** {_truncate(r['sft_completion'], 600)}")
             md.append(f"- **RLVR-sparse payload:** `{_truncate(r['sparse_payload'], 200)}`")
@@ -183,7 +183,7 @@ def render(ex1: list[dict], ex2: list[dict]) -> str:
             md.append("")
     md.append("")
 
-    md.append("## Example 2 — FALSE-conjecture candidates")
+    md.append("## Example 2 - FALSE-conjecture candidates")
     md.append("**Criterion:** RLVR-dense produces a correct witness; RLVR-sparse incorrectly abstains.")
     md.append("")
     if not ex2:
@@ -192,7 +192,7 @@ def render(ex1: list[dict], ex2: list[dict]) -> str:
         md.append(f"_{len(ex2)} candidates, sorted by dense score descending:_")
         md.append("")
         for i, r in enumerate(ex2, 1):
-            md.append(f"### Candidate 2.{i} — `{r['problem_id']}` ({r['domain']})")
+            md.append(f"### Candidate 2.{i} - `{r['problem_id']}` ({r['domain']})")
             md.append(f"- **Dense payload:** `{_truncate(r['dense_payload'], 200)}` (score {r['dense_score']:.3f})")
             md.append(f"- **Dense completion (truncated):** {_truncate(r['dense_completion'], 600)}")
             md.append(f"- **Sparse reason:** {r['sparse_reason']}")

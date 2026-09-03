@@ -1,7 +1,7 @@
 """
 Unit tests for src/oracle/verifier_generator.py parser utilities.
 
-Tests only the parsing / formatting logic — no Gemini API calls.
+Tests only the parsing / formatting logic - no Gemini API calls.
 """
 
 from __future__ import annotations

@@ -1,7 +1,7 @@
 """
 Canonical prompt strings shared across the v2.0 training stack.
 
-Single source of truth so the splitter (``tools/build_v2_splits.py``), the SFT
+Single source of truth so the splitter (``tools/build_splits.py``), the SFT
 and RLVR data loaders, the reward computation harness, and any future eval
 code all reference identical text. Avoids prompt drift between
 training-time and eval-time generation.
@@ -25,10 +25,10 @@ def build_v2_user_message(record: dict) -> str:
     remaining = record.get("remaining_hypotheses", [])
     conclusion = record.get("conclusion", "")
     if remaining and conclusion:
-        bulleted = "\n  - ".join(remaining)
+        bulleted = "\n - ".join(remaining)
         message = (
             f"Claim: For all mathematical objects satisfying:\n"
-            f"  - {bulleted}\n"
+            f" - {bulleted}\n"
             f"the following conclusion holds:\n"
             f"  {conclusion}"
         )
@@ -43,7 +43,7 @@ def build_v2_user_message(record: dict) -> str:
     return message
 
 
-# Global system prompt for the v2.0 task framing (PROPOSAL §3.2, PLAN.md §P3).
+# Global system prompt for the v2.0 task framing as used in the paper.
 #
 # The policy is expected to produce free reasoning inside <reasoning>...</reasoning>
 # tags followed by a single ``[COUNTEREXAMPLE: <expr>]`` tag. ``<expr>`` is a

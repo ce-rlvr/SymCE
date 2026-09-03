@@ -11,7 +11,7 @@ across all models so we can show:
 
 Inputs
 ------
-- runs/eval/*__thesis_full__suite/per_cell/*__counterexample__*.json
+- runs/eval/*__suite/per_cell/*__counterexample__*.json
   Each per_record has up to N samples with `reason`.
 
 Outputs
@@ -93,7 +93,7 @@ def main() -> int:
 
     if args.suite_dirs is None:
         args.suite_dirs = [Path(p) for p in sorted(
-            glob.glob(str(REPO_ROOT / "runs" / "eval" / "*__thesis_full__suite"))
+            glob.glob(str(REPO_ROOT / "runs" / "eval" / "*__suite"))
         )]
 
     cells = load_counterexample_cells(args.suite_dirs)
@@ -117,7 +117,7 @@ def main() -> int:
         for reason in REASONS:
             row[f"n_{reason}"] = counter.get(reason, 0)
             row[f"rate_{reason}"] = round(counter.get(reason, 0) / total, 6) if total else 0.0
-        # Anything else (defensive — should be empty)
+        # Anything else (defensive - should be empty)
         unknown = sum(v for k, v in counter.items() if k not in REASONS)
         row["n_other"] = unknown
         rows.append(row)
@@ -152,9 +152,9 @@ def main() -> int:
         lines.append("")
         return lines
 
-    md = ["# Eval reason distribution — counterexample benchmark", "",
+    md = ["# Eval reason distribution - counterexample benchmark", "",
           "Rates are fractions of total samples (n_problems x n_samples).",
-          "`hyp_only` is the load-bearing dense-reward pathology — model satisfies remaining hypotheses without negating Q.",
+          "`hyp_only` is the load-bearing dense-reward pathology - model satisfies remaining hypotheses without negating Q.",
           ""]
     md.extend(write_md_section("greedy", "greedy"))
     md.extend(write_md_section("sampled", "sampled"))

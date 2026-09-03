@@ -5,12 +5,12 @@ returns ``n_samples`` completions per prompt. It owns:
 
 - Model loading / API client setup (lazy on first call).
 - Chat-template application (so the prompt-string the cache sees is the same
-  string that gets fed to the model — critical for cache reuse).
+  string that gets fed to the model - critical for cache reuse).
 - Sampling-vs-greedy semantics:
-    * temperature == 0.0  → deterministic; if n_samples > 1 the backend
+    * temperature == 0.0  -> deterministic; if n_samples > 1 the backend
       MUST log a warning and either bump the temperature OR collapse to a
       single sample with a warning. The Pass@K bug we shipped previously
-      came from expanding a greedy prompt to N copies — never again.
+      came from expanding a greedy prompt to N copies - never again.
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ class GenerationRequest:
     top_p: float = 1.0
     seed: int = 42
     stop: Optional[list[str]] = None
-    # Cache identity context — the backend writes through to the cache using
+    # Cache identity context - the backend writes through to the cache using
     # this. ``cache_key_extra`` is appended to the cache key to disambiguate
     # otherwise-identical requests (e.g., prompt-style label).
     cache_key_extra: str = ""
@@ -95,7 +95,7 @@ class Backend(ABC):
 
         Local backends override this to apply the tokenizer's chat template.
         API backends typically don't need it (the API handles roles directly)
-        but we still need a stable string for cache keys — the default
+        but we still need a stable string for cache keys - the default
         implementation produces a deterministic role-tagged join.
         """
         parts = []
@@ -119,13 +119,13 @@ class Backend(ABC):
         """Release model / connection resources. Default: no-op."""
         return None
 
-    # ── Safety net: enforce sane sampling parameters ─────────────────────────
+    # Safety net: enforce sane sampling parameters
     @staticmethod
     def sanitize_sampling(temperature: float, n_samples: int) -> tuple[float, int, bool]:
         """Common guard against the pass@k-equals-pass@1 bug.
 
         Returns (temperature, n_samples, was_corrected). If T==0 and N>1,
-        we COLLAPSE to N=1 with a clear warning — preferable to silently
+        we COLLAPSE to N=1 with a clear warning - preferable to silently
         bumping the temperature, which would change the user-visible
         sampling distribution.
         """

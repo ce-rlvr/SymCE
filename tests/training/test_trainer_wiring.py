@@ -13,7 +13,7 @@ a ``GRPOTrainer`` (which needs a real LLM + tokenizer + dataset). We assert:
 - An invalid reward_mode raises ``ValueError`` with a clear message.
 
 The oracle path is then driven end-to-end against a hand-crafted verifier
-module — the same fixture style as ``tests/oracle/`` — to verify that the
+module - the same fixture style as ``tests/oracle/`` - to verify that the
 TRL-shaped kwargs path reaches ``compute_reward_oracle`` correctly.
 """
 
@@ -28,7 +28,7 @@ import pytest
 
 # Match training.rlvr.train: unsloth's side-effect monkey-patches must run
 # before TRL is imported, otherwise trl/trainer/callbacks.py pulls in
-# mergekit_utils → mergekit (not installed in this env). Skip the whole
+# mergekit_utils -> mergekit (not installed in this env). Skip the whole
 # module if unsloth isn't importable (e.g. CPU-only CI).
 os.environ.setdefault("ACCELERATE_MIXED_PRECISION", "bf16")
 unsloth = pytest.importorskip("unsloth")
@@ -41,9 +41,9 @@ from training.rlvr.config import RLVRConfig
 from training.rlvr.trainer import _build_reward_funcs
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Helpers
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 # Minimal verifier module: one trivial remaining-hypothesis (always True) and
 # one ¬Q check that fires only when witness == 0. Lets us hit "success" and
@@ -75,9 +75,9 @@ def _make_cfg(tmp_path: Path, *, reward_mode: str, enable_format: bool = True) -
     return cfg
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Branch tests
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def test_oracle_branch_returns_single_oracle_reward(tmp_path):
     cfg = _make_cfg(tmp_path, reward_mode="oracle")
@@ -111,9 +111,9 @@ def test_invalid_reward_mode_raises(tmp_path):
         _build_reward_funcs(cfg, Path(cfg.output_dir))
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # End-to-end: oracle reward fn callable via TRL-shaped kwargs
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 @pytest.mark.slow
 def test_oracle_reward_fn_kwargs_path(tmp_path):
@@ -124,7 +124,7 @@ def test_oracle_reward_fn_kwargs_path(tmp_path):
     fn = funcs[0]
 
     # Two rollouts against the *same* prompt: one full success (witness=0,
-    # both conditions True → reason='success'), one parse-error (no tag).
+    # both conditions True -> reason='success'), one parse-error (no tag).
     completions = [
         [{"role": "assistant", "content": "<reasoning>x=0</reasoning>\n[COUNTEREXAMPLE: 0]"}],
         [{"role": "assistant", "content": "I refuse"}],
@@ -138,9 +138,9 @@ def test_oracle_reward_fn_kwargs_path(tmp_path):
 
     rewards = fn(prompts=[None, None], completions=completions, **kwargs)
     assert len(rewards) == 2
-    # Full success ⇒ α·1 + β·1 + γ·1 = 0.25 + 0.60 + 0.10 = 0.95.
+    # Full success => α*1 + β*1 + γ*1 = 0.25 + 0.60 + 0.10 = 0.95.
     assert rewards[0] == pytest.approx(0.95, abs=1e-9)
-    # No tag ⇒ -ε = -1.0.
+    # No tag => -ε = -1.0.
     assert rewards[1] == pytest.approx(-1.0, abs=1e-9)
 
     # Rollouts log was written.

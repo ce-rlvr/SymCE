@@ -41,12 +41,12 @@ from training.rlvr.config import REWARD_WEIGHTS  # noqa: E402
 logger = logging.getLogger(__name__)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Code extraction
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 # Greedy-but-anchored fence match. Prefers ```python fences but falls back to
-# any triple-fenced block. Multiple fences in one completion → take the first.
+# any triple-fenced block. Multiple fences in one completion -> take the first.
 _FENCE_PY = re.compile(r"```(?:python|py)\s*\n(.*?)```", re.DOTALL | re.IGNORECASE)
 _FENCE_ANY = re.compile(r"```\s*\n?(.*?)```", re.DOTALL)
 
@@ -69,28 +69,28 @@ def extract_code(text: str) -> str | None:
     return code or None
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Verifier → scalar mapping
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Verifier -> scalar mapping
+# ---------------------------------------------------------------------------
 
 def _classify(verifier_result: dict) -> str:
     """Return the REWARD_WEIGHTS key for a given verifier result dict.
 
     Priority order (most severe / most informative first):
 
-    1. safety_invalid  — blocked before execution; return immediately.
-    2. syntax_error    — execution-based check, more informative than a static
+    1. safety_invalid   -  blocked before execution; return immediately.
+    2. syntax_error     -  execution-based check, more informative than a static
                         negation scan; a syntax-broken script cannot satisfy hyps.
-    3. timed_out       — execution-based; the search loop was too slow.
-    4. success         — exit code 0. If negation form is also missing the model
+    3. timed_out        -  execution-based; the search loop was too slow.
+    4. success          -  exit code 0. If negation form is also missing the model
                         likely *proved* the conclusion (wrong direction), which is
                         caught as execution_ok_no_negation (-0.2) rather than
                         success (+1.0). This case gives partial credit: the model
                         did run hypothesis checks but got the logical direction wrong.
-    5. runtime_error   — AssertionError or other non-zero exit after syntax passes.
-    6. negation_invalid — no execution error but the static negation scan failed;
+    5. runtime_error    -  AssertionError or other non-zero exit after syntax passes.
+    6. negation_invalid - no execution error but the static negation scan failed;
                          weaker signal than runtime failures.
-    7. default         — fallback.
+    7. default          -  fallback.
 
     NOTE: We intentionally check execution-based flags (syntax_error, timed_out,
     runtime_error) BEFORE the static negation scan so that a script that is
@@ -140,9 +140,9 @@ def score_completion(text: str, weights: dict[str, float] | None = None) -> tupl
     return w.get(reason, w["default"]), reason, result
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Rollout logger (per-completion JSONL trace for debugging RL collapse)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 class RolloutLogger:
     """Thread-safe append-only JSONL writer for per-completion telemetry."""
@@ -161,9 +161,9 @@ class RolloutLogger:
                 fh.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Reward function factories (closures over config)
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _completion_text(completion: Any) -> str:
     """Pull the assistant text out of a TRL completion entry."""
@@ -257,9 +257,9 @@ def make_verifier_reward(
     return verifier_reward
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Optional secondary format reward
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 _HAS_PY_FENCE = re.compile(r"```(?:python|py)\b", re.IGNORECASE)
 _HAS_ASSERT = re.compile(r"\bassert\b")

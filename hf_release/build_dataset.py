@@ -31,10 +31,10 @@ sys.path.insert(0, str(REPO_ROOT))
 
 # local file -> name in the dataset repo
 JSONL_FILES = {
-    "data/algebra_counterexamples_v2_reconstructed.jsonl": "corpus.jsonl",
-    "data/test_set_v2.jsonl": "test.jsonl",
-    "data/sft_data_v2.jsonl": "sft.jsonl",
-    "data/rlvr_prompts_v2.jsonl": "rlvr_prompts.jsonl",
+    "data/symce_corpus.jsonl": "corpus.jsonl",
+    "data/test_set.jsonl": "test.jsonl",
+    "data/sft_data.jsonl": "sft.jsonl",
+    "data/rlvr_prompts.jsonl": "rlvr_prompts.jsonl",
     "data/theorem_truth_eval.jsonl": "theorem_truth.jsonl",
     "data/witness_schemas.jsonl": "witness_schemas.jsonl",
 }
@@ -297,13 +297,13 @@ def main() -> int:
             shutil.copy2(src, out / dst_rel)
 
     shutil.copy2(REPO_ROOT / "LICENSE-DATA", out / "LICENSE")
-    shutil.copy2(REPO_ROOT / "data" / "dataset_stats_v2.json", out / "dataset_stats.json")
+    shutil.copy2(REPO_ROOT / "data" / "dataset_stats.json", out / "dataset_stats.json")
 
     n_verifiers, per_domain = build_verifiers(out)
     print(f"  verifiers.jsonl          {n_verifiers:6,d} modules")
     print(f"  verifiers.tar.gz         {(out / 'verifiers.tar.gz').stat().st_size / 1e6:.1f} MB")
 
-    stats = json.loads((REPO_ROOT / "data" / "dataset_stats_v2.json").read_text())
+    stats = json.loads((REPO_ROOT / "data" / "dataset_stats.json").read_text())
     pools = stats["pools"]
     dom = stats["domain_breakdown_strict_pool"]
 

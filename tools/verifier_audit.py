@@ -1,5 +1,5 @@
 """
-P1.5 — Verifier audit tool.
+P1.5 - Verifier audit tool.
 
 Runs the hand-curated unit-test suite (tests/oracle/verifier_unit_tests.jsonl) against
 migrated records in data/algebra_counterexamples_v2.jsonl and reports per-domain pass rates.
@@ -18,8 +18,8 @@ Usage:
     python -m tools.verifier_audit   # same via module invocation
 
 Exit code:
-    0 — all algebra-domain pass rates ≥ min_audit_pass_rate_per_domain
-    1 — one or more domains below threshold
+    0 - all algebra-domain pass rates >= min_audit_pass_rate_per_domain
+    1 - one or more domains below threshold
 """
 
 from __future__ import annotations
@@ -53,7 +53,7 @@ class AuditConfig:
 
 
 def _load_v2_index(path: Path) -> dict[str, dict]:
-    """Build a {theorem_id:hyp_name → record} index from the v2 JSONL."""
+    """Build a {theorem_id:hyp_name -> record} index from the v2 JSONL."""
     index: dict[str, dict] = {}
     if not path.exists():
         return index
@@ -112,7 +112,7 @@ def run_audit(cfg: AuditConfig, root: Path) -> dict:
     logger.info("Unit tests loaded: %d", len(unit_tests))
 
     if not unit_tests:
-        logger.warning("No unit tests found — audit trivially passes (no tests).")
+        logger.warning("No unit tests found - audit trivially passes (no tests).")
         report = {
             "per_domain": {},
             "global": {"total": 0, "passed": 0, "pass_rate": 1.0},
@@ -237,7 +237,7 @@ def run_audit(cfg: AuditConfig, root: Path) -> dict:
     gate_passed = True
     for domain in cfg.domains_in_audit_gate:
         if domain not in per_domain:
-            logger.warning("Domain '%s' has no unit tests — cannot verify gate", domain)
+            logger.warning("Domain '%s' has no unit tests - cannot verify gate", domain)
             continue
         rate = per_domain[domain]["pass_rate"]
         if rate < cfg.min_audit_pass_rate_per_domain:
@@ -259,10 +259,10 @@ def run_audit(cfg: AuditConfig, root: Path) -> dict:
     logger.info("Audit report written to %s", report_path)
 
     if gate_passed:
-        logger.info("AUDIT GATE PASSED — all algebra domains ≥ %.0f%%",
+        logger.info("AUDIT GATE PASSED - all algebra domains >= %.0f%%",
                     cfg.min_audit_pass_rate_per_domain * 100)
     else:
-        logger.error("AUDIT GATE FAILED — see failures in report")
+        logger.error("AUDIT GATE FAILED - see failures in report")
 
     return report
 

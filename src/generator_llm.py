@@ -24,7 +24,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Retry helper — wraps chat.send_message with exponential backoff.
+# Retry helper - wraps chat.send_message with exponential backoff.
 # Retries on transient API errors: rate limits (429), server errors (500/503),
 # and network timeouts. Hard-stops on auth errors and client 4xx.
 # ---------------------------------------------------------------------------
@@ -314,10 +314,10 @@ def correct_from_session(chat: Any, failed_code: str, error_message: str) -> str
             "IMPORTANT: The previous script violated the logical contract.\n"
             "You MUST explicitly assert the conclusion is false.\n"
             "Include at least one of these literal forms:\n"
-            "  - assert not <expr>\n"
-            "  - assert <lhs> != <rhs>\n"
-            "  - assert <expr> == False\n"
-            "  - assert <expr> is False\n"
+            " - assert not <expr>\n"
+            " - assert <lhs> != <rhs>\n"
+            " - assert <expr> == False\n"
+            " - assert <expr> is False\n"
             "Do not return code that only asserts the conclusion is true.\n\n"
         )
 
@@ -329,9 +329,9 @@ def correct_from_session(chat: Any, failed_code: str, error_message: str) -> str
         f"{negation_fix_block}"
         "Please diagnose the error and generate a fully corrected Python script.\n"
         "Reminders:\n"
-        "  - All remaining hypotheses must hold — verify each with an `assert`\n"
-        "  - The conclusion must be FALSE — use `assert not <check>` or `assert lhs != rhs`\n"
-        "  - Check SymPy API usage carefully (e.g. use `.order()` on Permutation objects)\n"
+        " - All remaining hypotheses must hold — verify each with an `assert`\n"
+        " - The conclusion must be FALSE — use `assert not <check>` or `assert lhs != rhs`\n"
+        " - Check SymPy API usage carefully (e.g. use `.order()` on Permutation objects)\n"
         "If you realize the statement is actually ill-defined or true, you can return [ILL_DEFINED] or [STATEMENT_IS_TRUE]. Otherwise, output ONLY valid Python code. No prose, no markdown."
     )
 

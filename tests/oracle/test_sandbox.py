@@ -1,7 +1,7 @@
 """
 Unit tests for src/oracle/sandbox.py.
 
-These tests run without Gemini — they use hand-crafted verifier modules written
+These tests run without Gemini - they use hand-crafted verifier modules written
 to temporary files to exercise every code path in run_oracle().
 """
 
@@ -51,7 +51,7 @@ C4 = CyclicGroup(4)
 V4 = AbelianGroup(2, 2)
 
 def conditions(witness) -> list[bool]:
-    # H_1: G is a finite group — all PermutationGroups are finite; order() > 0 is a reliable check
+    # H_1: G is a finite group - all PermutationGroups are finite; order() > 0 is a reliable check
     try:
         h1 = witness.order() > 0
     except Exception:
@@ -85,7 +85,7 @@ def good_module_path(tmp_path):
 
 class TestRunOracle:
     def test_passing_witness(self, good_module_path):
-        """V4 is a finite non-cyclic group — all conditions should be True."""
+        """V4 is a finite non-cyclic group - all conditions should be True."""
         result = run_oracle(good_module_path, "V4", n_conditions=2, timeout_seconds=15.0)
         assert result.parse_ok is True
         assert result.conditions is not None
@@ -96,7 +96,7 @@ class TestRunOracle:
         assert result.timed_out is False
 
     def test_failing_witness_cyclic(self, good_module_path):
-        """C4 is cyclic — neg_Q should be False."""
+        """C4 is cyclic - neg_Q should be False."""
         result = run_oracle(good_module_path, "C4", n_conditions=2, timeout_seconds=15.0)
         assert result.parse_ok is True
         assert result.conditions is not None
@@ -114,7 +114,7 @@ class TestRunOracle:
     def test_syntax_error_in_witness(self, good_module_path):
         """A witness expression with syntax errors should fail gracefully."""
         result = run_oracle(good_module_path, "def bad(): pass", n_conditions=2, timeout_seconds=15.0)
-        # eval of a statement raises SyntaxError — should produce parse_ok=False
+        # eval of a statement raises SyntaxError - should produce parse_ok=False
         assert result.parse_ok is False
 
     def test_nonexistent_module(self, tmp_path):

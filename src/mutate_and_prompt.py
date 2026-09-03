@@ -36,14 +36,14 @@ def mutate_theorem(theorem: dict, drop_index: int = 0) -> Optional[dict]:
     remaining_hyps = [h for h in theorem["hypotheses"] if h["id"] != dropped_hyp["id"]]
 
     remaining_texts = [h["text"] for h in remaining_hyps]
-    remaining_bulleted = "\n  - ".join(remaining_texts)
+    remaining_bulleted = "\n - ".join(remaining_texts)
 
     # Clean conjecture: no dropped-hypothesis metadata. This is what the trained
-    # model sees during RLVR and evaluation — exposing the dropped hypothesis
+    # model sees during RLVR and evaluation - exposing the dropped hypothesis
     # name would allow the model to trivially target the missing condition.
     false_conjecture = (
         f"Claim: For all mathematical objects satisfying:\n"
-        f"  - {remaining_bulleted}\n"
+        f" - {remaining_bulleted}\n"
         f"the following conclusion holds:\n"
         f"  {theorem['conclusion']}"
     )

@@ -8,7 +8,7 @@ so the orchestrator (``training.eval.run_suite``) is backend-agnostic.
 
 Available backends:
 - ``vllm_backend.VLLMBackend``: primary local-model path; one engine per
-  (model_id, dtype, max_model_len) — load once, reuse across benchmarks.
+  (model_id, dtype, max_model_len) - load once, reuse across benchmarks.
 - ``unsloth_backend.UnslothBackend``: HF/Unsloth fallback for machines without
   vLLM or for the calibration-witness path.
 - ``openai_backend.OpenAIBackend``: OpenAI proper and DeepSeek (OpenAI-compatible).

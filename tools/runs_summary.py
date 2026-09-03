@@ -48,7 +48,7 @@ def _load_runs(index_path: Path) -> dict[str, dict]:
             if not run_id:
                 continue
             runs.setdefault(run_id, {})
-            # Merge — later events overwrite earlier fields they touch.
+            # Merge - later events overwrite earlier fields they touch.
             for k, v in evt.items():
                 runs[run_id][k] = v
     return runs

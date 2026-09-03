@@ -51,7 +51,7 @@ from training.rlvr.trainer import build_trainer
 
 def _build_parser(cfg: RLVRConfig) -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        description="RLVR (GRPO) — Qwen2.5-Math-1.5B + LoRA via Unsloth + TRL",
+        description="RLVR (GRPO) - Qwen2.5-Math-1.5B + LoRA via Unsloth + TRL",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     p.add_argument(
@@ -101,7 +101,7 @@ def _save_train_log(trainer, output_dir: Path) -> dict:
         writer = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(history)
-    print(f"  train_log.csv  → {log_path}")
+    print(f"  train_log.csv  -> {log_path}")
 
     # Headline reward + KL
     final_reward = None
@@ -128,7 +128,7 @@ def main() -> None:
     cfg, parsed_args = _parse()
     set_seed(cfg.seed)
 
-    # ── Run directory ──────────────────────────────────────────────────────
+    # Run directory
     if cfg.use_run_dir:
         run_dir = build_run_dir(
             phase="rlvr",
@@ -161,15 +161,15 @@ def main() -> None:
         output_dir.mkdir(parents=True, exist_ok=True)
         cfg.save(output_dir / "config.json")
         wandb_names = derive_wandb_names(Path(output_dir), phase="rlvr")
-        print(f"[run-dir]   (disabled) → {output_dir}")
+        print(f"[run-dir]   (disabled) -> {output_dir}")
 
     _maybe_setup_wandb(cfg, wandb_names)
 
-    # ── Model + data ───────────────────────────────────────────────────────
-    print(f"[model]     Loading SFT checkpoint {cfg.sft_checkpoint} …")
+    # Model + data
+    print(f"[model]     Loading SFT checkpoint {cfg.sft_checkpoint} ...")
     model, tokenizer = build_model_and_tokenizer(cfg)
 
-    print(f"[data]      Loading {cfg.train_jsonl} …")
+    print(f"[data]      Loading {cfg.train_jsonl} ...")
     train_ds = load_rlvr_dataset(cfg)
     print(f"            train={len(train_ds)} prompts")
 
@@ -188,12 +188,12 @@ def main() -> None:
               + (f" + format_reward (w={cfg.format_reward_weight})"
                  if cfg.enable_format_reward else " (format_reward disabled)"))
 
-    # ── Train ──────────────────────────────────────────────────────────────
+    # Train
     import warnings
     warnings.filterwarnings("ignore", message=".*max_new_tokens.*")
     warnings.filterwarnings("ignore", message=".*attention mask API.*")
 
-    print("[trainer]   Building GRPOTrainer …")
+    print("[trainer]   Building GRPOTrainer ...")
     trainer = build_trainer(
         cfg, model, tokenizer, train_ds,
         output_dir=output_dir, run_name=wandb_names["name"],
@@ -210,23 +210,23 @@ def main() -> None:
             finalise_run(run_dir, status="failed", extra={"exception": repr(exc)})
         raise
 
-    # ── Save artefacts ─────────────────────────────────────────────────────
-    print("[save]      Saving artefacts …")
+    # Save artefacts
+    print("[save]      Saving artefacts ...")
     lora_dir = output_dir / "lora"
     merged_dir = output_dir / "merged"
     model.save_pretrained(str(lora_dir))
     tokenizer.save_pretrained(str(lora_dir))
-    print(f"  LoRA adapters  → {lora_dir}")
+    print(f"  LoRA adapters  -> {lora_dir}")
 
     try:
         model.save_pretrained_merged(str(merged_dir), tokenizer, save_method="merged_16bit")
-        print(f"  Merged 16-bit  → {merged_dir}")
+        print(f"  Merged 16-bit  -> {merged_dir}")
     except Exception as exc:
         print(f"  [warn] merged save skipped: {exc}")
 
     train_headlines = _save_train_log(trainer, output_dir)
 
-    # ── Rollouts rollup ────────────────────────────────────────────────────
+    # Rollouts rollup
     rollouts_path = output_dir / cfg.rollouts_log
     rollouts_summary: dict = {}
     if rollouts_path.exists():
@@ -234,20 +234,20 @@ def main() -> None:
             rollouts_path,
             output_path=output_dir / "rollouts_summary.json",
         )
-        print(f"  rollouts_summary.json → {output_dir / 'rollouts_summary.json'}")
+        print(f"  rollouts_summary.json -> {output_dir / 'rollouts_summary.json'}")
         print(f"    mean_reward        = {rollouts_summary.get('mean_reward')}")
         print(f"    format_ok_rate     = {rollouts_summary.get('format_ok_rate')}")
         print(f"    parse_ok_rate      = {rollouts_summary.get('parse_ok_rate')}")
         print(f"    q_neg_rate         = {rollouts_summary.get('q_neg_rate')}")
         print(f"    group_std_pos_rate = {rollouts_summary.get('group_std_pos_rate')} "
-              f"({'PASS' if rollouts_summary.get('plan_p4_group_std_gate_pass') else 'FAIL'} P4 gate ≥0.70)")
+              f"({'PASS' if rollouts_summary.get('plan_p4_group_std_gate_pass') else 'FAIL'} P4 gate >=0.70)")
     else:
-        print(f"  [warn] {rollouts_path} not found — skipping rollouts rollup")
+        print(f"  [warn] {rollouts_path} not found - skipping rollouts rollup")
 
-    # ── Summary + finalise ─────────────────────────────────────────────────
+    # Summary + finalise
     write_run_summary_md(
         output_dir / "run_summary.md",
-        title=f"RLVR run — {output_dir.name}",
+        title=f"RLVR run - {output_dir.name}",
         sections={
             "Configuration": {
                 "config_yaml": parsed_args.config,

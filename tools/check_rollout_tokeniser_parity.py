@@ -1,5 +1,5 @@
 """
-Rollout/training-time tokeniser parity check (PLAN §P4 risk mitigation).
+Rollout/training-time tokeniser parity check (PLAN Section P4 risk mitigation).
 
 GRPOTrainer computes per-token logprobs at training time using the HF
 tokenizer; when rollouts come from vLLM, vLLM uses its own tokeniser cache.
@@ -11,7 +11,7 @@ This script enforces two invariants over a sample of v2 RLVR prompts:
 
 1. **Chat-template determinism.** ``tokenizer.apply_chat_template`` on the
    prompt is deterministic across calls (no hidden RNG, no inserted
-   timestamps), and round-tripping ``ids → decode → encode`` is the
+   timestamps), and round-tripping ``ids -> decode -> encode`` is the
    identity (or, where it isn't exactly, the mismatch is logged so it can
    be inspected). This is the parity check that is meaningful regardless
    of whether vLLM is loaded.
@@ -24,14 +24,14 @@ This script enforces two invariants over a sample of v2 RLVR prompts:
 Usage (from repo root, pfe-rlvr-env active):
 
     python -m tools.check_rollout_tokeniser_parity \\
-        --rlvr-prompts data/rlvr_prompts_v2.jsonl \\
+        --rlvr-prompts data/rlvr_prompts.jsonl \\
         --sft-checkpoint checkpoints/sft/qwen25-math-1_5b-r16-bf16-v2-p4smoke/lora \\
         --num-prompts 50
 
 Exit codes:
-    0 — all parity checks pass.
-    1 — at least one parity check failed (details printed).
-    2 — usage / I/O error.
+    0 - all parity checks pass.
+    1 - at least one parity check failed (details printed).
+    2 - usage / I/O error.
 """
 
 from __future__ import annotations
@@ -98,7 +98,7 @@ def _check_chat_template_parity(prompts: list[list[dict]], tokenizer) -> tuple[i
             continue
 
         ids1 = tokenizer(rendered, add_special_tokens=False).input_ids
-        # encode → decode → encode must be the identity, otherwise the rollout
+        # encode -> decode -> encode must be the identity, otherwise the rollout
         # text vLLM emits will not re-tokenise to the same ids the trainer used.
         decoded = tokenizer.decode(ids1, skip_special_tokens=False)
         ids2 = tokenizer(decoded, add_special_tokens=False).input_ids
@@ -113,7 +113,7 @@ def _check_chat_template_parity(prompts: list[list[dict]], tokenizer) -> tuple[i
             min(len(ids1), len(ids2)),
         )
         logger.warning(
-            "prompt %d: round-trip mismatch at token %d (len %d → %d). "
+            "prompt %d: round-trip mismatch at token %d (len %d -> %d). "
             "First diverging context: %r",
             i, diff_at, len(ids1), len(ids2),
             decoded[max(0, diff_at - 20): diff_at + 20],
@@ -163,11 +163,11 @@ def _check_vllm_parity(prompts: list[list[dict]], hf_tokenizer, model_path: str)
 
 def main() -> int:
     p = argparse.ArgumentParser(
-        description="Rollout/training-time tokeniser parity check (PLAN §P4).",
+        description="Rollout/training-time tokeniser parity check (PLAN Section P4).",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     p.add_argument(
-        "--rlvr-prompts", default="data/rlvr_prompts_v2.jsonl",
+        "--rlvr-prompts", default="data/rlvr_prompts.jsonl",
         help="Path to a v2 RLVR prompts JSONL file.",
     )
     p.add_argument(

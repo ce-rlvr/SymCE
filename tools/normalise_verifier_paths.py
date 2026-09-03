@@ -25,9 +25,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 # (file, dotted key path) pairs that hold a verifier module location.
 TARGETS: list[tuple[str, tuple[str, ...]]] = [
-    ("data/algebra_counterexamples_v2_reconstructed.jsonl", ("verifier", "module_path")),
-    ("data/test_set_v2.jsonl", ("verifier", "module_path")),
-    ("data/rlvr_prompts_v2.jsonl", ("verifier_module_path",)),
+    ("data/symce_corpus.jsonl", ("verifier", "module_path")),
+    ("data/test_set.jsonl", ("verifier", "module_path")),
+    ("data/rlvr_prompts.jsonl", ("verifier_module_path",)),
     ("data/witness_schemas.jsonl", ("file",)),
     ("data/witness_schemas.jsonl", ("module_path",)),
 ]

@@ -30,7 +30,7 @@ The on-disk layout is:
       index.jsonl                      (one line per status change; append-only)
 
 The runs/ directory is intentionally separate from checkpoints/ so the
-legacy paths (checkpoints/sft/qwen25-math-1_5b-r16-bf16/, …) remain readable
+legacy paths (checkpoints/sft/qwen25-math-1_5b-r16-bf16/, ...) remain readable
 without us having to rewrite them in-place. `tools/migrate_legacy_checkpoints.py`
 moves the legacy dirs into runs/ with a synthetic timestamp from mtime.
 """
@@ -55,9 +55,9 @@ RUNS_ROOT: Path = REPO_ROOT / "runs"
 INDEX_PATH: Path = RUNS_ROOT / "index.jsonl"
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Git
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _run_git(*args: str) -> Optional[str]:
     try:
@@ -83,9 +83,9 @@ def git_info() -> dict[str, Any]:
     }
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Dataset fingerprint
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _sha256_of_file(path: Path, chunk: int = 1 << 20) -> str:
     h = hashlib.sha256()
@@ -106,7 +106,7 @@ def _count_lines(path: Path) -> int:
 def dataset_fingerprint(dataset_paths: Iterable[str | Path]) -> dict[str, dict[str, Any]]:
     """Returns {relative_path: {sha256, sha8, line_count, mtime, bytes}}.
 
-    Silently skips paths that don't exist (with a sentinel entry) — we still
+    Silently skips paths that don't exist (with a sentinel entry) - we still
     record the attempt so post-hoc audits can see the trainer was *asked* to
     train on a missing file.
     """
@@ -130,9 +130,9 @@ def dataset_fingerprint(dataset_paths: Iterable[str | Path]) -> dict[str, dict[s
     return out
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Run-directory construction
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _config_basename(config_yaml: Optional[str | Path]) -> str:
     if not config_yaml:
@@ -154,8 +154,8 @@ def build_run_dir(
 ) -> Path:
     """Allocate a unique run directory under ``runs/{phase}/``.
 
-    Collisions (same minute, same config, same seed, same SHA — rare) get an
-    ``__r2``, ``__r3``, … suffix appended so we never silently overwrite.
+    Collisions (same minute, same config, same seed, same SHA - rare) get an
+    ``__r2``, ``__r3``, ... suffix appended so we never silently overwrite.
     """
     ts = (now or datetime.now(tz=timezone.utc)).strftime("%Y%m%d-%H%M%S")
     cfg_name = _slugify(_config_basename(config_yaml))
@@ -175,9 +175,9 @@ def build_run_dir(
     return candidate
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Metadata stamping
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def _config_to_dict(cfg: Any) -> dict[str, Any]:
     if is_dataclass(cfg):
@@ -313,9 +313,9 @@ def _append_index(record: dict[str, Any]) -> None:
         fh.write(json.dumps(record, default=str) + "\n")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 # Convenience: derive a W&B run_name from a run_dir
-# ─────────────────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
 
 def derive_wandb_names(
     run_dir: Path,
@@ -329,10 +329,10 @@ def derive_wandb_names(
     Conventions (overridable):
       - project: ``pfe-rlvr-{phase}`` (e.g. ``pfe-rlvr-sft``, ``pfe-rlvr-rlvr``).
       - group:   the config_basename portion of the run_dir leaf.
-      - name:    the run_dir leaf (timestamped + seed + sha → globally unique).
+      - name:    the run_dir leaf (timestamped + seed + sha -> globally unique).
     """
     leaf = run_dir.name
-    # leaf is "<ts>__<cfg>__seed<N>__<sha>[__extra]" — group = <cfg>
+    # leaf is "<ts>__<cfg>__seed<N>__<sha>[__extra]" - group = <cfg>
     parts = leaf.split("__")
     group = parts[1] if len(parts) >= 2 else "default"
     return {

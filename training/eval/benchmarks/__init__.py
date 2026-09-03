@@ -14,15 +14,15 @@ declares:
 
 Available prompt styles (subset depends on the benchmark):
 
-- ``"standard_cot"`` — generic "solve and box the final answer" style.
-- ``"v2_counterexample"`` — the in-domain [COUNTEREXAMPLE: ...] format
+- ``"standard_cot"`` - generic "solve and box the final answer" style.
+- ``"v2_counterexample"`` - the in-domain [COUNTEREXAMPLE: ...] format
   (used by the in-domain counterexample benchmark, and on external benches
   for the SFT/RLVR models to measure regression under their trained format).
-- ``"auto"`` — resolves to the benchmark's preferred default.
+- ``"auto"`` - resolves to the benchmark's preferred default.
 
 Available benchmarks:
 
-- ``counterexample`` (in-domain): v2 oracle scoring against ``data/test_set_v2.jsonl``.
+- ``counterexample`` (in-domain): v2 oracle scoring against ``data/test_set.jsonl``.
 - ``theorem_truth`` (in-domain): true-theorem classification using ``data/theorem_truth_eval.jsonl``.
 - ``gsm8k`` (external)
 - ``math`` (external)

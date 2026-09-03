@@ -7,9 +7,9 @@ applies the Qwen chat template, and returns ``(train_dataset, eval_dataset)``.
 A ``task_mode`` switch on ``SFTConfig`` selects the expected assistant-target
 shape:
 
-- ``"legacy"`` — v1.0 SFT data, where the assistant message is a
+- ``"legacy"`` - v1.0 SFT data, where the assistant message is a
   ```python``` code block. No further validation performed.
-- ``"counterexample_only"`` — v2.0 SFT data (P3+). Each assistant message is
+- ``"counterexample_only"`` - v2.0 SFT data (P3+). Each assistant message is
   validated against the v2 tag contract via
   ``parse_counterexample_tag``; lines that fail to parse a
   ``[COUNTEREXAMPLE: <expr>]`` tag are rejected at load time so a malformed
@@ -42,7 +42,7 @@ def _validate_assistant_v2(content: str, line_no: int) -> None:
             f"line {line_no}: v2 SFT record has no parseable "
             f"[COUNTEREXAMPLE: …] tag in the assistant message; "
             f"set task_mode='legacy' for v1 data or rebuild via "
-            f"tools/build_v2_splits.py."
+            f"tools/build_splits.py."
         )
 
 
@@ -53,7 +53,7 @@ def load_sft_dataset(cfg, tokenizer):
 
     Each record must be ``{"messages": [system, user, assistant]}``. When
     ``cfg.task_mode == "counterexample_only"``, the assistant content is also
-    validated to contain a parseable ``[COUNTEREXAMPLE: …]`` tag.
+    validated to contain a parseable ``[COUNTEREXAMPLE: ...]`` tag.
     """
     task_mode = getattr(cfg, "task_mode", "legacy")
     if task_mode not in _VALID_TASK_MODES:

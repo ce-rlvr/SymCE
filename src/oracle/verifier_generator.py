@@ -56,7 +56,7 @@ def _extract_section(prompt_md: str, heading: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Gemini model cache (separate from generator_llm.py — different system prompt)
+# Gemini model cache (separate from generator_llm.py - different system prompt)
 # ---------------------------------------------------------------------------
 
 _model_lock = threading.Lock()
@@ -166,7 +166,7 @@ def _build_user_prompt_verifier(record: dict, system_prompt_md: str) -> str:
     domain = record.get("domain", "Algebra")
     theorem_name = record.get("theorem_name", record.get("theorem_id", "unknown"))
 
-    bulleted = "\n  - ".join(remaining) if remaining else "(none)"
+    bulleted = "\n - ".join(remaining) if remaining else "(none)"
 
     # Extract just the user prompt section from the MD file
     match = re.search(r"##\s+USER PROMPT TEMPLATE.*?```[^\n]*\n(.*?)```", system_prompt_md, re.DOTALL)
@@ -177,7 +177,7 @@ def _build_user_prompt_verifier(record: dict, system_prompt_md: str) -> str:
     return template.format(
         domain=domain,
         theorem_name=theorem_name,
-        remaining_hypotheses_bulleted=f"  - {bulleted}",
+        remaining_hypotheses_bulleted=f" - {bulleted}",
         conclusion=conclusion,
     )
 
@@ -189,7 +189,7 @@ def _build_user_prompt_witness(record: dict, witness_prompt_md: str, use_fallbac
     domain = record.get("domain", "Algebra")
     counterexample_code = record.get("counterexample_code", "")
 
-    bulleted = "\n".join(f"  - {h}" for h in remaining) if remaining else "  (none)"
+    bulleted = "\n".join(f" - {h}" for h in remaining) if remaining else "  (none)"
 
     if use_fallback or not counterexample_code.strip():
         # Use fallback prompt
@@ -336,7 +336,7 @@ def generate_verifier(
         module_path.write_text(raw_source, encoding="utf-8")
         source = raw_source
 
-        # Quick syntax check via subprocess (don't run full oracle yet — no witness)
+        # Quick syntax check via subprocess (don't run full oracle yet - no witness)
         import subprocess, tempfile, sys, os as _os
         with tempfile.NamedTemporaryFile(mode="w", suffix=".py", prefix="syntax_check_", delete=False) as tmp:
             tmp.write(f"import importlib.util\n"

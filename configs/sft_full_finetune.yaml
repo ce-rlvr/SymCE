@@ -11,7 +11,7 @@ sft:
   dtype: bfloat16
   load_in_4bit: false
 
-  # ── LoRA disabled for full fine-tuning ───────────────────────────────────
+  # LoRA disabled for full fine-tuning
   use_lora: true
   lora_r: 32
   lora_alpha: 32
@@ -24,24 +24,24 @@ sft:
     - gate_proj
     - up_proj
     - down_proj
-  
+
   # For full SFT, we don't need these LoRA parameters, but we can leave them
   # as defaults or omit them. (They won't be used since use_lora is false).
 
-  train_jsonl: data/sft_data_v2.jsonl
+  train_jsonl: data/sft_data.jsonl
   eval_fraction: 0.05
   task_mode: counterexample_only
 
-  # ── Optimisation ───────────────────────────────────────────────────────────
-  # Full SFT uses much more VRAM than LoRA. 
-  # We reduce per-device batch size and increase gradient accumulation steps 
+  # Optimisation
+  # Full SFT uses much more VRAM than LoRA.
+  # We reduce per-device batch size and increase gradient accumulation steps
   # to maintain an effective batch size of 32 (2 * 16) without OOMing on 32GB GPU.
   per_device_train_batch_size: 2
-  gradient_accumulation_steps: 16   
-  
+  gradient_accumulation_steps: 16
+
   num_train_epochs: 2.0
   max_steps: -1
-  
+
   # Full SFT typically requires a smaller learning rate than LoRA
   # (e.g. 2e-5 instead of 2e-4)
   learning_rate: 2.0e-5
@@ -62,15 +62,15 @@ sft:
   # Directory fallback (use_run_dir=true takes precedence normally)
   output_dir: checkpoints/sft/qwen3-4b-fullsft-bf16-v2
 
-  # ── Run-directory + experiment tracking ────────────────────────────────────
+  # Run-directory + experiment tracking
   use_run_dir: true
   report_to: wandb
   wandb_project: ""
   wandb_group: ""
 
-  # ── Post-train held-out probe ──────────────────────────────────────────────
+  # Post-train held-out probe
   holdout_probe_enabled: true
-  holdout_probe_jsonl: data/test_set_v2.jsonl
+  holdout_probe_jsonl: data/test_set.jsonl
   holdout_probe_n_prompts: 50
   holdout_probe_k_samples: 5
   holdout_probe_temperature: 1.0

@@ -16,13 +16,13 @@ the per_record JSONs via the `subset` field:
 
 For each (model, prompt_style, sampling_label) cell we report:
 - N, Pass@1 with 95% bootstrap CI on each subset.
-- The paired delta (extra_stratified - from_test_set) — *positive* delta means
+- The paired delta (extra_stratified - from_test_set) - *positive* delta means
   the model does better on seen-mutation theorems, which is the memorisation
   signal we want to bound.
 
 Inputs
 ------
-runs/eval/*__thesis_full__suite/per_cell/*__theorem_truth__*.json
+runs/eval/*__suite/per_cell/*__theorem_truth__*.json
 
 Outputs
 -------
@@ -70,10 +70,10 @@ def bootstrap_pass_at_1(records: list[dict], n_bootstrap: int, alpha: float, rng
 def bootstrap_subset_delta(
     records: list[dict], n_bootstrap: int, alpha: float, rng,
 ) -> tuple[float, float, float, int, int]:
-    """Bootstrap CI on (Pass@1 on extra_stratified) − (Pass@1 on from_test_set).
+    """Bootstrap CI on (Pass@1 on extra_stratified) - (Pass@1 on from_test_set).
 
     Resamples *within each subset independently* (since the subsets are
-    different theorems — not paired).
+    different theorems - not paired).
     """
     extra = [r for r in records if r.get("subset") == "extra_stratified"]
     base = [r for r in records if r.get("subset") == "from_test_set"]
@@ -117,7 +117,7 @@ def main() -> int:
 
     if args.suite_dirs is None:
         args.suite_dirs = [Path(p) for p in sorted(
-            glob.glob(str(REPO_ROOT / "runs" / "eval" / "*__thesis_full__suite"))
+            glob.glob(str(REPO_ROOT / "runs" / "eval" / "*__suite"))
         )]
 
     cells = load_theorem_truth_cells(args.suite_dirs)
@@ -179,7 +179,7 @@ def main() -> int:
             if not bucket:
                 continue
             md.append(f"## {style} / {samp}\n")
-            md.append("| Model | Pass@1 extra_strat (CI) | Pass@1 from_test (CI) | Δ (extra − test) | 95% CI on Δ |")
+            md.append("| Model | Pass@1 extra_strat (CI) | Pass@1 from_test (CI) | Δ (extra - test) | 95% CI on Δ |")
             md.append("|---|---:|---:|---:|---:|")
             for r in bucket:
                 md.append(

@@ -3,7 +3,7 @@
 
 ## aime2024
 
-### qwen-base — standard_cot / greedy
+### qwen-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -11,7 +11,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.0 | 0.0 | 0.0 |
 
-### qwen-rlvr — standard_cot / greedy
+### qwen-rlvr - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -28,7 +28,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.066667 | 0.0 | 0.166667 |
 
-### qwen-rlvr-sparse — standard_cot / greedy
+### qwen-rlvr-sparse - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -45,7 +45,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.1 | 0.0 | 0.233333 |
 
-### qwen-sft — standard_cot / greedy
+### qwen-sft - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -62,7 +62,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.066667 | 0.0 | 0.166667 |
 
-### qwen3-base — standard_cot / greedy
+### qwen3-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -70,7 +70,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.0 | 0.0 | 0.0 |
 
-### qwen-base — standard_cot / sampled
+### qwen-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -81,7 +81,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.025 | 0.004167 | 0.054167 |
 
-### qwen-rlvr — standard_cot / sampled
+### qwen-rlvr - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -110,7 +110,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.070833 | 0.008333 | 0.158333 |
 
-### qwen-rlvr-sparse — standard_cot / sampled
+### qwen-rlvr-sparse - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -139,7 +139,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.070833 | 0.004167 | 0.1625 |
 
-### qwen-sft — standard_cot / sampled
+### qwen-sft - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -168,7 +168,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.041667 | 0.0 | 0.095833 |
 
-### qwen3-base — standard_cot / sampled
+### qwen3-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -179,7 +179,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.0 | 0.0 | 0.0 |
 
-### qwen-rlvr — v2_counterexample / greedy
+### qwen-rlvr - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -196,7 +196,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.166667 | 0.033333 | 0.3 |
 
-### qwen-rlvr-sparse — v2_counterexample / greedy
+### qwen-rlvr-sparse - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -213,7 +213,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.066667 | 0.0 | 0.166667 |
 
-### qwen-sft — v2_counterexample / greedy
+### qwen-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -230,7 +230,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.066667 | 0.0 | 0.166667 |
 
-### qwen-rlvr — v2_counterexample / sampled
+### qwen-rlvr - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -259,7 +259,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.104167 | 0.025 | 0.204167 |
 
-### qwen-rlvr-sparse — v2_counterexample / sampled
+### qwen-rlvr-sparse - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -288,7 +288,7 @@
 | conclusion_pass_rate | overall | 30 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:AIME | 30 | 0.1125 | 0.045833 | 0.195833 |
 
-### qwen-sft — v2_counterexample / sampled
+### qwen-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -320,7 +320,7 @@
 
 ## counterexample
 
-### abel-7b-002 — v2_counterexample / greedy
+### abel-7b-002 - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -333,7 +333,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.076923 | 0.0 | 0.230769 |
 | pass_at_1 | domain:RingTheory | 47 | 0.042553 | 0.0 | 0.106383 |
 
-### deepseek-flash — v2_counterexample / greedy
+### deepseek-flash - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -346,7 +346,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.538462 | 0.230769 | 0.769231 |
 | pass_at_1 | domain:RingTheory | 47 | 0.276596 | 0.148936 | 0.404255 |
 
-### deepseek-math-7b-rl — v2_counterexample / greedy
+### deepseek-math-7b-rl - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -359,7 +359,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.076923 | 0.0 | 0.230769 |
 | pass_at_1 | domain:RingTheory | 47 | 0.06383 | 0.0 | 0.148936 |
 
-### deepseek-pro — v2_counterexample / greedy
+### deepseek-pro - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -372,7 +372,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.461538 | 0.230769 | 0.692308 |
 | pass_at_1 | domain:RingTheory | 47 | 0.255319 | 0.12766 | 0.382979 |
 
-### eurus-2-7b-prime — v2_counterexample / greedy
+### eurus-2-7b-prime - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -385,7 +385,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.230769 | 0.0 | 0.461538 |
 | pass_at_1 | domain:RingTheory | 47 | 0.255319 | 0.12766 | 0.382979 |
 
-### gemini-flash — v2_counterexample / greedy
+### gemini-flash - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -398,7 +398,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.307692 | 0.076923 | 0.538462 |
 | pass_at_1 | domain:RingTheory | 47 | 0.382979 | 0.255319 | 0.531915 |
 
-### gemini-flash-lite — v2_counterexample / greedy
+### gemini-flash-lite - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -411,7 +411,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.615385 | 0.384615 | 0.846154 |
 | pass_at_1 | domain:RingTheory | 47 | 0.553191 | 0.404255 | 0.702128 |
 
-### gemini-flash-preview — v2_counterexample / greedy
+### gemini-flash-preview - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -424,7 +424,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.384615 | 0.153846 | 0.615385 |
 | pass_at_1 | domain:RingTheory | 47 | 0.340426 | 0.212766 | 0.489362 |
 
-### gemini-pro — v2_counterexample / greedy
+### gemini-pro - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -437,7 +437,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.538462 | 0.307692 | 0.769231 |
 | pass_at_1 | domain:RingTheory | 47 | 0.340426 | 0.212766 | 0.489362 |
 
-### gemma3-base — v2_counterexample / greedy
+### gemma3-base - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -450,7 +450,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.153846 | 0.0 | 0.384615 |
 | pass_at_1 | domain:RingTheory | 47 | 0.170213 | 0.06383 | 0.276596 |
 
-### gemma3-rlvr-dense — v2_counterexample / greedy
+### gemma3-rlvr-dense - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -463,7 +463,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.230769 | 0.0 | 0.461538 |
 | pass_at_1 | domain:RingTheory | 47 | 0.340426 | 0.212766 | 0.468085 |
 
-### gemma3-sft — v2_counterexample / greedy
+### gemma3-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -476,7 +476,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.076923 | 0.0 | 0.230769 |
 | pass_at_1 | domain:RingTheory | 47 | 0.191489 | 0.085106 | 0.319149 |
 
-### mammoth2-7b-plus — v2_counterexample / greedy
+### mammoth2-7b-plus - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -489,7 +489,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:RingTheory | 47 | 0.0 | 0.0 | 0.0 |
 
-### qwen-base — v2_counterexample / greedy
+### qwen-base - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -502,7 +502,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:RingTheory | 47 | 0.0 | 0.0 | 0.0 |
 
-### qwen-rlvr — v2_counterexample / greedy
+### qwen-rlvr - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -539,7 +539,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.461538 | 0.230769 | 0.692308 |
 | pass_at_1 | domain:RingTheory | 47 | 0.531915 | 0.382979 | 0.680851 |
 
-### qwen-rlvr-sparse — v2_counterexample / greedy
+### qwen-rlvr-sparse - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -576,7 +576,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.307692 | 0.076923 | 0.538462 |
 | pass_at_1 | domain:RingTheory | 47 | 0.489362 | 0.340426 | 0.638298 |
 
-### qwen-sft — v2_counterexample / greedy
+### qwen-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -613,7 +613,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.153846 | 0.0 | 0.384615 |
 | pass_at_1 | domain:RingTheory | 47 | 0.297872 | 0.170213 | 0.425532 |
 
-### qwen25-math-7b-instruct — v2_counterexample / greedy
+### qwen25-math-7b-instruct - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -626,7 +626,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.153846 | 0.0 | 0.384615 |
 | pass_at_1 | domain:RingTheory | 47 | 0.106383 | 0.021277 | 0.191489 |
 
-### qwen3-base — v2_counterexample / greedy
+### qwen3-base - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -639,7 +639,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.230769 | 0.0 | 0.461538 |
 | pass_at_1 | domain:RingTheory | 47 | 0.276596 | 0.148936 | 0.404255 |
 
-### abel-7b-002 — v2_counterexample / sampled
+### abel-7b-002 - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -655,7 +655,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.096154 | 0.019231 | 0.192308 |
 | pass_at_1 | domain:RingTheory | 47 | 0.034574 | 0.010638 | 0.06383 |
 
-### deepseek-flash — v2_counterexample / sampled
+### deepseek-flash - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -671,7 +671,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.480769 | 0.269231 | 0.692308 |
 | pass_at_1 | domain:RingTheory | 47 | 0.308511 | 0.210106 | 0.414894 |
 
-### deepseek-math-7b-rl — v2_counterexample / sampled
+### deepseek-math-7b-rl - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -687,7 +687,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.057692 | 0.0 | 0.144231 |
 | pass_at_1 | domain:RingTheory | 47 | 0.055851 | 0.026596 | 0.093085 |
 
-### deepseek-pro — v2_counterexample / sampled
+### deepseek-pro - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -703,7 +703,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.5 | 0.269231 | 0.730769 |
 | pass_at_1 | domain:RingTheory | 47 | 0.31383 | 0.210106 | 0.425532 |
 
-### eurus-2-7b-prime — v2_counterexample / sampled
+### eurus-2-7b-prime - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -719,7 +719,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.336538 | 0.163462 | 0.528846 |
 | pass_at_1 | domain:RingTheory | 47 | 0.263298 | 0.175532 | 0.356383 |
 
-### gemini-flash-lite — v2_counterexample / sampled
+### gemini-flash-lite - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -735,7 +735,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.567308 | 0.317308 | 0.807692 |
 | pass_at_1 | domain:RingTheory | 47 | 0.534574 | 0.409574 | 0.654255 |
 
-### gemini-flash-preview — v2_counterexample / sampled
+### gemini-flash-preview - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -751,7 +751,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.461538 | 0.269231 | 0.653846 |
 | pass_at_1 | domain:RingTheory | 47 | 0.409574 | 0.316489 | 0.507979 |
 
-### gemma3-base — v2_counterexample / sampled
+### gemma3-base - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -767,7 +767,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.057692 | 0.0 | 0.153846 |
 | pass_at_1 | domain:RingTheory | 47 | 0.12766 | 0.074468 | 0.18617 |
 
-### gemma3-rlvr-dense — v2_counterexample / sampled
+### gemma3-rlvr-dense - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -783,7 +783,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.307692 | 0.096154 | 0.538462 |
 | pass_at_1 | domain:RingTheory | 47 | 0.329787 | 0.212766 | 0.452128 |
 
-### gemma3-sft — v2_counterexample / sampled
+### gemma3-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -799,7 +799,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.134615 | 0.048077 | 0.240385 |
 | pass_at_1 | domain:RingTheory | 47 | 0.180851 | 0.106316 | 0.263298 |
 
-### mammoth2-7b-plus — v2_counterexample / sampled
+### mammoth2-7b-plus - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -815,7 +815,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.076923 | 0.009615 | 0.163462 |
 | pass_at_1 | domain:RingTheory | 47 | 0.034574 | 0.013298 | 0.06117 |
 
-### qwen-base — v2_counterexample / sampled
+### qwen-base - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -831,7 +831,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.009615 | 0.0 | 0.028846 |
 | pass_at_1 | domain:RingTheory | 47 | 0.018617 | 0.00266 | 0.037234 |
 
-### qwen-rlvr — v2_counterexample / sampled
+### qwen-rlvr - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -880,7 +880,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.346154 | 0.153846 | 0.567308 |
 | pass_at_1 | domain:RingTheory | 47 | 0.462766 | 0.345745 | 0.577128 |
 
-### qwen-rlvr-sparse — v2_counterexample / sampled
+### qwen-rlvr-sparse - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -929,7 +929,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.346154 | 0.153846 | 0.557692 |
 | pass_at_1 | domain:RingTheory | 47 | 0.425532 | 0.311104 | 0.542553 |
 
-### qwen-sft — v2_counterexample / sampled
+### qwen-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -978,7 +978,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.211538 | 0.105769 | 0.326923 |
 | pass_at_1 | domain:RingTheory | 47 | 0.242021 | 0.159574 | 0.329787 |
 
-### qwen25-math-7b-instruct — v2_counterexample / sampled
+### qwen25-math-7b-instruct - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -994,7 +994,7 @@
 | pass_at_1 | domain:RealAnalysis | 13 | 0.105769 | 0.019231 | 0.221154 |
 | pass_at_1 | domain:RingTheory | 47 | 0.021277 | 0.007979 | 0.037234 |
 
-### qwen3-base — v2_counterexample / sampled
+### qwen3-base - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1013,7 +1013,7 @@
 
 ## gsm8k
 
-### qwen-base — standard_cot / greedy
+### qwen-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1021,7 +1021,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.301744 | 0.277483 | 0.326763 |
 
-### qwen-rlvr — standard_cot / greedy
+### qwen-rlvr - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1038,7 +1038,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.880212 | 0.862756 | 0.89765 |
 
-### qwen-rlvr-sparse — standard_cot / greedy
+### qwen-rlvr-sparse - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1055,7 +1055,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.872631 | 0.854435 | 0.890068 |
 
-### qwen-sft — standard_cot / greedy
+### qwen-sft - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1072,7 +1072,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.790751 | 0.768764 | 0.811979 |
 
-### qwen3-base — standard_cot / greedy
+### qwen3-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1080,7 +1080,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.830174 | 0.809704 | 0.850644 |
 
-### qwen-base — standard_cot / sampled
+### qwen-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1091,7 +1091,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.247062 | 0.233984 | 0.26014 |
 
-### qwen-rlvr — standard_cot / sampled
+### qwen-rlvr - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1120,7 +1120,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.879265 | 0.865805 | 0.892153 |
 
-### qwen-rlvr-sparse — standard_cot / sampled
+### qwen-rlvr-sparse - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1149,7 +1149,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.871873 | 0.857657 | 0.885425 |
 
-### qwen-sft — standard_cot / sampled
+### qwen-sft - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1178,7 +1178,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.767817 | 0.752654 | 0.782792 |
 
-### qwen3-base — standard_cot / sampled
+### qwen3-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1189,7 +1189,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.813306 | 0.79511 | 0.831217 |
 
-### qwen-rlvr — v2_counterexample / greedy
+### qwen-rlvr - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1206,7 +1206,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.88931 | 0.872612 | 0.905989 |
 
-### qwen-rlvr-sparse — v2_counterexample / greedy
+### qwen-rlvr-sparse - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1223,7 +1223,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.887794 | 0.870356 | 0.905231 |
 
-### qwen-sft — v2_counterexample / greedy
+### qwen-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1240,7 +1240,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.709629 | 0.68461 | 0.733889 |
 
-### qwen-rlvr — v2_counterexample / sampled
+### qwen-rlvr - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1269,7 +1269,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.880781 | 0.867132 | 0.894428 |
 
-### qwen-rlvr-sparse — v2_counterexample / sampled
+### qwen-rlvr-sparse - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1298,7 +1298,7 @@
 | conclusion_pass_rate | overall | 1319 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:arithmetic | 1319 | 0.882961 | 0.869124 | 0.896039 |
 
-### qwen-sft — v2_counterexample / sampled
+### qwen-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1330,7 +1330,7 @@
 
 ## math
 
-### qwen-base — standard_cot / greedy
+### qwen-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1344,7 +1344,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.487805 | 0.378049 | 0.597561 |
 | pass_at_1 | domain:Precalculus | 56 | 0.285714 | 0.178571 | 0.410714 |
 
-### qwen-rlvr — standard_cot / greedy
+### qwen-rlvr - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1385,7 +1385,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.780488 | 0.695122 | 0.865854 |
 | pass_at_1 | domain:Precalculus | 56 | 0.392857 | 0.267857 | 0.517857 |
 
-### qwen-rlvr-sparse — standard_cot / greedy
+### qwen-rlvr-sparse - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1426,7 +1426,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.817073 | 0.731707 | 0.902439 |
 | pass_at_1 | domain:Precalculus | 56 | 0.392857 | 0.267857 | 0.517857 |
 
-### qwen-sft — standard_cot / greedy
+### qwen-sft - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1467,7 +1467,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.658537 | 0.560976 | 0.756098 |
 | pass_at_1 | domain:Precalculus | 56 | 0.339286 | 0.214286 | 0.464286 |
 
-### qwen3-base — standard_cot / greedy
+### qwen3-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1481,7 +1481,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.231707 | 0.146341 | 0.329268 |
 | pass_at_1 | domain:Precalculus | 56 | 0.017857 | 0.0 | 0.053571 |
 
-### qwen-base — standard_cot / sampled
+### qwen-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1498,7 +1498,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.36128 | 0.29878 | 0.426867 |
 | pass_at_1 | domain:Precalculus | 56 | 0.216518 | 0.142857 | 0.296875 |
 
-### qwen-rlvr — standard_cot / sampled
+### qwen-rlvr - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1551,7 +1551,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.769817 | 0.6875 | 0.846037 |
 | pass_at_1 | domain:Precalculus | 56 | 0.415179 | 0.310268 | 0.524554 |
 
-### qwen-rlvr-sparse — standard_cot / sampled
+### qwen-rlvr-sparse - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1604,7 +1604,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.757622 | 0.675305 | 0.835366 |
 | pass_at_1 | domain:Precalculus | 56 | 0.379464 | 0.285714 | 0.477679 |
 
-### qwen-sft — standard_cot / sampled
+### qwen-sft - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1657,7 +1657,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.655488 | 0.571646 | 0.734756 |
 | pass_at_1 | domain:Precalculus | 56 | 0.301339 | 0.209821 | 0.397321 |
 
-### qwen3-base — standard_cot / sampled
+### qwen3-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1674,7 +1674,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.256098 | 0.190549 | 0.323171 |
 | pass_at_1 | domain:Precalculus | 56 | 0.0625 | 0.024554 | 0.109375 |
 
-### qwen-rlvr — v2_counterexample / greedy
+### qwen-rlvr - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1715,7 +1715,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.743902 | 0.646341 | 0.829268 |
 | pass_at_1 | domain:Precalculus | 56 | 0.285714 | 0.178571 | 0.410714 |
 
-### qwen-rlvr-sparse — v2_counterexample / greedy
+### qwen-rlvr-sparse - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1756,7 +1756,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.743902 | 0.646341 | 0.829268 |
 | pass_at_1 | domain:Precalculus | 56 | 0.357143 | 0.232143 | 0.482143 |
 
-### qwen-sft — v2_counterexample / greedy
+### qwen-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1797,7 +1797,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.414634 | 0.304878 | 0.52439 |
 | pass_at_1 | domain:Precalculus | 56 | 0.071429 | 0.017857 | 0.142857 |
 
-### qwen-rlvr — v2_counterexample / sampled
+### qwen-rlvr - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1850,7 +1850,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.719512 | 0.632622 | 0.801829 |
 | pass_at_1 | domain:Precalculus | 56 | 0.256696 | 0.165179 | 0.357143 |
 
-### qwen-rlvr-sparse — v2_counterexample / sampled
+### qwen-rlvr-sparse - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1903,7 +1903,7 @@
 | pass_at_1 | domain:Prealgebra | 82 | 0.702744 | 0.620427 | 0.783537 |
 | pass_at_1 | domain:Precalculus | 56 | 0.245536 | 0.154018 | 0.339286 |
 
-### qwen-sft — v2_counterexample / sampled
+### qwen-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1959,7 +1959,7 @@
 
 ## mmlu_college_math
 
-### qwen-base — standard_cot / greedy
+### qwen-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1967,7 +1967,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.27 | 0.19 | 0.36 |
 
-### qwen-rlvr — standard_cot / greedy
+### qwen-rlvr - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -1984,7 +1984,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.68 | 0.59 | 0.77 |
 
-### qwen-rlvr-sparse — standard_cot / greedy
+### qwen-rlvr-sparse - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2001,7 +2001,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.68 | 0.59 | 0.77 |
 
-### qwen-sft — standard_cot / greedy
+### qwen-sft - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2018,7 +2018,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.5 | 0.4 | 0.6 |
 
-### qwen3-base — standard_cot / greedy
+### qwen3-base - standard_cot / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2026,7 +2026,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.34 | 0.25 | 0.43 |
 
-### qwen-base — standard_cot / sampled
+### qwen-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2037,7 +2037,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.345 | 0.29625 | 0.39375 |
 
-### qwen-rlvr — standard_cot / sampled
+### qwen-rlvr - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2066,7 +2066,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.71875 | 0.6525 | 0.78125 |
 
-### qwen-rlvr-sparse — standard_cot / sampled
+### qwen-rlvr-sparse - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2095,7 +2095,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.69375 | 0.63 | 0.755 |
 
-### qwen-sft — standard_cot / sampled
+### qwen-sft - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2124,7 +2124,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.54875 | 0.49 | 0.60875 |
 
-### qwen3-base — standard_cot / sampled
+### qwen3-base - standard_cot / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2135,7 +2135,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.39625 | 0.3275 | 0.46875 |
 
-### qwen-rlvr — v2_counterexample / greedy
+### qwen-rlvr - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2152,7 +2152,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.74 | 0.65 | 0.82 |
 
-### qwen-rlvr-sparse — v2_counterexample / greedy
+### qwen-rlvr-sparse - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2169,7 +2169,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.73 | 0.64 | 0.81 |
 
-### qwen-sft — v2_counterexample / greedy
+### qwen-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2186,7 +2186,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.48 | 0.38 | 0.58 |
 
-### qwen-rlvr — v2_counterexample / sampled
+### qwen-rlvr - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2215,7 +2215,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.73125 | 0.6675 | 0.7925 |
 
-### qwen-rlvr-sparse — v2_counterexample / sampled
+### qwen-rlvr-sparse - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2244,7 +2244,7 @@
 | conclusion_pass_rate | overall | 100 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | domain:college_math | 100 | 0.73125 | 0.6675 | 0.79125 |
 
-### qwen-sft — v2_counterexample / sampled
+### qwen-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2276,7 +2276,7 @@
 
 ## theorem_truth
 
-### gemma3-base — truth_classify / greedy
+### gemma3-base - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2291,7 +2291,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.586667 | 0.506667 | 0.666667 |
 | pass_at_1 | subset:from_test_set | 197 | 0.497462 | 0.426396 | 0.568528 |
 
-### gemma3-rlvr-dense — truth_classify / greedy
+### gemma3-rlvr-dense - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2306,7 +2306,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.64 | 0.566667 | 0.72 |
 | pass_at_1 | subset:from_test_set | 197 | 0.51269 | 0.441624 | 0.583756 |
 
-### gemma3-sft — truth_classify / greedy
+### gemma3-sft - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2321,7 +2321,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.02 | 0.0 | 0.046667 |
 | pass_at_1 | subset:from_test_set | 197 | 0.015228 | 0.0 | 0.035533 |
 
-### qwen-rlvr — truth_classify / greedy
+### qwen-rlvr - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2366,7 +2366,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.766667 | 0.7 | 0.833333 |
 | pass_at_1 | subset:from_test_set | 197 | 0.654822 | 0.588832 | 0.720812 |
 
-### qwen-rlvr-sparse — truth_classify / greedy
+### qwen-rlvr-sparse - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2411,7 +2411,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.62 | 0.54 | 0.693333 |
 | pass_at_1 | subset:from_test_set | 197 | 0.482234 | 0.411168 | 0.553299 |
 
-### qwen-sft — truth_classify / greedy
+### qwen-sft - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2456,7 +2456,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.166667 | 0.106667 | 0.226667 |
 | pass_at_1 | subset:from_test_set | 197 | 0.15736 | 0.106599 | 0.208122 |
 
-### qwen3-base — truth_classify / greedy
+### qwen3-base - truth_classify / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2471,7 +2471,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.733333 | 0.66 | 0.8 |
 | pass_at_1 | subset:from_test_set | 197 | 0.695431 | 0.629442 | 0.761421 |
 
-### gemma3-base — truth_classify / sampled
+### gemma3-base - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2495,7 +2495,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.822244 | 0.773024 | 0.869561 |
 | pass_at_8 | subset:from_test_set | 197 | 0.857868 | 0.807107 | 0.903553 |
 
-### gemma3-rlvr-dense — truth_classify / sampled
+### gemma3-rlvr-dense - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2519,7 +2519,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.878445 | 0.837471 | 0.916153 |
 | pass_at_8 | subset:from_test_set | 197 | 0.918782 | 0.878173 | 0.954315 |
 
-### gemma3-sft — truth_classify / sampled
+### gemma3-sft - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2543,7 +2543,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.129714 | 0.092912 | 0.167152 |
 | pass_at_8 | subset:from_test_set | 197 | 0.192893 | 0.142132 | 0.248731 |
 
-### qwen-rlvr — truth_classify / sampled
+### qwen-rlvr - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2624,7 +2624,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.90736 | 0.869924 | 0.941352 |
 | pass_at_8 | subset:from_test_set | 197 | 0.93401 | 0.898477 | 0.964467 |
 
-### qwen-rlvr-sparse — truth_classify / sampled
+### qwen-rlvr-sparse - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2705,7 +2705,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.743655 | 0.687817 | 0.796413 |
 | pass_at_8 | subset:from_test_set | 197 | 0.80203 | 0.746193 | 0.857868 |
 
-### qwen-sft — truth_classify / sampled
+### qwen-sft - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2786,7 +2786,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.664884 | 0.608593 | 0.719362 |
 | pass_at_8 | subset:from_test_set | 197 | 0.761421 | 0.700508 | 0.817259 |
 
-### qwen3-base — truth_classify / sampled
+### qwen3-base - truth_classify / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2810,7 +2810,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.948695 | 0.924039 | 0.970087 |
 | pass_at_8 | subset:from_test_set | 197 | 0.979695 | 0.959391 | 0.994924 |
 
-### gemma3-base — v2_counterexample / greedy
+### gemma3-base - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2825,7 +2825,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.473333 | 0.393333 | 0.553333 |
 | pass_at_1 | subset:from_test_set | 197 | 0.472081 | 0.406091 | 0.543147 |
 
-### gemma3-rlvr-dense — v2_counterexample / greedy
+### gemma3-rlvr-dense - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2840,7 +2840,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.273333 | 0.2 | 0.346667 |
 | pass_at_1 | subset:from_test_set | 197 | 0.187817 | 0.137056 | 0.243655 |
 
-### gemma3-sft — v2_counterexample / greedy
+### gemma3-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2855,7 +2855,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | subset:from_test_set | 197 | 0.005076 | 0.0 | 0.015228 |
 
-### qwen-rlvr — v2_counterexample / greedy
+### qwen-rlvr - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2900,7 +2900,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.473333 | 0.393333 | 0.553333 |
 | pass_at_1 | subset:from_test_set | 197 | 0.370558 | 0.304569 | 0.436548 |
 
-### qwen-rlvr-sparse — v2_counterexample / greedy
+### qwen-rlvr-sparse - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2945,7 +2945,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.7 | 0.626667 | 0.773333 |
 | pass_at_1 | subset:from_test_set | 197 | 0.604061 | 0.532995 | 0.670051 |
 
-### qwen-sft — v2_counterexample / greedy
+### qwen-sft - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -2990,7 +2990,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.0 | 0.0 | 0.0 |
 | pass_at_1 | subset:from_test_set | 197 | 0.0 | 0.0 | 0.0 |
 
-### qwen3-base — v2_counterexample / greedy
+### qwen3-base - v2_counterexample / greedy
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3005,7 +3005,7 @@
 | pass_at_1 | subset:extra_stratified | 150 | 0.866667 | 0.806667 | 0.92 |
 | pass_at_1 | subset:from_test_set | 197 | 0.862944 | 0.812183 | 0.908629 |
 
-### gemma3-base — v2_counterexample / sampled
+### gemma3-base - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3029,7 +3029,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.824511 | 0.781998 | 0.864123 |
 | pass_at_8 | subset:from_test_set | 197 | 0.903553 | 0.857868 | 0.944162 |
 
-### gemma3-rlvr-dense — v2_counterexample / sampled
+### gemma3-rlvr-dense - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3053,7 +3053,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.550943 | 0.490754 | 0.609139 |
 | pass_at_8 | subset:from_test_set | 197 | 0.649746 | 0.583756 | 0.715736 |
 
-### gemma3-sft — v2_counterexample / sampled
+### gemma3-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3077,7 +3077,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.003173 | 0.0 | 0.009518 |
 | pass_at_8 | subset:from_test_set | 197 | 0.005076 | 0.0 | 0.015228 |
 
-### qwen-rlvr — v2_counterexample / sampled
+### qwen-rlvr - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3158,7 +3158,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.616207 | 0.556017 | 0.67422 |
 | pass_at_8 | subset:from_test_set | 197 | 0.695431 | 0.629442 | 0.761421 |
 
-### qwen-rlvr-sparse — v2_counterexample / sampled
+### qwen-rlvr-sparse - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3239,7 +3239,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.885243 | 0.845631 | 0.921048 |
 | pass_at_8 | subset:from_test_set | 197 | 0.923858 | 0.883249 | 0.959391 |
 
-### qwen-sft — v2_counterexample / sampled
+### qwen-sft - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|
@@ -3320,7 +3320,7 @@
 | pass_at_5 | subset:from_test_set | 197 | 0.003173 | 0.0 | 0.009518 |
 | pass_at_8 | subset:from_test_set | 197 | 0.005076 | 0.0 | 0.015228 |
 
-### qwen3-base — v2_counterexample / sampled
+### qwen3-base - v2_counterexample / sampled
 
 | Metric | Slice | N | Point | CI lo | CI hi |
 |---|---|---:|---:|---:|---:|

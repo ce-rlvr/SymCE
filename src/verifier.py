@@ -9,7 +9,7 @@ Key design choices:
     the "Learning to Disprove" logical specification bug: scripts that assert
     Q(x) is True instead of asserting Q(x) is False.
   - A successful verification (success=True) means exit code 0, which in
-    turn means all assert statements passed — including `assert not Q(x)`.
+    turn means all assert statements passed - including `assert not Q(x)`.
 """
 
 import os
@@ -55,7 +55,7 @@ def check_negation_form(code: str) -> bool:
     Returns True if the code contains at least one pattern that asserts the
     *negation* of the conclusion (e.g. `assert not Q(x)` or `assert a != b`).
 
-    A False result is a red flag — the code may be asserting Q(x) is True
+    A False result is a red flag - the code may be asserting Q(x) is True
     (existential satisfiability) rather than False (disproof).
 
     This is a conservative heuristic; execution is the authoritative check.
@@ -156,7 +156,7 @@ def execute_and_verify(python_code: str) -> dict:
     result["negation_form_ok"] = check_negation_form(python_code)
     if not result["negation_form_ok"]:
         logger.warning(
-            "Negation form check FAILED — code may assert Q(x) is True "
+            "Negation form check FAILED - code may assert Q(x) is True "
             "instead of False. Proceeding to execution but flagging the issue."
         )
         result["error_message"] = (

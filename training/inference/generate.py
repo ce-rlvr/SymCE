@@ -68,7 +68,7 @@ def main() -> None:
             if len(samples) >= args.num_samples:
                 break
 
-    print(f"[gen]   {len(samples)} sample(s) from {prompts_path.name}\n{'─'*60}")
+    print(f"[gen]   {len(samples)} sample(s) from {prompts_path.name}\n{''*60}")
 
     for i, record in enumerate(samples, 1):
         messages = record["messages"]   # [system, user]
@@ -90,11 +90,11 @@ def main() -> None:
         completion = tokenizer.decode(new_tokens, skip_special_tokens=True)
 
         user_snippet = messages[-1]["content"][:200].replace("\n", " ")
-        print(f"\n── Sample {i} ──")
-        print(f"[user]      {user_snippet}…")
+        print(f"\n-- Sample {i} --")
+        print(f"[user]      {user_snippet}...")
         print(f"[assistant]\n{completion}")
 
-    print(f"\n{'─'*60}\n[done]")
+    print(f"\n{''*60}\n[done]")
 
 
 if __name__ == "__main__":

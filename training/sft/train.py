@@ -50,7 +50,7 @@ from training.sft.trainer import build_trainer
 
 def _build_parser(cfg: SFTConfig) -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        description="SFT fine-tuning — Qwen2.5-Math-1.5B + LoRA via Unsloth",
+        description="SFT fine-tuning - Qwen2.5-Math-1.5B + LoRA via Unsloth",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     p.add_argument(
@@ -90,7 +90,7 @@ def _parse() -> tuple[SFTConfig, argparse.Namespace]:
 
 
 def _save_train_log(trainer, output_dir: Path) -> dict:
-    """Dump trainer.state.log_history → train_log.csv. Return a small headline dict."""
+    """Dump trainer.state.log_history -> train_log.csv. Return a small headline dict."""
     history = trainer.state.log_history
     if not history:
         return {}
@@ -154,7 +154,7 @@ def main() -> None:
     cfg, parsed_args = _parse()
     set_seed(cfg.seed)
 
-    # ── Run directory ──────────────────────────────────────────────────────
+    # Run directory
     if cfg.use_run_dir:
         run_dir = build_run_dir(
             phase="sft",
@@ -188,7 +188,7 @@ def main() -> None:
     lora_dir = output_dir / "lora"
     merged_dir = output_dir / "merged"
 
-    # ── Model + data ───────────────────────────────────────────────────────
+    # Model + data
     print(f"[model]    Loading {cfg.model_name} …")
     model, tokenizer = build_model_and_tokenizer(cfg)
 
@@ -196,14 +196,14 @@ def main() -> None:
     train_ds, eval_ds = load_sft_dataset(cfg, tokenizer)
     print(f"           train={len(train_ds)}  eval={len(eval_ds)}")
 
-    # ── Train ──────────────────────────────────────────────────────────────
-    print("[trainer]  Building SFTTrainer …")
+    # Train
+    print("[trainer]  Building SFTTrainer ...")
     trainer = build_trainer(
         cfg, model, tokenizer, train_ds, eval_ds,
         output_dir=output_dir, run_name=wandb_names["name"],
     )
 
-    print("[train]    Starting training …")
+    print("[train]    Starting training ...")
     try:
         trainer.train()
     except Exception as exc:
@@ -211,8 +211,8 @@ def main() -> None:
             finalise_run(run_dir, status="failed", extra={"exception": repr(exc)})
         raise
 
-    # ── Save artefacts ─────────────────────────────────────────────────────
-    print("[save]     Saving artefacts …")
+    # Save artefacts
+    print("[save]     Saving artefacts ...")
     if cfg.use_lora:
         model.save_pretrained(str(lora_dir))
         tokenizer.save_pretrained(str(lora_dir))
@@ -231,7 +231,7 @@ def main() -> None:
 
     train_headlines = _save_train_log(trainer, output_dir)
 
-    # ── Post-train held-out probe ──────────────────────────────────────────
+    # Post-train held-out probe
     probe_summary: dict = {}
     if cfg.holdout_probe_enabled:
         print(f"[probe]    Held-out probe on {cfg.holdout_probe_jsonl} "
@@ -258,12 +258,12 @@ def main() -> None:
             print(f"    oracle_pass_at_{cfg.holdout_probe_k_samples}        = "
                   f"{probe_summary[f'oracle_pass_at_{cfg.holdout_probe_k_samples}']:.3f}")
             if not probe_summary["advisory_gate_passed"]:
-                print("  [warn] tag_parse_rate < 0.80 — RLVR will likely struggle. "
+                print("  [warn] tag_parse_rate < 0.80 - RLVR will likely struggle. "
                       "Consider revisiting SFT data quality before continuing.")
         else:
-            print("  [warn] no probe records loaded — skipping diagnostics")
+            print("  [warn] no probe records loaded - skipping diagnostics")
 
-    # ── Summary + finalise ─────────────────────────────────────────────────
+    # Summary + finalise
     write_run_summary_md(
         output_dir / "run_summary.md",
         title=f"SFT run — {output_dir.name}",

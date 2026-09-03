@@ -1,6 +1,6 @@
 """In-domain v2 counterexample benchmark.
 
-Loads ``data/test_set_v2.jsonl`` (or whatever ``test_file`` is configured),
+Loads ``data/test_set.jsonl`` (or whatever ``test_file`` is configured),
 builds the leakage-free user prompt via ``training.common.prompts``, and
 scores each completion through the independent per-theorem verifier via
 ``compute_reward_oracle``. "Correct" = strict success (q_neg=1 AND all
@@ -26,7 +26,7 @@ from training.rlvr.reward_oracle import (
 
 logger = logging.getLogger(__name__)
 
-# Generic CoT prompt for "external" comparability — used when this benchmark
+# Generic CoT prompt for "external" comparability - used when this benchmark
 # is invoked with prompt_style=standard_cot (rare; mostly here for symmetry).
 _STANDARD_COT_SYSTEM = (
     "You are an expert mathematician. Reason carefully about the proposed "
@@ -46,7 +46,7 @@ class CounterexampleBenchmark(Benchmark):
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
-        self.test_file = (self.cfg or {}).get("test_file", "data/test_set_v2.jsonl")
+        self.test_file = (self.cfg or {}).get("test_file", "data/test_set.jsonl")
         self.drop_unusable = bool((self.cfg or {}).get("drop_unusable", True))
         self.oracle_timeout = float((self.cfg or {}).get("oracle_timeout", 8.0))
         self.oracle_weights = (self.cfg or {}).get("oracle_weights") or dict(

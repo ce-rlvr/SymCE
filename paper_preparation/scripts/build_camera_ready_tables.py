@@ -70,7 +70,7 @@ def load_cells(runs_root: str):
     Accepts both the raw ``.json`` cells produced by the evaluation harness and the
     gzipped ``.json.gz`` cells carried by the public release.
     """
-    base = os.path.join(runs_root, "eval", "*__thesis_full__suite", "per_cell")
+    base = os.path.join(runs_root, "eval", "*__suite", "per_cell")
     paths = sorted(glob.glob(os.path.join(base, "*.json"))
                    + glob.glob(os.path.join(base, "*.json.gz")))
     for path in paths:
@@ -537,10 +537,10 @@ def render_markdown(tables: dict) -> str:
             if label == "base":
                 cells_out.append(fmt(r.get("value")))
             else:
-                cells_out.append(f"{fmt(r['mean'])} ± {fmt(r['sd'])}")
+                cells_out.append(f"{fmt(r['mean'])} +/- {fmt(r['sd'])}")
         lines.append(f"| {metric} | " + " | ".join(cells_out) + " |")
     gap = ms["sparse_minus_dense_v2"]
-    lines += ["", f"Sparse minus dense on the v2 probe: **{fmt(gap['mean'])} ± {fmt(gap['sd'])}**, "
+    lines += ["", f"Sparse minus dense on the v2 probe: **{fmt(gap['mean'])} +/- {fmt(gap['sd'])}**, "
                   f"per seed " + ", ".join(f"{k}={fmt(v)}" for k, v in gap["per_seed"].items()) + "."]
 
     o = tables["ood"]
@@ -552,7 +552,7 @@ def render_markdown(tables: dict) -> str:
         for label, _ in ARMS:
             r = row[label]
             vals.append(fmt(r.get("value")) if label == "base" else
-                        (f"{fmt(r['mean'])} ± {fmt(r['sd'])}" if r else "--"))
+                        (f"{fmt(r['mean'])} +/- {fmt(r['sd'])}" if r else "--"))
         lines.append(f"| {bench} | {row['n']} | " + " | ".join(vals) + " |")
     lines.append("")
     lines.append(f"Seeds without transfer evaluations: {', '.join(o['seeds_missing'])}.")
@@ -611,7 +611,7 @@ def render_markdown(tables: dict) -> str:
 
     lines += ["", "## Excluded runs", ""]
     for suite, why in EXCLUDED_SUITES.items():
-        lines.append(f"- `{suite}` — {why}")
+        lines.append(f"- `{suite}` - {why}")
     return "\n".join(lines) + "\n"
 
 

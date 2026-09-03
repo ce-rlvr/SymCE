@@ -131,7 +131,7 @@ def _is_transient_error_msg(error_msg: str) -> bool:
 def _migrate_one_impl(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -> dict:
     """
     Core migration logic for one record.
-    
+
     Returns a result dict. If result has migration_failed=True, caller will check
     if error is transient and retry accordingly.
     """
@@ -176,16 +176,16 @@ def _migrate_one_impl(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -
 def _retry_with_backoff_on_result(record: dict, cfg: MigrationConfig, verifiers_dir: Path, max_attempts: int) -> dict:
     """
     Retry record migration with exponential backoff on transient errors.
-    
+
     Inspects the VerifierGenerationResult error message and retries if it indicates
     a transient problem (rate limit, 503, high demand, etc.).
-    
+
     Args:
         record: The record being migrated
         cfg: Migration config
         verifiers_dir: Path to verifiers directory
         max_attempts: Max number of attempts
-    
+
     Returns:
         Enriched record dict (success or failure)
     """
@@ -195,7 +195,7 @@ def _retry_with_backoff_on_result(record: dict, cfg: MigrationConfig, verifiers_
     for attempt in range(max_attempts):
         try:
             result = _migrate_one_impl(record, cfg, verifiers_dir)
-            
+
             # Check if the result indicates a transient error
             if result.get("migration_failed") and attempt < max_attempts - 1:
                 error_msg = result.get("migration_error", "")
@@ -205,16 +205,16 @@ def _retry_with_backoff_on_result(record: dict, cfg: MigrationConfig, verifiers_
                     jitter = delay * cfg.record_retry_jitter * (2 * random.random() - 1)
                     wait = max(0.5, delay + jitter)
                     logger.warning(
-                        "Transient error on %s:%s (attempt %d/%d): %s — retrying in %.1fs",
-                        tid, hyp, attempt + 1, max_attempts, 
+                        "Transient error on %s:%s (attempt %d/%d): %s - retrying in %.1fs",
+                        tid, hyp, attempt + 1, max_attempts,
                         error_msg[:100], wait,
                     )
                     time.sleep(wait)
                     continue  # Retry
-            
+
             # Either success, or a permanent error (don't retry)
             return result
-        
+
         except Exception as exc:
             if attempt >= max_attempts - 1:
                 logger.error(
@@ -231,17 +231,17 @@ def _retry_with_backoff_on_result(record: dict, cfg: MigrationConfig, verifiers_
                 enriched["migration_error"] = f"Exception: {exc}"
                 enriched["original_theorem_validated"] = None
                 return enriched
-            
+
             # Transient exception; retry with backoff
             delay = cfg.record_retry_base_seconds * (2 ** attempt)
             jitter = delay * cfg.record_retry_jitter * (2 * random.random() - 1)
             wait = max(0.5, delay + jitter)
             logger.warning(
-                "Exception on %s:%s (attempt %d/%d): %s — retrying in %.1fs",
+                "Exception on %s:%s (attempt %d/%d): %s - retrying in %.1fs",
                 tid, hyp, attempt + 1, max_attempts, type(exc).__name__, wait,
             )
             time.sleep(wait)
-    
+
     # Shouldn't reach here, but provide a fallback
     enriched = dict(record)
     enriched["verifier"] = None
@@ -257,7 +257,7 @@ def _retry_with_backoff_on_result(record: dict, cfg: MigrationConfig, verifiers_
 def _migrate_one(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -> dict:
     """
     Migrate one record with exponential backoff retry on transient errors.
-    
+
     Returns an enriched record dict (always, never raises).
     Sets migration_failed=True on permanent failures.
     """
@@ -285,7 +285,7 @@ def _append_jsonl(path: Path, record: dict) -> None:
 def _migrate_one_impl(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -> dict:
     """
     Core migration logic for one record (may raise on transient errors).
-    
+
     Called by _migrate_one() through the retry wrapper.
     Raises exceptions that _retry_with_backoff will retry on transient errors.
     """
@@ -330,7 +330,7 @@ def _migrate_one_impl(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -
 def _migrate_one(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -> dict:
     """
     Migrate one record with exponential backoff retry on transient errors.
-    
+
     Returns an enriched record dict (always, never raises).
     Sets migration_failed=True on permanent failures.
     """
@@ -345,7 +345,7 @@ def _migrate_one(record: dict, cfg: MigrationConfig, verifiers_dir: Path) -> dic
 def run_migration(cfg: MigrationConfig, root: Path) -> None:
     input_path = root / cfg.input_path
     output_path = root / cfg.output_path
-    
+
     # Auto-derive failure output path if not set
     if not cfg.output_path_failures:
         # Replace <stem>.jsonl with <stem>_failures.jsonl
@@ -357,7 +357,7 @@ def run_migration(cfg: MigrationConfig, root: Path) -> None:
         output_path_failures = output_path.parent / failure_name
     else:
         output_path_failures = root / cfg.output_path_failures
-    
+
     verifiers_dir = root / cfg.verifiers_dir
 
     if not input_path.exists():
@@ -420,7 +420,7 @@ def run_migration(cfg: MigrationConfig, root: Path) -> None:
             except Exception as exc:
                 original = futures[fut]
                 logger.error(
-                    "Unexpected error migrating %s:%s — %s",
+                    "Unexpected error migrating %s:%s - %s",
                     original.get("theorem_id"), original.get("dropped_hypothesis_name"), exc,
                 )
                 # Write a failure record
@@ -441,7 +441,7 @@ def run_migration(cfg: MigrationConfig, root: Path) -> None:
 
             if completed % 100 == 0 or completed == len(to_process):
                 logger.info(
-                    "Progress: %d/%d — success=%d, failed=%d",
+                    "Progress: %d/%d - success=%d, failed=%d",
                     completed, len(to_process), n_success, n_failed,
                 )
 

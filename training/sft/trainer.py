@@ -9,7 +9,7 @@ def build_trainer(cfg, model, tokenizer, train_ds, eval_ds, *, output_dir=None, 
     """
     Build a TRL SFTTrainer with Unsloth's response-only loss masking.
 
-    Loss is computed only on assistant tokens — system + user turns are masked.
+    Loss is computed only on assistant tokens - system + user turns are masked.
     The instruction/response delimiters are derived from the configured chat
     template so Qwen and Llama-family checkpoints train correctly.
 
@@ -34,7 +34,7 @@ def build_trainer(cfg, model, tokenizer, train_ds, eval_ds, *, output_dir=None, 
         optim=cfg.optim,
         weight_decay=cfg.weight_decay,
         max_grad_norm=cfg.max_grad_norm,
-        # Precision — Unsloth handles gradient checkpointing via get_peft_model
+        # Precision - Unsloth handles gradient checkpointing via get_peft_model
         bf16=True,
         # Eval / logging / save
         eval_strategy=cfg.eval_strategy,
