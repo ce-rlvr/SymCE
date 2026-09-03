@@ -2,7 +2,7 @@
 Unit tests for training.rlvr.reward.
 
 These mock execute_and_verify so the suite runs without spawning python3
-subprocesses or importing sympy/z3 — fast, hermetic, deterministic.
+subprocesses or importing sympy/z3 - fast, hermetic, deterministic.
 
 Run from repo root:
     python -m pytest training/rlvr/tests/test_reward.py -v
@@ -29,10 +29,10 @@ from training.rlvr.reward import (
 )
 
 
-# ─── extract_code ────────────────────────────────────────────────────────────
+# extract_code
 
 def test_extract_python_fence():
-    text = "Reasoning…\n```python\nx = 1\nassert not False\n```\nDone"
+    text = "Reasoning...\n```python\nx = 1\nassert not False\n```\nDone"
     assert extract_code(text) == "x = 1\nassert not False"
 
 
@@ -55,7 +55,7 @@ def test_extract_returns_none_for_non_string():
     assert extract_code("") is None
 
 
-# ─── score_completion: every classifier branch ───────────────────────────────
+# score_completion: every classifier branch
 
 def _stub(monkeypatch, result: dict):
     monkeypatch.setattr(reward_mod, "execute_and_verify", lambda code: result)
@@ -82,16 +82,22 @@ def test_score_safety_invalid(monkeypatch):
     assert reason == "safety_invalid"
 
 
-def test_score_negation_invalid_overrides_success(monkeypatch):
-    """Critical: a script that exits 0 but lacks negation MUST still be penalised."""
+def test_score_exit_zero_without_negation_is_penalised(monkeypatch):
+    """A script that exits 0 but lacks the negation form must not score as success.
+
+    It earns partial credit rather than the full negation_invalid penalty: the
+    hypothesis checks did run, so only the logical direction is wrong. See the
+    priority order documented on ``_classify``.
+    """
     _stub(monkeypatch, {
         "success": True, "exit_code": 0, "timed_out": False,
         "syntax_error": False, "runtime_error": False,
         "negation_form_ok": False, "safety_ok": True,
     })
     r, reason, _ = score_completion("```python\nassert True\n```")
-    assert r == REWARD_WEIGHTS["negation_invalid"]
-    assert reason == "negation_invalid"
+    assert reason == "execution_ok_no_negation"
+    assert r == REWARD_WEIGHTS["execution_ok_no_negation"]
+    assert r < REWARD_WEIGHTS["success"]
 
 
 def test_score_success(monkeypatch):
@@ -139,7 +145,7 @@ def test_score_runtime_error(monkeypatch):
 
 
 def test_score_default_branch(monkeypatch):
-    """ImportError / unknown failure with no flag set → default reward."""
+    """ImportError / unknown failure with no flag set -> default reward."""
     _stub(monkeypatch, {
         "success": False, "exit_code": 1, "timed_out": False,
         "syntax_error": False, "runtime_error": False,
@@ -160,7 +166,7 @@ def test_score_handles_verifier_exception(monkeypatch):
     assert "exception" in vresult
 
 
-# ─── make_verifier_reward (TRL signature) ────────────────────────────────────
+# make_verifier_reward (TRL signature)
 
 def _conv(text: str) -> list[dict]:
     return [{"role": "assistant", "content": text}]
@@ -172,7 +178,7 @@ def test_verifier_reward_signature_and_length(monkeypatch):
         "syntax_error": False, "runtime_error": False,
         "negation_form_ok": True, "safety_ok": True,
     })
-    fn = make_verifier_reward(pool_workers=1)  # serial → easy to reason about
+    fn = make_verifier_reward(pool_workers=1)  # serial -> easy to reason about
     completions = [
         _conv("```python\nassert not False\n```"),
         _conv("no fence here"),
@@ -214,7 +220,7 @@ def test_verifier_reward_extra_kwargs_ignored(monkeypatch):
     assert out == [REWARD_WEIGHTS["success"]]
 
 
-# ─── format_reward ───────────────────────────────────────────────────────────
+# format_reward
 
 def test_format_reward_positive():
     completions = [_conv("```python\nx=1\nassert not False\n```")]
