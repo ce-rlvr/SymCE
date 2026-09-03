@@ -99,13 +99,29 @@ Archived run records under `runs/` and `results_summary/` refer to the split
 files by their original names (`test_set_v2.jsonl` and so on). Those records are
 left exactly as the runs wrote them rather than rewritten to match the new names.
 
-`data/SHA256SUMS` carries the hash and the identity of every released split as
-shipped. The training runs under `runs/sft/` and `runs/rlvr/` recorded their own
-hashes in `status.json` at launch; those predate the path normalisation
-described above, so they will not match the current files byte for byte. The
-evaluation suites wrote an empty `dataset_fingerprint.json`, which was a defect
-in `run_suite.py`; it now fingerprints the local split each benchmark reads, so
-runs made from this revision onward record it properly.
+### Integrity
+
+`data/SHA256SUMS` carries the hash of every released split as shipped:
+
+```bash
+python tools/verify_corpus_integrity.py --sums
+python tools/verify_corpus_integrity.py --against-rev $(git rev-list --max-parents=0 HEAD)
+```
+
+The second form compares each split with the first commit while ignoring the
+verifier-path fields, which shows that rewriting those paths changed nothing
+else in any of the 13,090 records.
+
+The training runs under `runs/sft/` and `runs/rlvr/` recorded their own input
+hashes in `status.json` at launch. Those are genuine run-time records, and they
+predate the path rewrite, so they will not match the current files byte for
+byte; the check above is what establishes that only the paths moved.
+
+The evaluation suites wrote an empty `dataset_fingerprint.json`. That was a
+defect in `run_suite.py`, now fixed, so runs made from this revision onward
+record their inputs properly. The fourteen archived suites cannot be
+back-filled honestly, since a hash computed today would not be evidence of what
+those runs read at the time.
 
 ---
 

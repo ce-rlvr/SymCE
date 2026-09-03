@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ce-rlvr.github.io/SymCE/sitemap.xml
