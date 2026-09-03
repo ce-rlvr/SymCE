@@ -9,7 +9,6 @@ abstract: >-
   Hurts and Reinforcement Repairs".
 type: dataset
 license: CC-BY-4.0
-# TODO: add ORCIDs and the DOI once minted.
 authors:
   - family-names: Zouak
     given-names: Omar Farouk

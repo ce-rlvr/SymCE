@@ -40,7 +40,7 @@ user can belong to many.
 
 Everything below assumes the namespace is `ce-rlvr`. If you pick another name,
 pass `--org <name>` to `build_model_repos.py` and edit `DATASET_REPO` at the top
-of both builders, `index.html` in the website repo, and the `Data:` link in the
+of both builders, `docs/index.html`, and the `Data:` link in the
 generated cards.
 
 ---
@@ -115,9 +115,10 @@ false should not be downloaded by accident.
 
 ### Not published
 
-The Gemma-3-4B adapters. The paper's Limitations, the repository README and the
-project page all state that they are not released; publishing them means editing
-those three claims first.
+The Gemma-3-4B adapters. Only the Qwen3-4B checkpoints are on the Hub. The
+seed-24 Gemma evaluation outputs are in `runs/eval/`, so the collapse reported
+for that seed is reproducible; the seed-56 outputs are not, which the repository
+README states.
 
 ---
 
@@ -130,5 +131,5 @@ those three claims first.
   that the model cards' `datasets: [ce-rlvr/SymCE]` resolves.
 - Turn on the dataset viewer (it is on by default for public repos) and confirm
   all seven configs render.
-- Add the Hub links to the code repository's README and to `index.html` in the
-  website repo, which currently assume the `ce-rlvr` namespace.
+- Check the Hub links in the repository README and in `docs/index.html`, both
+  of which assume the `ce-rlvr` namespace.
