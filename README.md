@@ -183,9 +183,16 @@ python -m training.rlvr.train --config configs/full_run_sparse.yaml        # spa
 ```
 
 The dense and sparse configurations differ **only** in the reward weights.
-Additional seeds are in `configs/seeds/`. Each run directory records the fully
-resolved `config.json` it was launched with, which is the authoritative record
-of what a given number came from.
+Additional seeds are in `configs/seeds/`.
+
+The reference-seed runs were launched from `configs/full_run.yaml` (SFT) and
+`configs/full_run_dense_test.yaml` (dense RLVR), which the paper cites. Neither
+original file survived, so both were reconstructed from the corresponding run's
+recorded `config.json` and carry a header saying so. They reproduce the settings
+exactly, including the 3 SFT epochs used at seed 42 and the dense reward weights
+(0.25, 0.65, 0.10, 0.30, 1.00), but each holds only the section its run used.
+Every run directory keeps its own resolved `config.json`, which remains the
+authoritative record of what a given number came from.
 
 ---
 
