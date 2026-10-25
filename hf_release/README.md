@@ -124,9 +124,8 @@ README states.
 
 ## 3. After uploading
 
-- Add the arXiv id to the `tags:` block of every card as `arxiv:XXXX.XXXXX`. The
-  Hub then links each repo to its paper page automatically. Skip it until the
-  preprint exists; the tag is a no-op otherwise.
+- Both builders already tag every card with `arxiv:2610.02444`, so the Hub links
+  each repository to the paper page automatically.
 - Cross-link: the dataset card already points at the code and the models; check
   that the model cards' `datasets: [ce-rlvr/SymCE]` resolves.
 - Turn on the dataset viewer (it is on by default for public repos) and confirm

@@ -10,7 +10,7 @@ The counterexample task is to find:
 
 CRITICAL: The witness x must satisfy the remaining hypotheses AND falsify
 the conclusion. Finding x where Q(x) is True would be existential
-satisfiability — the wrong task.
+satisfiability, the wrong task.
 """
 
 from typing import Optional

@@ -180,7 +180,7 @@ def main() -> None:
         return
 
     if not args.markdown:
-        print(f"# Runs summary — {datetime.now(tz=timezone.utc).isoformat(timespec='seconds')}")
+        print(f"# Runs summary: {datetime.now(tz=timezone.utc).isoformat(timespec='seconds')}")
         print()
         print(f"_{len(rows)} runs"
               + (f", phase={args.phase}" if args.phase else "")

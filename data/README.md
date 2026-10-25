@@ -32,7 +32,7 @@ from the verifier source and its canonical witness.
 | `sft_data.jsonl` | 1,000 | Supervised fine-tuning split |
 | `rlvr_prompts.jsonl` | 3,506 | RLVR prompt set |
 | `theorem_truth_eval.jsonl` | 347 | Calibration probe - **true** theorems, never mutated |
-| `witness_schemas.jsonl` | 4,700 | One-line witness-shape descriptions |
+| `witness_schemas.jsonl` | 4,676 | One-line witness-shape descriptions, one per verifier module (covering 4,700 records) |
 | `dataset_stats.json` | - | Per-domain counts and token statistics |
 | `oracle_perf_probe.json` | - | Verifier latency measurements |
 | `verifiers/<Domain>/<theorem_id>__<hypothesis>.py` | 12,376 | The verifier modules |

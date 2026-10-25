@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <!--
-  Project page for SymCE. Served by GitHub Pages from this directory.
-
-  Two links in the resource bar are placeholders until the paper is online:
-  search for PLACEHOLDER below and fill in the ACL Anthology and arXiv URLs.
+  Project page for SymCE, served by GitHub Pages from this directory.
+  No build step and no external requests. Numbers are the four-seed means from
+  paper_preparation/results/camera_ready_tables.md unless marked otherwise.
 -->
 <html lang="en">
 <head>
@@ -11,29 +10,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SymCE: Counterexample Generation via Per-Theorem Symbolic Verifiers</title>
 <meta name="description" content="SymCE: 4,707 false undergraduate algebra and real-analysis conjectures, each with an executable Python verifier. Findings of EMNLP 2026.">
+<meta name="color-scheme" content="light dark">
 <meta property="og:title" content="Counterexample Generation via Per-Theorem Symbolic Verifiers">
-<meta property="og:description" content="Counterexample-only SFT drops true-theorem recognition from 0.27 to 0.00. Sparse-reward RLVR restores it to 0.66; a dense reward does not.">
+<meta property="og:description" content="Counterexample-only SFT drops true-theorem recognition from 0.27 to 0.00. RLVR with a sparse reward restores it to 0.66; a dense reward does not.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ce-rlvr.github.io/SymCE/">
 <meta property="og:image" content="https://ce-rlvr.github.io/SymCE/static/figures/fig_calibration.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ce-rlvr.github.io/SymCE/">
 
-<!--
-  Google Scholar reads these. citation_pdf_url must point at a directly
-  downloadable PDF, so fill it in once the Anthology entry exists and remove the
-  comment markers; a tag pointing at a missing file is worse than no tag.
--->
 <meta name="citation_title" content="Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs">
 <meta name="citation_author" content="Zouak, Omar Farouk">
 <meta name="citation_author" content="Boukhalfa, Houssam Eddine">
-<meta name="citation_author" content="Soumaya, Lakehal">
+<meta name="citation_author" content="Lakehal, Soumaya">
 <meta name="citation_author" content="Katiyar, Shiv">
 <meta name="citation_author" content="Nefti-Meziani, Samia">
-<meta name="citation_publication_date" content="2026">
+<meta name="citation_publication_date" content="2026/10">
 <meta name="citation_conference_title" content="Findings of the Association for Computational Linguistics: EMNLP 2026">
+<meta name="citation_publisher" content="Association for Computational Linguistics">
+<meta name="citation_firstpage" content="45032">
+<meta name="citation_lastpage" content="45047">
+<meta name="citation_isbn" content="979-8-89176-462-0">
 <meta name="citation_language" content="en">
-<!-- <meta name="citation_pdf_url" content="PLACEHOLDER"> -->
+<meta name="citation_abstract_html_url" content="https://aclanthology.org/2026.findings-emnlp.2112/">
+<meta name="citation_pdf_url" content="https://aclanthology.org/2026.findings-emnlp.2112.pdf">
 
 <script type="application/ld+json">
 {
@@ -43,18 +43,19 @@
   "author": [
     {"@type": "Person", "name": "Omar Farouk Zouak"},
     {"@type": "Person", "name": "Houssam Eddine Boukhalfa"},
-    {"@type": "Person", "name": "Lakehal Soumaya"},
+    {"@type": "Person", "name": "Soumaya Lakehal"},
     {"@type": "Person", "name": "Shiv Katiyar"},
     {"@type": "Person", "name": "Samia Nefti-Meziani"}
   ],
-  "datePublished": "2026",
+  "datePublished": "2026-10",
   "inLanguage": "en",
-  "url": "https://ce-rlvr.github.io/SymCE/",
-  "keywords": "counterexample generation, mathematical reasoning, RLVR, GRPO, symbolic verification, reward shaping, calibration",
+  "url": "https://aclanthology.org/2026.findings-emnlp.2112/",
+  "sameAs": ["https://arxiv.org/abs/2610.02444", "https://ce-rlvr.github.io/SymCE/"],
   "isPartOf": {
     "@type": "PublicationIssue",
     "name": "Findings of the Association for Computational Linguistics: EMNLP 2026"
   },
+  "pagination": "45032-45047",
   "codeRepository": "https://github.com/ce-rlvr/SymCE"
 }
 </script>
@@ -63,71 +64,132 @@
 </head>
 <body>
 
-<div class="col">
+<header class="hero">
+  <div class="wrap">
+    <p class="venue">Findings of EMNLP 2026</p>
+    <h1>Counterexample Generation via Per&#8209;Theorem Symbolic Verifiers</h1>
+    <p class="subtitle">When Imitation Hurts and Reinforcement Repairs</p>
 
-<header>
-  <h1>Counterexample Generation via Per-Theorem Symbolic Verifiers
-    <span class="sub">When Imitation Hurts and Reinforcement Repairs</span></h1>
+    <p class="authors">
+      Omar Farouk Zouak<sup>1</sup>,
+      Houssam Eddine Boukhalfa<sup>1</sup>,
+      Soumaya Lakehal<sup>1</sup>,
+      Shiv Katiyar<sup>2</sup>,
+      Samia Nefti-Meziani<sup>2</sup>
+    </p>
+    <p class="affil"><sup>1</sup>National School of Artificial Intelligence (ENSIA), Algiers &nbsp;&middot;&nbsp; <sup>2</sup>University of Birmingham</p>
 
-  <p class="byline">
-    Omar Farouk Zouak<sup>1</sup>,
-    Houssam Eddine Boukhalfa<sup>1</sup>,
-    Lakehal Soumaya<sup>1</sup>,
-    Shiv Katiyar<sup>2</sup>,
-    Samia Nefti-Meziani<sup>2</sup>
-  </p>
-  <p class="meta">
-    <span><sup>1</sup>National School of Artificial Intelligence, Algiers &nbsp;&middot;&nbsp; <sup>2</sup>University of Birmingham</span>
-    <span>Findings of the ACL: EMNLP 2026 &nbsp;&middot;&nbsp; correspondence: <a href="mailto:omar.zouak@ensia.edu.dz">omar.zouak@ensia.edu.dz</a></span>
-  </p>
-
-  <nav class="res" aria-label="Resources">
-    <a href="#">Paper</a><!-- PLACEHOLDER: ACL Anthology URL -->
-    <a href="#">arXiv</a><!-- PLACEHOLDER: arXiv URL, or delete this link -->
-    <a href="https://github.com/ce-rlvr/SymCE">Code</a>
-    <a href="https://huggingface.co/datasets/ce-rlvr/SymCE">Dataset</a>
-    <a href="https://huggingface.co/ce-rlvr">Models</a>
-    <a href="#cite">BibTeX</a>
-  </nav>
+    <nav class="links" aria-label="Resources">
+      <a class="btn primary" href="https://aclanthology.org/2026.findings-emnlp.2112/">Paper</a>
+      <a class="btn" href="https://arxiv.org/abs/2610.02444">arXiv</a>
+      <a class="btn" href="https://github.com/ce-rlvr/SymCE">Code</a>
+      <a class="btn" href="https://huggingface.co/datasets/ce-rlvr/SymCE">Dataset</a>
+      <span class="btn off" title="The trained adapters will be published on Hugging Face">Models (soon)</span>
+      <a class="btn" href="#cite">Cite</a>
+    </nav>
+  </div>
 </header>
 
-<main>
+<main class="wrap">
 
-<section id="summary">
-  <h2>Summary</h2>
-  <p class="tldr">Fine-tuning a model only on counterexamples destroys its ability to recognise that a theorem is true. Reinforcement learning against the same verifier repairs the damage, but only when the reward is sparse.</p>
-  <p>We drop one hypothesis from each of 6,748 undergraduate theorems and keep the mutations for which a teacher model can write a working Python verifier. The result is SymCE: 4,707 false conjectures, each with an executable oracle. A verifier runs in about 130&nbsp;ms, so it doubles as the reward function during reinforcement learning.</p>
+<section class="tldr">
+  <p>Training a model only on counterexamples makes it treat <em>every</em> theorem as false.
+  Reinforcement learning against a symbolic verifier fixes this, but only when the reward is sparse.</p>
 </section>
 
-<section id="task">
-  <h2>The task</h2>
-  <p>Given a false conjecture, emit one Python expression on which every remaining hypothesis holds and the conclusion fails. The verifier returns one boolean per hypothesis plus one for the negated conclusion. No language model judges the answer.</p>
-<pre><code><span class="dim"># "The direct product of two abelian groups is abelian."</span>
-<span class="dim"># Drop "G is abelian" and the claim is false.</span>
+<section id="how">
+  <h2>How it works</h2>
+  <p class="lead">Take a true theorem, drop one hypothesis, and ask the model for a counterexample.
+  A Python verifier written for that conjecture checks the answer, and the same check is the RL reward.</p>
 
-&gt;&gt;&gt; run_oracle(
-...     "data/verifiers/GroupTheory/abelian_direct_product__h1.py",
-...     "(SymmetricGroup(3), CyclicGroup(2))",
-...     n_conditions=2).conditions
-[True, True]
-<span class="dim"># H is abelian; S3 x C2 is not. Counterexample accepted.</span></code></pre>
-  <p>A model may instead answer <code>NONE</code>, claiming that no counterexample exists. Whether it keeps that option is the subject of the paper.</p>
+  <ol class="flow">
+    <li>
+      <span class="step">1 &middot; True theorem</span>
+      <span class="body">G&thinsp;&times;&thinsp;H is abelian if and only if G and H are both abelian.</span>
+    </li>
+    <li>
+      <span class="step">2 &middot; Drop a hypothesis</span>
+      <span class="body">&ldquo;If H is abelian, then G&thinsp;&times;&thinsp;H is abelian.&rdquo; <b class="neg">False.</b></span>
+    </li>
+    <li>
+      <span class="step">3 &middot; Model answers</span>
+      <span class="body"><code>(SymmetricGroup(3), CyclicGroup(2))</code><br><small>or <code>NONE</code> if it thinks no counterexample exists</small></span>
+    </li>
+    <li>
+      <span class="step">4 &middot; Verifier runs</span>
+      <span class="body"><code>[True, True]</code><br><small>H is abelian; S<sub>3</sub>&thinsp;&times;&thinsp;C<sub>2</sub> is not. <b class="pos">Accepted.</b></small></span>
+    </li>
+  </ol>
+  <p class="note">One boolean per remaining hypothesis, plus one for the negated conclusion. No language model judges the answer.</p>
 </section>
 
-<section id="trap">
+<section id="finding">
   <h2>The imitation trap</h2>
-  <p>Counterexample-only training data contains no true statements. After supervised fine-tuning the model is better at mathematics, with MATH-500 rising from 0.13 to 0.55, yet it recognises <strong>none</strong> of 347 true theorems under the prompt style it was trained on. Asked an explicit true/false question, it calls 70&nbsp;% of true theorems false. The base model does not.</p>
+  <p class="lead">Fine-tuned on counterexamples alone, Qwen3-4B stops recognising true theorems.
+  Two RL rewards then reach the same success rate on false conjectures, but only the sparse one restores calibration.</p>
 
-  <figure>
-    <img src="static/figures/fig_calibration.png" alt="Bar chart of true-theorem recognition for the base model, SFT and the two RLVR variants under two prompt styles. SFT falls to zero under the counterexample-emit prompt; sparse RLVR reaches 0.65 and 0.84.">
-    <figcaption><strong>Figure 1.</strong> True theorems correctly recognised, reference seed. The dashed line marks the untrained base.</figcaption>
-  </figure>
+  <div class="charts">
+    <figure class="chart">
+      <figcaption>False conjectures disproved<small>Pass@1, 201 test items</small></figcaption>
+      <div class="bars">
+        <div class="row"><span class="lbl">Base</span><span class="track"><span class="bar base" style="--v:.30"></span></span><span class="val">0.30</span></div>
+        <div class="row"><span class="lbl">+ SFT</span><span class="track"><span class="bar sft" style="--v:.34"></span></span><span class="val">0.34</span></div>
+        <div class="row"><span class="lbl">+ RL dense</span><span class="track"><span class="bar dense" style="--v:.49"></span></span><span class="val">0.49</span></div>
+        <div class="row"><span class="lbl">+ RL sparse</span><span class="track"><span class="bar sparse" style="--v:.46"></span></span><span class="val">0.46</span></div>
+      </div>
+    </figure>
+    <figure class="chart">
+      <figcaption>True theorems recognised<small>347 true theorems, training-style prompt</small></figcaption>
+      <div class="bars">
+        <div class="row"><span class="lbl">Base</span><span class="track"><span class="bar base" style="--v:.27"></span></span><span class="val">0.27</span></div>
+        <div class="row"><span class="lbl">+ SFT</span><span class="track"><span class="bar sft" style="--v:0"></span></span><span class="val neg">0.00</span></div>
+        <div class="row"><span class="lbl">+ RL dense</span><span class="track"><span class="bar dense" style="--v:.33"></span></span><span class="val">0.33</span></div>
+        <div class="row"><span class="lbl">+ RL sparse</span><span class="track"><span class="bar sparse" style="--v:.66"></span></span><span class="val pos">0.66</span></div>
+      </div>
+    </figure>
+  </div>
+  <p class="note">Qwen3-4B, means over four training seeds. SFT scores 0.00 on true theorems in every seed, and on an explicit true/false question it calls 70% of them false. The collapse also appears on Gemma-3-4B.</p>
+</section>
 
-  <p>The two reward shapes reach the same in-domain success and differ by 33 points here. Under the dense reward, partial credit for satisfying some hypotheses makes a wrong guess score better than abstaining, so the model always guesses. Under the sparse reward a wrong witness scores what abstention scores, so abstention survives as an available action. Section 6.3 of the paper traces this through a seven-way outcome taxonomy over every rollout.</p>
+<section id="why">
+  <h2>Why: what each answer earns</h2>
+  <p class="lead">Every training conjecture is false, so answering <code>NONE</code> is never correct during training.
+  The dense reward makes any parsable guess worth more than abstaining. The sparse reward does not, so the model keeps the option of saying <code>NONE</code>, which is what a true theorem needs.</p>
 
-  <figure>
-    <img src="static/figures/fig_reason_stack.png" alt="Stacked bar chart of outcome categories for each model on the counterexample benchmark.">
-    <figcaption><strong>Figure 2.</strong> Outcome taxonomy. The hyp-only category, where the model satisfies the remaining hypotheses but asserts the false conclusion is true, rises from 1&nbsp;% to 31&nbsp;% under SFT. Only sparse RL re-learns abstention.</figcaption>
+  <figure class="reward">
+    <div class="scroll">
+    <svg viewBox="0 0 640 190" role="img" aria-labelledby="rw-t">
+      <title id="rw-t">Reward for one answer to a false conjecture. Dense: NONE earns -0.2, a wrong witness 0.10 to 0.35, a valid one 1. Sparse: NONE and a wrong witness both earn 0, a valid one 1.</title>
+      <g class="axis">
+        <line x1="110" y1="60" x2="620" y2="60"/>
+        <line x1="110" y1="145" x2="620" y2="145"/>
+        <g class="ticks">
+          <line x1="140" y1="54" x2="140" y2="66"/><line x1="210" y1="54" x2="210" y2="66"/><line x1="385" y1="54" x2="385" y2="66"/><line x1="560" y1="54" x2="560" y2="66"/>
+          <line x1="140" y1="139" x2="140" y2="151"/><line x1="210" y1="139" x2="210" y2="151"/><line x1="385" y1="139" x2="385" y2="151"/><line x1="560" y1="139" x2="560" y2="151"/>
+        </g>
+        <g class="tl">
+          <text x="140" y="82">&#8722;0.2</text><text x="210" y="82">0</text><text x="385" y="82">0.5</text><text x="560" y="82">1</text>
+          <text x="140" y="167">&#8722;0.2</text><text x="210" y="167">0</text><text x="385" y="167">0.5</text><text x="560" y="167">1</text>
+        </g>
+      </g>
+      <text class="name" x="0" y="65">Dense</text>
+      <text class="name" x="0" y="150">Sparse</text>
+      <!-- dense -->
+      <rect class="guess" x="245" y="52" width="87.5" height="16" rx="3"/>
+      <text class="lab" x="288" y="42">wrong witness</text>
+      <circle class="none" cx="140" cy="60" r="7"/>
+      <text class="lab none-t" x="140" y="42">NONE</text>
+      <circle class="valid" cx="560" cy="60" r="7"/>
+      <text class="lab valid-t" x="560" y="42">valid</text>
+      <!-- sparse -->
+      <circle class="guess-dot" cx="210" cy="145" r="7"/>
+      <circle class="none-ring" cx="210" cy="145" r="11"/>
+      <text class="lab" x="232" y="127" text-anchor="start">wrong witness = NONE = 0</text>
+      <circle class="valid" cx="560" cy="145" r="7"/>
+      <text class="lab valid-t" x="560" y="127">valid</text>
+    </svg>
+    </div>
+    <figcaption>Reward for one answer to a false conjecture. After RL, the sparse model abstains on 10% of test items and the dense model on 2% (reference seed).</figcaption>
   </figure>
 </section>
 
@@ -136,76 +198,74 @@
   <div class="scroll">
   <table>
     <thead>
-      <tr>
-        <th>Qwen3-4B</th>
-        <th>SymCE Pass@1</th>
-        <th>SymCE Pass@8</th>
-        <th>Truth SymCE-prompt</th>
-        <th>Truth-classify</th>
-      </tr>
+      <tr><th></th><th>Disproved<br><small>Pass@1</small></th><th>True theorems<br><small>training prompt</small></th><th>True theorems<br><small>true/false prompt</small></th></tr>
     </thead>
     <tbody>
-      <tr><td>base</td><td>0.30</td><td>0.49</td><td>0.27</td><td>0.36</td></tr>
-      <tr><td class="in">+ SFT</td><td>0.34</td><td>0.62</td><td>0.00</td><td>0.16</td></tr>
-      <tr><td class="in">+ RLVR dense</td><td class="hi">0.49</td><td class="hi">0.66</td><td>0.33</td><td>0.71</td></tr>
-      <tr><td class="in">+ RLVR sparse</td><td>0.46</td><td>0.64</td><td class="hi">0.66</td><td class="hi">0.75</td></tr>
-      <tr class="gap"><td>Best 7B open-weights</td><td>0.30</td><td>0.57</td><td>&ndash;</td><td>&ndash;</td></tr>
-      <tr><td>Frontier APIs (6)</td><td>0.42 to 0.58</td><td>up to 0.77</td><td>&ndash;</td><td>&ndash;</td></tr>
+      <tr><td>Qwen3-4B base</td><td>0.30</td><td>0.27</td><td>0.36</td></tr>
+      <tr><td>+ SFT</td><td>0.34</td><td class="neg">0.00</td><td>0.16</td></tr>
+      <tr><td>+ RL dense</td><td><b>0.49</b></td><td>0.33</td><td>0.71</td></tr>
+      <tr><td>+ RL sparse</td><td>0.46</td><td><b>0.66</b></td><td><b>0.75</b></td></tr>
+      <tr class="sep"><td>Best open 7B math model</td><td>0.30</td><td>&middot;</td><td>&middot;</td></tr>
+      <tr><td>Six frontier APIs</td><td>0.42 to 0.58</td><td>&middot;</td><td>&middot;</td></tr>
     </tbody>
   </table>
   </div>
-  <p class="note">Our rows are means over seeds 42, 19, 31 and 64; the comparator rows are the reference seed. SymCE Pass@<em>k</em> is the counterexample benchmark (n=201). The two Truth columns are the theorem-truth probe (n=347) under the two prompt styles.</p>
-
-  <p>The 4B model beats every 7B mathematics specialist we evaluated and sits inside the frontier-API range, where one of the six APIs beats it. Under unchanged chain-of-thought prompting it also improves on GSM8K (0.83 to 0.88), MATH-500 (0.13 to 0.65) and MMLU-college-math (0.34 to 0.72). No benchmark examples or answer formats appear anywhere in the pipeline. GSM8K is the cleanest case, because the base already formats answers correctly there and SFT alone produces no gain.</p>
-
-  <figure>
-    <img src="static/figures/fig_per_domain.png" alt="Per-domain Pass@1 with confidence intervals for each model across six mathematical subdomains.">
-    <figcaption><strong>Figure 3.</strong> Both RLVR variants improve over the base in all six subdomains. The largest gain is on Real Analysis, which is 6.7&nbsp;% of the training distribution.</figcaption>
-  </figure>
+  <p class="note">Our rows: mean over four seeds. Comparator rows: reference seed. The trained 4B model also improves GSM8K (0.83 to 0.88), MATH-500 (0.13 to 0.65) and MMLU college math (0.34 to 0.72) under the same chain-of-thought prompt, with none of their data in training.</p>
 </section>
 
 <section id="data">
-  <h2>SymCE</h2>
+  <h2>The dataset</h2>
   <dl class="facts">
     <div><dt>4,707</dt><dd>false conjectures</dd></div>
-    <div><dt>3,485</dt><dd>source theorems</dd></div>
-    <div><dt>6</dt><dd>subdomains</dd></div>
-    <div><dt>132 ms</dt><dd>median verification</dd></div>
+    <div><dt>12,376</dt><dd>verifier modules</dd></div>
+    <div><dt>6</dt><dd>areas of algebra and analysis</dd></div>
+    <div><dt>132 ms</dt><dd>median check</dd></div>
   </dl>
-  <p>Group, ring, number and field theory, linear algebra and real analysis. The release ships all 12,376 generated verifier modules, the four splits (test 201, SFT 1,000, RLVR 3,506, true-theorem probe 347), the witness schemas and the human-audit annotations.</p>
+  <p>Group, ring, number and field theory, linear algebra and real analysis. Splits: 201 test, 1,000 SFT, 3,506 RL, plus 347 true theorems as a calibration probe. A hand audit of 177 verifier decisions found 97.7% correct.</p>
 <pre><code>from datasets import load_dataset
-ds = load_dataset("ce-rlvr/SymCE", "test")["test"]</code></pre>
-  <p>Verifiers are written by a language model, so we measured their reliability instead of assuming it. Judging verifier <em>source</em> proved unworkable, because the code leans on heuristics that are incomplete in theory but correct on the cases that arise. We audited the accept/reject <em>decision</em> on real model outputs instead: 177 decisions checked by hand, 97.7&nbsp;% correct, a 2.0&nbsp;% false-accept rate, and no case traced to a faulty verifier. All four disputed decisions are released with the annotations.</p>
-</section>
-
-<section id="limits">
-  <h2>Limitations</h2>
-  <p>Every trained model here is 4B, adapted with LoRA and optimised with GRPO on one consumer GPU. Larger scales, full-parameter fine-tuning and other reinforcement learning algorithms are untested. Mutations are single-hypothesis drops only. The verifier substrate is bounded by what SymPy and Z3 decide, which excludes topology and higher-order logic. The audit had one annotator, so we report no inter-annotator agreement. We did not cross-evaluate on COUNTERMATH, whose scoring runs on the authors' server.</p>
+test = load_dataset("ce-rlvr/SymCE", "test")["test"]</code></pre>
 </section>
 
 <section id="cite">
   <h2>Citation</h2>
-<pre><code>@inproceedings{zouak2026symce,
-  title  = {Counterexample Generation via Per-Theorem
-            Symbolic Verifiers: When Imitation Hurts
-            and Reinforcement Repairs},
-  author = {Zouak, Omar Farouk and
-            Boukhalfa, Houssam Eddine and
-            Soumaya, Lakehal and
-            Katiyar, Shiv and
-            Nefti-Meziani, Samia},
-  booktitle = {Findings of the Association for
-               Computational Linguistics: EMNLP 2026},
-  year   = {2026}
+  <div class="bib">
+    <button type="button" class="copy" data-target="bibtex">Copy</button>
+<pre id="bibtex"><code>@inproceedings{zouak-etal-2026-counterexample,
+    title = "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs",
+    author = "Zouak, Omar Farouk  and
+      Boukhalfa, Houssam Eddine  and
+      Lakehal, Soumaya  and
+      Katiyar, Shiv  and
+      Nefti-Meziani, Samia",
+    booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {EMNLP} 2026",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.findings-emnlp.2112/",
+    pages = "45032--45047",
 }</code></pre>
+  </div>
 </section>
 
 </main>
 
-<footer>
-  <p>Code MIT. Corpus, verifier modules and audit annotations CC BY 4.0.</p>
+<footer class="wrap">
+  <p>Code MIT. Corpus, verifiers and audit annotations CC BY 4.0. Contact: <a href="mailto:omar.zouak@ensia.edu.dz">omar.zouak@ensia.edu.dz</a></p>
 </footer>
 
-</div>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var el = document.getElementById(b.dataset.target);
+    try {
+      navigator.clipboard.writeText(el.innerText).then(function () {
+        b.textContent = "Copied";
+        setTimeout(function () { b.textContent = "Copy"; }, 1500);
+      });
+    } catch (e) { b.textContent = "Select and copy"; }
+  });
+});
+</script>
 </body>
 </html>

@@ -9,6 +9,8 @@ abstract: >-
   Hurts and Reinforcement Repairs".
 type: dataset
 license: CC-BY-4.0
+repository-code: "https://github.com/ce-rlvr/SymCE"
+url: "https://ce-rlvr.github.io/SymCE/"
 authors:
   - family-names: Zouak
     given-names: Omar Farouk
@@ -16,8 +18,8 @@ authors:
   - family-names: Boukhalfa
     given-names: Houssam Eddine
     affiliation: "National School of Artificial Intelligence, Algiers, Algeria"
-  - family-names: Soumaya
-    given-names: Lakehal
+  - family-names: Lakehal
+    given-names: Soumaya
     affiliation: "National School of Artificial Intelligence, Algiers, Algeria"
   - family-names: Katiyar
     given-names: Shiv
@@ -29,14 +31,32 @@ preferred-citation:
   type: conference-paper
   title: "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs"
   collection-title: "Findings of the Association for Computational Linguistics: EMNLP 2026"
+  publisher:
+    name: "Association for Computational Linguistics"
+  conference:
+    name: "EMNLP 2026"
+    city: "Budapest"
+    country: "HU"
   year: 2026
+  month: 10
+  start: 45032
+  end: 45047
+  isbn: "979-8-89176-462-0"
+  url: "https://aclanthology.org/2026.findings-emnlp.2112/"
+  identifiers:
+    - type: url
+      value: "https://aclanthology.org/2026.findings-emnlp.2112/"
+      description: "ACL Anthology"
+    - type: url
+      value: "https://arxiv.org/abs/2610.02444"
+      description: "arXiv preprint"
   authors:
     - family-names: Zouak
       given-names: Omar Farouk
     - family-names: Boukhalfa
       given-names: Houssam Eddine
-    - family-names: Soumaya
-      given-names: Lakehal
+    - family-names: Lakehal
+      given-names: Soumaya
     - family-names: Katiyar
       given-names: Shiv
     - family-names: Nefti-Meziani

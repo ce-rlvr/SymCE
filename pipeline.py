@@ -395,7 +395,7 @@ def process_theorem(
         if attempts_csv_path is not None and not dry_run:
             skip_record = _build_skip_record(theorem, stats["skip_reason"])
             _append_attempt_csv(attempts_csv_path, skip_record)
-        logger.info(f"[{theorem['id']}] Skipped — no droppable hypotheses")
+        logger.info(f"[{theorem['id']}] Skipped, no droppable hypotheses")
         return stats
 
     stats["variants_total"] = len(droppable)
@@ -551,12 +551,12 @@ def run_pipeline(
 
     if seen_pairs:
         logger.info(
-            f"Resuming — {len(seen_pairs)} (theorem, hypothesis) pair(s) "
+            f"Resuming, {len(seen_pairs)} (theorem, hypothesis) pair(s) "
             f"already in {output_path.name}"
         )
 
     logger.info(
-        f"Starting pipeline — {len(theorems)} theorem(s), "
+        f"Starting pipeline, {len(theorems)} theorem(s), "
         f"workers={num_workers}, max_retries={max_retries}"
     )
 
@@ -609,7 +609,7 @@ def run_pipeline(
                 agg["statement_true"] += stats.get("variants_statement_true", 0)
 
     logger.info(
-        f"Pipeline complete — {agg['successful']} new successes, "
+        f"Pipeline complete, {agg['successful']} new successes, "
         f"{agg['failed']} failed variants, {agg['ill_defined']} ill-defined variants, "
         f"{agg['statement_true']} true variants, {agg['skipped']} skipped theorems, "
         f"{agg['already_done_pairs']} pairs already done"

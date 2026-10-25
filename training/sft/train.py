@@ -119,7 +119,7 @@ def _load_probe_records(jsonl_path: Path, n: int) -> list[dict]:
     """Load the first ``n`` usable v2 records (drop migration_failed / witness_passes_verifier=false)."""
     records: list[dict] = []
     if not jsonl_path.exists():
-        print(f"[probe]    skipped — {jsonl_path} not found")
+        print(f"[probe]    skipped, {jsonl_path} not found")
         return records
     with open(jsonl_path, encoding="utf-8") as fh:
         for line in fh:
@@ -266,7 +266,7 @@ def main() -> None:
     # Summary + finalise
     write_run_summary_md(
         output_dir / "run_summary.md",
-        title=f"SFT run — {output_dir.name}",
+        title=f"SFT run: {output_dir.name}",
         sections={
             "Configuration": {
                 "config_yaml": parsed_args.config,
