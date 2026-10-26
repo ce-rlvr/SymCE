@@ -7,6 +7,10 @@
 [Project page](https://ce-rlvr.github.io/SymCE/) ·
 [Dataset](https://huggingface.co/datasets/ce-rlvr/SymCE)
 
+<p align="center">
+  <img src="docs/static/figures/symce_overview.svg" width="900" alt="SymCE overview: a true theorem loses one hypothesis, the model answers with a witness or NONE, a per-theorem Python verifier checks it, and the same check is the RL reward. Counterexample-only SFT drops true-theorem recognition from 0.27 to 0.00; RL with a sparse reward restores it to 0.66.">
+</p>
+
 SymCE is a corpus of **4,707 false** undergraduate algebra and real-analysis
 conjectures. Each one is a true theorem with a single hypothesis removed, and
 each comes with an **executable Python verifier** and a one-line *witness
