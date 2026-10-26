@@ -126,6 +126,7 @@ tags:
 - mathematics
 - counterexample-generation
 - symbolic-verification
+- arxiv:2610.02444
 {extra_tags}---
 
 # {repo_name}
@@ -137,6 +138,9 @@ LoRA adapter (rank 16, all attention and MLP projections) over
 *Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation
 Hurts and Reinforcement Repairs* (Findings of EMNLP 2026).
 
+- Paper: https://aclanthology.org/2026.findings-emnlp.2112/
+- arXiv: https://arxiv.org/abs/2610.02444
+- Project page: https://ce-rlvr.github.io/SymCE/
 - Code: https://github.com/ce-rlvr/SymCE
 - Data: https://huggingface.co/datasets/{dataset}
 {warning}
@@ -193,13 +197,25 @@ under full-parameter fine-tuning is untested.
 ## Citation
 
 ```bibtex
-@inproceedings{{zouak2026symce,
-  title     = {{Counterexample Generation via Per-Theorem Symbolic Verifiers:
-               When Imitation Hurts and Reinforcement Repairs}},
-  author    = {{Zouak, Omar Farouk and Boukhalfa, Houssam Eddine and
-               Soumaya, Lakehal and Katiyar, Shiv and Nefti-Meziani, Samia}},
-  booktitle = {{Findings of the Association for Computational Linguistics: EMNLP 2026}},
-  year      = {{2026}}
+@inproceedings{{zouak-etal-2026-counterexample,
+    title = "Counterexample Generation via Per-Theorem Symbolic Verifiers: When Imitation Hurts and Reinforcement Repairs",
+    author = "Zouak, Omar Farouk  and
+      Boukhalfa, Houssam Eddine  and
+      Lakehal, Soumaya  and
+      Katiyar, Shiv  and
+      Nefti-Meziani, Samia",
+    editor = "Lee, Hung-Yi  and
+      Dev, Sunipa  and
+      Li, Jessy  and
+      Elliott, Desmond",
+    booktitle = "Findings of the {{A}}ssociation for {{C}}omputational {{L}}inguistics: {{EMNLP}} 2026",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.findings-emnlp.2112/",
+    pages = "45032--45047",
+    ISBN = "979-8-89176-462-0",
 }}
 ```
 """

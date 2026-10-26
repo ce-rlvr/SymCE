@@ -2,8 +2,8 @@
 LLM-based counterexample code generator using the Gemini API.
 
 Configuration via environment variables (or a .env file):
-    GEMINI_API_KEY   — Google Generative AI API key (required)
-    GEMINI_MODEL     — model name (default: gemini-2.0-flash)
+    GEMINI_API_KEY   Google Generative AI API key (required)
+    GEMINI_MODEL     model name (default: gemini-2.0-flash)
 """
 
 import os
@@ -65,7 +65,7 @@ def _send_with_retry(chat: Any, prompt: str) -> Any:
             jitter = delay * _RETRY_JITTER * (2 * random.random() - 1)
             wait = max(0.5, delay + jitter)
             logger.warning(
-                "Gemini API transient error (attempt %d/%d): %s — retrying in %.1fs",
+                "Gemini API transient error (attempt %d/%d): %s, retrying in %.1fs",
                 attempt + 1, _RETRY_ATTEMPTS, exc_name, wait,
             )
             time.sleep(wait)
@@ -257,7 +257,7 @@ def start_generation_session(user_prompt: str) -> tuple[Any, str]:
     about the specific task and previous errors.
 
     Returns:
-        (chat_session, python_code) — the session object to pass to
+        (chat_session, python_code), the session object to pass to
         correct_from_session() on failure, and the extracted code string.
 
     Raises:
@@ -282,7 +282,7 @@ def start_generation_session(user_prompt: str) -> tuple[Any, str]:
         raise
 
     code = _extract_code(response.text)
-    logger.debug(f"Session started — {len(code)} chars generated/extracted")
+    logger.debug(f"Session started, {len(code)} chars generated/extracted")
     return chat, code
 
 
@@ -341,7 +341,7 @@ def correct_from_session(chat: Any, failed_code: str, error_message: str) -> str
         raise
 
     code = _extract_code(response.text)
-    logger.debug(f"Correction received — {len(code)} chars")
+    logger.debug(f"Correction received, {len(code)} chars")
     return code
 
 
