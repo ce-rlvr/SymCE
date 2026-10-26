@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" font-family="Helvetica, Arial, sans-serif">
+  <title>SymCE overview: a true theorem loses one hypothesis, the model proposes a witness or NONE, a per-theorem Python verifier checks it and its output is the RL reward. Counterexample-only SFT drops true-theorem recognition to 0.00; RL with a sparse reward restores it to 0.66.</title>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0b3b60"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="980" height="440" rx="14" fill="#ffffff"/>
+
+  <!-- ===== task loop ===== -->
+  <g font-size="13" fill="#1b2430">
+    <rect x="30" y="22" width="200" height="112" rx="10" fill="#f4f6f9" stroke="#dde2e8"/>
+    <text x="44" y="44" font-size="11" font-weight="bold" fill="#0b3b60" letter-spacing="0.6">1  TRUE THEOREM</text>
+    <text x="44" y="70">G &#215; H is abelian if and</text>
+    <text x="44" y="88">only if G and H are both</text>
+    <text x="44" y="106">abelian.</text>
+
+    <rect x="270" y="22" width="200" height="112" rx="10" fill="#f4f6f9" stroke="#dde2e8"/>
+    <text x="284" y="44" font-size="11" font-weight="bold" fill="#0b3b60" letter-spacing="0.6">2  DROP ONE HYPOTHESIS</text>
+    <text x="284" y="70">If H is abelian, then</text>
+    <text x="284" y="88">G &#215; H is abelian.</text>
+    <text x="284" y="112" font-weight="bold" fill="#d62728">False conjecture</text>
+
+    <rect x="510" y="22" width="200" height="112" rx="10" fill="#f4f6f9" stroke="#dde2e8"/>
+    <text x="524" y="44" font-size="11" font-weight="bold" fill="#0b3b60" letter-spacing="0.6">3  MODEL ANSWERS</text>
+    <text x="524" y="70" font-family="Menlo, Consolas, monospace" font-size="12">(SymmetricGroup(3),</text>
+    <text x="524" y="87" font-family="Menlo, Consolas, monospace" font-size="12"> CyclicGroup(2))</text>
+    <text x="524" y="112" fill="#5b6675">or NONE: "none exists"</text>
+
+    <rect x="750" y="22" width="200" height="112" rx="10" fill="#e9f5ee" stroke="#008c45" stroke-width="1.5"/>
+    <text x="764" y="44" font-size="11" font-weight="bold" fill="#0b3b60" letter-spacing="0.6">4  PYTHON VERIFIER</text>
+    <text x="764" y="70" font-family="Menlo, Consolas, monospace" font-size="13">[True, True]</text>
+    <text x="764" y="90" font-size="12" fill="#5b6675">one boolean per condition</text>
+    <text x="764" y="112" font-weight="bold" fill="#008c45">Accepted</text>
+  </g>
+  <g stroke="#0b3b60" stroke-width="2" fill="none">
+    <line x1="232" y1="78" x2="266" y2="78" marker-end="url(#arr)"/>
+    <line x1="472" y1="78" x2="506" y2="78" marker-end="url(#arr)"/>
+    <line x1="712" y1="78" x2="746" y2="78" marker-end="url(#arr)"/>
+    <path d="M850,136 L850,162 L610,162 L610,140" marker-end="url(#arr)"/>
+  </g>
+  <text x="730" y="181" font-size="13" text-anchor="middle" fill="#0b3b60" font-weight="bold">same check = RL reward (GRPO)</text>
+
+  <line x1="30" y1="204" x2="950" y2="204" stroke="#dde2e8"/>
+
+  <!-- ===== results ===== -->
+  <g font-size="13" fill="#1b2430">
+    <text x="30" y="232" font-size="15" font-weight="bold">False conjectures disproved</text>
+    <text x="30" y="250" font-size="12" fill="#5b6675">Pass@1, 201 test items</text>
+    <text x="510" y="232" font-size="15" font-weight="bold">True theorems recognised</text>
+    <text x="510" y="250" font-size="12" fill="#5b6675">347 true theorems, training-style prompt</text>
+
+    <g>
+      <text x="30" y="280">Qwen3-4B base</text>
+      <text x="30" y="310">+ SFT</text>
+      <text x="30" y="340">+ RL dense</text>
+      <text x="30" y="370">+ RL sparse</text>
+      <rect x="140" y="267" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="140" y="297" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="140" y="327" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="140" y="357" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="140" y="267" width="81"    height="18" rx="4" fill="#969696"/>
+      <rect x="140" y="297" width="91.8"  height="18" rx="4" fill="#d62728"/>
+      <rect x="140" y="327" width="132.3" height="18" rx="4" fill="#466eb4"/>
+      <rect x="140" y="357" width="124.2" height="18" rx="4" fill="#008c45"/>
+      <g font-weight="bold" text-anchor="end">
+        <text x="450" y="280">0.30</text>
+        <text x="450" y="310">0.34</text>
+        <text x="450" y="340">0.49</text>
+        <text x="450" y="370">0.46</text>
+      </g>
+    </g>
+
+    <g>
+      <text x="510" y="280">Qwen3-4B base</text>
+      <text x="510" y="310">+ SFT</text>
+      <text x="510" y="340">+ RL dense</text>
+      <text x="510" y="370">+ RL sparse</text>
+      <rect x="620" y="267" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="620" y="297" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="620" y="327" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="620" y="357" width="270" height="18" rx="4" fill="#f0f2f5"/>
+      <rect x="620" y="267" width="72.9"  height="18" rx="4" fill="#969696"/>
+      <rect x="620" y="327" width="89.1"  height="18" rx="4" fill="#466eb4"/>
+      <rect x="620" y="357" width="178.2" height="18" rx="4" fill="#008c45"/>
+      <g font-weight="bold" text-anchor="end">
+        <text x="930" y="280">0.27</text>
+        <text x="930" y="310" fill="#d62728">0.00</text>
+        <text x="930" y="340">0.33</text>
+        <text x="930" y="370" fill="#008c45">0.66</text>
+      </g>
+    </g>
+  </g>
+  <text x="490" y="412" font-size="13" text-anchor="middle" fill="#1b2430">Counterexample-only SFT erases true-theorem recognition. RL with a sparse, outcome-only reward restores it;</text>
+  <text x="490" y="430" font-size="13" text-anchor="middle" fill="#1b2430">a dense reward with partial credit reaches a similar success rate but not the calibration. Qwen3-4B, mean of four seeds.</text>
+</svg>
